@@ -6,4 +6,6 @@ import lombok.Data;
 public class Country {
     private String tag;
     private Ideology ideology;
+
+    private Chars characters;
 }
