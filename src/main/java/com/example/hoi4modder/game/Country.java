@@ -6,6 +6,13 @@ import lombok.Data;
 public class Country {
     private String tag;
     private Ideology ideology;
+    private GameCharacter characters;
 
-    private Chars characters;
+    private double stability;
+    private double warSupport;
+    private int researchSlots;
+
+    private int capital;
+
+    private PopularityRadius popularities;
 }
