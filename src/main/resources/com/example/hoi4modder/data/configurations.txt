@@ -1,0 +1,2 @@
+game_directory =  D:\Games\Hoi4 1.12
+mod_directory = C:\Users\mysha\Documents\Paradox Interactive\Hearts of Iron IV\mod\labmod
