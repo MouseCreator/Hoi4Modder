@@ -2,6 +2,7 @@ module com.example.hoi4modder {
     requires javafx.controls;
     requires javafx.fxml;
     requires java.desktop;
+    requires lombok;
 
 
     opens com.example.hoi4modder to javafx.fxml;
