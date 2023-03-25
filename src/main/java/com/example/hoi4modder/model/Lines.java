@@ -4,7 +4,9 @@ import java.util.ArrayList;
 
 public class Lines {
     private ArrayList<String> lines;
-
+    public Lines() {
+        lines = new ArrayList<>();
+    }
     public Lines(String origin) {
         String[] originLines = origin.split("\n");
         for (String line : originLines) {
@@ -39,15 +41,30 @@ public class Lines {
         this.lines = copy;
     }
 
-    public void append(String s) {
-        addLine(s);
+    public void append(String field, int value) {
+        addLine(field + " = " + value);
     }
 
-    public void appendFieldValue(String field,String value) {
+    public void append(String field, double d) {
+        addLine(field + " = " + d);
+    }
+
+    public void append(String field,String value) {
         addLine(field + " = " + value);
+    }
+    public void append(String line) {
+        addLine(line);
     }
 
     private void addLine(String s) {
         this.lines.add(s);
+    }
+
+    public void clear() {
+        lines.clear();
+    }
+
+    public void appendBr(String field, String value) {
+        this.append(field, "\"" + value + "\"");
     }
 }

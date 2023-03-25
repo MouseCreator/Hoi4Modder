@@ -5,6 +5,5 @@ import lombok.Data;
 @Data
 public class GameCharacter {
     private String identification;
-
     private int number;
 }

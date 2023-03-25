@@ -4,8 +4,8 @@ import lombok.Data;
 
 @Data
 public class PopularityRadius {
-    private double democratic;
-    private double commusism;
-    private double fascism;
-    private double neutrality;
+    private int democratic;
+    private int commusism;
+    private int fascism;
+    private int neutrality;
 }
