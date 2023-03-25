@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class Building {
-    String name;
-    boolean coastal;
-    int level;
+    private String name;
+    private boolean coastal;
+    private int level;
 }

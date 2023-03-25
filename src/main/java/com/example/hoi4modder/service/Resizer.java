@@ -1,4 +1,4 @@
-package com.example.hoi4modder.model;
+package com.example.hoi4modder.service;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 public class Resizer {

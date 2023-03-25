@@ -1,4 +1,4 @@
-package com.example.hoi4modder.model;
+package com.example.hoi4modder.service;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
