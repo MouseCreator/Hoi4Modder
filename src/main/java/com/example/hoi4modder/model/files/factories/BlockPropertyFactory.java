@@ -6,7 +6,7 @@ import com.example.hoi4modder.model.files.properties.SingleValue;
 
 public class BlockPropertyFactory extends AbstractFactory {
     private final BlockProperty property = new BlockProperty();
-    private LocalisationPropertyFactory nextInChain;
+    private final FieldValuePropertyFactory nextInChain = new FieldValuePropertyFactory();
 
     @Override
     public ChainedFactory next() {
