@@ -34,7 +34,7 @@ public class ActivePaneController {
     }
 
     private String getFilename() {
-        return null;
+        return "country-editor.fxml";
     }
 
     public Pane getContent() {
