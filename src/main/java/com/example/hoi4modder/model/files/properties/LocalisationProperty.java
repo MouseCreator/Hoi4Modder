@@ -1,8 +1,8 @@
 package com.example.hoi4modder.model.files.properties;
 
 public class LocalisationProperty implements Property{
-    private String key;
-    private String value;
+    private final String key;
+    private final String value;
 
     public LocalisationProperty(String key, String value) {
         this.key = key;

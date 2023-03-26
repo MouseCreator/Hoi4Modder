@@ -1,7 +1,7 @@
 package com.example.hoi4modder.model.files.properties;
 public class BlockProperty implements Property{
-    private String value;
-    private SavedList block;
+    private final String value = "";
+    private final SavedList block = new SavedListArray();
     @Override
     public String delimiter() {
         return "= {";

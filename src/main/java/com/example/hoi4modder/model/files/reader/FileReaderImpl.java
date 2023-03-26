@@ -5,7 +5,6 @@ import com.example.hoi4modder.model.files.properties.SavedList;
 import com.example.hoi4modder.model.files.properties.SavedListArray;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
@@ -37,6 +36,7 @@ public class FileReaderImpl {
     }
 
     public SavedList fromLines(List<String> lines) {
-        return new SavedListArray();
+        SavedListArray array = new SavedListArray();
+        return null;
     }
 }
