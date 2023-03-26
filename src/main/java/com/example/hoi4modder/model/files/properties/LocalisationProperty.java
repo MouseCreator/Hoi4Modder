@@ -26,6 +26,6 @@ public class LocalisationProperty implements Property{
 
     @Override
     public String toFile() {
-        return key + delimiter() + "0\"" + value + "\"";
+        return key + delimiter() + "\"" + value + "\"";
     }
 }

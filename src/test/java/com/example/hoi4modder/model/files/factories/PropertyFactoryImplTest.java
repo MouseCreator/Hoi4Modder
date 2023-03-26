@@ -21,9 +21,13 @@ class PropertyFactoryImplTest {
         };
         PropertyFactoryImpl propertyFactory = new PropertyFactoryImpl();
         for (String s : strings) {
+            if (s.equals("recruit_character = ENT_leyla_athella")) {
+                int i = 0;
+                i++;
+            }
             Property result = propertyFactory.toProperty(s);
             String propertyString = result.toFile();
-            assertEquals(propertyString, s);
+            assertEquals(s, propertyString);
         }
     }
 }

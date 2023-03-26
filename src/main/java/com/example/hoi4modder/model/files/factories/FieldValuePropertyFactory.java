@@ -15,7 +15,10 @@ public class FieldValuePropertyFactory extends AbstractFactory{
 
     @Override
     public Property toProperty(String origin) {
-        return null;
+        String[] s = origin.split("=", 2);
+        String field = s[0].trim();
+        String value = s[1].trim();
+        return new FieldValueProperty(field, value);
     }
 
     @Override

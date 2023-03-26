@@ -28,9 +28,5 @@ class LocalisationPropertyFactory extends AbstractFactory{
     protected Property getProperty() {
         return property;
     }
-
-    @Override
-    public boolean canHandle(String string) {
-        return string.contains(property.delimiter());
-    }
+    
 }
