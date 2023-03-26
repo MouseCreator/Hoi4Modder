@@ -20,6 +20,7 @@ class LocalisationPropertyFactory extends AbstractFactory{
         int splitPosition = origin.indexOf(":");
         key = origin.substring(0, splitPosition);
         value = origin.substring(splitPosition+1);
+        value = value.substring(value.indexOf('\"')+1, value.lastIndexOf("\""));
         return new LocalisationProperty(key, value);
     }
 
