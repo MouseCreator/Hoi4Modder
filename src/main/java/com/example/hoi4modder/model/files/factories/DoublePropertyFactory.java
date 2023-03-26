@@ -3,7 +3,7 @@ package com.example.hoi4modder.model.files.factories;
 import com.example.hoi4modder.model.files.properties.FieldValueProperty;
 import com.example.hoi4modder.model.files.properties.Property;
 
-public class DoublePropertyFactory extends AbstractFactory{
+public class DoublePropertyFactory extends PropertyFactoryMethod {
 
     private final LocalisationPropertyFactory next = new LocalisationPropertyFactory();
 

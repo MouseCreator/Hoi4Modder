@@ -3,7 +3,7 @@ package com.example.hoi4modder.model.files.factories;
 import com.example.hoi4modder.model.files.properties.Property;
 import com.example.hoi4modder.model.files.properties.SingleValue;
 
-class SingleValueFactory extends AbstractFactory {
+class SingleValueFactory extends PropertyFactoryMethod {
     private final SingleValue property = new SingleValue();
 
     @Override

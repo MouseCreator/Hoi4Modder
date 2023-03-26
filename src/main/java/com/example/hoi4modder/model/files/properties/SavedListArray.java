@@ -17,8 +17,8 @@ public class SavedListArray implements SavedList, Iterable<SavedElement> {
     }
 
     @Override
-    public void add(Property property) {
-        savedElements.add(property);
+    public void add(SavedElement element) {
+        savedElements.add(element);
     }
 
     @Override

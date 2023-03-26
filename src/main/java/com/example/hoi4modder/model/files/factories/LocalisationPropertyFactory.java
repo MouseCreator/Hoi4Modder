@@ -3,7 +3,7 @@ package com.example.hoi4modder.model.files.factories;
 import com.example.hoi4modder.model.files.properties.LocalisationProperty;
 import com.example.hoi4modder.model.files.properties.Property;
 
-class LocalisationPropertyFactory extends AbstractFactory{
+class LocalisationPropertyFactory extends PropertyFactoryMethod {
 
     private final LocalisationProperty property = new LocalisationProperty();
 

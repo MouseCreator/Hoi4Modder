@@ -1,9 +1,8 @@
 package com.example.hoi4modder.model.files.factories;
 
-import com.example.hoi4modder.model.files.properties.LocalisationProperty;
 import com.example.hoi4modder.model.files.properties.Property;
 
-abstract class AbstractFactory implements ChainedFactory{
+abstract class PropertyFactoryMethod implements ChainedFactory{
 
     public abstract ChainedFactory next();
 
@@ -15,6 +14,8 @@ abstract class AbstractFactory implements ChainedFactory{
             return next().createProperty(origin);
         }
     }
+
+
     @Override
     public boolean canHandle(String origin) {
         return getProperty().containsDelimiter(origin);

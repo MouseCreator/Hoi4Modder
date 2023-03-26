@@ -1,6 +1,7 @@
 package com.example.hoi4modder.model.files.factories;
 
 import com.example.hoi4modder.model.files.properties.Property;
+import com.example.hoi4modder.model.files.properties.SavedElement;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -21,7 +22,7 @@ class PropertyFactoryImplTest {
         };
         PropertyFactoryImpl propertyFactory = new PropertyFactoryImpl();
         for (String s : strings) {
-            Property result = propertyFactory.toProperty(s);
+            SavedElement result = propertyFactory.toProperty(s);
             String propertyString = result.toFile();
             assertEquals(s, propertyString);
         }

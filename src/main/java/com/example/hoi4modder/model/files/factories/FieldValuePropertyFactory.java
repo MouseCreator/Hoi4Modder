@@ -3,7 +3,7 @@ package com.example.hoi4modder.model.files.factories;
 import com.example.hoi4modder.model.files.properties.FieldValueProperty;
 import com.example.hoi4modder.model.files.properties.Property;
 
-public class FieldValuePropertyFactory extends AbstractFactory{
+public class FieldValuePropertyFactory extends PropertyFactoryMethod {
 
     private final FieldValueProperty property = new FieldValueProperty();
 
