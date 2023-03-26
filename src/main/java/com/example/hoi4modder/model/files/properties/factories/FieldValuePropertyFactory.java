@@ -7,7 +7,7 @@ public class FieldValuePropertyFactory extends PropertyFactoryMethod {
 
     private final FieldValueProperty property = new FieldValueProperty();
 
-    private final DoublePropertyFactory next = new DoublePropertyFactory();
+    private final LocalisationPropertyFactory next = new LocalisationPropertyFactory();
     @Override
     public ChainedFactory next() {
         return next;

@@ -1,6 +1,6 @@
 package com.example.hoi4modder.model.files;
 
-import com.example.hoi4modder.model.files.properties.SavedList;
+import com.example.hoi4modder.model.files.properties.lists.SavedList;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

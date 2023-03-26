@@ -1,6 +1,6 @@
 package com.example.hoi4modder.model.files.properties.factories;
 
-import com.example.hoi4modder.model.files.properties.BlockListProperty;
+import com.example.hoi4modder.model.files.properties.lists.BlockListProperty;
 import com.example.hoi4modder.model.files.properties.Property;
 import com.example.hoi4modder.model.files.properties.SingleValue;
 

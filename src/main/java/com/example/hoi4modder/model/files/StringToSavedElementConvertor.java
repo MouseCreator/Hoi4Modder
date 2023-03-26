@@ -1,7 +1,10 @@
 package com.example.hoi4modder.model.files;
 
 import com.example.hoi4modder.model.files.properties.factories.PropertyFactoryImpl;
-import com.example.hoi4modder.model.files.properties.*;
+import com.example.hoi4modder.model.files.properties.lists.BlockListProperty;
+import com.example.hoi4modder.model.files.properties.lists.SavedElementList;
+import com.example.hoi4modder.model.files.properties.lists.SavedList;
+import com.example.hoi4modder.model.files.properties.lists.SavedListArray;
 
 import java.util.List;
 import java.util.Queue;

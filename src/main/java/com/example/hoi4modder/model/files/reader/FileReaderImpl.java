@@ -1,8 +1,8 @@
 package com.example.hoi4modder.model.files.reader;
 
 import com.example.hoi4modder.model.files.properties.SavedElement;
-import com.example.hoi4modder.model.files.properties.SavedList;
-import com.example.hoi4modder.model.files.properties.SavedListArray;
+import com.example.hoi4modder.model.files.properties.lists.SavedList;
+import com.example.hoi4modder.model.files.properties.lists.SavedListArray;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
