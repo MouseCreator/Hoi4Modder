@@ -1,6 +1,8 @@
 package com.example.hoi4modder.model.files.properties;
 
-public class LocalisationList extends SavedListArray {
+import java.util.List;
+
+public class LocalisationList implements SavedList {
     private String localisationKey;
 
     @Override
@@ -11,5 +13,20 @@ public class LocalisationList extends SavedListArray {
     @Override
     public String suffix() {
         return "\n";
+    }
+
+    @Override
+    public List<SavedElement> getElements() {
+        return null;
+    }
+
+    @Override
+    public String toFile() {
+        return prefix();
+    }
+
+    @Override
+    public void add(SavedElement property) {
+
     }
 }

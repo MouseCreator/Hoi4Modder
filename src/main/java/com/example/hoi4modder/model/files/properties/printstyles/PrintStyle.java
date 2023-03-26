@@ -5,4 +5,5 @@ import com.example.hoi4modder.model.files.properties.SavedElement;
 
 public interface PrintStyle {
     String printStyled(ListElement element);
+    boolean matches(String styledString);
 }
