@@ -1,4 +1,4 @@
 package com.example.hoi4modder.model.files;
 
-public interface List extends Saved {
+public interface SavedList extends Saved {
 }
