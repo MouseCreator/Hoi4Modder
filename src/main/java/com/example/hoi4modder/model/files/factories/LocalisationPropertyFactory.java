@@ -6,7 +6,7 @@ import com.example.hoi4modder.model.files.properties.SingleValue;
 
 class LocalisationPropertyFactory extends AbstractFactory{
 
-    private LocalisationProperty property;
+    private final LocalisationProperty property = new LocalisationProperty();
     @Override
     public ChainedFactory next() {
         return null;
@@ -15,6 +15,11 @@ class LocalisationPropertyFactory extends AbstractFactory{
     @Override
     public Property toProperty(String origin) {
         return null;
+    }
+
+    @Override
+    protected Property getProperty() {
+        return property;
     }
 
     @Override

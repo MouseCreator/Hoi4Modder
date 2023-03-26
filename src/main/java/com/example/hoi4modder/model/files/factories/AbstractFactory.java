@@ -7,7 +7,6 @@ public abstract class AbstractFactory implements ChainedFactory{
 
     public abstract ChainedFactory next();
 
-    private Property property;
     @Override
     public Property createProperty(String origin) {
         if (canHandle(origin)) {
@@ -18,10 +17,12 @@ public abstract class AbstractFactory implements ChainedFactory{
     }
     @Override
     public boolean canHandle(String origin) {
-        return origin.contains(property.delimiter());
+        return getProperty().containsDelimiter(origin);
     }
 
     public abstract Property toProperty(String origin);
+
+    protected abstract Property getProperty();
 }
 
 

@@ -8,6 +8,12 @@ public class LocalisationProperty implements Property{
         this.key = key;
         this.value = value;
     }
+
+    public LocalisationProperty() {
+        this.key = "";
+        this.value = "";
+    }
+
     @Override
     public String delimiter() {
         return ":0 ";

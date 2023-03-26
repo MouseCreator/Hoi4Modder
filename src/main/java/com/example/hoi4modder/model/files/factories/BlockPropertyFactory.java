@@ -5,7 +5,7 @@ import com.example.hoi4modder.model.files.properties.Property;
 import com.example.hoi4modder.model.files.properties.SingleValue;
 
 public class BlockPropertyFactory extends AbstractFactory {
-    private BlockProperty property = new BlockProperty();
+    private final BlockProperty property = new BlockProperty();
     private LocalisationPropertyFactory nextInChain;
 
     @Override
@@ -16,5 +16,9 @@ public class BlockPropertyFactory extends AbstractFactory {
     @Override
     public Property toProperty(String origin) {
         return new SingleValue(origin);
+    }
+    @Override
+    protected Property getProperty() {
+        return property;
     }
 }
