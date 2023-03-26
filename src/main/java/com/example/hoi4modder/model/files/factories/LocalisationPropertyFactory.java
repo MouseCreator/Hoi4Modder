@@ -1,8 +1,8 @@
 package com.example.hoi4modder.model.files.factories;
 
-import com.example.hoi4modder.model.files.Property;
+import com.example.hoi4modder.model.files.properties.Property;
 
-public class LocalisationPropertyFactory extends AbstractFactory{
+class LocalisationPropertyFactory extends AbstractFactory{
     @Override
     public ChainedFactory next() {
         return null;

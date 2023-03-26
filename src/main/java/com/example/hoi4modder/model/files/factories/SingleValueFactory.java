@@ -1,10 +1,9 @@
 package com.example.hoi4modder.model.files.factories;
 
-import com.example.hoi4modder.model.files.LocalisationProperty;
-import com.example.hoi4modder.model.files.Property;
-import com.example.hoi4modder.model.files.SingleValue;
+import com.example.hoi4modder.model.files.properties.Property;
+import com.example.hoi4modder.model.files.properties.SingleValue;
 
-public class SingleValueFactory extends AbstractFactory {
+class SingleValueFactory extends AbstractFactory {
     private SingleValue property;
     private LocalisationPropertyFactory nextInChain;
 

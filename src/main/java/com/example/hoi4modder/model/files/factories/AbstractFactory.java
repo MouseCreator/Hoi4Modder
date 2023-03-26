@@ -1,6 +1,6 @@
 package com.example.hoi4modder.model.files.factories;
 
-import com.example.hoi4modder.model.files.Property;
+import com.example.hoi4modder.model.files.properties.Property;
 
 public abstract class AbstractFactory implements ChainedFactory{
 
@@ -16,3 +16,5 @@ public abstract class AbstractFactory implements ChainedFactory{
 
     public abstract Property toProperty(String origin);
 }
+
+

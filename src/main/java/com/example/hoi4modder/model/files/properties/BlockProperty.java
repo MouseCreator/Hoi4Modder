@@ -1,4 +1,4 @@
-package com.example.hoi4modder.model.files;
+package com.example.hoi4modder.model.files.properties;
 public class BlockProperty implements Property{
     private String value;
     private SavedList block;
