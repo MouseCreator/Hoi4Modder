@@ -5,16 +5,20 @@ import com.example.hoi4modder.model.files.properties.SingleValue;
 
 class SingleValueFactory extends AbstractFactory {
     private final SingleValue property = new SingleValue();
-    private LocalisationPropertyFactory nextInChain;
 
     @Override
     public ChainedFactory next() {
-        return nextInChain;
+        throw new UnsupportedOperationException("Cannot get next in chain for SingleValue property.");
     }
 
     @Override
     public Property toProperty(String origin) {
         return new SingleValue(origin);
+    }
+
+    @Override
+    protected Property getProperty() {
+        return property;
     }
 
     @Override
