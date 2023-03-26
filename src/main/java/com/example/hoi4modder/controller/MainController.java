@@ -7,6 +7,8 @@ import javafx.scene.control.TextArea;
 import javafx.scene.layout.Pane;
 
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
@@ -85,6 +87,12 @@ public class MainController implements Initializable {
     public void congratulate(String text) {
         this.consoleView.setText(text);
         this.consoleView.setStyle("-fx-text-fill: green");
+    }
+
+    private final Map<String, String> configurations = new HashMap<>();
+
+    public String getConfiguration(String key) {
+        return configurations.get(key);
     }
 
 }
