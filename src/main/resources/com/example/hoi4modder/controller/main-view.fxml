@@ -4,6 +4,7 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
@@ -39,10 +40,11 @@
                            <content>
                               <Pane fx:id="leftContent" prefHeight="200.0" prefWidth="200.0" />
                            </content></ScrollPane>
-                        <ScrollPane fx:id="sideButton" prefHeight="400.0" prefWidth="246.0">
+                        <ScrollPane fx:id="sideButton" prefHeight="298.0" prefWidth="280.0">
                            <content>
                               <Pane fx:id="rightContent" prefHeight="200.0" prefWidth="200.0" />
                            </content></ScrollPane>
+                        <TextArea fx:id="consoleView" editable="false" prefHeight="200.0" prefWidth="200.0" text="[Console]" wrapText="true" />
                      </children>
                   </VBox>
                   <ScrollPane fx:id="mainPane" prefHeight="698.0" prefWidth="1000.0">

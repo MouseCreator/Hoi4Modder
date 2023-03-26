@@ -3,6 +3,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextArea;
 import javafx.scene.layout.Pane;
 
 import java.net.URL;
@@ -18,6 +19,9 @@ public class MainController implements Initializable {
 
     @FXML
     private MenuBar mainMenu;
+
+    @FXML
+    private TextArea consoleView;
 
     @FXML
     private ScrollPane mainPane;
@@ -66,4 +70,21 @@ public class MainController implements Initializable {
         loadScene();
         currentActive.initContent();
     }
+    public void report(String text) {
+        this.consoleView.setText(text);
+        this.consoleView.setStyle("-fx-text-fill: red");
+    }
+    public void inform(String text) {
+        this.consoleView.setText(text);
+        this.consoleView.setStyle("-fx-text-fill: black");
+    }
+    public void warn(String text) {
+        this.consoleView.setText(text);
+        this.consoleView.setStyle("-fx-text-fill: orange");
+    }
+    public void congratulate(String text) {
+        this.consoleView.setText(text);
+        this.consoleView.setStyle("-fx-text-fill: green");
+    }
+
 }

@@ -14,18 +14,18 @@
          <children>
             <Pane prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <ImageView fx:id="flagImage" fitHeight="104.0" fitWidth="164.0" layoutX="14.0" layoutY="7.0" onDragOver="#handleDragOver" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="flagImage" fitHeight="104.0" fitWidth="164.0" layoutX="14.0" layoutY="7.0" onDragDropped="#handleDragDrop" onDragOver="#handleDragOver" pickOnBounds="true" preserveRatio="true" />
                   <Label layoutX="62.0" layoutY="114.0" text="Add flags" />
                   <HBox layoutX="1.0" layoutY="160.0" prefHeight="46.0" prefWidth="200.0">
                      <children>
                         <Pane prefHeight="78.0" prefWidth="10.0" />
-                        <ImageView fitHeight="26.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="neutralityFlag" fitHeight="26.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true" />
                         <Pane prefHeight="78.0" prefWidth="10.0" />
-                        <ImageView fitHeight="26.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="democraticFlag" fitHeight="26.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true" />
                         <Pane prefHeight="78.0" prefWidth="10.0" />
-                        <ImageView fitHeight="26.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="fascismFlag" fitHeight="26.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true" />
                         <Pane prefHeight="78.0" prefWidth="10.0" />
-                        <ImageView fitHeight="26.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="communismFlag" fitHeight="26.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                   </HBox>
                </children>

@@ -6,9 +6,9 @@ import javafx.scene.layout.Pane;
 import java.io.IOException;
 
 
-public class ActivePaneController {
+public abstract class ActivePaneController {
     private Pane content;
-    private MainController parentController;
+    protected MainController parentController;
 
     public boolean onCloseRequest() {
         return true;
@@ -33,9 +33,7 @@ public class ActivePaneController {
         }
     }
 
-    private String getFilename() {
-        return "country-editor.fxml";
-    }
+    protected abstract String getFilename();
 
     public Pane getContent() {
         return content;
