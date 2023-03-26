@@ -5,12 +5,16 @@ import com.example.hoi4modder.model.files.properties.SavedElement;
 
 public class NormalPrintStyle implements PrintStyle{
     @Override
-    public String printStyled(ListElement element) {
-        return null;
+    public String printStyled(ListElement list) {
+        StringBuilder builder = new StringBuilder(list.prefix());
+        builder.append("\n");
+        for (SavedElement element : list.getElements()) {
+            builder.append(element.toFile()).append("\n");
+        }
+        builder.append(list.prefix());
+        String result = builder.toString();
+        return result.replace("\n", "\n\t");
+
     }
 
-    @Override
-    public String printStyled(SavedElement element, int depth) {
-        return null;
-    }
 }
