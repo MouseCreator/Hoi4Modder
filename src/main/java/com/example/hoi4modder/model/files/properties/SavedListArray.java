@@ -1,7 +1,5 @@
 package com.example.hoi4modder.model.files.properties;
 
-import com.example.hoi4modder.model.files.properties.printstyles.PrintStyle;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;

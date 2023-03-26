@@ -1,10 +1,8 @@
 package com.example.hoi4modder.model.files;
 
-import com.example.hoi4modder.model.files.factories.PropertyFactory;
-import com.example.hoi4modder.model.files.factories.PropertyFactoryImpl;
+import com.example.hoi4modder.model.files.properties.factories.PropertyFactoryImpl;
 import com.example.hoi4modder.model.files.properties.*;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Queue;
 import java.util.concurrent.LinkedBlockingQueue;

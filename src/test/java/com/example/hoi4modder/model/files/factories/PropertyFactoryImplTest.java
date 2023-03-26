@@ -1,7 +1,7 @@
 package com.example.hoi4modder.model.files.factories;
 
-import com.example.hoi4modder.model.files.properties.Property;
 import com.example.hoi4modder.model.files.properties.SavedElement;
+import com.example.hoi4modder.model.files.properties.factories.PropertyFactoryImpl;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

@@ -1,4 +1,4 @@
-package com.example.hoi4modder.model.files.factories;
+package com.example.hoi4modder.model.files.properties.factories;
 
 import com.example.hoi4modder.model.files.properties.Property;
 
