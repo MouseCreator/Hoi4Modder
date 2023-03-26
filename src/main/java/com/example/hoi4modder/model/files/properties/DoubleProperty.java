@@ -9,6 +9,11 @@ public class DoubleProperty implements Property{
     }
 
     @Override
+    public boolean containsDelimiter(String str) {
+        return str.matches(" *[a-zA-Z0-9_]+ [a-zA-Z0-9_]+ *");
+    }
+
+    @Override
     public String toFile() {
         return property + " " + value;
     }

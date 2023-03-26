@@ -4,5 +4,5 @@ import com.example.hoi4modder.model.files.properties.Property;
 
 public interface ChainedFactory {
     Property createProperty(String origin);
-    boolean canHandle();
+    boolean canHandle(String string);
 }

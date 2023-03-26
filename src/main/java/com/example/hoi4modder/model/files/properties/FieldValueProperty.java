@@ -9,6 +9,11 @@ public class FieldValueProperty implements Property {
     }
 
     @Override
+    public boolean containsDelimiter(String str) {
+        return str.contains("=");
+    }
+
+    @Override
     public String toFile() {
         return field + delimiter() + value;
     }

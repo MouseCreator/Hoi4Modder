@@ -6,10 +6,18 @@ public class SingleValue implements Property{
     public SingleValue(String origin) {
         this.value = origin;
     }
+    public SingleValue() {
+        this.value = "";
+    }
 
     @Override
     public String delimiter() {
         return "";
+    }
+
+    @Override
+    public boolean containsDelimiter(String str) {
+        return true;
     }
 
     @Override

@@ -3,9 +3,19 @@ package com.example.hoi4modder.model.files.properties;
 public class LocalisationProperty implements Property{
     private String key;
     private String value;
+
+    public LocalisationProperty(String key, String value) {
+        this.key = key;
+        this.value = value;
+    }
     @Override
     public String delimiter() {
-        return ":";
+        return ":0 ";
+    }
+
+    @Override
+    public boolean containsDelimiter(String str) {
+        return str.contains(":0") || str.contains(":1") || str.contains(":2");
     }
 
     @Override

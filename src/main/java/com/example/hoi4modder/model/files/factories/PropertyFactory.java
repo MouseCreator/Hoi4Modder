@@ -15,7 +15,7 @@ public class PropertyFactory implements ChainedFactory {
     }
 
     @Override
-    public boolean canHandle() {
+    public boolean canHandle(String str) {
         return false;
     }
 }

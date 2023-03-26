@@ -7,6 +7,11 @@ public class BlockProperty implements Property{
         return "= {";
     }
 
+    @Override
+    public boolean containsDelimiter(String str) {
+        return str.contains("=") && str.contains("{");
+    }
+
     public String closedDelimiter() {
         return "}";
     }
