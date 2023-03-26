@@ -14,10 +14,10 @@ class PropertyFactoryImplTest {
                 "ernst_udet:0 \"Эрнст Удет\"",
                 "set_popularities = {",
                 "isolation",
+                "democratic = 7",
                 "recruit_character = ENT_leyla_athella",
                 "basic_heavy_battery = 1",
                 "9357 1"
-
         };
         PropertyFactoryImpl propertyFactory = new PropertyFactoryImpl();
         for (String s : strings) {
