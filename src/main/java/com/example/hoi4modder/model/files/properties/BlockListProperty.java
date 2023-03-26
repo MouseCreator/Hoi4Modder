@@ -11,6 +11,16 @@ public class BlockListProperty implements Property, SavedList {
 
     private PrintStyle printStyle;
 
+    public BlockListProperty(String name, SavedListArray expressions) {
+        this.key = name;
+        this.block = expressions;
+    }
+
+    public BlockListProperty() {
+        this.key = "";
+        this.block = new SavedListArray();
+    }
+
     public String getKey() {
         return key;
     }

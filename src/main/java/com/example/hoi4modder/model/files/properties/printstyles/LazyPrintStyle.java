@@ -16,4 +16,9 @@ public class LazyPrintStyle implements PrintStyle{
         return builder.toString();
     }
 
+    @Override
+    public boolean matches(String styledString) {
+        return styledString.contains("{") && styledString.contains("}");
+    }
+
 }

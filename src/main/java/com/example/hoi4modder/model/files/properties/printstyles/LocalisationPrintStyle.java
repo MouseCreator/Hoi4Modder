@@ -15,4 +15,9 @@ public class LocalisationPrintStyle implements PrintStyle{
         return builder.toString();
     }
 
+    @Override
+    public boolean matches(String styledString) {
+        return styledString.startsWith(" ");
+    }
+
 }

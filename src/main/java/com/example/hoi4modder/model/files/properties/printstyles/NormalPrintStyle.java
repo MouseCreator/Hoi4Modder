@@ -17,4 +17,9 @@ public class NormalPrintStyle implements PrintStyle{
 
     }
 
+    @Override
+    public boolean matches(String styledString) {
+        return !(styledString.contains("{") && styledString.contains("}"));
+    }
+
 }
