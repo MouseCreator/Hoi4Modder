@@ -38,4 +38,7 @@ public abstract class ActivePaneController {
     public Pane getContent() {
         return content;
     }
+
+    public abstract void save();
+    public abstract void load();
 }

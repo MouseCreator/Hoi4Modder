@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ColorPicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
@@ -8,7 +9,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hoi4modder.controller.CountryEditorController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="454.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hoi4modder.controller.CountryEditorController">
    <children>
       <HBox prefHeight="217.0" prefWidth="1000.0">
          <children>
@@ -84,6 +85,78 @@
                      <children>
                         <Label prefHeight="18.0" prefWidth="74.0" text="Train buffer" />
                         <TextField text="1.0" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <VBox prefHeight="218.0" prefWidth="227.0">
+               <children>
+                  <Pane prefHeight="45.0" prefWidth="227.0" />
+                  <HBox prefHeight="31.0" prefWidth="227.0">
+                     <children>
+                        <Label prefHeight="18.0" prefWidth="74.0" text="Neutrality" />
+                        <TextField text="50" />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="31.0" prefWidth="227.0">
+                     <children>
+                        <Label prefHeight="18.0" prefWidth="74.0" text="Democratic" />
+                        <TextField text="50" />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="31.0" prefWidth="227.0">
+                     <children>
+                        <Label prefHeight="18.0" prefWidth="74.0" text="Fascism" />
+                        <TextField text="0" />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="31.0" prefWidth="227.0">
+                     <children>
+                        <Label prefHeight="18.0" prefWidth="74.0" text="Communism" />
+                        <TextField text="0" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <HBox prefHeight="217.0" prefWidth="1000.0">
+         <children>
+            <Pane prefHeight="218.0" prefWidth="199.0">
+               <children>
+                  <HBox layoutX="1.0" layoutY="160.0" prefHeight="46.0" prefWidth="200.0">
+                     <children>
+                        <Pane prefHeight="78.0" prefWidth="10.0" />
+                        <ImageView fx:id="neutralityFlag1" fitHeight="26.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true" />
+                        <Pane prefHeight="78.0" prefWidth="10.0" />
+                        <ImageView fx:id="democraticFlag1" fitHeight="26.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true" />
+                        <Pane prefHeight="78.0" prefWidth="10.0" />
+                        <ImageView fx:id="fascismFlag1" fitHeight="26.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true" />
+                        <Pane prefHeight="78.0" prefWidth="10.0" />
+                        <ImageView fx:id="communismFlag1" fitHeight="26.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true" />
+                     </children>
+                  </HBox>
+               </children>
+            </Pane>
+            <VBox prefHeight="218.0" prefWidth="227.0">
+               <children>
+                  <Pane prefHeight="45.0" prefWidth="227.0" />
+                  <HBox prefHeight="31.0" prefWidth="227.0">
+                     <children>
+                        <Label prefHeight="18.0" prefWidth="68.0" text="Elections" />
+                        <CheckBox mnemonicParsing="false" text="Enabled" />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="31.0" prefWidth="227.0">
+                     <children>
+                        <Label prefHeight="18.0" prefWidth="64.0" text="Frequency" />
+                        <TextField promptText="0" text="48" />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="31.0" prefWidth="227.0">
+                     <children>
+                        <Label prefHeight="18.0" prefWidth="63.0" text="Last" />
+                        <TextField promptText="YYYY.MM.DD" />
                      </children>
                   </HBox>
                </children>

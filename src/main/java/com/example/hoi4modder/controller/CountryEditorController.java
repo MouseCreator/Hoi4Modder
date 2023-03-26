@@ -1,5 +1,6 @@
 package com.example.hoi4modder.controller;
 
+import com.example.hoi4modder.game.Country;
 import com.example.hoi4modder.game.Ideology;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -22,6 +23,8 @@ public class CountryEditorController extends ActivePaneController implements Ini
     @FXML
     private ImageView flagImage;
 
+    private Country country = new Country();
+
     @FXML
     private ImageView communismFlag;
 
@@ -35,8 +38,6 @@ public class CountryEditorController extends ActivePaneController implements Ini
     private ImageView neutralityFlag;
 
     Map<Ideology, Image> flags = new HashMap<>();
-
-
     @FXML
     void handleDragOver(DragEvent event) {
         if (event.getDragboard().hasFiles()) {
@@ -80,5 +81,15 @@ public class CountryEditorController extends ActivePaneController implements Ini
     @Override
     protected String getFilename() {
         return "country-editor.fxml";
+    }
+
+    @Override
+    public void save() {
+        
+    }
+
+    @Override
+    public void load() {
+
     }
 }

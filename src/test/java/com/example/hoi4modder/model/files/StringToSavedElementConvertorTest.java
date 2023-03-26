@@ -67,6 +67,8 @@ class StringToSavedElementConvertorTest {
         SavedList list = convertor.forStructuredFile(toLines());
         list.toString();
     }
+
+
     private ArrayList<String> toLines() {
         return new ArrayList<String>(List.of(sampleFile.split("\n")));
     }
