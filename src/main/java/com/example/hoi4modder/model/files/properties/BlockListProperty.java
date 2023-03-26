@@ -1,5 +1,5 @@
 package com.example.hoi4modder.model.files.properties;
-public class BlockProperty implements Property{
+public class BlockListProperty implements Property, SavedElement {
     private final String value = "";
     private final SavedList block = new SavedListArray();
     @Override
