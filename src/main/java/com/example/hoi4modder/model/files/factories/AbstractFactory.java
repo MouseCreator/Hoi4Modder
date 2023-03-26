@@ -3,7 +3,7 @@ package com.example.hoi4modder.model.files.factories;
 import com.example.hoi4modder.model.files.properties.LocalisationProperty;
 import com.example.hoi4modder.model.files.properties.Property;
 
-public abstract class AbstractFactory implements ChainedFactory{
+abstract class AbstractFactory implements ChainedFactory{
 
     public abstract ChainedFactory next();
 
