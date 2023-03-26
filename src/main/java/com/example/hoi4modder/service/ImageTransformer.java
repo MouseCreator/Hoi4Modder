@@ -1,12 +1,5 @@
 package com.example.hoi4modder.service;
 
-import org.apache.commons.exec.CommandLine;
-import org.apache.commons.exec.DefaultExecutor;
-import org.apache.commons.exec.PumpStreamHandler;
-
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 public class ImageTransformer {
@@ -21,9 +14,8 @@ public class ImageTransformer {
         Process process = builder.start();
 
         System.out.println(process.waitFor());
-;
     }
-    public void portrait() throws IOException {
+    public void portrait() {
         File charFile = new File("src/main/resources/com/example/hoi4modder/data/image/Char.dds");
         File frameFile = new File("src/main/resources/com/example/hoi4modder/data/image/frame.png");
     }
