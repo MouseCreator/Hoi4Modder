@@ -1,7 +1,7 @@
 package com.example.hoi4modder.model.files.properties;
-public class BlockListProperty implements Property, SavedElement {
-    private final String value = "";
-    private final SavedList block = new SavedListArray();
+
+public class BlockListProperty extends SavedListArray implements Property {
+    private final String key = "";
     @Override
     public String delimiter() {
         return "= {";
@@ -12,13 +12,14 @@ public class BlockListProperty implements Property, SavedElement {
         return str.contains("=") && str.contains("{");
     }
 
-    public String closedDelimiter() {
-        return "}";
+    @Override
+    public String prefix() {
+        return key + " = {";
     }
 
     @Override
-    public String toFile() {
-        return value + delimiter() + block.toFile() +closedDelimiter();
+    public String suffix() {
+        return "}";
     }
 
 }
