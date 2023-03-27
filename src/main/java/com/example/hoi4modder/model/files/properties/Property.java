@@ -4,7 +4,6 @@ public interface Property {
     String delimiter();
     boolean containsDelimiter(String str);
     String toFile();
-
     String name();
     String value();
     void add(Property other);

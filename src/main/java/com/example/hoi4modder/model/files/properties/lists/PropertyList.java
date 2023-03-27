@@ -5,7 +5,7 @@ import com.example.hoi4modder.model.files.properties.Property;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class PropertyList implements Iterable<Property>, PropertyCollection {
+public class PropertyList implements PropertyCollection {
 
     private final ArrayList<Property> properties = new ArrayList<>();
     public void add(Property property) {

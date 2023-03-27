@@ -3,7 +3,7 @@ package com.example.hoi4modder.model.files.properties;
 import com.example.hoi4modder.model.files.properties.lists.PropertyList;
 import com.example.hoi4modder.model.files.properties.styles.PrintStyle;
 
-public class BlockProperty implements Property {
+public class BlockProperty implements Block {
     private String key;
     private PrintStyle style;
     private final PropertyList block;
@@ -30,7 +30,7 @@ public class BlockProperty implements Property {
     public boolean containsDelimiter(String str) {
         return str.contains("=") && str.contains("{");
     }
-
+    @Override
     public String prefix() {
         return key + " = {";
     }

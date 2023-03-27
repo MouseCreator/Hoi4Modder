@@ -1,10 +1,11 @@
 package com.example.hoi4modder.model.files.properties.styles;
 
-import com.example.hoi4modder.model.files.properties.Property;
+import com.example.hoi4modder.model.files.properties.Block;
 
 public class SimpleStyle implements PrintStyle{
+
     @Override
-    public String styledList(Property name) {
+    public String styledList(Block name) {
         return null;
     }
 }

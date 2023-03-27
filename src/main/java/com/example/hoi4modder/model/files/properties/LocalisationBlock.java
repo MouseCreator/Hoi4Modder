@@ -1,10 +1,13 @@
 package com.example.hoi4modder.model.files.properties;
+import com.example.hoi4modder.model.files.properties.lists.PropertyCollection;
 import com.example.hoi4modder.model.files.properties.lists.PropertyList;
+import com.example.hoi4modder.model.files.properties.styles.PrintStyle;
 
-public class LocalisationBlock implements Property{
+public class LocalisationBlock implements Block{
     private final String language;
-
     private final PropertyList keys;
+
+    private PrintStyle style;
 
     public LocalisationBlock(String language) {
         this.language = language;
@@ -24,7 +27,7 @@ public class LocalisationBlock implements Property{
     }
     @Override
     public String toFile() {
-        return language + delimiter();
+        return style.styledList(this);
     }
     @Override
     public String name() {
@@ -44,5 +47,28 @@ public class LocalisationBlock implements Property{
     @Override
     public void put(Property other) {
 
+    }
+
+    @Override
+    public PropertyCollection getElements() {
+        return keys;
+    }
+
+    @Override
+    public String prefix() {
+        return language + delimiter();
+    }
+
+    @Override
+    public String suffix() {
+        return "\n";
+    }
+
+    public PrintStyle getStyle() {
+        return style;
+    }
+
+    public void setStyle(PrintStyle style) {
+        this.style = style;
     }
 }

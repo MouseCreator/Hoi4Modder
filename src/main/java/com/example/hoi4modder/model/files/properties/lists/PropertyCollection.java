@@ -1,4 +1,6 @@
 package com.example.hoi4modder.model.files.properties.lists;
 
-public interface PropertyCollection {
+import com.example.hoi4modder.model.files.properties.Property;
+
+public interface PropertyCollection extends Iterable<Property> {
 }
