@@ -13,7 +13,6 @@ public class Destinations {
     private final String history = "history" + s;
     private final String gfx = "gfx" + s;
     private final String common = "common" + s;
-
     private final String basedir = "src/main/resources/com/example/hoi4modder/";
     private final String python = "python" + s;
 
