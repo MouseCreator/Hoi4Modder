@@ -5,19 +5,24 @@ import java.io.IOException;
 
 public class ImageTransformer {
 
-    public void toPortrait() throws IOException, InterruptedException {
-        File charFile = new File("src/main/resources//com/example/hoi4modder/data/image/Char.dds");
-        File frameFile = new File("src/main/resources/com/example/hoi4modder/data/image/frame.png");
-        File script = new File("src/main/resources/com/example/hoi4modder/data/python/to_portrait.py");
-        String saveDestination = "D:\\small.dds";
-        ProcessBuilder processBuilder = new ProcessBuilder("python ", script.getPath() + " ", charFile.getAbsolutePath() + " ",
-                frameFile.getAbsolutePath() + " ", saveDestination);
+    public void toPortrait(String origin, String frame, String destination) throws IOException, InterruptedException {
+        try {
+            File script = new File(Destinations.get().pythonScript("to_portrait"));
+            String saveDestination = "D:\\small.dds";
+            ProcessBuilder processBuilder = new ProcessBuilder("python ",
+                    script.getPath() + " ",
+                    origin + " ",
+                    frame + " ",
+                    destination);
 
-        processBuilder.redirectErrorStream(true);
-        Process process = processBuilder.start();
+            processBuilder.redirectErrorStream(true);
+            Process process = processBuilder.start();
 
-        int exitCode = process.waitFor();
-        System.out.println(exitCode);
-        System.out.println(process.waitFor());
+            int exitCode = process.waitFor();
+            System.out.println(exitCode);
+            System.out.println(process.waitFor());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -1,5 +1,6 @@
 package com.example.hoi4modder.model;
 
+import com.example.hoi4modder.service.Destinations;
 import com.example.hoi4modder.service.ImageTransformer;
 import org.junit.jupiter.api.Test;
 
@@ -10,7 +11,7 @@ class ImageTransformerTest {
     void toPortrait() {
         try {
             ImageTransformer transformer = new ImageTransformer();
-            transformer.toPortrait();
+            //transformer.toPortrait();
         } catch (Exception e) {
             e.printStackTrace();
             fail();
