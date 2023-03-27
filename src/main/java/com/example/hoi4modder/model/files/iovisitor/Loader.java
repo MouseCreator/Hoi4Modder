@@ -15,6 +15,5 @@ public class Loader implements Visitor {
     private void loadCountry(Country country) {
         FileServiceImpl fileService = new FileServiceImpl();
         SavedElement structure = fileService.read(Destinations.get().countryFile(country));
-        //FieldInjection.getInjector(Country.class, country);
     }
 }

@@ -31,7 +31,7 @@ public class FieldInjection {
         }
         return obj;
     }
-    public void constructor(Object obj, SavedList source) throws IllegalAccessException {
+    public void constructor(Object obj)  {
         Class<?> clazz = obj.getClass();
         Field[] fields = clazz.getDeclaredFields();
         for (Field field : fields) {

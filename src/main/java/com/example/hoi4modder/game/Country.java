@@ -3,7 +3,6 @@ package com.example.hoi4modder.game;
 import com.example.hoi4modder.model.files.iovisitor.SavedField;
 import com.example.hoi4modder.model.files.service.Model;
 import javafx.scene.image.Image;
-import javafx.scene.paint.Color;
 import lombok.Data;
 
 import java.util.List;
@@ -13,24 +12,23 @@ import java.util.Map;
 public class Country implements Model {
     private String tag;
     private String name;
-    private Color color;
+    private String color;
     private Map<Ideology, Image> flags;
     private List<GameCharacter> characters;
     @SavedField(name = "set_stability")
-    private double stability;
+    private String stability;
     @SavedField(name = "set_war_support")
-    private double warSupport;
+    private String warSupport;
     @SavedField(name = "set_research_slots")
-    private int researchSlots;
-
+    private String researchSlots;
     @SavedField
-    private int capital;
+    private String capital;
     @SavedField(name = "set_convoys")
-    private int convoys;
+    private String convoys;
 
     @SavedField(name = "set_popularities")
-    private PopularityRadius popularities;
+    private PopularityRadius popularities = new PopularityRadius();
 
     @SavedField(name = "set_politics")
-    private CountryPolitics politics;
+    private CountryPolitics politics = new CountryPolitics();
 }
