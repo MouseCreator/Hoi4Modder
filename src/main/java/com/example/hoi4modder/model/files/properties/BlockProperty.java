@@ -1,6 +1,8 @@
 package com.example.hoi4modder.model.files.properties;
 
 import com.example.hoi4modder.model.files.properties.lists.PropertyList;
+import com.example.hoi4modder.model.files.properties.styles.NormalStyle;
+import com.example.hoi4modder.model.files.properties.styles.PrintRules;
 import com.example.hoi4modder.model.files.properties.styles.PrintStyle;
 
 public class BlockProperty implements Block {
@@ -10,16 +12,21 @@ public class BlockProperty implements Block {
     public BlockProperty(String name, PropertyList expressions) {
         this.key = name;
         this.block = expressions;
+        PrintRules rules = new PrintRules();
+        rules.forBlock(this);
     }
     public BlockProperty() {
         this.key = "";
         this.block = new PropertyList();
+        this.style = new NormalStyle();
     }
     public String getKey() {
         return key;
     }
     public void setKey(String key) {
         this.key = key;
+        PrintRules rules = new PrintRules();
+        rules.forBlock(this);
     }
     @Override
     public String delimiter() {
@@ -45,7 +52,7 @@ public class BlockProperty implements Block {
 
     @Override
     public String toFile() {
-        return prefix() + block.toFile() + suffix();
+        return style.styledList(this);
     }
 
     @Override
@@ -68,9 +75,6 @@ public class BlockProperty implements Block {
         block.add(element);
     }
 
-    public PrintStyle getStyle() {
-        return style;
-    }
 
     public void setStyle(PrintStyle style) {
         this.style = style;

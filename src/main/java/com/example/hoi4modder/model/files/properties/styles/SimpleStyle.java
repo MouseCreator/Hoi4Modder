@@ -10,7 +10,7 @@ public class SimpleStyle implements PrintStyle{
         StringBuilder builder = new StringBuilder(block.prefix());
         builder.append(" ");
         for (Property property : block.getElements()) {
-            builder.append(property).append(" ");
+            builder.append(property.toFile()).append(" ");
         }
         builder.append(block.suffix());
         return builder.toString();

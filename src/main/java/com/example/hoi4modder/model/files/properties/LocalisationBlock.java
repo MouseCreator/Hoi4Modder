@@ -1,13 +1,14 @@
 package com.example.hoi4modder.model.files.properties;
 import com.example.hoi4modder.model.files.properties.lists.PropertyCollection;
 import com.example.hoi4modder.model.files.properties.lists.PropertyList;
+import com.example.hoi4modder.model.files.properties.styles.LocalisationStyle;
 import com.example.hoi4modder.model.files.properties.styles.PrintStyle;
 
 public class LocalisationBlock implements Block{
     private final String language;
     private final PropertyList keys;
 
-    private PrintStyle style;
+    private PrintStyle style = new LocalisationStyle();
 
     public LocalisationBlock(String language) {
         this.language = language;

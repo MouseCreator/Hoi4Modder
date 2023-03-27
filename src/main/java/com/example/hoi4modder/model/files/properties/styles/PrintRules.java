@@ -11,7 +11,7 @@ public class PrintRules {
        "traits", "rgb"
     }));
     private final ArrayList<String> mediumRule = new ArrayList<>(List.of(new String[] {
-            "provinces"
+            "provinces", "victory_points"
     }));
     public void forBlock(BlockProperty block) {
         String name = block.name();

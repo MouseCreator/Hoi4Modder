@@ -10,7 +10,7 @@ public class MediumStyle implements PrintStyle{
         StringBuilder builder = new StringBuilder(block.prefix());
         builder.append("\n\t");
         for (Property property : block.getElements()) {
-            builder.append(property).append(" ");
+            builder.append(property.toFile()).append(" ");
         }
         builder.append("\n").append(block.suffix());
         return builder.toString();

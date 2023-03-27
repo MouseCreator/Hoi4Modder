@@ -9,7 +9,7 @@ public class NormalStyle implements PrintStyle{
         StringBuilder builder = new StringBuilder(block.prefix());
         builder.append("\n");
         for (Property property : block.getElements()) {
-            builder.append("\t").append(property).append("\n");
+            builder.append("\t").append(property.toFile().replace("\n","\n\t")).append("\n");
         }
         builder.append(block.suffix());
         return builder.toString();

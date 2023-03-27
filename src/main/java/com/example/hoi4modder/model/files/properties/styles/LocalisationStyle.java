@@ -9,7 +9,7 @@ public class LocalisationStyle implements PrintStyle{
         StringBuilder builder = new StringBuilder(block.prefix());
         builder.append("\n");
         for (Property property : block.getElements()) {
-            builder.append(" ").append(property).append("\n");
+            builder.append(" ").append(property.toFile()).append("\n");
         }
         builder.append(block.suffix());
         return builder.toString();
