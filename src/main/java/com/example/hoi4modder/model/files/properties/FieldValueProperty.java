@@ -26,4 +26,9 @@ public class FieldValueProperty implements Property {
     public String toFile() {
         return field + delimiter() + value;
     }
+
+    @Override
+    public void inject(Object baseObject) {
+
+    }
 }

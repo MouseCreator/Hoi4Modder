@@ -60,6 +60,11 @@ public class BlockListProperty implements Property, SavedList {
     }
 
     @Override
+    public void inject(Object baseObject) {
+
+    }
+
+    @Override
     public void add(SavedElement element) {
         block.add(element);
     }

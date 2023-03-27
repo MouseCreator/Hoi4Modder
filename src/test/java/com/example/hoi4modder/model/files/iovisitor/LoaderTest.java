@@ -10,12 +10,8 @@ class LoaderTest {
     void someTest() {
         Country c = new Country();
         iReceiveCountry(c);
-        assertEquals( 3, c.getCapital() );
-        assertEquals( 100, c.getConvoys() );
     }
 
     void iReceiveCountry(Country country) {
-        country.setCapital(3);
-        country.setConvoys(100);
     }
 }

@@ -28,4 +28,9 @@ public class LocalisationProperty implements Property{
     public String toFile() {
         return key + delimiter() + "\"" + value + "\"";
     }
+
+    @Override
+    public void inject(Object baseObject) {
+
+    }
 }

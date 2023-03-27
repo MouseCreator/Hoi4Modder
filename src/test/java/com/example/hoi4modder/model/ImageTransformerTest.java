@@ -10,7 +10,7 @@ class ImageTransformerTest {
     void toPortrait() {
         try {
             ImageTransformer transformer = new ImageTransformer();
-            transformer.portrait();
+            transformer.toPortrait();
         } catch (Exception e) {
             e.printStackTrace();
             fail();

@@ -28,6 +28,11 @@ public class LocalisationList implements SavedList {
     }
 
     @Override
+    public void inject(Object baseObject) {
+
+    }
+
+    @Override
     public void add(SavedElement property) {
 
     }
