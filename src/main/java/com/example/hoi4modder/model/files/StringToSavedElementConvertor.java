@@ -14,6 +14,7 @@ public class StringToSavedElementConvertor {
                 continue;
             line = line.replace(" =", "=");
             line = line.replace("= ", "=");
+            line = line.replace(":0 ", ":0");
             line = line.trim().replaceAll(" +", " ");
             builder.append(line).append(" ");
         }

@@ -6,8 +6,8 @@ import com.example.hoi4modder.model.files.properties.Property;
 class LocalisationPropertyFactory extends PropertyFactoryMethod {
 
     private final LocalisationProperty property = new LocalisationProperty();
+    private final FieldValuePropertyFactory next = new FieldValuePropertyFactory();
 
-    private final SingleValueFactory next = new SingleValueFactory();
     @Override
     public ChainedFactory next() {
         return next;

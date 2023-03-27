@@ -13,13 +13,13 @@ public class BlockPropertyFactory extends PropertyFactoryMethod {
     @Override
     public Property toProperty(String origin) {
         BlockProperty result = new BlockProperty();
-        String[] s = origin.split(" ", 2);
+        String[] s = split(origin);
         result.setKey(origin.substring(0, origin.indexOf("=")));
         PropertyFactoryImpl propertyFactory = new PropertyFactoryImpl();
         origin = s[1];
         while (!origin.startsWith("}")) {
 
-            String[] parts = origin.split(" ", 2);
+            String[] parts = split(origin);
             if(parts[0].endsWith("={")) {
                 result.add(propertyFactory.toProperty(origin));
                 origin = skip(parts[1]);

@@ -7,7 +7,6 @@ import com.example.hoi4modder.model.files.properties.styles.PrintStyle;
 public class LocalisationBlock implements Block{
     private final String language;
     private final PropertyList keys;
-
     private PrintStyle style = new LocalisationStyle();
 
     public LocalisationBlock(String language) {
@@ -24,7 +23,7 @@ public class LocalisationBlock implements Block{
     }
     @Override
     public boolean containsDelimiter(String str) {
-        return str.matches("l_[A-Za-z0-9]*:");
+        return str.matches("l_[a-zA-Z0-9]*:");
     }
     @Override
     public String toFile() {
@@ -42,7 +41,7 @@ public class LocalisationBlock implements Block{
 
     @Override
     public void add(Property other) {
-
+        this.keys.add(other);
     }
 
     @Override

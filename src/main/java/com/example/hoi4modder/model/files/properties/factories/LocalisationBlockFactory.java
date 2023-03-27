@@ -6,7 +6,9 @@ import com.example.hoi4modder.model.files.properties.Property;
 
 public class LocalisationBlockFactory extends PropertyFactoryMethod{
 
-    private final FieldValuePropertyFactory next = new FieldValuePropertyFactory();
+
+
+    private final SingleValueFactory next = new SingleValueFactory();
 
     private final LocalisationBlock property = new LocalisationBlock();
     @Override
@@ -16,12 +18,20 @@ public class LocalisationBlockFactory extends PropertyFactoryMethod{
 
     @Override
     public Property toProperty(String origin) {
-        String[] strings = origin.split(" ", 2);
-        LocalisationBlock block = new LocalisationBlock(strings[0]);
         PropertyFactoryImpl propertyFactory = new PropertyFactoryImpl();
-        while (!origin.isEmpty())
-            block.add(propertyFactory.toProperty(origin));
+        String[] strings = split(origin);
+        String title = origin.split(" ", 2)[0];
+        title = title.substring(0, title.length()-1);
+        LocalisationBlock block = new LocalisationBlock(title);
+        for (String current : strings) {
+            block.add(propertyFactory.toProperty(current));
+        }
         return block;
+    }
+    @Override
+    protected String[] split(String str) {
+        String[] inSplit = super.split(str);
+        return inSplit[1].split("\" ");
     }
 
     @Override
