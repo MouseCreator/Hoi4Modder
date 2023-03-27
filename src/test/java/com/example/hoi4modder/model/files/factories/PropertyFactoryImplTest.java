@@ -1,6 +1,6 @@
 package com.example.hoi4modder.model.files.factories;
 
-import com.example.hoi4modder.model.files.properties.SavedElement;
+import com.example.hoi4modder.model.files.properties.Property;
 import com.example.hoi4modder.model.files.properties.factories.PropertyFactoryImpl;
 import org.junit.jupiter.api.Test;
 
@@ -22,7 +22,7 @@ class PropertyFactoryImplTest {
         };
         PropertyFactoryImpl propertyFactory = new PropertyFactoryImpl();
         for (String s : strings) {
-            SavedElement result = propertyFactory.toProperty(s);
+            Property result = propertyFactory.toProperty(s);
             String propertyString = result.toFile();
             assertEquals(s, propertyString);
         }
