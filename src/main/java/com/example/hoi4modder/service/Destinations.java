@@ -1,10 +1,12 @@
 package com.example.hoi4modder.service;
 
+import com.example.hoi4modder.game.Country;
+
 import java.io.File;
 
 public class Destinations {
-    private Destinations destinations;
-    public Destinations getDestinations() {
+    private static final Destinations destinations = new Destinations();
+    public static Destinations get() {
         return destinations;
     }
     private final String s = File.pathSeparator;
@@ -22,8 +24,9 @@ public class Destinations {
     private final String mod_countries = "mod_countries_l_russian";
     private final String mod_characters = "mod_characters_l_russian";
     private final String states = "states" + s;
-    public String countryFile(String tag) {
-        return history + countries + tag + txt;
+    public String countryFile(Country country) {
+        return history + countries + country.getTag() + " - " +
+                country.getName() + txt;
     }
     public String stateFile(int id) {
         return history + states + id + txt;

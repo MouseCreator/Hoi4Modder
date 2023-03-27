@@ -60,7 +60,7 @@ public class CountryManager {
     private void setPopularities(PopularityRadius popularities) {
         currentStr.append("democratic", popularities.getDemocratic());
         currentStr.append("fascism", popularities.getFascism());
-        currentStr.append("communism", popularities.getCommusism());
+        currentStr.append("communism", popularities.getCommunism());
         currentStr.append("neutrality", popularities.getNeutrality());
     }
 
