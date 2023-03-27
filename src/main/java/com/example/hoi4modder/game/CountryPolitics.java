@@ -6,8 +6,6 @@ import lombok.Data;
 public class CountryPolitics {
     private Ideology rulingParty;
     private boolean electionsAllowed;
-
     private int electionsFrequency;
-
     private String lastElection;
 }
