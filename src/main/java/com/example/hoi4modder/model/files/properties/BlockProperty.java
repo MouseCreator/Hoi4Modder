@@ -4,21 +4,17 @@ import com.example.hoi4modder.model.files.properties.lists.PropertyList;
 import com.example.hoi4modder.model.files.properties.styles.PrintStyle;
 
 public class BlockProperty implements Property {
-    private String key = "";
-
+    private String key;
     private PrintStyle style;
     private final PropertyList block;
-
     public BlockProperty(String name, PropertyList expressions) {
         this.key = name;
         this.block = expressions;
     }
-
     public BlockProperty() {
         this.key = "";
         this.block = new PropertyList();
     }
-
     public String getKey() {
         return key;
     }
@@ -27,7 +23,7 @@ public class BlockProperty implements Property {
     }
     @Override
     public String delimiter() {
-        return "= {";
+        return "={";
     }
 
     @Override
