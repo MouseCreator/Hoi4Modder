@@ -14,7 +14,6 @@ public class PropertyFactoryImpl implements PropertyFactory{
     @Override
     public Property toBlock(Queue<String> origin) {
         Property property = firstInChain.createProperty(origin.poll());
-
         while (!origin.isEmpty()) {
             String current = origin.poll();
             if (current.startsWith("}")) {
