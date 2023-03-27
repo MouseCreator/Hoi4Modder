@@ -1,7 +1,9 @@
-package com.example.hoi4modder.model.files.properties.lists;
+package com.example.hoi4modder.model.files.properties;
 
 import com.example.hoi4modder.model.files.properties.Property;
 import com.example.hoi4modder.model.files.properties.SavedElement;
+import com.example.hoi4modder.model.files.properties.lists.SavedList;
+import com.example.hoi4modder.model.files.properties.lists.SavedListArray;
 import com.example.hoi4modder.model.files.properties.printstyles.PrintStyle;
 
 import java.util.List;
@@ -59,10 +61,6 @@ public class BlockListProperty implements Property, SavedList {
         return prefix() + printStyle.printStyled(this) + suffix();
     }
 
-    @Override
-    public void inject(Object baseObject) {
-
-    }
 
     @Override
     public void add(SavedElement element) {

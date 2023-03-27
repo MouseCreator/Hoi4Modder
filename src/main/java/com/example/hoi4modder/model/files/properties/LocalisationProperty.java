@@ -29,7 +29,6 @@ public class LocalisationProperty implements Property{
         return key + delimiter() + "\"" + value + "\"";
     }
 
-    @Override
     public void inject(Object baseObject) {
 
     }

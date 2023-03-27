@@ -1,7 +1,7 @@
 package com.example.hoi4modder.model.files;
 
 import com.example.hoi4modder.model.files.properties.factories.PropertyFactoryImpl;
-import com.example.hoi4modder.model.files.properties.lists.BlockListProperty;
+import com.example.hoi4modder.model.files.properties.BlockListProperty;
 import com.example.hoi4modder.model.files.properties.lists.SavedElementList;
 import com.example.hoi4modder.model.files.properties.lists.SavedList;
 import com.example.hoi4modder.model.files.properties.lists.SavedListArray;
@@ -13,7 +13,6 @@ import java.util.concurrent.LinkedBlockingQueue;
 public class StringToSavedElementConvertor {
     PropertyFactoryImpl propertyFactory = new PropertyFactoryImpl();
     public SavedList forStructuredFile(List<String> input) {
-        SavedElementList result = new SavedElementList();
         StringBuilder builder = new StringBuilder();
         for (String line : input) {
             line = toNormalizedLine(line);
@@ -38,7 +37,7 @@ public class StringToSavedElementConvertor {
             } else if (current.startsWith("}")) {
                 return arr;
             } else {
-                arr.add(propertyFactory.toProperty(current));
+               // arr.add(propertyFactory.toProperty(current));
             }
         }
         return arr;

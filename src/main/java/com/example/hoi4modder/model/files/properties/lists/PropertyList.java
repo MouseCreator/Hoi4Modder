@@ -1,4 +1,4 @@
 package com.example.hoi4modder.model.files.properties.lists;
 
-public interface BlockCollection<T> {
+public class PropertyList {
 }
