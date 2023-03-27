@@ -3,8 +3,6 @@ package com.example.hoi4modder.model.files.properties.factories;
 import com.example.hoi4modder.model.files.properties.LocalisationProperty;
 import com.example.hoi4modder.model.files.properties.Property;
 
-import java.util.Queue;
-
 class LocalisationPropertyFactory extends PropertyFactoryMethod {
 
     private final LocalisationProperty property = new LocalisationProperty();

@@ -1,10 +1,8 @@
 package com.example.hoi4modder.model.files.properties.factories;
 
 import com.example.hoi4modder.model.files.properties.LocalisationBlock;
-import com.example.hoi4modder.model.files.properties.LocalisationProperty;
 import com.example.hoi4modder.model.files.properties.Property;
 
-import java.util.Queue;
 
 public class LocalisationBlockFactory extends PropertyFactoryMethod{
 

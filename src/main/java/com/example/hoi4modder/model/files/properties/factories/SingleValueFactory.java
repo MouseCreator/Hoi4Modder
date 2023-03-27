@@ -3,8 +3,6 @@ package com.example.hoi4modder.model.files.properties.factories;
 import com.example.hoi4modder.model.files.properties.Property;
 import com.example.hoi4modder.model.files.properties.SingleValue;
 
-import java.util.Queue;
-
 class SingleValueFactory extends PropertyFactoryMethod {
     private final SingleValue property = new SingleValue();
 
