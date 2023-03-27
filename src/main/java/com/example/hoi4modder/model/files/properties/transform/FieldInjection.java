@@ -31,7 +31,21 @@ public class FieldInjection {
         }
         return obj;
     }
-
+    public void constructor(Object obj, SavedList source) throws IllegalAccessException {
+        Class<?> clazz = obj.getClass();
+        Field[] fields = clazz.getDeclaredFields();
+        for (Field field : fields) {
+            if (field.isAnnotationPresent(Declarable.class)) {
+                String search = field.getAnnotation(Declarable.class).name();
+                field.setAccessible(true);
+                if (field.getType().equals(BlockCollection.class)) {
+                    //field.set(obj, constructor(field.getGenericType().getClass(), source.findBlock(search)));
+                } else {
+                    //source.findValue(search);
+                }
+            }
+        }
+    }
     private Object createInstance(Class<?> clazz) {
         try {
             Constructor<?> constructor = clazz.getConstructor();

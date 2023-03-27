@@ -1,6 +1,7 @@
 package com.example.hoi4modder.model.files.iovisitor;
 
 import com.example.hoi4modder.game.Country;
+import com.example.hoi4modder.model.files.properties.SavedElement;
 import com.example.hoi4modder.model.files.service.FileServiceImpl;
 import com.example.hoi4modder.service.Destinations;
 
@@ -13,6 +14,7 @@ public class Loader implements Visitor {
 
     private void loadCountry(Country country) {
         FileServiceImpl fileService = new FileServiceImpl();
-        fileService.put(country, Destinations.get().countryFile(country), "");
+        SavedElement structure = fileService.read(Destinations.get().countryFile(country));
+        //FieldInjection.getInjector(Country.class, country);
     }
 }

@@ -24,4 +24,5 @@ public class SingleValue implements Property{
     public String toFile() {
         return value;
     }
+
 }
