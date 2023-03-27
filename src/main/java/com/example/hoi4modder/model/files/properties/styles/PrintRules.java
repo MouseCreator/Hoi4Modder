@@ -13,16 +13,18 @@ public class PrintRules {
     private final ArrayList<String> mediumRule = new ArrayList<>(List.of(new String[] {
             "provinces"
     }));
-    public void visitBlock(BlockProperty block) {
+    public void forBlock(BlockProperty block) {
         String name = block.name();
         if (simpleRule.contains(name)) {
             block.setStyle(new SimpleStyle());
         } else if (mediumRule.contains(name)) {
             block.setStyle(new MediumStyle());
+        } else {
+            block.setStyle(new NormalStyle());
         }
     }
 
-    public void visitLocalisation(LocalisationBlock block) {
-        block.name();
+    public void forLocalisation(LocalisationBlock block) {
+        block.setStyle(new LocalisationStyle());
     }
 }
