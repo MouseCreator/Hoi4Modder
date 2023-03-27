@@ -1,6 +1,6 @@
 package com.example.hoi4modder.model.files;
 
-import com.example.hoi4modder.model.files.properties.lists.SavedList;
+import com.example.hoi4modder.model.files.properties.Property;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -64,8 +64,8 @@ class StringToSavedElementConvertorTest {
     @Test
     void testBuilding() {
         StringToSavedElementConvertor convertor = new StringToSavedElementConvertor();
-        SavedList list = convertor.forStructuredFile(toLines());
-        list.toString();
+        Property property = convertor.forStructuredFile(toLines());
+        property.toFile();
     }
 
 
