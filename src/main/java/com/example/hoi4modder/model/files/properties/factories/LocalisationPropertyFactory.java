@@ -3,6 +3,8 @@ package com.example.hoi4modder.model.files.properties.factories;
 import com.example.hoi4modder.model.files.properties.LocalisationProperty;
 import com.example.hoi4modder.model.files.properties.Property;
 
+import java.util.Queue;
+
 class LocalisationPropertyFactory extends PropertyFactoryMethod {
 
     private final LocalisationProperty property = new LocalisationProperty();
@@ -17,9 +19,10 @@ class LocalisationPropertyFactory extends PropertyFactoryMethod {
     public Property toProperty(String origin) {
         String key;
         String value;
-        int splitPosition = origin.indexOf(":");
-        key = origin.substring(0, splitPosition);
-        value = origin.substring(splitPosition+1);
+        String str = origin.split(" ")[0];
+        int splitPosition = str.indexOf(":");
+        key = str.substring(0, splitPosition);
+        value = str.substring(splitPosition+1);
         value = value.substring(value.indexOf('\"')+1, value.lastIndexOf("\""));
         return new LocalisationProperty(key, value);
     }

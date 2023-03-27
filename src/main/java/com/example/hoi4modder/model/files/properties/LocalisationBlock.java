@@ -2,9 +2,18 @@ package com.example.hoi4modder.model.files.properties;
 import com.example.hoi4modder.model.files.properties.lists.PropertyList;
 
 public class LocalisationBlock implements Property{
-    private String language;
+    private final String language;
 
-    private PropertyList keys = new PropertyList();
+    private final PropertyList keys;
+
+    public LocalisationBlock(String language) {
+        this.language = language;
+        this.keys = new PropertyList();
+    }
+    public LocalisationBlock() {
+        this.language = "";
+        this.keys = new PropertyList();
+    }
     @Override
     public String delimiter() {
         return ":";

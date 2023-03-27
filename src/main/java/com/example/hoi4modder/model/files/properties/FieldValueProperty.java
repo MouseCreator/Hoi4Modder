@@ -28,7 +28,23 @@ public class FieldValueProperty implements Property {
     }
 
     @Override
-    public void inject(Object baseObject) {
-
+    public String name() {
+        return field;
     }
+
+    @Override
+    public String value() {
+        return value;
+    }
+
+    @Override
+    public void add(Property other) {
+        throw new UnsupportedOperationException("Cannot add values to FieldValue");
+    }
+
+    @Override
+    public void put(Property other) {
+        throw new UnsupportedOperationException("Cannot put values to FieldValue");
+    }
+
 }

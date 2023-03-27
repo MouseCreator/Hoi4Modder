@@ -29,7 +29,24 @@ public class LocalisationProperty implements Property{
         return key + delimiter() + "\"" + value + "\"";
     }
 
-    public void inject(Object baseObject) {
-
+    @Override
+    public String name() {
+        return key;
     }
+
+    @Override
+    public String value() {
+        return value;
+    }
+
+    @Override
+    public void add(Property other) {
+        throw new UnsupportedOperationException("Cannot add values to localisation key");
+    }
+
+    @Override
+    public void put(Property other) {
+        throw new UnsupportedOperationException("Cannot add values to localisation key");
+    }
+
 }

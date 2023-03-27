@@ -65,11 +65,11 @@ class StringToSavedElementConvertorTest {
     void testBuilding() {
         StringToSavedElementConvertor convertor = new StringToSavedElementConvertor();
         Property property = convertor.forStructuredFile(toLines());
-        property.toFile();
+        System.out.println(property.toFile());
     }
 
 
     private ArrayList<String> toLines() {
-        return new ArrayList<String>(List.of(sampleFile.split("\n")));
+        return new ArrayList<>(List.of(sampleFile.split("\n")));
     }
 }

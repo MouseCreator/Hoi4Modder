@@ -1,7 +1,6 @@
 package com.example.hoi4modder.game;
 
 import com.example.hoi4modder.model.files.iovisitor.SavedField;
-import com.example.hoi4modder.model.files.service.Model;
 import javafx.scene.image.Image;
 import lombok.Data;
 
@@ -9,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 @Data
-public class Country implements Model {
+public class Country {
     private String tag;
     private String name;
     private String color;
