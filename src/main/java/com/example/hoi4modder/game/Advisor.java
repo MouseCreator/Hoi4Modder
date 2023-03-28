@@ -1,9 +1,12 @@
 package com.example.hoi4modder.game;
 
-import java.util.List;
+import lombok.Data;
 
-public class PoliticalAdvisor implements CharacterRole{
+import java.util.List;
+@Data
+public class Advisor implements CharacterRole{
     private String slot;
     private String token;
+    private String ledger;
     private List<LeaderTrait> traits;
 }
