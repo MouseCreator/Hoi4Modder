@@ -1,13 +1,12 @@
 package com.example.hoi4modder.game;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
-import java.util.Set;
-
+@EqualsAndHashCode(callSuper = true)
 @Data
-public class Advisor implements CharacterRole{
+public class Advisor extends Role{
     private String slot;
     private String token;
     private String ledger;
-    private Set<String> traits;
 }

@@ -37,7 +37,7 @@ public class Saver implements Visitor {
         }
         Property coprsCommander = mainProperty.getFirst("corps_commander");
         if (coprsCommander != null) {
-            CorpsCommander commanderRole = new CorpsCommander();
+            UnitLeader commanderRole = new UnitLeader();
         }
         currentCharacter.setRoles(roles);
     }

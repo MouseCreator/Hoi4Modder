@@ -1,11 +1,13 @@
 package com.example.hoi4modder.game;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.util.Set;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
-public class NavyLeader {
+public class NavyLeader extends Role {
     private int skill;
     private int attackSkill;
     private int defenceSkill;
