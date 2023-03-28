@@ -1,5 +1,7 @@
 package com.example.hoi4modder.model.files.properties;
 
+import com.example.hoi4modder.model.files.properties.lists.PropertyCollection;
+
 public class SingleValue implements Property{
     private final String value;
 
@@ -43,6 +45,21 @@ public class SingleValue implements Property{
     @Override
     public void put(Property other) {
         throw new UnsupportedOperationException("Cannot add values to single value type");
+    }
+
+    @Override
+    public PropertyCollection getAll() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public PropertyCollection get(String field) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public Property getFirst(String field) {
+        return  (field.isEmpty()) ? this : null;
     }
 
 

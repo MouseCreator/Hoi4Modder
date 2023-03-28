@@ -46,7 +46,31 @@ public class LocalisationBlock implements Block{
 
     @Override
     public void put(Property other) {
+        this.keys.add(other);
+    }
 
+    @Override
+    public PropertyCollection getAll() {
+        return this.keys;
+    }
+
+    @Override
+    public PropertyCollection get(String field) {
+        PropertyList list = new PropertyList();
+        for (Property property : keys) {
+            if (property.name().equals(field))
+                list.add(property);
+        }
+        return list;
+    }
+
+    @Override
+    public Property getFirst(String field) {
+        for (Property property : keys) {
+            if (property.name().equals(field))
+                return property;
+        }
+        return null;
     }
 
     @Override

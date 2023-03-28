@@ -1,5 +1,6 @@
 package com.example.hoi4modder.model.files.properties;
 
+import com.example.hoi4modder.model.files.properties.lists.PropertyCollection;
 import com.example.hoi4modder.model.files.properties.lists.PropertyList;
 import com.example.hoi4modder.model.files.properties.styles.NormalStyle;
 import com.example.hoi4modder.model.files.properties.styles.PrintRules;
@@ -73,6 +74,30 @@ public class BlockProperty implements Block {
     @Override
     public void put(Property element) {
         block.add(element);
+    }
+
+    @Override
+    public PropertyCollection getAll() {
+        return this.block;
+    }
+
+    @Override
+    public PropertyCollection get(String field) {
+        PropertyList result = new PropertyList();
+        for (Property property : block) {
+            if (property.name().equals(field))
+                result.add(property);
+        }
+        return result;
+    }
+
+    @Override
+    public Property getFirst(String field) {
+        for (Property property : block) {
+            if (property.name().equals(field))
+                return property;
+        }
+        return null;
     }
 
 
