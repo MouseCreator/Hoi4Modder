@@ -18,7 +18,7 @@ class StringToSavedElementConvertorTest {
                 	name="STATE_15"
                 	manpower = 2332100
                 	resources={
-                #		steel=21 # was: 36
+                		steel=21 # was: 36
                 	}
                 	
                 	state_category = city
@@ -93,7 +93,7 @@ class StringToSavedElementConvertorTest {
                  henschel:0 "«Хеншель»"
                  henschel_desc:1 "«Хеншель» отвечал за все серийные модели «Тигров». После того как ранние проблемы с надежностью были устранены, танки показали себя вполне достойно."
                  GER_MAN:0 "MAN\"""";
-        Property property = convertor.forLocalisationFile(toLines(localisationFile));
+        Property property = convertor.forStructuredFile(toLines(localisationFile));
         System.out.println(property.toFile());
     }
 

@@ -14,19 +14,6 @@ public class StringToSavedElementConvertor {
                 continue;
             line = line.replace(" =", "=");
             line = line.replace("= ", "=");
-            line = line.trim().replaceAll(" +", " ");
-            builder.append(line).append(" ");
-        }
-        String fullExpression = builder.toString();
-        return propertyFactory.toProperty(fullExpression);
-    }
-
-    public Property forLocalisationFile(List<String> input) {
-        StringBuilder builder = new StringBuilder();
-        for (String line : input) {
-            line = toNormalizedLine(line);
-            if (line.isEmpty())
-                continue;
             line = line.replace(":0 ", ":0");
             line = line.replace(":1 ", ":1");
             line = line.replace(":2 ", ":2");
