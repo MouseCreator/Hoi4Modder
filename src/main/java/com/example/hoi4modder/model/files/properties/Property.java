@@ -1,9 +1,6 @@
 package com.example.hoi4modder.model.files.properties;
 
 import com.example.hoi4modder.model.files.properties.lists.PropertyCollection;
-import com.example.hoi4modder.model.files.properties.lists.PropertyList;
-
-import java.util.Map;
 
 public interface Property {
     String delimiter();

@@ -34,8 +34,10 @@ public class Saver implements Visitor {
             advisorRole.setSlot(advisor.getFirst("slot").value());
             advisorRole.setToken(advisor.getFirst("idea_token").value());
             Property traitScope = advisor.getFirst("traits");
-            for (Property property : traitScope.getAll()) {
-                advisorRole.getTraits().add(property.value());
+            if (traitScope != null) {
+                for (Property property : traitScope.getAll()) {
+                    advisorRole.getTraits().add(property.value());
+                }
             }
         }
         currentCharacter.setRoles(roles);
