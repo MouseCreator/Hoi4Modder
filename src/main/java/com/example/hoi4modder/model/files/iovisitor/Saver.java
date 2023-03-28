@@ -30,19 +30,23 @@ public class Saver implements Visitor {
         FieldValueMap<CharacterRole> roles = currentCharacter.getRoles();
         Property advisorProperty = mainProperty.getFirst("advisor");
         if (advisorProperty != null) {
-            Advisor advisorRole = new Advisor();
+            Advisor advisorRole = Advisor.createAdvisor();
             advisorRole.setSlot(advisorProperty.getFirst("slot").value());
             advisorRole.setToken(advisorProperty.getFirst("idea_token").value());
+            Property costProperty = advisorProperty.getFirst("cost");
+            if (costProperty != null) {
+                advisorRole.setCost(Integer.parseInt(costProperty.value()));
+            }
             setTraitsForAdvisor(advisorRole, advisorProperty);
         }
         Property commanderProperty = mainProperty.getFirst("corps_commander");
         if (commanderProperty != null) {
-            UnitLeader unitLeader = new UnitLeader();
+            UnitLeader unitLeader = UnitLeader.getCorpsCommander();
             unitLeader.setSkill(Integer.parseInt(commanderProperty.getFirst("skill").value()));
-            unitLeader.setSkill(Integer.parseInt(commanderProperty.getFirst("attack_skill").value()));
-            unitLeader.setSkill(Integer.parseInt(commanderProperty.getFirst("defense_skill").value()));
-            unitLeader.setSkill(Integer.parseInt(commanderProperty.getFirst("planning_skill").value()));
-            unitLeader.setSkill(Integer.parseInt(commanderProperty.getFirst("logistics_skill").value()));
+            unitLeader.setAttackSkill(Integer.parseInt(commanderProperty.getFirst("attack_skill").value()));
+            unitLeader.setDefenceSkill(Integer.parseInt(commanderProperty.getFirst("defense_skill").value()));
+            unitLeader.setPlanningSkill(Integer.parseInt(commanderProperty.getFirst("planning_skill").value()));
+            unitLeader.setLogisticsSkill(Integer.parseInt(commanderProperty.getFirst("logistics_skill").value()));
             setTraitsForAdvisor(unitLeader, commanderProperty);
         }
         currentCharacter.setRoles(roles);
