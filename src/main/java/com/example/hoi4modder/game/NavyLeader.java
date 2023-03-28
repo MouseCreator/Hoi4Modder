@@ -5,11 +5,11 @@ import lombok.Data;
 import java.util.Set;
 
 @Data
-public class CorpsCommander implements CharacterRole{
+public class NavyLeader {
     private int skill;
     private int attackSkill;
     private int defenceSkill;
-    private int planningSkill;
-    private int logisticsSkill;
+    private int maneuveringSkill;
+    private int coordinationSkill;
     private Set<String> traits;
 }
