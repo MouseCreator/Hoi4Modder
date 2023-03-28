@@ -1,15 +1,13 @@
 package com.example.hoi4modder.model.files.iovisitor;
-import com.example.hoi4modder.game.GameCharacter;
-import com.example.hoi4modder.game.GameCharacterList;
+import com.example.hoi4modder.game.*;
 import com.example.hoi4modder.model.files.properties.BlockProperty;
 import com.example.hoi4modder.model.files.properties.Property;
 import com.example.hoi4modder.model.files.properties.lists.PropertyCollection;
-import java.util.Map;
 
 public class Saver implements Visitor {
     @Override
     public void visitCharacterList(GameCharacterList characterList) {
-        Property mainBlock = new BlockProperty(); //readFile();
+        Property mainBlock = new BlockProperty();// readFile();
 
         PropertyCollection charactersCollection = mainBlock.getAll();
 
@@ -21,14 +19,28 @@ public class Saver implements Visitor {
     private GameCharacter propertyToCharacter(Property property) {
         GameCharacter currentCharacter = new GameCharacter();
         currentCharacter.setIdentification(property.name());
-        currentCharacter.setName(property.get("name").get(0).value());
-        PropertyCollection portraits = property.get("portraits").get(0).getAll();
+        currentCharacter.setName(property.getFirst("name").value());
+        PropertyCollection portraits = property.getFirst ("portraits").getAll();
         createPortraits(currentCharacter, portraits);
+        addRoles(currentCharacter, property);
         return currentCharacter;
     }
 
+    private void addRoles(GameCharacter currentCharacter, Property mainProperty) {
+        FieldValueMap<CharacterRole> roles = currentCharacter.getRoles();
+        Property advisor = mainProperty.getFirst("portraits");
+        if (advisor != null) {
+            Advisor advisorRole = new Advisor();
+            advisorRole.setSlot(advisor.getFirst("slot").value());
+            advisorRole.setToken(advisor.getFirst("idea_token").value());
+
+        }
+        currentCharacter.setRoles(roles);
+    }
+    private void setTraitsForAdvisor(Advisor advisor) {
+    }
     private void createPortraits(GameCharacter currentCharacter, PropertyCollection portraits) {
-        Map<String, String> characterPortraits = currentCharacter.getPortraits();
+        FieldValueMap<String> characterPortraits = currentCharacter.getPortraits();
         for (Property portraitProperty : portraits) {
             characterPortraits.put(portraitProperty.name(), portraitProperty.value());
         }

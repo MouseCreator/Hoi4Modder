@@ -1,8 +1,8 @@
 package com.example.hoi4modder.game;
 
-import java.util.List;
+import java.util.Set;
 
 public class LeaderTrait implements Trait {
     private String name;
-    private List<Modifier> modifiers;
+    private Set<Modifier> modifiers;
 }

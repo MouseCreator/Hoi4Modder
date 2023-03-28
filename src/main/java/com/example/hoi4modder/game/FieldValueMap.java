@@ -1,6 +1,7 @@
 package com.example.hoi4modder.game;
 
 import java.util.Map;
+import java.util.Set;
 
 public class FieldValueMap<T> {
     private final Map<String, T> map;
@@ -20,5 +21,9 @@ public class FieldValueMap<T> {
     }
     public void remove(String key, T value) {
         map.remove(key, value);
+    }
+
+    public Set<String> fields() {
+        return map.keySet();
     }
 }

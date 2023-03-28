@@ -3,6 +3,8 @@ package com.example.hoi4modder.model.files.properties;
 import com.example.hoi4modder.model.files.properties.lists.PropertyCollection;
 import com.example.hoi4modder.model.files.properties.lists.PropertyList;
 
+import java.util.Map;
+
 public interface Property {
     String delimiter();
     boolean containsDelimiter(String str);
@@ -13,5 +15,7 @@ public interface Property {
     void put(Property other);
 
     PropertyCollection getAll();
-    PropertyCollection get(String name);
+    PropertyCollection get(String field);
+
+    Property getFirst(String field);
 }
