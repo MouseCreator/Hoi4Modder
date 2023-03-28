@@ -28,28 +28,31 @@ public class Saver implements Visitor {
 
     private void addRoles(GameCharacter currentCharacter, Property mainProperty) {
         FieldValueMap<CharacterRole> roles = currentCharacter.getRoles();
-        Property advisor = mainProperty.getFirst("advisor");
-        if (advisor != null) {
+        Property advisorProperty = mainProperty.getFirst("advisor");
+        if (advisorProperty != null) {
             Advisor advisorRole = new Advisor();
-            advisorRole.setSlot(advisor.getFirst("slot").value());
-            advisorRole.setToken(advisor.getFirst("idea_token").value());
-            setTraitsForAdvisor(advisorRole, advisor);
+            advisorRole.setSlot(advisorProperty.getFirst("slot").value());
+            advisorRole.setToken(advisorProperty.getFirst("idea_token").value());
+            setTraitsForAdvisor(advisorRole, advisorProperty);
         }
-        Property coprsCommander = mainProperty.getFirst("corps_commander");
-        if (coprsCommander != null) {
-            UnitLeader commanderRole = new UnitLeader();
+        Property commanderProperty = mainProperty.getFirst("corps_commander");
+        if (commanderProperty != null) {
+            UnitLeader unitLeader = new UnitLeader();
+            unitLeader.setSkill(Integer.parseInt(commanderProperty.getFirst("skill").value()));
+            unitLeader.setSkill(Integer.parseInt(commanderProperty.getFirst("attack_skill").value()));
+            unitLeader.setSkill(Integer.parseInt(commanderProperty.getFirst("defense_skill").value()));
+            unitLeader.setSkill(Integer.parseInt(commanderProperty.getFirst("planning_skill").value()));
+            unitLeader.setSkill(Integer.parseInt(commanderProperty.getFirst("logistics_skill").value()));
+            setTraitsForAdvisor(unitLeader, commanderProperty);
         }
         currentCharacter.setRoles(roles);
     }
 
-    private void addAdvisor() {
-
-    }
-    private void setTraitsForAdvisor(Advisor advisor, Property role) {
-        Property traitScope = role.getFirst("traits");
+    private void setTraitsForAdvisor(CharacterRole role, Property roleProperty) {
+        Property traitScope = roleProperty.getFirst("traits");
         if (traitScope != null) {
             for (Property property : traitScope.getAll()) {
-                advisor.getTraits().add(property.value());
+                role.getTraits().add(property.value());
             }
         }
     }

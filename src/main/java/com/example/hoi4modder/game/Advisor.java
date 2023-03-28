@@ -9,4 +9,17 @@ public class Advisor extends Role{
     private String slot;
     private String token;
     private String ledger;
+    private int cost;
+
+    public Advisor() {
+    }
+
+    public static Advisor createAdvisor() {
+        Advisor result = new Advisor();
+        result.cost = 150;
+        result.slot = "political_advisor";
+        result.ledger = "";
+        result.token = "NO_TOKEN";
+        return result;
+    }
 }
