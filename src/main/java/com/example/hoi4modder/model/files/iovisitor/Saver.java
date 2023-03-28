@@ -28,12 +28,15 @@ public class Saver implements Visitor {
 
     private void addRoles(GameCharacter currentCharacter, Property mainProperty) {
         FieldValueMap<CharacterRole> roles = currentCharacter.getRoles();
-        Property advisor = mainProperty.getFirst("portraits");
+        Property advisor = mainProperty.getFirst("advisor");
         if (advisor != null) {
             Advisor advisorRole = new Advisor();
             advisorRole.setSlot(advisor.getFirst("slot").value());
             advisorRole.setToken(advisor.getFirst("idea_token").value());
-
+            Property traitScope = advisor.getFirst("traits");
+            for (Property property : traitScope.getAll()) {
+                advisorRole.getTraits().add(property.value());
+            }
         }
         currentCharacter.setRoles(roles);
     }
