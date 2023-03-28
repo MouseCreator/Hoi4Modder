@@ -3,6 +3,8 @@ package com.example.hoi4modder.game;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import java.util.HashSet;
+
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class UnitLeader extends Role{
@@ -30,6 +32,7 @@ public class UnitLeader extends Role{
         commander.setDefenceSkill(1);
         commander.setPlanningSkill(1);
         commander.setLogisticsSkill(1);
+        commander.setTraits(new HashSet<>());
         return commander;
     }
 }
