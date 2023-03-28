@@ -3,6 +3,7 @@ package com.example.hoi4modder.model.files;
 import com.example.hoi4modder.model.files.properties.Property;
 import com.example.hoi4modder.model.files.properties.factories.PropertyFactoryImpl;
 
+import java.util.ArrayList;
 import java.util.List;
 public class StringToSavedElementConvertor {
     PropertyFactoryImpl propertyFactory = new PropertyFactoryImpl();
@@ -23,7 +24,9 @@ public class StringToSavedElementConvertor {
         String fullExpression = builder.toString();
         return propertyFactory.toProperty(fullExpression);
     }
-
+    public Property forStructuredFile(String input) {
+       return forStructuredFile(toLines(input));
+    }
     private String toNormalizedLine(String line) {
         String result = line.replace("\t", "");
         if (result.contains("#"))
@@ -32,4 +35,7 @@ public class StringToSavedElementConvertor {
     }
 
 
+    public ArrayList<String> toLines(String file) {
+        return new ArrayList<String>(List.of(file.split("\n")));
+    }
 }

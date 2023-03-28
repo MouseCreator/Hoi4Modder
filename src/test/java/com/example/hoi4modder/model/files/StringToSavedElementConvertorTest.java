@@ -3,9 +3,6 @@ package com.example.hoi4modder.model.files;
 import com.example.hoi4modder.model.files.properties.Property;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.List;
-
 class StringToSavedElementConvertorTest {
 
     @Test
@@ -65,7 +62,7 @@ class StringToSavedElementConvertorTest {
                 	local_supplies=0.0\s
                 }
                 """;
-        Property property = convertor.forStructuredFile(toLines(sampleFile));
+        Property property = convertor.forStructuredFile(sampleFile);
         System.out.println(property.toFile());
     }
     @Test
@@ -93,13 +90,8 @@ class StringToSavedElementConvertorTest {
                  henschel:0 "«Хеншель»"
                  henschel_desc:1 "«Хеншель» отвечал за все серийные модели «Тигров». После того как ранние проблемы с надежностью были устранены, танки показали себя вполне достойно."
                  GER_MAN:0 "MAN\"""";
-        Property property = convertor.forStructuredFile(toLines(localisationFile));
+        Property property = convertor.forStructuredFile(convertor.toLines(localisationFile));
         System.out.println(property.toFile());
     }
 
-
-
-    private ArrayList<String> toLines(String file) {
-        return new ArrayList<>(List.of(file.split("\n")));
-    }
 }

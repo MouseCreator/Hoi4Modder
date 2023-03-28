@@ -1,18 +1,13 @@
 package com.example.hoi4modder.model.files.iovisitor;
 import com.example.hoi4modder.game.*;
-import com.example.hoi4modder.model.files.properties.BlockProperty;
 import com.example.hoi4modder.model.files.properties.Property;
 import com.example.hoi4modder.model.files.properties.lists.PropertyCollection;
 
-public class Saver implements Visitor {
-    @Override
-    public void visitCharacterList(GameCharacterList characterList) {
-        Property mainBlock = new BlockProperty();// readFile();
-
+public class Saver {
+    public void visitCharacterList(GameCharacterList characterList, Property mainBlock) {
         PropertyCollection charactersCollection = mainBlock.getAll();
-
         for(Property property : charactersCollection) {
-            characterList.getCharacterList().add(propertyToCharacter(property));
+            characterList.add(propertyToCharacter(property));
         }
     }
 

@@ -1,7 +1,6 @@
 package com.example.hoi4modder.game;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 
 import java.util.HashSet;
 
@@ -9,7 +8,8 @@ import java.util.HashSet;
 @Data
 public class UnitLeader extends Role{
     private int skill;
-    private boolean isFieldMarshal;
+    @Getter(AccessLevel.NONE)
+    private boolean fieldMarshal;
     private int attackSkill;
     private int defenceSkill;
     private int planningSkill;
@@ -17,12 +17,12 @@ public class UnitLeader extends Role{
 
     public static UnitLeader getCorpsCommander() {
         UnitLeader commander = weakUnitLeader();
-        commander.isFieldMarshal=false;
+        commander.fieldMarshal=false;
         return commander;
     }
     public static UnitLeader getFieldMarshal() {
         UnitLeader commander = weakUnitLeader();
-        commander.isFieldMarshal=true;
+        commander.fieldMarshal=true;
         return commander;
     }
     private static UnitLeader weakUnitLeader() {
