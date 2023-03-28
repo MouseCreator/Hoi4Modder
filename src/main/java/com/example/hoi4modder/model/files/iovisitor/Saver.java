@@ -53,7 +53,7 @@ public class Saver implements Visitor {
 
         Property countryLeaderProperty = mainProperty.getFirst("country_leader");
         if (countryLeaderProperty != null) {
-            CountryLeader countryLeader = new CountryLeader();
+            CountryLeader countryLeader = CountryLeader.getCountryLeader();
             countryLeader.setIdeology(countryLeaderProperty.getFirst("ideology").value());
             setTraitsForAdvisor(countryLeader, countryLeaderProperty);
         }
@@ -61,12 +61,12 @@ public class Saver implements Visitor {
         Property navyLeaderProperty = mainProperty.getFirst("navy_leader");
         if (navyLeaderProperty != null) {
             NavyLeader navyLeader = NavyLeader.getNavyLeader();
-            navyLeader.setSkill(Integer.parseInt(commanderProperty.getFirst("skill").value()));
-            navyLeader.setAttackSkill(Integer.parseInt(commanderProperty.getFirst("attack_skill").value()));
-            navyLeader.setDefenceSkill(Integer.parseInt(commanderProperty.getFirst("defense_skill").value()));
-            navyLeader.setManeuveringSkill(Integer.parseInt(commanderProperty.getFirst("maneuvering_skill").value()));
-            navyLeader.setCoordinationSkill(Integer.parseInt(commanderProperty.getFirst("coordination_skill").value()));
-            setTraitsForAdvisor(navyLeader, commanderProperty);
+            navyLeader.setSkill(Integer.parseInt(navyLeaderProperty.getFirst("skill").value()));
+            navyLeader.setAttackSkill(Integer.parseInt(navyLeaderProperty.getFirst("attack_skill").value()));
+            navyLeader.setDefenceSkill(Integer.parseInt(navyLeaderProperty.getFirst("defense_skill").value()));
+            navyLeader.setManeuveringSkill(Integer.parseInt(navyLeaderProperty.getFirst("maneuvering_skill").value()));
+            navyLeader.setCoordinationSkill(Integer.parseInt(navyLeaderProperty.getFirst("coordination_skill").value()));
+            setTraitsForAdvisor(navyLeader, navyLeaderProperty);
         }
         currentCharacter.setRoles(roles);
     }
