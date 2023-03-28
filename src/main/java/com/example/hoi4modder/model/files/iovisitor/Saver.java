@@ -33,16 +33,25 @@ public class Saver implements Visitor {
             Advisor advisorRole = new Advisor();
             advisorRole.setSlot(advisor.getFirst("slot").value());
             advisorRole.setToken(advisor.getFirst("idea_token").value());
-            Property traitScope = advisor.getFirst("traits");
-            if (traitScope != null) {
-                for (Property property : traitScope.getAll()) {
-                    advisorRole.getTraits().add(property.value());
-                }
-            }
+            setTraitsForAdvisor(advisorRole, advisor);
+        }
+        Property coprsCommander = mainProperty.getFirst("corps_commander");
+        if (coprsCommander != null) {
+            CorpsCommander commanderRole = new CorpsCommander();
         }
         currentCharacter.setRoles(roles);
     }
-    private void setTraitsForAdvisor(Advisor advisor) {
+
+    private void addAdvisor() {
+
+    }
+    private void setTraitsForAdvisor(Advisor advisor, Property role) {
+        Property traitScope = role.getFirst("traits");
+        if (traitScope != null) {
+            for (Property property : traitScope.getAll()) {
+                advisor.getTraits().add(property.value());
+            }
+        }
     }
     private void createPortraits(GameCharacter currentCharacter, PropertyCollection portraits) {
         FieldValueMap<String> characterPortraits = currentCharacter.getPortraits();

@@ -5,9 +5,10 @@ import lombok.Data;
 import java.util.List;
 @Data
 public class CorpsCommander implements CharacterRole{
+    private int skill;
     private int attackSkill;
     private int defenceSkill;
     private int planningSkill;
     private int logisticsSkill;
-    private List<ArmyTrait> traits;
+    private List<String> traits;
 }
