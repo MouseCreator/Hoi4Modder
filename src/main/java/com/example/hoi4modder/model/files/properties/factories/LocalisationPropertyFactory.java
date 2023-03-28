@@ -15,12 +15,9 @@ class LocalisationPropertyFactory extends PropertyFactoryMethod {
 
     @Override
     public Property toProperty(String origin) {
-        String key;
-        String value;
-        String str = origin.split(" ")[0];
-        int splitPosition = str.indexOf(":");
-        key = str.substring(0, splitPosition);
-        value = str.substring(splitPosition+1);
+        String[] strings = origin.split(":", 2);
+        String key = strings[0];
+        String value = strings[1];
         value = value.substring(value.indexOf('\"')+1, value.lastIndexOf("\""));
         return new LocalisationProperty(key, value);
     }

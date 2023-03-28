@@ -18,7 +18,7 @@ abstract class PropertyFactoryMethod implements ChainedFactory{
 
     @Override
     public boolean canHandle(String origin) {
-        return getProperty().containsDelimiter(origin.split(" ")[0]);
+        return getProperty().containsDelimiter(split(origin)[0]);
     }
 
     public abstract Property toProperty(String origin);
@@ -29,9 +29,9 @@ abstract class PropertyFactoryMethod implements ChainedFactory{
         String[] strings = string.split(" ", 2);
         if (hasNotClosedBracket(strings[0])) {
             String[] toBrackets = strings[1].split("\"", 2);
-            strings[0] += toBrackets[2];
+            strings[0] += toBrackets[1];
             strings[0] += "\"";
-            strings[1] = toBrackets[1];
+            strings[1] = toBrackets[0];
         }
         return strings;
     }

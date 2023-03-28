@@ -5,7 +5,7 @@ import com.example.hoi4modder.model.files.properties.Property;
 
 public class BlockPropertyFactory extends PropertyFactoryMethod {
     private final BlockProperty property = new BlockProperty();
-    private final LocalisationBlockFactory nextInChain = new LocalisationBlockFactory();
+    private final LocalisationPropertyFactory nextInChain = new LocalisationPropertyFactory();
     @Override
     public ChainedFactory next() {
         return nextInChain;
@@ -59,6 +59,7 @@ public class BlockPropertyFactory extends PropertyFactoryMethod {
 
     @Override
     public boolean canHandle(String origin) {
-        return origin.contains("=") && origin.contains("{");
+        String firstExpression = split(origin)[0];
+        return firstExpression.contains("=") && firstExpression.contains("{");
     }
 }

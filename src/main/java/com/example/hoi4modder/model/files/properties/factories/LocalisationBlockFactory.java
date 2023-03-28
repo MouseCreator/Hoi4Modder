@@ -19,19 +19,21 @@ public class LocalisationBlockFactory extends PropertyFactoryMethod{
     @Override
     public Property toProperty(String origin) {
         PropertyFactoryImpl propertyFactory = new PropertyFactoryImpl();
-        String[] strings = split(origin);
-        String title = origin.split(" ", 2)[0];
-        title = title.substring(0, title.length()-1);
+        String[] titleAndKeys = origin.split(": ", 2);
+        String title = titleAndKeys [0];
+        String[] strings = splitAll(titleAndKeys[1]);
         LocalisationBlock block = new LocalisationBlock(title);
         for (String current : strings) {
             block.add(propertyFactory.toProperty(current));
         }
         return block;
     }
-    @Override
-    protected String[] split(String str) {
-        String[] inSplit = super.split(str);
-        return inSplit[1].split("\" ");
+    private String[] splitAll(String str) {
+        String[] inSplit = str.split("\" ");
+        for (int i = 0; i < inSplit.length; i++) {
+            inSplit[i] += "\"";
+        }
+        return inSplit;
     }
 
     @Override
