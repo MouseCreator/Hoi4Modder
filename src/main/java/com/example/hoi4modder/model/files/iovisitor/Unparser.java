@@ -1,9 +1,7 @@
 package com.example.hoi4modder.model.files.iovisitor;
 
-import com.example.hoi4modder.game.FieldValueMap;
-import com.example.hoi4modder.game.GameCharacter;
-import com.example.hoi4modder.game.GameCharacterList;
-import com.example.hoi4modder.game.Role;
+import com.example.hoi4modder.game.*;
+import com.example.hoi4modder.game.roles.*;
 import com.example.hoi4modder.model.files.properties.BlockProperty;
 import com.example.hoi4modder.model.files.properties.FieldValueProperty;
 import com.example.hoi4modder.model.files.properties.Property;
@@ -17,6 +15,26 @@ public class Unparser implements Visitor {
        // }
     }
 
+    @Override
+    public void visitNavyLeader(NavyLeader navyLeader, Property baseProperty) {
+
+    }
+
+    @Override
+    public void visitCountryLeader(CountryLeader countryLeader, Property property) {
+
+    }
+
+    @Override
+    public void visitUnitLeader(UnitLeader unitLeader, Property property) {
+
+    }
+
+    @Override
+    public void visitAdvisor(Advisor advisor, BlockProperty property) {
+
+    }
+
     private Property propertyFromCharacter(GameCharacter character) {
         BlockProperty blockProperty = new BlockProperty();
         blockProperty.setKey(character.getIdentification());
@@ -27,7 +45,9 @@ public class Unparser implements Visitor {
     }
 
     private void addRoles(GameCharacter character, BlockProperty mainProperty) {
-
+        for (CharacterRole role : character.getRoles()) {
+            Property toAdd = new BlockProperty();
+        }
     }
 
     private BlockProperty addPortraitProperty(FieldValueMap<String> portraits) {

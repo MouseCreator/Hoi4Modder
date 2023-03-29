@@ -1,9 +1,10 @@
 package com.example.hoi4modder.game;
 
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
-public class FieldValueMap<T> {
+public class FieldValueMap<T> implements Iterable<T>{
     private final Map<String, T> map;
 
     public FieldValueMap(Map<String, T> map) {
@@ -25,5 +26,10 @@ public class FieldValueMap<T> {
 
     public Set<String> fields() {
         return map.keySet();
+    }
+
+    @Override
+    public Iterator<T> iterator() {
+        return map.values().iterator();
     }
 }
