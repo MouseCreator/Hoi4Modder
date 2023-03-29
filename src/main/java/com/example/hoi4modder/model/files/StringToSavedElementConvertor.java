@@ -19,6 +19,8 @@ public class StringToSavedElementConvertor {
             line = line.replace(":1 ", ":1");
             line = line.replace(":2 ", ":2");
             line = line.trim().replaceAll(" +", " ");
+            if (line.isEmpty())
+                continue;
             builder.append(line).append(" ");
         }
         String fullExpression = builder.toString();
@@ -36,6 +38,6 @@ public class StringToSavedElementConvertor {
 
 
     public ArrayList<String> toLines(String file) {
-        return new ArrayList<String>(List.of(file.split("\n")));
+        return new ArrayList<>(List.of(file.split("\n")));
     }
 }

@@ -18,7 +18,6 @@ public class BlockPropertyFactory extends PropertyFactoryMethod {
         PropertyFactoryImpl propertyFactory = new PropertyFactoryImpl();
         origin = s[1];
         while (!origin.startsWith("}")) {
-
             String[] parts = split(origin);
             if(parts[0].endsWith("={")) {
                 result.add(propertyFactory.toProperty(origin));
@@ -46,7 +45,7 @@ public class BlockPropertyFactory extends PropertyFactoryMethod {
                 } else if (ch == '}') {
                     bracketCount--;
                     if (bracketCount == 0)
-                        return origin.substring(charNum);
+                        return origin.substring(charNum+1);
                 }
             }
         }

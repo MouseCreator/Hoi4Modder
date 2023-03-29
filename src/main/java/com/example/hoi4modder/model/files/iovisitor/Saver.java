@@ -3,11 +3,14 @@ import com.example.hoi4modder.game.*;
 import com.example.hoi4modder.model.files.properties.Property;
 import com.example.hoi4modder.model.files.properties.lists.PropertyCollection;
 
+import java.util.HashMap;
+
 public class Saver {
     public void visitCharacterList(GameCharacterList characterList, Property mainBlock) {
         PropertyCollection charactersCollection = mainBlock.getAll();
         for(Property property : charactersCollection) {
-            characterList.add(propertyToCharacter(property));
+            GameCharacter character = propertyToCharacter(property);
+            characterList.add(character);
         }
     }
 
@@ -15,14 +18,14 @@ public class Saver {
         GameCharacter currentCharacter = new GameCharacter();
         currentCharacter.setIdentification(property.name());
         currentCharacter.setName(property.getFirst("name").value());
-        PropertyCollection portraits = property.getFirst ("portraits").getAll();
+        PropertyCollection portraits = property.getFirst("portraits").getAll();
         createPortraits(currentCharacter, portraits);
         addRoles(currentCharacter, property);
         return currentCharacter;
     }
 
     private void addRoles(GameCharacter currentCharacter, Property mainProperty) {
-        FieldValueMap<CharacterRole> roles = currentCharacter.getRoles();
+        FieldValueMap<CharacterRole> roles = new FieldValueMap<>(new HashMap<>());
         Property advisorProperty = mainProperty.getFirst("advisor");
         if (advisorProperty != null) {
             Advisor advisorRole = Advisor.createAdvisor();
@@ -33,17 +36,20 @@ public class Saver {
                 advisorRole.setCost(Integer.parseInt(costProperty.value()));
             }
             setTraitsForAdvisor(advisorRole, advisorProperty);
+            roles.put("advisor", advisorRole);
         }
         Property commanderProperty = mainProperty.getFirst("corps_commander");
         if (commanderProperty != null) {
             UnitLeader unitLeader = UnitLeader.getCorpsCommander();
             initializeUnitLeader(commanderProperty, unitLeader);
+            roles.put("corps_commander", unitLeader);
         }
 
         Property fieldMarshalProperty = mainProperty.getFirst("field_marshal");
         if (fieldMarshalProperty != null) {
             UnitLeader unitLeader = UnitLeader.getFieldMarshal();
             initializeUnitLeader(fieldMarshalProperty, unitLeader);
+            roles.put("field_marshal", unitLeader);
         }
 
         Property countryLeaderProperty = mainProperty.getFirst("country_leader");
@@ -51,6 +57,7 @@ public class Saver {
             CountryLeader countryLeader = CountryLeader.getCountryLeader();
             countryLeader.setIdeology(countryLeaderProperty.getFirst("ideology").value());
             setTraitsForAdvisor(countryLeader, countryLeaderProperty);
+            roles.put("country_leader", countryLeader);
         }
 
         Property navyLeaderProperty = mainProperty.getFirst("navy_leader");
@@ -62,6 +69,7 @@ public class Saver {
             navyLeader.setManeuveringSkill(Integer.parseInt(navyLeaderProperty.getFirst("maneuvering_skill").value()));
             navyLeader.setCoordinationSkill(Integer.parseInt(navyLeaderProperty.getFirst("coordination_skill").value()));
             setTraitsForAdvisor(navyLeader, navyLeaderProperty);
+            roles.put("navy_leader", navyLeader);
         }
         currentCharacter.setRoles(roles);
     }
@@ -84,7 +92,7 @@ public class Saver {
         }
     }
     private void createPortraits(GameCharacter currentCharacter, PropertyCollection portraits) {
-        FieldValueMap<String> characterPortraits = currentCharacter.getPortraits();
+        FieldValueMap<String> characterPortraits = new FieldValueMap<>(new HashMap<>());
         for (Property portraitProperty : portraits) {
             characterPortraits.put(portraitProperty.name(), portraitProperty.value());
         }
