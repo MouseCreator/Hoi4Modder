@@ -5,7 +5,7 @@ import com.example.hoi4modder.model.files.properties.lists.PropertyCollection;
 
 import java.util.HashMap;
 
-public class Parser {
+public class Parser implements Visitor{
     public void visitCharacterList(GameCharacterList characterList, Property mainBlock) {
         PropertyCollection charactersCollection = mainBlock.getAll();
         for(Property property : charactersCollection) {
