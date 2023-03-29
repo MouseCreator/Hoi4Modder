@@ -1,7 +1,6 @@
 package com.example.hoi4modder.model.files.iovisitor;
 import com.example.hoi4modder.game.*;
 import com.example.hoi4modder.game.roles.*;
-import com.example.hoi4modder.model.files.properties.Block;
 import com.example.hoi4modder.model.files.properties.Property;
 import com.example.hoi4modder.model.files.properties.lists.PropertyCollection;
 
@@ -21,22 +20,39 @@ public class Parser implements Visitor{
 
     @Override
     public void visitNavyLeader(NavyLeader navyLeader) {
-
+        navyLeader.setSkill(Integer.parseInt(baseProperty.getFirst("skill").value()));
+        navyLeader.setAttackSkill(Integer.parseInt(baseProperty.getFirst("attack_skill").value()));
+        navyLeader.setDefenceSkill(Integer.parseInt(baseProperty.getFirst("defense_skill").value()));
+        navyLeader.setManeuveringSkill(Integer.parseInt(baseProperty.getFirst("maneuvering_skill").value()));
+        navyLeader.setCoordinationSkill(Integer.parseInt(baseProperty.getFirst("coordination_skill").value()));
+        setTraitsForAdvisor(navyLeader, baseProperty);
     }
 
     @Override
     public void visitCountryLeader(CountryLeader countryLeader) {
-
+        countryLeader.setIdeology(baseProperty.getFirst("ideology").value());
+        setTraitsForAdvisor(countryLeader, baseProperty);
     }
 
     @Override
     public void visitUnitLeader(UnitLeader unitLeader) {
-
+        unitLeader.setSkill(Integer.parseInt(baseProperty.getFirst("skill").value()));
+        unitLeader.setAttackSkill(Integer.parseInt(baseProperty.getFirst("attack_skill").value()));
+        unitLeader.setDefenceSkill(Integer.parseInt(baseProperty.getFirst("defense_skill").value()));
+        unitLeader.setPlanningSkill(Integer.parseInt(baseProperty.getFirst("planning_skill").value()));
+        unitLeader.setLogisticsSkill(Integer.parseInt(baseProperty.getFirst("logistics_skill").value()));
+        setTraitsForAdvisor(unitLeader, baseProperty);
     }
 
     @Override
     public void visitAdvisor(Advisor advisor) {
-
+        advisor.setSlot(baseProperty.getFirst("slot").value());
+        advisor.setToken(baseProperty.getFirst("idea_token").value());
+        Property costProperty = baseProperty.getFirst("cost");
+        if (costProperty != null) {
+            advisor.setCost(Integer.parseInt(costProperty.value()));
+        }
+        setTraitsForAdvisor(advisor, baseProperty);
     }
 
     private GameCharacter propertyToCharacter(Property property) {
@@ -51,61 +67,49 @@ public class Parser implements Visitor{
 
     private void addRoles(GameCharacter currentCharacter, Property mainProperty) {
         FieldValueMap<CharacterRole> roles = new FieldValueMap<>(new HashMap<>());
+        Parser parser = new Parser();
+
         Property advisorProperty = mainProperty.getFirst("advisor");
         if (advisorProperty != null) {
-            Advisor advisorRole = Advisor.createAdvisor();
-            advisorRole.setSlot(advisorProperty.getFirst("slot").value());
-            advisorRole.setToken(advisorProperty.getFirst("idea_token").value());
-            Property costProperty = advisorProperty.getFirst("cost");
-            if (costProperty != null) {
-                advisorRole.setCost(Integer.parseInt(costProperty.value()));
-            }
-            setTraitsForAdvisor(advisorRole, advisorProperty);
-            roles.put("advisor", advisorRole);
+            Advisor advisor = Advisor.createAdvisor();
+            parser.setBlock(advisorProperty);
+            parser.visitAdvisor(advisor);
+            roles.put("advisor", advisor);
         }
+
         Property commanderProperty = mainProperty.getFirst("corps_commander");
         if (commanderProperty != null) {
             UnitLeader unitLeader = UnitLeader.getCorpsCommander();
-            initializeUnitLeader(commanderProperty, unitLeader);
+            parser.setBlock(commanderProperty);
+            parser.visitUnitLeader(unitLeader);
             roles.put("corps_commander", unitLeader);
         }
 
         Property fieldMarshalProperty = mainProperty.getFirst("field_marshal");
         if (fieldMarshalProperty != null) {
             UnitLeader unitLeader = UnitLeader.getFieldMarshal();
-            initializeUnitLeader(fieldMarshalProperty, unitLeader);
+            parser.setBlock(commanderProperty);
+            parser.visitUnitLeader(unitLeader);
             roles.put("field_marshal", unitLeader);
         }
 
         Property countryLeaderProperty = mainProperty.getFirst("country_leader");
         if (countryLeaderProperty != null) {
             CountryLeader countryLeader = CountryLeader.getCountryLeader();
-            countryLeader.setIdeology(countryLeaderProperty.getFirst("ideology").value());
-            setTraitsForAdvisor(countryLeader, countryLeaderProperty);
+            parser.setBlock(commanderProperty);
+            countryLeader.acceptVisitor(parser);
             roles.put("country_leader", countryLeader);
         }
 
         Property navyLeaderProperty = mainProperty.getFirst("navy_leader");
         if (navyLeaderProperty != null) {
             NavyLeader navyLeader = NavyLeader.getNavyLeader();
-            navyLeader.setSkill(Integer.parseInt(navyLeaderProperty.getFirst("skill").value()));
-            navyLeader.setAttackSkill(Integer.parseInt(navyLeaderProperty.getFirst("attack_skill").value()));
-            navyLeader.setDefenceSkill(Integer.parseInt(navyLeaderProperty.getFirst("defense_skill").value()));
-            navyLeader.setManeuveringSkill(Integer.parseInt(navyLeaderProperty.getFirst("maneuvering_skill").value()));
-            navyLeader.setCoordinationSkill(Integer.parseInt(navyLeaderProperty.getFirst("coordination_skill").value()));
-            setTraitsForAdvisor(navyLeader, navyLeaderProperty);
+            parser.setBlock(navyLeaderProperty);
+            navyLeader.acceptVisitor(parser);
             roles.put("navy_leader", navyLeader);
         }
-        currentCharacter.setRoles(roles);
-    }
 
-    private void initializeUnitLeader(Property commanderProperty, UnitLeader unitLeader) {
-        unitLeader.setSkill(Integer.parseInt(commanderProperty.getFirst("skill").value()));
-        unitLeader.setAttackSkill(Integer.parseInt(commanderProperty.getFirst("attack_skill").value()));
-        unitLeader.setDefenceSkill(Integer.parseInt(commanderProperty.getFirst("defense_skill").value()));
-        unitLeader.setPlanningSkill(Integer.parseInt(commanderProperty.getFirst("planning_skill").value()));
-        unitLeader.setLogisticsSkill(Integer.parseInt(commanderProperty.getFirst("logistics_skill").value()));
-        setTraitsForAdvisor(unitLeader, commanderProperty);
+        currentCharacter.setRoles(roles);
     }
 
     private void setTraitsForAdvisor(CharacterRole role, Property roleProperty) {
