@@ -3,11 +3,11 @@ package com.example.hoi4modder.model.files;
 import com.example.hoi4modder.model.files.properties.Property;
 import org.junit.jupiter.api.Test;
 
-class StringToSavedElementConvertorTest {
+class StringToPropertyConvertorTest {
 
     @Test
     void testBuilding() {
-        StringToSavedElementConvertor convertor = new StringToSavedElementConvertor();
+        StringToPropertyConvertor convertor = new StringToPropertyConvertor();
         String sampleFile = """
                             
                 state={
@@ -67,7 +67,7 @@ class StringToSavedElementConvertorTest {
     }
     @Test
     void testLocalisation() {
-        StringToSavedElementConvertor convertor = new StringToSavedElementConvertor();
+        StringToPropertyConvertor convertor = new StringToPropertyConvertor();
         String localisationFile = """
                 l_russian:
                  fascist_influence:0 "Влияние фашизма"

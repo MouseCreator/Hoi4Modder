@@ -5,7 +5,7 @@ import com.example.hoi4modder.model.files.properties.factories.PropertyFactoryIm
 
 import java.util.ArrayList;
 import java.util.List;
-public class StringToSavedElementConvertor {
+public class StringToPropertyConvertor {
     PropertyFactoryImpl propertyFactory = new PropertyFactoryImpl();
     public Property forStructuredFile(List<String> input) {
         StringBuilder builder = new StringBuilder();

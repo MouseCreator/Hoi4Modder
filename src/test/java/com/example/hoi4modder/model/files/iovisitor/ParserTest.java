@@ -1,15 +1,13 @@
 package com.example.hoi4modder.model.files.iovisitor;
 
 import com.example.hoi4modder.game.GameCharacterList;
-import com.example.hoi4modder.model.files.StringToSavedElementConvertor;
+import com.example.hoi4modder.model.files.StringToPropertyConvertor;
 import com.example.hoi4modder.model.files.properties.Property;
 import org.junit.jupiter.api.Test;
 
 import java.util.LinkedList;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-class SaverTest {
+class ParserTest {
     @Test
     void testForCharacterList() {
         String sample = """
@@ -81,11 +79,11 @@ class SaverTest {
                 }
                 	
                 	""";
-        StringToSavedElementConvertor convertor = new StringToSavedElementConvertor();
+        StringToPropertyConvertor convertor = new StringToPropertyConvertor();
         Property baseProperty = convertor.forStructuredFile(sample);
-        Saver saver = new Saver();
+        Parser parser = new Parser();
         GameCharacterList list = new GameCharacterList(new LinkedList<>());
-        saver.visitCharacterList(list, baseProperty);
+        parser.visitCharacterList(list, baseProperty);
         System.out.println(list);
     }
 }

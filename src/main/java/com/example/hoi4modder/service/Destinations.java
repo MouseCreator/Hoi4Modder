@@ -11,6 +11,7 @@ public class Destinations {
     private final String history = "history" + s;
     private final String gfx = "gfx" + s;
     private final String common = "common" + s;
+    private final String characters = "characters" + s;
     private final String basedir = "src/main/resources/com/example/hoi4modder/";
     private final String python = "python" + s;
 
@@ -40,5 +41,9 @@ public class Destinations {
 
     public String pythonScript(String filename) {
         return basedir + data + python + filename + py;
+    }
+
+    public String characters() {
+        return common + characters;
     }
 }
