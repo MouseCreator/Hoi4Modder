@@ -41,13 +41,30 @@ public class Unparser implements Visitor {
         return traitsBlock;
     }
     @Override
-    public void visitUnitLeader(UnitLeader unitLeader, Property property) {
-
+    public void visitUnitLeader(UnitLeader unitLeader, Property baseProperty) {
+        baseProperty.add(createTraitsBlock(unitLeader));
+        baseProperty.add(new FieldValueProperty("skill", String.valueOf(unitLeader.getSkill())));
+        baseProperty.add(new FieldValueProperty("attack_skill", String.valueOf(unitLeader.getAttackSkill())));
+        baseProperty.add(new FieldValueProperty("defense_skill", String.valueOf(unitLeader.getDefenceSkill())));
+        baseProperty.add(new FieldValueProperty("maneuvering_skill", String.valueOf(unitLeader.getLogisticsSkill())));
+        baseProperty.add(new FieldValueProperty("coordination_skill", String.valueOf(unitLeader.getLogisticsSkill())));
+        baseProperty.add(new FieldValueProperty("legacy_id", String.valueOf(-1)));
     }
 
     @Override
-    public void visitAdvisor(Advisor advisor, BlockProperty property) {
+    public void visitAdvisor(Advisor advisor, BlockProperty baseProperty) {
+        baseProperty.add(new FieldValueProperty("slot", String.valueOf(advisor.getSlot())));
+        baseProperty.add(new FieldValueProperty("idea_token", String.valueOf(advisor.getToken())));
+        baseProperty.add(simpleBlock("allowed",
+                new FieldValueProperty("original_tag", advisor.getTitle().substring(0, 3))));
+        baseProperty.add(createTraitsBlock(advisor));
+        baseProperty.add(simpleBlock("ai_will_do", new FieldValueProperty("factor", "1")));
+    }
 
+    private BlockProperty simpleBlock(String name, Property value) {
+        BlockProperty property = new BlockProperty(name);
+        property.add(value);
+        return property;
     }
 
     private Property propertyFromCharacter(GameCharacter character) {
