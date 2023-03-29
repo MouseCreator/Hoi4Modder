@@ -88,16 +88,14 @@ public class Unparser implements Visitor {
         blockProperty.add(new FieldValueProperty("name", character.getName()));
         blockProperty.add(addPortraitProperty(character.getPortraits()));
         addRoles(character, blockProperty);
-        return null;
+        return blockProperty;
     }
 
     private void addRoles(GameCharacter character, BlockProperty mainProperty) {
         for (CharacterRole role : character.getRoles()) {
-            Property toAdd = new BlockProperty(role.getTitle());
             Unparser unparser = new Unparser();
-            unparser.setBlock(toAdd);
             role.acceptVisitor(unparser);
-            mainProperty.add(toAdd);
+            mainProperty.add(unparser.getBlock());
         }
     }
 
@@ -109,6 +107,7 @@ public class Unparser implements Visitor {
         for (String key : portraits.fields()) {
             civilianBlock.add(new FieldValueProperty(key, portraits.get(key)));
         }
+        mainBlock.add(civilianBlock);
         return mainBlock;
     }
 }

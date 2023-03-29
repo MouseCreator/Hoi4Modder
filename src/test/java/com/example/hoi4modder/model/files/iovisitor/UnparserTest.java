@@ -2,14 +2,18 @@ package com.example.hoi4modder.model.files.iovisitor;
 
 import com.example.hoi4modder.game.GameCharacterList;
 import com.example.hoi4modder.model.files.StringToPropertyConvertor;
+import com.example.hoi4modder.model.files.properties.BlockProperty;
 import com.example.hoi4modder.model.files.properties.Property;
 import org.junit.jupiter.api.Test;
 
 import java.util.LinkedList;
 
-class ParserTest {
+import static org.junit.jupiter.api.Assertions.*;
+
+class UnparserTest {
+
     @Test
-    void testForCharacterList() {
+    void testUnparser() {
         String sample = """
                 characters = {
                 	ENT_leyla_athella = {
@@ -85,5 +89,10 @@ class ParserTest {
         GameCharacterList list = new GameCharacterList(new LinkedList<>());
         parser.setBlock(baseProperty);
         parser.visitCharacterList(list);
+
+        Unparser unparser = new Unparser();
+        unparser.visitCharacterList(list);
+        Property property = unparser.getBlock();
+        System.out.println(property.toFile());
     }
 }
