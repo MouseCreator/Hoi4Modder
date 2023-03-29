@@ -94,7 +94,8 @@ public class Saver {
     private void createPortraits(GameCharacter currentCharacter, PropertyCollection portraits) {
         FieldValueMap<String> characterPortraits = new FieldValueMap<>(new HashMap<>());
         for (Property portraitProperty : portraits) {
-            characterPortraits.put(portraitProperty.name(), portraitProperty.value());
+            for (Property categoryProperty : portraitProperty.getAll())
+                characterPortraits.put(categoryProperty.name(), categoryProperty.value());
         }
         currentCharacter.setPortraits(characterPortraits);
     }
