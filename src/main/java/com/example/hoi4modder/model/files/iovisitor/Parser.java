@@ -1,15 +1,18 @@
 package com.example.hoi4modder.model.files.iovisitor;
 import com.example.hoi4modder.game.*;
 import com.example.hoi4modder.game.roles.*;
-import com.example.hoi4modder.model.files.properties.BlockProperty;
+import com.example.hoi4modder.model.files.properties.Block;
 import com.example.hoi4modder.model.files.properties.Property;
 import com.example.hoi4modder.model.files.properties.lists.PropertyCollection;
 
 import java.util.HashMap;
 
 public class Parser implements Visitor{
-    public void visitCharacterList(GameCharacterList characterList, Property mainBlock) {
-        PropertyCollection charactersCollection = mainBlock.getAll();
+
+    private Property baseProperty;
+    @Override
+    public void visitCharacterList(GameCharacterList characterList) {
+        PropertyCollection charactersCollection = baseProperty.getAll();
         for(Property property : charactersCollection) {
             GameCharacter character = propertyToCharacter(property);
             characterList.add(character);
@@ -17,22 +20,22 @@ public class Parser implements Visitor{
     }
 
     @Override
-    public void visitNavyLeader(NavyLeader navyLeader, Property baseProperty) {
+    public void visitNavyLeader(NavyLeader navyLeader) {
 
     }
 
     @Override
-    public void visitCountryLeader(CountryLeader countryLeader, Property property) {
+    public void visitCountryLeader(CountryLeader countryLeader) {
 
     }
 
     @Override
-    public void visitUnitLeader(UnitLeader unitLeader, Property property) {
+    public void visitUnitLeader(UnitLeader unitLeader) {
 
     }
 
     @Override
-    public void visitAdvisor(Advisor advisor, BlockProperty property) {
+    public void visitAdvisor(Advisor advisor) {
 
     }
 
@@ -120,5 +123,13 @@ public class Parser implements Visitor{
                 characterPortraits.put(categoryProperty.name(), categoryProperty.value());
         }
         currentCharacter.setPortraits(characterPortraits);
+    }
+    @Override
+    public Property getBlock() {
+        return baseProperty;
+    }
+    @Override
+    public void setBlock(Property baseProperty) {
+        this.baseProperty = baseProperty;
     }
 }

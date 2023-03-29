@@ -3,6 +3,7 @@ package com.example.hoi4modder.model.files.manager;
 import com.example.hoi4modder.game.GameCharacterList;
 import com.example.hoi4modder.model.files.StringToPropertyConvertor;
 import com.example.hoi4modder.model.files.iovisitor.Parser;
+import com.example.hoi4modder.model.files.properties.BlockProperty;
 import com.example.hoi4modder.service.Destinations;
 
 import java.io.IOException;
@@ -32,7 +33,8 @@ public class CharacterManager {
     private GameCharacterList getGameCharacterListFromFile(String name) throws IOException {
         List<String> inputs = reader.readByLines(name);
         GameCharacterList resultList = new GameCharacterList(new ArrayList<>());
-        parser.visitCharacterList(resultList, convertor.forStructuredFile(inputs));
+        parser.setBlock(convertor.forStructuredFile(inputs));
+        parser.visitCharacterList(resultList);
         return resultList;
     }
 }

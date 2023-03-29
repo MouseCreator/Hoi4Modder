@@ -1,7 +1,6 @@
 package com.example.hoi4modder.game.roles;
 
 import com.example.hoi4modder.model.files.iovisitor.Visitor;
-import com.example.hoi4modder.model.files.properties.BlockProperty;
 import lombok.*;
 
 import java.util.HashSet;
@@ -40,7 +39,7 @@ public class UnitLeader extends Role {
 
     @Override
     public void acceptVisitor(Visitor visitor) {
-        visitor.visitUnitLeader(this, new BlockProperty());
+        visitor.visitUnitLeader(this);
     }
 
     @Override

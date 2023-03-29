@@ -83,7 +83,8 @@ class ParserTest {
         Property baseProperty = convertor.forStructuredFile(sample);
         Parser parser = new Parser();
         GameCharacterList list = new GameCharacterList(new LinkedList<>());
-        parser.visitCharacterList(list, baseProperty);
+        parser.setBlock(baseProperty);
+        parser.visitCharacterList(list);
         System.out.println(list);
     }
 }

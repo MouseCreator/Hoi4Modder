@@ -5,16 +5,18 @@ import com.example.hoi4modder.game.roles.*;
 import com.example.hoi4modder.model.files.properties.*;
 
 public class Unparser implements Visitor {
-
+    private Property baseProperty = new BlockProperty();
     @Override
-    public void visitCharacterList(GameCharacterList characterList, Property mainBlock) {
+    public void visitCharacterList(GameCharacterList characterList) {
+        this.baseProperty = new BlockProperty("characters");
         for (GameCharacter character : characterList) {
-            mainBlock.add(propertyFromCharacter(character));
+            baseProperty.add(propertyFromCharacter(character));
         }
     }
 
     @Override
-    public void visitNavyLeader(NavyLeader navyLeader, Property baseProperty) {
+    public void visitNavyLeader(NavyLeader navyLeader) {
+        this.baseProperty = new BlockProperty(navyLeader.getTitle());
         baseProperty.add(createTraitsBlock(navyLeader));
         baseProperty.add(new FieldValueProperty("skill", String.valueOf(navyLeader.getSkill())));
         baseProperty.add(new FieldValueProperty("attack_skill", String.valueOf(navyLeader.getAttackSkill())));
@@ -27,7 +29,8 @@ public class Unparser implements Visitor {
         return "\"" + origin + "\"";
     }
     @Override
-    public void visitCountryLeader(CountryLeader countryLeader, Property baseProperty) {
+    public void visitCountryLeader(CountryLeader countryLeader) {
+        this.baseProperty = new BlockProperty(countryLeader.getTitle());
         baseProperty.add(new FieldValueProperty("ideology", String.valueOf(countryLeader.getIdeology())));
         baseProperty.add(createTraitsBlock(countryLeader));
         baseProperty.add(new FieldValueProperty("expire", inQuotes("1955.1.1.1")));
@@ -41,7 +44,8 @@ public class Unparser implements Visitor {
         return traitsBlock;
     }
     @Override
-    public void visitUnitLeader(UnitLeader unitLeader, Property baseProperty) {
+    public void visitUnitLeader(UnitLeader unitLeader) {
+        this.baseProperty = new BlockProperty(unitLeader.getTitle());
         baseProperty.add(createTraitsBlock(unitLeader));
         baseProperty.add(new FieldValueProperty("skill", String.valueOf(unitLeader.getSkill())));
         baseProperty.add(new FieldValueProperty("attack_skill", String.valueOf(unitLeader.getAttackSkill())));
@@ -52,13 +56,24 @@ public class Unparser implements Visitor {
     }
 
     @Override
-    public void visitAdvisor(Advisor advisor, BlockProperty baseProperty) {
+    public void visitAdvisor(Advisor advisor) {
+        this.baseProperty = new BlockProperty("advisor");
         baseProperty.add(new FieldValueProperty("slot", String.valueOf(advisor.getSlot())));
         baseProperty.add(new FieldValueProperty("idea_token", String.valueOf(advisor.getToken())));
         baseProperty.add(simpleBlock("allowed",
                 new FieldValueProperty("original_tag", advisor.getTitle().substring(0, 3))));
         baseProperty.add(createTraitsBlock(advisor));
         baseProperty.add(simpleBlock("ai_will_do", new FieldValueProperty("factor", "1")));
+    }
+
+    @Override
+    public Property getBlock() {
+        return this.baseProperty;
+    }
+
+    @Override
+    public void setBlock(Property mainBlock) {
+        this.baseProperty = mainBlock;
     }
 
     private BlockProperty simpleBlock(String name, Property value) {
@@ -80,6 +95,7 @@ public class Unparser implements Visitor {
         for (CharacterRole role : character.getRoles()) {
             Property toAdd = new BlockProperty();
             role.acceptVisitor(new Unparser());
+            mainProperty.add(toAdd);
         }
     }
 

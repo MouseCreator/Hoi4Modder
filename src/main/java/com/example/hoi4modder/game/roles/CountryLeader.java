@@ -21,7 +21,7 @@ public class CountryLeader extends Role {
 
     @Override
     public void acceptVisitor(Visitor visitor) {
-        visitor.visitCountryLeader(this, new BlockProperty());
+        visitor.visitCountryLeader(this);
     }
 
     @Override

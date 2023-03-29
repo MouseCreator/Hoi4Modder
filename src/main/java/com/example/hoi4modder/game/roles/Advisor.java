@@ -30,7 +30,7 @@ public class Advisor extends Role{
 
     @Override
     public void acceptVisitor(Visitor visitor) {
-        visitor.visitAdvisor(this, new BlockProperty());
+        visitor.visitAdvisor(this);
     }
 
     @Override
