@@ -17,6 +17,7 @@ public class GameFilesReader {
                 break;
             lines.add(line);
         }
+        reader.close();
         return lines;
     }
     public String read(String filename) throws IOException {
