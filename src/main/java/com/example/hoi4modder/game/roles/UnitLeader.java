@@ -1,12 +1,14 @@
-package com.example.hoi4modder.game;
+package com.example.hoi4modder.game.roles;
 
+import com.example.hoi4modder.model.files.iovisitor.Visitor;
+import com.example.hoi4modder.model.files.properties.BlockProperty;
 import lombok.*;
 
 import java.util.HashSet;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class UnitLeader extends Role{
+public class UnitLeader extends Role {
     private int skill;
     @Getter(AccessLevel.NONE)
     private boolean fieldMarshal;
@@ -34,5 +36,15 @@ public class UnitLeader extends Role{
         commander.setLogisticsSkill(1);
         commander.setTraits(new HashSet<>());
         return commander;
+    }
+
+    @Override
+    public void acceptVisitor(Visitor visitor) {
+        visitor.visitUnitLeader(this, new BlockProperty());
+    }
+
+    @Override
+    public String getTitle() {
+        return fieldMarshal ? "field_marshal" : "corps_commander";
     }
 }

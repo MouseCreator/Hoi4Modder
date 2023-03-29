@@ -1,5 +1,7 @@
-package com.example.hoi4modder.game;
+package com.example.hoi4modder.game.roles;
 
+import com.example.hoi4modder.model.files.iovisitor.Visitor;
+import com.example.hoi4modder.model.files.properties.BlockProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -24,5 +26,15 @@ public class Advisor extends Role{
         result.token = "NO_TOKEN";
         result.setTraits(new HashSet<>());
         return result;
+    }
+
+    @Override
+    public void acceptVisitor(Visitor visitor) {
+        visitor.visitAdvisor(this, new BlockProperty());
+    }
+
+    @Override
+    public String getTitle() {
+        return "advisor";
     }
 }

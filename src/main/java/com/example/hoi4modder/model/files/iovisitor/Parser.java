@@ -1,5 +1,7 @@
 package com.example.hoi4modder.model.files.iovisitor;
 import com.example.hoi4modder.game.*;
+import com.example.hoi4modder.game.roles.*;
+import com.example.hoi4modder.model.files.properties.BlockProperty;
 import com.example.hoi4modder.model.files.properties.Property;
 import com.example.hoi4modder.model.files.properties.lists.PropertyCollection;
 
@@ -12,6 +14,26 @@ public class Parser implements Visitor{
             GameCharacter character = propertyToCharacter(property);
             characterList.add(character);
         }
+    }
+
+    @Override
+    public void visitNavyLeader(NavyLeader navyLeader, Property baseProperty) {
+
+    }
+
+    @Override
+    public void visitCountryLeader(CountryLeader countryLeader, Property property) {
+
+    }
+
+    @Override
+    public void visitUnitLeader(UnitLeader unitLeader, Property property) {
+
+    }
+
+    @Override
+    public void visitAdvisor(Advisor advisor, BlockProperty property) {
+
     }
 
     private GameCharacter propertyToCharacter(Property property) {

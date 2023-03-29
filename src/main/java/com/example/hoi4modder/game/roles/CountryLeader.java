@@ -1,5 +1,7 @@
-package com.example.hoi4modder.game;
+package com.example.hoi4modder.game.roles;
 
+import com.example.hoi4modder.model.files.iovisitor.Visitor;
+import com.example.hoi4modder.model.files.properties.BlockProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -15,5 +17,15 @@ public class CountryLeader extends Role {
         leader.setTraits(new HashSet<>());
         leader.setIdeology("socialism");
         return leader;
+    }
+
+    @Override
+    public void acceptVisitor(Visitor visitor) {
+        visitor.visitCountryLeader(this, new BlockProperty());
+    }
+
+    @Override
+    public String getTitle() {
+        return null;
     }
 }

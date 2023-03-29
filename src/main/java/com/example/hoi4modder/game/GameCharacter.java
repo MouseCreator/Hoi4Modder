@@ -1,5 +1,6 @@
 package com.example.hoi4modder.game;
 
+import com.example.hoi4modder.game.roles.CharacterRole;
 import lombok.Data;
 
 @Data

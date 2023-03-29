@@ -1,5 +1,7 @@
-package com.example.hoi4modder.game;
+package com.example.hoi4modder.game.roles;
 
+import com.example.hoi4modder.model.files.iovisitor.Visitor;
+import com.example.hoi4modder.model.files.properties.BlockProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -23,5 +25,15 @@ public class NavyLeader extends Role {
         leader.setAttackSkill(1);
         leader.setTraits(new HashSet<>());
         return leader;
+    }
+
+    @Override
+    public void acceptVisitor(Visitor visitor) {
+        visitor.visitNavyLeader(this, new BlockProperty());
+    }
+
+    @Override
+    public String getTitle() {
+        return "navy_leader";
     }
 }
