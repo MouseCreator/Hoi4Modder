@@ -21,6 +21,13 @@ public class BlockProperty implements Block {
         this.block = new PropertyList();
         this.style = new NormalStyle();
     }
+
+    public BlockProperty(String key) {
+        this.key = key;
+        this.block = new PropertyList();
+        this.style = new NormalStyle();
+    }
+
     public String getKey() {
         return key;
     }
