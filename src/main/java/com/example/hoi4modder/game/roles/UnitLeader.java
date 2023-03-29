@@ -16,12 +16,12 @@ public class UnitLeader extends Role {
     private int planningSkill;
     private int logisticsSkill;
 
-    public static UnitLeader getCorpsCommander() {
+    public static UnitLeader createCorpsCommander() {
         UnitLeader commander = weakUnitLeader();
         commander.fieldMarshal=false;
         return commander;
     }
-    public static UnitLeader getFieldMarshal() {
+    public static UnitLeader createFieldMarshal() {
         UnitLeader commander = weakUnitLeader();
         commander.fieldMarshal=true;
         return commander;

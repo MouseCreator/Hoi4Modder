@@ -15,7 +15,7 @@ public class NavyLeader extends Role {
     private int maneuveringSkill;
     private int coordinationSkill;
 
-    public static NavyLeader getNavyLeader() {
+    public static NavyLeader createCountryLeader() {
         NavyLeader leader = new NavyLeader();
         leader.setSkill(1);
         leader.setManeuveringSkill(1);

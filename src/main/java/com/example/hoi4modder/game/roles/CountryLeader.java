@@ -11,7 +11,7 @@ import java.util.HashSet;
 public class CountryLeader extends Role {
     private String ideology;
 
-    public static CountryLeader getCountryLeader() {
+    public static CountryLeader createCountryLeader() {
         CountryLeader leader = new CountryLeader();
         leader.setTraits(new HashSet<>());
         leader.setIdeology("socialism");

@@ -68,7 +68,6 @@ public class Parser implements Visitor{
     private void addRoles(GameCharacter currentCharacter, Property mainProperty) {
         FieldValueMap<CharacterRole> roles = new FieldValueMap<>(new HashMap<>());
         Parser parser = new Parser();
-
         Property advisorProperty = mainProperty.getFirst("advisor");
         if (advisorProperty != null) {
             Advisor advisor = Advisor.createAdvisor();
@@ -79,7 +78,7 @@ public class Parser implements Visitor{
 
         Property commanderProperty = mainProperty.getFirst("corps_commander");
         if (commanderProperty != null) {
-            UnitLeader unitLeader = UnitLeader.getCorpsCommander();
+            UnitLeader unitLeader = UnitLeader.createCorpsCommander();
             parser.setBlock(commanderProperty);
             parser.visitUnitLeader(unitLeader);
             roles.put("corps_commander", unitLeader);
@@ -87,7 +86,7 @@ public class Parser implements Visitor{
 
         Property fieldMarshalProperty = mainProperty.getFirst("field_marshal");
         if (fieldMarshalProperty != null) {
-            UnitLeader unitLeader = UnitLeader.getFieldMarshal();
+            UnitLeader unitLeader = UnitLeader.createFieldMarshal();
             parser.setBlock(commanderProperty);
             parser.visitUnitLeader(unitLeader);
             roles.put("field_marshal", unitLeader);
@@ -95,15 +94,15 @@ public class Parser implements Visitor{
 
         Property countryLeaderProperty = mainProperty.getFirst("country_leader");
         if (countryLeaderProperty != null) {
-            CountryLeader countryLeader = CountryLeader.getCountryLeader();
-            parser.setBlock(commanderProperty);
+            CountryLeader countryLeader = CountryLeader.createCountryLeader();
+            parser.setBlock(countryLeaderProperty);
             countryLeader.acceptVisitor(parser);
             roles.put("country_leader", countryLeader);
         }
 
         Property navyLeaderProperty = mainProperty.getFirst("navy_leader");
         if (navyLeaderProperty != null) {
-            NavyLeader navyLeader = NavyLeader.getNavyLeader();
+            NavyLeader navyLeader = NavyLeader.createCountryLeader();
             parser.setBlock(navyLeaderProperty);
             navyLeader.acceptVisitor(parser);
             roles.put("navy_leader", navyLeader);
