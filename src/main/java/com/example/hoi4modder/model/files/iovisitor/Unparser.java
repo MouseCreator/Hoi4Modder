@@ -1,6 +1,7 @@
 package com.example.hoi4modder.model.files.iovisitor;
 
 import com.example.hoi4modder.game.*;
+import com.example.hoi4modder.game.collection.SpriteList;
 import com.example.hoi4modder.game.roles.*;
 import com.example.hoi4modder.model.files.properties.*;
 
@@ -64,6 +65,11 @@ public class Unparser implements Visitor {
                 new FieldValueProperty("original_tag", advisor.getTitle().substring(0, 3))));
         baseProperty.add(createTraitsBlock(advisor));
         baseProperty.add(simpleBlock("ai_will_do", new FieldValueProperty("factor", "1")));
+    }
+
+    @Override
+    public void visitSpriteList(SpriteList spriteList) {
+
     }
 
     @Override

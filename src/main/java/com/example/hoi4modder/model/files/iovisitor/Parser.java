@@ -1,5 +1,6 @@
 package com.example.hoi4modder.model.files.iovisitor;
 import com.example.hoi4modder.game.*;
+import com.example.hoi4modder.game.collection.SpriteList;
 import com.example.hoi4modder.game.roles.*;
 import com.example.hoi4modder.model.files.properties.Property;
 import com.example.hoi4modder.model.files.properties.lists.PropertyCollection;
@@ -54,6 +55,8 @@ public class Parser implements Visitor{
         }
         setTraitsForAdvisor(advisor, baseProperty);
     }
+
+
 
     private GameCharacter propertyToCharacter(Property property) {
         GameCharacter currentCharacter = new GameCharacter();
@@ -123,7 +126,7 @@ public class Parser implements Visitor{
         FieldValueMap<String> characterPortraits = new FieldValueMap<>(new HashMap<>());
         for (Property portraitProperty : portraits) {
             for (Property categoryProperty : portraitProperty.getAll())
-                characterPortraits.put(categoryProperty.name(), categoryProperty.value());
+                characterPortraits.put(categoryProperty.name(), noQuotes(categoryProperty.value()));
         }
         currentCharacter.setPortraits(characterPortraits);
     }
@@ -134,5 +137,24 @@ public class Parser implements Visitor{
     @Override
     public void setBlock(Property baseProperty) {
         this.baseProperty = baseProperty;
+    }
+
+    private String noQuotes(String origin) {
+        return origin.replace("\"", "");
+    }
+    @Override
+    public void visitSpriteList(SpriteList spriteList) {
+        PropertyCollection charactersCollection = baseProperty.getAll();
+        for(Property property : charactersCollection) {
+            SpriteType sprite = toSpriteType(property);
+            spriteList.add(sprite);
+        }
+    }
+
+    private SpriteType toSpriteType(Property property) {
+        SpriteType spriteType = new SpriteType();
+        spriteType.setName(noQuotes(property.getFirst("name").value()));
+        spriteType.setTextureFile(noQuotes(property.getFirst("texturefile").value()));
+        return spriteType;
     }
 }
