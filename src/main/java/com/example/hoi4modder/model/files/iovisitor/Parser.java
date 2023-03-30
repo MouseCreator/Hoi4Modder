@@ -1,5 +1,6 @@
 package com.example.hoi4modder.model.files.iovisitor;
 import com.example.hoi4modder.game.*;
+import com.example.hoi4modder.game.collection.LocalisationMap;
 import com.example.hoi4modder.game.collection.SpriteList;
 import com.example.hoi4modder.game.roles.*;
 import com.example.hoi4modder.model.files.properties.Property;
@@ -151,7 +152,15 @@ public class Parser implements Visitor{
         }
     }
 
-    private SpriteType toSpriteType(Property property) {
+    @Override
+    public void visitLocalisationMap(LocalisationMap localisationMap) {
+        PropertyCollection list = baseProperty.getAll();
+        for (Property property : list) {
+            localisationMap.put(property.name(), property.value());
+        }
+    }
+
+    public SpriteType toSpriteType(Property property) {
         SpriteType spriteType = new SpriteType();
         spriteType.setName(noQuotes(property.getFirst("name").value()));
         spriteType.setTextureFile(noQuotes(property.getFirst("texturefile").value()));

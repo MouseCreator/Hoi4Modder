@@ -1,6 +1,7 @@
 package com.example.hoi4modder.model.files.iovisitor;
 
 import com.example.hoi4modder.game.*;
+import com.example.hoi4modder.game.collection.LocalisationMap;
 import com.example.hoi4modder.game.collection.SpriteList;
 import com.example.hoi4modder.game.roles.*;
 import com.example.hoi4modder.model.files.properties.*;
@@ -68,11 +69,6 @@ public class Unparser implements Visitor {
     }
 
     @Override
-    public void visitSpriteList(SpriteList spriteList) {
-
-    }
-
-    @Override
     public Property getBlock() {
         return this.baseProperty;
     }
@@ -115,5 +111,29 @@ public class Unparser implements Visitor {
         }
         mainBlock.add(civilianBlock);
         return mainBlock;
+    }
+
+    @Override
+    public void visitSpriteList(SpriteList spriteList) {
+        this.baseProperty = new BlockProperty("spriteTypes");
+        for (SpriteType sprite : spriteList) {
+            baseProperty.add(fromSpriteType(sprite));
+        }
+    }
+
+    @Override
+    public void visitLocalisationMap(LocalisationMap localisationMap) {
+        this.baseProperty = new LocalisationBlock("l_russian");
+        for (String key : localisationMap.keys()) {
+            baseProperty.add(new LocalisationProperty(key, inQuotes(localisationMap.get(key))));
+        }
+    }
+
+    private BlockProperty fromSpriteType(SpriteType spriteType) {
+        BlockProperty property = new BlockProperty();
+        property.setKey("SpriteType");
+        property.add(new FieldValueProperty("name", inQuotes(spriteType.getName())));
+        property.add(new FieldValueProperty("texturefile", inQuotes(spriteType.getTextureFile())));
+        return property;
     }
 }
