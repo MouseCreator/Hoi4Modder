@@ -2,10 +2,13 @@ package com.example.hoi4modder.game.collection;
 
 import com.example.hoi4modder.game.FieldValueMap;
 
-import java.util.Map;
 
 public class SavedMap<T> extends SavedCollection<T>{
-    private FieldValueMap<T> map;
+    private final FieldValueMap<T> map;
+
+    public SavedMap(FieldValueMap<T> map) {
+        this.map = map;
+    }
     public void put(String field, T value) {
         map.put(field, value);
     }
