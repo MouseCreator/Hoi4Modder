@@ -1,4 +1,7 @@
 package com.example.hoi4modder.model.files.manager.state;
 
-public abstract class FileState {
+public interface FileState {
+    void write(String message);
+
+    String read();
 }
