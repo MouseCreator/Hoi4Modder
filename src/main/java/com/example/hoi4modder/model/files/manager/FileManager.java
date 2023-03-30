@@ -2,7 +2,9 @@ package com.example.hoi4modder.model.files.manager;
 
 public class FileManager {
 
-    public String getFileFromModOrGame() {
-        return null;
-    }
+    private String editableFile;
+
+    private boolean isOverride;
+
+    private boolean isOriginalGameFile;
 }
