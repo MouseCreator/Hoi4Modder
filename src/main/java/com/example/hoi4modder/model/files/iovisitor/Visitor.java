@@ -2,6 +2,7 @@ package com.example.hoi4modder.model.files.iovisitor;
 
 
 import com.example.hoi4modder.game.GameCharacterList;
+import com.example.hoi4modder.game.SpriteType;
 import com.example.hoi4modder.game.collection.LocalisationMap;
 import com.example.hoi4modder.game.collection.SavedCollection;
 import com.example.hoi4modder.game.collection.SpriteList;

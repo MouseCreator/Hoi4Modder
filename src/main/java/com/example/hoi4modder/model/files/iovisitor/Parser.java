@@ -166,4 +166,7 @@ public class Parser implements Visitor{
         spriteType.setTextureFile(noQuotes(property.getFirst("texturefile").value()));
         return spriteType;
     }
+
+
+
 }
