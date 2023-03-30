@@ -24,6 +24,10 @@ public class FieldValueMap<T> implements Iterable<T>{
         map.remove(key, value);
     }
 
+    public boolean containsKey(String key) {
+        return map.containsKey(key);
+    }
+
     public Set<String> fields() {
         return map.keySet();
     }
@@ -31,5 +35,9 @@ public class FieldValueMap<T> implements Iterable<T>{
     @Override
     public Iterator<T> iterator() {
         return map.values().iterator();
+    }
+
+    public boolean containsValue(T value) {
+        return map.containsValue(value);
     }
 }
