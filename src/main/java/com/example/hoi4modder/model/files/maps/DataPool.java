@@ -4,24 +4,24 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
-public class DataPool {
-    private final Map<String, DataMap> maps;
+public class DataPool<T> {
+    private final Map<String, DataMap<T>> maps;
 
-    public DataPool(Map<String, DataMap> maps) {
+    public DataPool(Map<String, DataMap<T>> maps) {
         this.maps = maps;
     }
 
-    public String get(String key) {
+    public T get(String key) {
         for (String current : maps.keySet()) {
-            String result = maps.get(current).get(key);
+            T result = maps.get(current).get(key);
             if (result != null)
                 return result;
         }
         throw new NoSuchElementException("Cannot find value " + key + " in the data pool");
     }
 
-    public String put(String type, String key, String value) {
-        DataMap mapToAdd = maps.get(type);
+    public T put(String type, String key, T value) {
+        DataMap<T> mapToAdd = maps.get(type);
         return mapToAdd.put(key, value);
     }
 
@@ -29,7 +29,7 @@ public class DataPool {
         if (maps.containsKey(type)) {
             return false;
         }
-        maps.put(type, new DataMap(new HashMap<>(), filename));
+        maps.put(type, new DataMap<>(new HashMap<>(), filename));
         return true;
     }
     public boolean remove(String key) {
