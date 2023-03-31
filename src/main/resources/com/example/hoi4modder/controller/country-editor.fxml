@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ColorPicker?>
 <?import javafx.scene.control.Label?>
@@ -132,5 +133,7 @@
             </VBox>
          </children>
       </HBox>
+      <ImageView fx:id="imageDDS" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+      <Button mnemonicParsing="false" onAction="#loadImage" text="Button" />
    </children>
 </VBox>
