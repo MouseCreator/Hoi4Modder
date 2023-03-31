@@ -6,6 +6,9 @@ import java.awt.image.BufferedImage;
 import java.io.FileInputStream;
 import java.io.IOException;
 
+/**
+ * Class for loading DDS images as javafx images (for preview)
+ */
 public class DirectSurfaceManager {
     public Image loadDDS(String filename) throws IOException {
         return toFxImage(loadAwtImage(filename));

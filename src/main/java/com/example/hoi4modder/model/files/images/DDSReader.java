@@ -9,7 +9,6 @@ package com.example.hoi4modder.model.files.images;
  * <a href="https://github.com/npedotnet/DDSReader/blob/master/README.md">...</a>
  * Japanese document
  * <a href="http://3dtech.jp/wiki/index.php?DDSReader">...</a>
- *
  * Minor improvements by MouseCreator
  */
 
