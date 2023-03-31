@@ -4,11 +4,6 @@ import com.example.hoi4modder.game.Trait;
 
 import java.util.HashMap;
 public class LoadedData {
-    private static final LoadedData data = new LoadedData();
-
-    public LoadedData getData() {
-        return data;
-    }
 
     private final DataPool<String> localisationPool = new DataPool<>(new HashMap<>());
     private final DataPool<String> graphicsPool = new DataPool<>(new HashMap<>());
