@@ -71,8 +71,7 @@ public class CountryEditorController extends ActivePaneController implements Ini
     void loadImage(ActionEvent event) {
         DirectSurfaceManager dds = new DirectSurfaceManager();
         try {
-            java.awt.image.BufferedImage origin = dds.awtImage("C:\\Users\\mysha\\Documents\\Paradox Interactive\\Hearts of Iron IV\\mod\\leylamod12c\\gfx\\leaders\\MNK\\MNK_leader_paulis.dds");
-            Image image = javafx.embed.swing.SwingFXUtils.toFXImage(origin, null);
+            Image image = dds.loadDDS("C:\\Users\\mysha\\Documents\\Paradox Interactive\\Hearts of Iron IV\\mod\\leylamod12c\\gfx\\leaders\\MNK\\MNK_leader_paulis.dds");
             imageDDS.setImage(image);
         } catch (IOException e) {
             System.err.println("Cannot open required file");
