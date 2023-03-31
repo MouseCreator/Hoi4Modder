@@ -70,8 +70,9 @@ public class CountryEditorController extends ActivePaneController implements Ini
     @FXML
     void loadImage(ActionEvent event) {
         DirectSurfaceManager dds = new DirectSurfaceManager();
+        String file = "C:\\Users\\mysha\\Documents\\Paradox Interactive\\Hearts of Iron IV\\mod\\leylamod12c\\gfx\\leaders\\MNK\\MNK_Oniona_Miniliana.dds";
         try {
-            Image image = dds.loadDDS("C:\\Users\\mysha\\Documents\\Paradox Interactive\\Hearts of Iron IV\\mod\\leylamod12c\\gfx\\leaders\\MNK\\MNK_leader_paulis.dds");
+            Image image = dds.loadDDS(file);
             imageDDS.setImage(image);
         } catch (IOException e) {
             System.err.println("Cannot open required file");

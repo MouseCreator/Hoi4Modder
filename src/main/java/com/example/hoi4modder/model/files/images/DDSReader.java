@@ -191,7 +191,7 @@ final class DDSReader {
         int [] pixels = new int[width*height];
         int index = offset;
         int w = (width+3)/4;
-        int h = (height+3)/4;
+        int h = height/4; //was: (height+3)/4
         for(int i=0; i<h; i++) {
             for(int j=0; j<w; j++) {
                 int c0 = (buffer[index] & 0xFF) | (buffer[index+1] & 0xFF) << 8; index += 2;
