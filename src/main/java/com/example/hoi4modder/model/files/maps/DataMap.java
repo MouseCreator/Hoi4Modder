@@ -40,4 +40,11 @@ public class DataMap<T> {
         }
         return false;
     }
+
+    public boolean containsKey(String key) {
+        return map.containsKey(key);
+    }
+    public boolean containsValue(String value) {
+        return map.containsKey(value);
+    }
 }

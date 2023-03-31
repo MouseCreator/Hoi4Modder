@@ -20,6 +20,14 @@ public class DataPool<T> {
         throw new NoSuchElementException("Cannot find value " + key + " in the data pool");
     }
 
+    public boolean containsKey(String key) {
+        for (String current : maps.keySet()) {
+            if(maps.get(current).containsKey(key))
+                return true;
+        }
+        return false;
+    }
+
     public T put(String type, String key, T value) {
         DataMap<T> mapToAdd = maps.get(type);
         return mapToAdd.put(key, value);
@@ -43,6 +51,9 @@ public class DataPool<T> {
         return maps.get(type).remove(key);
     }
     public boolean replace(String oldKey, String newKey) {
+        if (containsKey(newKey)) {
+            throw new IllegalArgumentException("Map already contains " + newKey);
+        }
         for (String current : maps.keySet()) {
             if(maps.get(current).replaceKey(oldKey,newKey))
                 return true;
