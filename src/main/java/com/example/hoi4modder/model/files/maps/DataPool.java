@@ -39,12 +39,19 @@ public class DataPool {
         }
         return false;
     }
+    public boolean remove(String type, String key) {
+        return maps.get(type).remove(key);
+    }
     public boolean replace(String oldKey, String newKey) {
         for (String current : maps.keySet()) {
             if(maps.get(current).replaceKey(oldKey,newKey))
                 return true;
         }
         return false;
+    }
+
+    public boolean replace(String type, String oldKey, String newKey) {
+        return maps.get(type).replaceKey(oldKey, newKey);
     }
 
 }
