@@ -63,10 +63,7 @@ public class CharacterListEditor extends ActivePaneController {
             return GameCharacterList.getArrayList();
         String tag = tagTextField.getText().toUpperCase();
         try {
-            FileSearchService searcher = (FileSearchService) parentController.getObjectPool().get("filesearcher");
-            searcher.setStrategy(new PutReplaceStrategy());
-            searcher.setDirectory(Destinations.get().characters());
-            String filename = searcher.findCountryByTag(tag);
+            String filename = getFilename(tag);
             return AbstractFactory.get().getCharacterList(filename);
         } catch (NoSuchElementException e) {
             Alert alert = new Alert(Alert.AlertType.WARNING, "Cannot find country with tag " + tag, ButtonType.OK);
@@ -76,6 +73,13 @@ public class CharacterListEditor extends ActivePaneController {
             alert.showAndWait();
         }
         return GameCharacterList.getArrayList();
+    }
+
+    private String getFilename(String tag) {
+        FileSearchService searcher = (FileSearchService) parentController.getObjectPool().get("filesearcher");
+        searcher.setStrategy(new PutReplaceStrategy());
+        searcher.setDirectory(Destinations.get().characters());
+        return searcher.findCountryByTag(tag);
     }
 }
 

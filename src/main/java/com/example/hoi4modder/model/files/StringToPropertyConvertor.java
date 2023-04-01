@@ -15,6 +15,8 @@ public class StringToPropertyConvertor {
                 continue;
             line = line.replace(" =", "=");
             line = line.replace("= ", "=");
+            line = line.replace("{", "{ ");
+            line = line.replace("}", " } ");
             if (line.matches("[a-zA-Z0-9-_]+:[0-9]+ \"(.+)\"")) {
                 String[] dotSplit = line.split("\"", 2);
                 line = dotSplit[0].trim() + "\"" + dotSplit[1];
