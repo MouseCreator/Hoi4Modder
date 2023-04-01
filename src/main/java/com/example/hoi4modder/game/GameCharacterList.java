@@ -1,6 +1,7 @@
 package com.example.hoi4modder.game;
 
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 public class GameCharacterList implements Iterable<GameCharacter>{
@@ -8,7 +9,10 @@ public class GameCharacterList implements Iterable<GameCharacter>{
 
     public GameCharacterList(List<GameCharacter> list) {
         this.characterList = list;
-        list.iterator();
+    }
+
+    public static GameCharacterList getArrayList() {
+        return new GameCharacterList(new ArrayList<>());
     }
 
     public void add(GameCharacter character) {
