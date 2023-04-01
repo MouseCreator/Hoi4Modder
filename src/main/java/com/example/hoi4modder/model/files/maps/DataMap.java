@@ -4,8 +4,11 @@ import java.util.Map;
 
 public class DataMap<T> {
     private final Map<String, T> map;
-
-    private final String filename;
+    private boolean changeable;
+    public void setFilename(String filename) {
+        this.filename = filename;
+    }
+    private String filename;
 
     public DataMap(Map<String, T> map, String filename) {
         this.map = map;
@@ -40,11 +43,18 @@ public class DataMap<T> {
         }
         return false;
     }
-
     public boolean containsKey(String key) {
         return map.containsKey(key);
     }
     public boolean containsValue(String value) {
         return map.containsKey(value);
+    }
+
+    public boolean isChangeable() {
+        return changeable;
+    }
+
+    public void setChangeable(boolean changeable) {
+        this.changeable = changeable;
     }
 }
