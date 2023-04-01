@@ -18,10 +18,7 @@ public class LoadedDataCreator {
         FileSearcher fileSearcher = new FileSearcher();
 
         DataPool<String> localisationPool = DataPool.getHashStringPool();
-        localisationPool.createMapType("characters",
-                fileSearcher.findAppendedFile(Destinations.get().localisation(), "characters"));
-        localisationPool.createMapType("traits",
-                fileSearcher.findAppendedFile(Destinations.get().localisation(), "traits"));
-        return localisationPool;
+
+        return null;
     }
 }

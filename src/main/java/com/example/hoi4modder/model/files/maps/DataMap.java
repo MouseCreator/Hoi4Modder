@@ -1,6 +1,7 @@
 package com.example.hoi4modder.model.files.maps;
 
 import java.util.Map;
+import java.util.Set;
 
 public class DataMap<T> {
     private final Map<String, T> map;
@@ -61,5 +62,9 @@ public class DataMap<T> {
 
     public void setReadOnly(boolean readOnly) {
         this.isReadOnly = readOnly;
+    }
+
+    public Set<String> getKeys() {
+        return map.keySet();
     }
 }
