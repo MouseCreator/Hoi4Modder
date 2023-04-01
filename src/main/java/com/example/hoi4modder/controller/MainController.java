@@ -1,4 +1,6 @@
 package com.example.hoi4modder.controller;
+import com.example.hoi4modder.model.files.manager.FileSearcher;
+import com.example.hoi4modder.service.ObjectPool;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.MenuBar;
@@ -37,7 +39,7 @@ public class MainController implements Initializable {
     @FXML
     private ScrollPane sideTop;
 
-    ActivePaneController currentActive;
+    private ActivePaneController currentActive;
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
@@ -95,4 +97,13 @@ public class MainController implements Initializable {
         return configurations.get(key);
     }
 
+    private final ObjectPool objectPool;
+
+    public MainController() {
+        objectPool = ObjectPool.getHashObjectPool();
+    }
+
+    public ObjectPool getObjectPool() {
+        return objectPool;
+    }
 }

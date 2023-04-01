@@ -6,6 +6,16 @@ import java.util.NoSuchElementException;
 public class FileSearcher {
 
     private String directory;
+    private String gameDirectory;
+    private String modsDirectory;
+    private String modName;
+
+    private String fromMod() {
+        return modsDirectory + modName;
+    }
+    private String fromGame() {
+        return gameDirectory;
+    }
     public String getDirectory() {
         return directory;
     }

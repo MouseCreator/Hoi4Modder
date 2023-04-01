@@ -20,7 +20,11 @@
                </children>
             </VBox>
             <TextField fx:id="tagTextField" />
-            <Pane prefHeight="200.0" prefWidth="200.0" />
+            <Pane prefHeight="30.0" prefWidth="15.0" />
+            <Pane prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <Button layoutY="1.0" mnemonicParsing="false" onAction="#loadCharactersByTag" text="Open" />
+               </children></Pane>
             <Button mnemonicParsing="false" onAction="#addEmptyCharacter" text="New character" />
             <Pane prefHeight="29.0" prefWidth="20.0" />
             <Button mnemonicParsing="false" onAction="#duplicateSelected" text="Duplicate" />
