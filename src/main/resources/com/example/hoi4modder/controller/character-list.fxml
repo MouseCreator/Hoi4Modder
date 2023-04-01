@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hoi4modder.controller.CharacterListEditor">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hoi4modder.controller.CharacterListEditor">
    <children>
       <Pane prefHeight="18.0" prefWidth="1000.0" />
       <HBox prefHeight="30.0" prefWidth="1000.0">
@@ -21,13 +21,15 @@
             </VBox>
             <TextField fx:id="tagTextField" />
             <Pane prefHeight="200.0" prefWidth="200.0" />
-            <Button mnemonicParsing="false" text="New character" />
+            <Button mnemonicParsing="false" onAction="#addEmptyCharacter" text="New character" />
             <Pane prefHeight="29.0" prefWidth="20.0" />
-            <Button mnemonicParsing="false" text="Duplicate" />
+            <Button mnemonicParsing="false" onAction="#duplicateSelected" text="Duplicate" />
             <Pane prefHeight="29.0" prefWidth="20.0" />
-            <Button mnemonicParsing="false" text="Remove character" textFill="RED" />
+            <Button mnemonicParsing="false" onAction="#removeSelected" text="Remove character" textFill="RED" />
+            <Pane prefHeight="29.0" prefWidth="20.0" />
+            <Button mnemonicParsing="false" onAction="#save" text="Save changes" />
          </children>
       </HBox>
-      <ListView fx:id="charactersListView" prefHeight="349.0" prefWidth="1000.0" />
+      <ListView fx:id="charactersListView" prefHeight="654.0" prefWidth="1000.0" />
    </children>
 </VBox>

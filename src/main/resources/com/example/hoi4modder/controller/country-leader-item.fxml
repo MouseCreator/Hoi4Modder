@@ -20,17 +20,17 @@
       <HBox prefHeight="30.0" prefWidth="167.0">
          <children>
             <Label prefHeight="18.0" prefWidth="59.0" text="Ideology:" />
-            <TextField />
+            <TextField fx:id="ideologyField" />
          </children>
       </HBox>
       <VBox>
          <children>
             <Label text="Traits:" />
-            <ListView prefHeight="166.0" prefWidth="190.0" />
+            <ListView fx:id="traitList" prefHeight="166.0" prefWidth="190.0" />
             <HBox prefHeight="26.0" prefWidth="190.0">
                <children>
                   <Button mnemonicParsing="false" text="X" textFill="RED" />
-                  <TextField prefHeight="26.0" prefWidth="140.0" />
+                  <TextField fx:id="traitName" prefHeight="26.0" prefWidth="140.0" />
                   <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="59.0" text="Add" />
                </children>
             </HBox>

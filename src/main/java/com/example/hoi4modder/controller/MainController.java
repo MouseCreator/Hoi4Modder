@@ -41,10 +41,10 @@ public class MainController implements Initializable {
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
-        loadPage(new CountryEditorController().load(this));
+        loadPage(new CharacterListEditor().load(this));
     }
     private void loadScene() {
-        mainContent.getChildren() .clear();
+        mainContent.getChildren().clear();
         mainContent.getChildren().add(currentActive.getContent());
     }
 
