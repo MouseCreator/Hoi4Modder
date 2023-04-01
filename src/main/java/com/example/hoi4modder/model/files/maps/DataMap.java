@@ -4,7 +4,7 @@ import java.util.Map;
 
 public class DataMap<T> {
     private final Map<String, T> map;
-    private boolean changeable;
+    private boolean isReadOnly;
     public void setFilename(String filename) {
         this.filename = filename;
     }
@@ -19,6 +19,8 @@ public class DataMap<T> {
     }
 
     public T put(String key, T value) {
+        if (isReadOnly)
+            throw new UnsupportedOperationException("Cannot make changes in this map");
         return map.put(key, value);
     }
 
@@ -27,6 +29,8 @@ public class DataMap<T> {
     }
 
     public boolean remove(String key) {
+        if (isReadOnly)
+            throw new UnsupportedOperationException("Cannot make changes in this map");
         if (map.containsKey(key)) {
             map.remove(key);
             return true;
@@ -35,6 +39,8 @@ public class DataMap<T> {
     }
 
     public boolean replaceKey(String oldKey, String newKey) {
+        if (isReadOnly)
+            throw new UnsupportedOperationException("Cannot make changes in this map");
         if (map.containsKey(oldKey)) {
             T value = map.remove(oldKey);
             map.put(newKey, value);
@@ -49,11 +55,11 @@ public class DataMap<T> {
         return map.containsKey(value);
     }
 
-    public boolean isChangeable() {
-        return changeable;
+    public boolean isReadOnly() {
+        return isReadOnly;
     }
 
-    public void setChangeable(boolean changeable) {
-        this.changeable = changeable;
+    public void setReadOnly(boolean readOnly) {
+        this.isReadOnly = readOnly;
     }
 }

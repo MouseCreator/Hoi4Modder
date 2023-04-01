@@ -17,6 +17,6 @@ public class DataMapBuilder<T> {
         map.setFilename(filename);
     }
     public void setChangeable(boolean isChangeable) {
-        map.setChangeable(isChangeable);
+        map.setReadOnly(isChangeable);
     }
 }
