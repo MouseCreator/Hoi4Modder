@@ -5,6 +5,10 @@ import java.util.HashMap;
 public class StringDataMapBuilder implements DataMapBuilder<String> {
     private DataMap<String> map;
 
+    public StringDataMapBuilder() {
+        newHashMap();
+    }
+
     public DataMap<String> getResult() {
         return map;
     }

@@ -16,9 +16,13 @@ public class LoadedDataCreator {
     private DataPool<String> createLocalisationPool() {
 
         FileSearcher fileSearcher = new FileSearcher(Destinations.get().localisation());
-        StringDataMapBuilder mapBuilder = new StringDataMapBuilder();
+
         DataPool<String> localisationPool = DataPool.getHashStringPool();
 
         return null;
+    }
+    private void addCharacterLocalisation(FileSearcher searcher, DataPool<String> localisationPool) {
+        StringDataMapBuilder mapBuilder = new StringDataMapBuilder();
+        mapBuilder.setFilename("");
     }
 }

@@ -6,7 +6,6 @@ import java.util.NoSuchElementException;
 
 public class DataPool<T> {
     private final Map<String, DataMap<T>> maps;
-
     public static DataPool<String> getHashStringPool() {
         return new DataPool<>(new HashMap<>());
     }
@@ -30,7 +29,9 @@ public class DataPool<T> {
         }
         return false;
     }
-
+    public void addDataMap(String type, DataMap<T> map) {
+        this.maps.put(type, map);
+    }
     public T put(String type, String key, T value) {
         DataMap<T> mapToAdd = maps.get(type);
         return mapToAdd.put(key, value);
