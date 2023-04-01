@@ -1,10 +1,11 @@
 package com.example.hoi4modder.controller;
+import com.example.hoi4modder.model.files.iovisitor.Parser;
 import com.example.hoi4modder.model.files.manager.FileSearchService;
-import com.example.hoi4modder.model.files.manager.FileSearcher;
-import com.example.hoi4modder.model.files.manager.strategy.PutReplaceStrategy;
 import com.example.hoi4modder.model.files.manager.strategy.PutStrategy;
+import com.example.hoi4modder.model.files.maps.DataMap;
 import com.example.hoi4modder.model.files.maps.DataPool;
 import com.example.hoi4modder.model.files.maps.LoadedData;
+import com.example.hoi4modder.service.AbstractFactory;
 import com.example.hoi4modder.service.Destinations;
 import com.example.hoi4modder.service.ObjectPool;
 import javafx.fxml.FXML;
@@ -15,8 +16,6 @@ import javafx.scene.control.TextArea;
 import javafx.scene.layout.Pane;
 
 import java.net.URL;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
@@ -102,20 +101,38 @@ public class MainController implements Initializable {
     public MainController() {
         objectPool = ObjectPool.getHashObjectPool();
         objectPool.put("filesearcher", new FileSearchService());
+        objectPool.put("data", getLoadedData());
     }
     public ObjectPool getObjectPool() {
         return objectPool;
     }
     private LoadedData getLoadedData() {
         LoadedData loadedData = new LoadedData();
-        //loadedData.setGraphicsData();
+        loadedData.setGraphicsData(loadGraphicsData());
         return loadedData;
     }
 
-    private void loadGraphicsData() {
-        FileSearchService searcher = (FileSearchService) objectPool.get("searcher");
+    private DataPool<String> loadGraphicsData() {
+        DataPool<String> graphicData = DataPool.getHashStringPool();
+        FileSearchService searcher = (FileSearchService) objectPool.get("filesearcher");
         searcher.setDirectory(Destinations.get().interfaceDir());
         searcher.setStrategy(new PutStrategy());
-        String filename = searcher.findInstance("leader");
+        String[] keywords = new String[] {"leader", "ideas_characters"};
+        for(String s : keywords) {
+            DataMap<String> map = getMap(searcher, s);
+            if (map != null) {
+                graphicData.addDataMap(s, map);
+            }
+        }
+        return graphicData;
+    }
+
+    private DataMap<String> getMap(FileSearchService searcher, String keyword) {
+        try {
+            String filename = searcher.findInstance(keyword);
+            return AbstractFactory.get().graphicsMap(filename);
+        } catch (Exception e) {
+            return null;
+        }
     }
 }

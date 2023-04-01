@@ -149,8 +149,8 @@ public class Parser implements Visitor{
     }
     @Override
     public void visitSpriteList(SpriteList spriteList) {
-        PropertyCollection charactersCollection = baseProperty.getAll();
-        for(Property property : charactersCollection) {
+        PropertyCollection spriteCollection = baseProperty.getAll();
+        for(Property property : spriteCollection) {
             SpriteType sprite = toSpriteType(property);
             spriteList.add(sprite);
         }

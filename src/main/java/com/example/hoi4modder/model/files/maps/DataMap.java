@@ -1,11 +1,17 @@
 package com.example.hoi4modder.model.files.maps;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
 public class DataMap<T> {
     private final Map<String, T> map;
     private boolean isReadOnly;
+
+    public static DataMap<String> getHashStringMap() {
+        return new DataMap<>(new HashMap<>());
+    }
+
     public void setFilename(String filename) {
         this.filename = filename;
     }

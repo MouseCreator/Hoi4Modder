@@ -7,20 +7,22 @@ import java.util.NoSuchElementException;
 
 public class PutStrategy implements SearcherStrategy {
     private FileSearcher searcher = new FileSearcher() ;
-    private FileSearchService service;
+    private FileSearchService searchService;
 
     @Override
     public String findCountryByTag(String tag) throws NoSuchElementException {
-        return null;
+        searcher.setDirectory(searchService.getFullModDirectory());
+        return searcher.findCountryByTag(tag);
     }
 
     @Override
     public void setService(FileSearchService fileSearchService) {
-        this.service = service;
+        this.searchService = fileSearchService;
     }
 
     @Override
     public String getInstance(String substring) {
-        return null;
+        searcher.setDirectory(searchService.getFullModDirectory());
+        return searcher.findInstance(substring);
     }
 }
