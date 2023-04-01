@@ -32,12 +32,6 @@ public class Destinations {
     public String stateFile(int id) {
         return history + states + id + txt;
     }
-    public String countriesLocalisation() {
-        return localisation + russian + mod_countries + yml;
-    }
-    public String charactersLocalisation() {
-        return localisation + russian + mod_characters + yml;
-    }
 
     public String pythonScript(String filename) {
         return basedir + data + python + filename + py;
@@ -45,5 +39,9 @@ public class Destinations {
 
     public String characters() {
         return common + characters;
+    }
+
+    public String localisation(String filename) {
+        return localisation + russian + s + yml;
     }
 }

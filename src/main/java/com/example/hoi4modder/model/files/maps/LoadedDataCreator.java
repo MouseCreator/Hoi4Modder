@@ -1,5 +1,7 @@
 package com.example.hoi4modder.model.files.maps;
 
+import com.example.hoi4modder.service.Destinations;
+
 import java.util.HashMap;
 
 public class LoadedDataCreator {
@@ -15,7 +17,7 @@ public class LoadedDataCreator {
 
 
         DataPool<String> localisationPool = DataPool.getHashStringPool();
-        localisationPool.createMapType("characters", "");
+        localisationPool.createMapType("characters", Destinations.get().localisation("new-characters"));
         return localisationPool;
     }
 }
