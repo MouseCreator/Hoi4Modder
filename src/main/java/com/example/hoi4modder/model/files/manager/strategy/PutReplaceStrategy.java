@@ -1,11 +1,12 @@
 package com.example.hoi4modder.model.files.manager.strategy;
 
 import com.example.hoi4modder.model.files.manager.FileSearcher;
-import com.example.hoi4modder.model.files.manager.GameFilesReader;
-import com.example.hoi4modder.model.files.manager.GameFilesWriter;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.NoSuchElementException;
 
 public class PutReplaceStrategy implements SearcherStrategy {
@@ -28,13 +29,12 @@ public class PutReplaceStrategy implements SearcherStrategy {
         }
     }
     private File replaceFile(String file) throws IOException {
-        GameFilesReader reader = new GameFilesReader();
-        String msg = reader.read(file);
+        Path gameFile = Paths.get(file);
         String newFile = searcher.toModFile(file);
-        GameFilesWriter writer = new GameFilesWriter();
         File createdFile = new File(newFile);
+        Path modPath = createdFile.toPath();
         if(createdFile.mkdirs()) {
-            writer.write(createdFile.getAbsolutePath(), msg);
+            Files.copy(gameFile, modPath);
         } else {
             throw new IOException("Cannot create directories in path");
         }

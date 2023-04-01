@@ -1,6 +1,4 @@
 package com.example.hoi4modder.model.files.manager;
-
-import com.example.hoi4modder.model.files.manager.strategy.PutReplaceStrategy;
 import com.example.hoi4modder.model.files.manager.strategy.SearcherStrategy;
 
 import java.io.File;
@@ -51,19 +49,6 @@ public class FileSearcher {
                 return fileEntry.getPath();
         }
         throw new NoSuchElementException("Cannot find country with tag " + tag + " at " + directory);
-    }
-
-    public String findAppendedFile(String keyword) {
-        File[] files = getFilesFromDirectory();
-        for (final File fileEntry : files) {
-            if (fileEntry.isDirectory()) {
-                continue;
-            }
-            String name = fileEntry.getName();
-            if (name.contains(keyword))
-                return fileEntry.getPath();
-        }
-        throw new NoSuchElementException("Cannot find file containing " + keyword + " at " + directory);
     }
 
     private File[] getFilesFromDirectory() {

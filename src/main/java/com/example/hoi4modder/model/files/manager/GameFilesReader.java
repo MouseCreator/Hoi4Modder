@@ -21,6 +21,6 @@ public class GameFilesReader {
         return lines;
     }
     public String read(String filename) throws IOException {
-        return String.join("\n", readByLines(filename));
+        return String.join(" ", readByLines(filename));
     }
 }
