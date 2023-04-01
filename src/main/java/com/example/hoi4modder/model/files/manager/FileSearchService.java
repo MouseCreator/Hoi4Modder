@@ -56,4 +56,8 @@ public class FileSearchService {
     public String getFullGameDirectory() {
         return gameDirectory + Destinations.get().separator() + directory;
     }
+
+    public String findInstance(String substring) {
+        return strategy.getInstance(substring);
+    }
 }

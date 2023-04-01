@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hoi4modder.controller.CharacterItem">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hoi4modder.controller.CharacterItemController">
    <children>
       <Pane prefHeight="400.0" prefWidth="51.0" />
       <VBox prefHeight="400.0" prefWidth="787.0">
@@ -54,12 +54,12 @@
                   </VBox>
                </children>
             </HBox>
-            <HBox prefHeight="259.0" prefWidth="787.0" />
+            <HBox fx:id="rolesBox" prefHeight="259.0" prefWidth="787.0" />
          </children>
       </VBox>
       <VBox prefHeight="350.0" prefWidth="185.0">
          <children>
-            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="bigPortraitImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../data/image/interface/NoLeader.png" />
                </image>
@@ -70,7 +70,7 @@
                   <Button mnemonicParsing="false" text="Change" />
                </children>
             </HBox>
-            <ImageView fitHeight="77.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="smallPortraitImage" fitHeight="77.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../data/image/interface/NoIdea.png" />
                </image>

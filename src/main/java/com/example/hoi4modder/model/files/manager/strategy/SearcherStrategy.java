@@ -9,4 +9,6 @@ public interface SearcherStrategy {
     String findCountryByTag(String tag) throws NoSuchElementException;
 
     void setService(FileSearchService fileSearchService);
+
+    String getInstance(String substring);
 }

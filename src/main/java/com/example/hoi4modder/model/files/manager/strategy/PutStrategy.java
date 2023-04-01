@@ -18,4 +18,9 @@ public class PutStrategy implements SearcherStrategy {
     public void setService(FileSearchService fileSearchService) {
         this.service = service;
     }
+
+    @Override
+    public String getInstance(String substring) {
+        return null;
+    }
 }

@@ -1,21 +1,21 @@
 package com.example.hoi4modder.model.files.maps;
-
-import java.util.Map;
-
-public class LoadedData<T> {
-    private final Map<String, DataPool<T>> data;
-
-    public LoadedData(Map<String, DataPool<T>> data) {
-        this.data = data;
+public class LoadedData {
+    public void setLocalisationData(DataPool<String> localisationData) {
+        this.localisationData = localisationData;
     }
 
-    public DataPool<T> getDataPool(String name) {
-        return data.get(name);
+    private DataPool<String> localisationData = DataPool.getHashStringPool();
+
+    public void setGraphicsData(DataPool<String> graphicsData) {
+        this.graphicsData = graphicsData;
     }
-    public DataPool<T> popDataPool(String name) {
-        return data.remove(name);
+
+    private DataPool<String> graphicsData = DataPool.getHashStringPool();
+
+    public DataPool<String> getGraphicsData() {
+        return graphicsData;
     }
-    public DataPool<T> insertDataPool(String name, DataPool<T> dataPool) {
-        return data.put(name, dataPool);
+    public DataPool<String> getLocalisationData() {
+        return localisationData;
     }
 }

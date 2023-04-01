@@ -1,6 +1,11 @@
 package com.example.hoi4modder.controller;
 import com.example.hoi4modder.model.files.manager.FileSearchService;
 import com.example.hoi4modder.model.files.manager.FileSearcher;
+import com.example.hoi4modder.model.files.manager.strategy.PutReplaceStrategy;
+import com.example.hoi4modder.model.files.manager.strategy.PutStrategy;
+import com.example.hoi4modder.model.files.maps.DataPool;
+import com.example.hoi4modder.model.files.maps.LoadedData;
+import com.example.hoi4modder.service.Destinations;
 import com.example.hoi4modder.service.ObjectPool;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -92,20 +97,25 @@ public class MainController implements Initializable {
         this.consoleView.setStyle("-fx-text-fill: green");
     }
 
-    private final Map<String, String> configurations = new HashMap<>();
-
-    public String getConfiguration(String key) {
-        return configurations.get(key);
-    }
-
     private final ObjectPool objectPool;
 
     public MainController() {
         objectPool = ObjectPool.getHashObjectPool();
         objectPool.put("filesearcher", new FileSearchService());
     }
-
     public ObjectPool getObjectPool() {
         return objectPool;
+    }
+    private LoadedData getLoadedData() {
+        LoadedData loadedData = new LoadedData();
+        //loadedData.setGraphicsData();
+        return loadedData;
+    }
+
+    private void loadGraphicsData() {
+        FileSearchService searcher = (FileSearchService) objectPool.get("searcher");
+        searcher.setDirectory(Destinations.get().interfaceDir());
+        searcher.setStrategy(new PutStrategy());
+        String filename = searcher.findInstance("leader");
     }
 }

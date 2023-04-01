@@ -52,4 +52,17 @@ public class FileSearcher {
         }
         throw new NoSuchElementException("Cannot find file named " + filename + " at " + directory);
     }
+
+    public String findInstance(String substring) {
+        File[] files = getFilesFromDirectory();
+        for (final File fileEntry : files) {
+            if (fileEntry.isDirectory()) {
+                continue;
+            }
+            String name = fileEntry.getName();
+            if (name.contains(substring))
+                return fileEntry.getPath();
+        }
+        throw new NoSuchElementException("Cannot find file with " + substring + " at " + directory);
+    }
 }

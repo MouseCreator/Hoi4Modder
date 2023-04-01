@@ -28,6 +28,8 @@ public class Destinations {
 
     private final String mod_countries = "mod_countries_l_russian";
     private final String mod_characters = "mod_characters_l_russian";
+
+    private final String interfaceDir = "interface" + s;
     private final String states = "states" + s;
     public String stateFile(int id) {
         return history + states + id + txt;
@@ -50,5 +52,9 @@ public class Destinations {
 
     public String separator() {
         return s;
+    }
+
+    public String interfaceDir() {
+        return interfaceDir;
     }
 }

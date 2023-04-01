@@ -24,12 +24,8 @@ public class PutReplaceStrategy implements SearcherStrategy {
             return searcher.findCountryByTag(tag);
         } catch (NoSuchElementException e) {
             String file = searcher.findCountryByTag(tag);
-            try {
-            File createdFile = replaceFile(file);
-                return createdFile.getAbsolutePath();
-            } catch (IOException err) {
-                err.printStackTrace();
-            }
+            String createdFile = getCreatedFile(file);
+            if (createdFile != null) return createdFile;
         }
         throw new NoSuchElementException();
     }
@@ -37,6 +33,29 @@ public class PutReplaceStrategy implements SearcherStrategy {
     @Override
     public void setService(FileSearchService fileSearchService) {
         this.searchService = fileSearchService;
+    }
+
+    @Override
+    public String getInstance(String substring) {
+        searcher.setDirectory(searchService.getFullModDirectory());
+        try {
+            return searcher.findInstance(substring);
+        } catch (NoSuchElementException e) {
+            String file = searcher.findInstance(substring);
+            String createdFile = getCreatedFile(file);
+            if (createdFile != null) return createdFile;
+        }
+        throw new NoSuchElementException();
+    }
+
+    private String getCreatedFile(String file) {
+        try {
+            File createdFile = replaceFile(file);
+            return createdFile.getAbsolutePath();
+        } catch (IOException err) {
+            err.printStackTrace();
+        }
+        return null;
     }
 
     private File replaceFile(String file) throws IOException {

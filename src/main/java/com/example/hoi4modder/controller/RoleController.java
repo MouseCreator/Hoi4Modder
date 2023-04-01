@@ -9,13 +9,13 @@ import java.util.HashSet;
 import java.util.Set;
 
 public abstract class RoleController<R extends Role> {
-    protected CharacterItem characterItem;
-    public CharacterItem getCharacterItem() {
-        return characterItem;
+    protected CharacterItemController characterItemController;
+    public CharacterItemController getCharacterItem() {
+        return characterItemController;
     }
 
-    public void setCharacterItem(CharacterItem characterItem) {
-        this.characterItem = characterItem;
+    public void setCharacterItem(CharacterItemController characterItemController) {
+        this.characterItemController = characterItemController;
     }
     protected void addTrait(ListView<String> listView, String trait) {
         if (trait.isEmpty())
