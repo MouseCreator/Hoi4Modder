@@ -36,14 +36,22 @@ public abstract class RoleController<R extends Role> {
 
     protected String getSelectedFromBox(ComboBox<String> box) {
         String result = box.getValue();
-        result = result.replace(" ", "_");
-        return result.toLowerCase();
+        return stringToLowerCase(result);
+    }
+
+    protected String stringToLowerCase(String origin) {
+        origin = origin.replace(" ", "_");
+        return origin.toLowerCase();
+    }
+    protected String stringToUpperCase(String origin) {
+        origin = origin.replace("_", " ");
+        origin = origin.substring(0, 1).toUpperCase() + origin.substring(1);
+        return origin;
     }
 
     protected void setSelectedFromBox(String slot, ComboBox<String> box) {
-        slot = slot.replace("_", " ");
-        slot = slot.substring(0, 1).toUpperCase() + slot.substring(1);
-        box.getSelectionModel().select(slot);
+
+        box.getSelectionModel().select(stringToUpperCase(slot));
     }
 
 }

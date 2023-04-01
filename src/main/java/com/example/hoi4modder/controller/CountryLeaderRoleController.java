@@ -64,10 +64,13 @@ public class CountryLeaderRoleController extends RoleController<CountryLeader> i
         ideologyBox.getItems().removeAll(ideologyBox.getItems());
         ideologyBox.getItems().addAll("neutrality", "democratic", "fascism", "communism");
         ideologyBox.getSelectionModel().select("neutrality");
+        setTypesFromIdeology("neutrality");
     }
     private void setTypesFromIdeology(String ideology) {
         typeBox.getItems().removeAll(ideologyBox.getItems());
-        ideologyBox.getItems().addAll(ideologies.get(ideology));
+        List<String> list = ideologies.get(ideology);
+        for(String str : list)
+            ideologyBox.getItems().add(stringToUpperCase(str));
     }
     private final Map<String, List<String>> ideologies;
 }
