@@ -38,8 +38,14 @@ public class NavyLeaderController extends RoleController<NavyLeader> implements 
     }
 
     @Override
-    public void fromRole(NavyLeader role) {
-
+    public void fromRole(NavyLeader navyLeader) {
+        skillField.setText(String.valueOf(navyLeader.getSkill()));
+        attackField.setText(String.valueOf(navyLeader.getAttackSkill()));
+        defenceField.setText(String.valueOf(navyLeader.getDefenceSkill()));
+        manuverField.setText(String.valueOf(navyLeader.getManeuveringSkill()));
+        cordsField.setText(String.valueOf(navyLeader.getCoordinationSkill()));
+        traitsList.getItems().clear();
+        traitsList.getItems().addAll(navyLeader.getTraits());
     }
 
     @Override

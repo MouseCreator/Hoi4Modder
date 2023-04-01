@@ -41,12 +41,14 @@ public class UnitLeaderController extends RoleController<UnitLeader> implements 
     }
 
     @Override
-    public void fromRole(UnitLeader role) {
-        skillField.setText(String.valueOf(role.getSkill()));
-        attackField.setText(String.valueOf(role.getAttackSkill()));
-        defenseField.setText(String.valueOf(role.getDefenceSkill()));
-        logisticsField.setText(String.valueOf(role.getLogisticsSkill()));
-        planningField.setText(String.valueOf(role.getPlanningSkill()));
+    public void fromRole(UnitLeader unitLeader) {
+        skillField.setText(String.valueOf(unitLeader.getSkill()));
+        attackField.setText(String.valueOf(unitLeader.getAttackSkill()));
+        defenseField.setText(String.valueOf(unitLeader.getDefenceSkill()));
+        logisticsField.setText(String.valueOf(unitLeader.getLogisticsSkill()));
+        planningField.setText(String.valueOf(unitLeader.getPlanningSkill()));
+        traitsList.getItems().clear();
+        traitsList.getItems().addAll(unitLeader.getTraits());
     }
 
     @Override

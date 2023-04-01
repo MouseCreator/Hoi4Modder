@@ -49,6 +49,7 @@ public class CountryLeaderRoleController extends RoleController<CountryLeader> i
                 typeBox.getSelectionModel().select(type);
             }
         }
+        traitList.getItems().clear();
         traitList.getItems().addAll(leader.getTraits());
     }
 
