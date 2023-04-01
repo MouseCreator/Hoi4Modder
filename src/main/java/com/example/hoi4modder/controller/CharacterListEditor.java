@@ -1,9 +1,16 @@
 package com.example.hoi4modder.controller;
 
+import com.example.hoi4modder.game.GameCharacterList;
+import com.example.hoi4modder.model.files.manager.FileSearcher;
+import com.example.hoi4modder.model.files.manager.strategy.PutReplaceStrategy;
 import com.example.hoi4modder.service.Destinations;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+
+import java.util.NoSuchElementException;
 
 public class CharacterListEditor extends ActivePaneController {
 
@@ -25,6 +32,7 @@ public class CharacterListEditor extends ActivePaneController {
 
     @Override
     public void load() {
+
     }
 
     @FXML
@@ -39,6 +47,26 @@ public class CharacterListEditor extends ActivePaneController {
     @FXML
     public void removeSelected() {
         System.out.println("Removed character");
+    }
+
+    private GameCharacterList characters;
+
+    @FXML
+    public void loadCharactersByTag() {
+        if (tagTextField.getText().isEmpty())
+            return;
+        String tag = tagTextField.getText().toUpperCase();
+        try {
+            FileSearcher searcher = (FileSearcher) parentController.getObjectPool().get("filesearcher");
+            searcher.setStrategy(new PutReplaceStrategy());
+            searcher.setDirectory("common/characters");
+            String filename = searcher.findCountryByTag(tag);
+
+        } catch (NoSuchElementException e) {
+            Alert alert = new Alert(Alert.AlertType.WARNING, "Cannot find country with tag " + tag, ButtonType.OK);
+            alert.showAndWait();
+        }
+
     }
 }
 
