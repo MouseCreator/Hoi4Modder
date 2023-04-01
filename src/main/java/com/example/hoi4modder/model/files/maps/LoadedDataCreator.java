@@ -15,8 +15,8 @@ public class LoadedDataCreator {
 
     private DataPool<String> createLocalisationPool() {
 
-        FileSearcher fileSearcher = new FileSearcher();
-
+        FileSearcher fileSearcher = new FileSearcher(Destinations.get().localisation());
+        StringDataMapBuilder mapBuilder = new StringDataMapBuilder();
         DataPool<String> localisationPool = DataPool.getHashStringPool();
 
         return null;

@@ -4,8 +4,24 @@ import java.io.File;
 import java.util.NoSuchElementException;
 
 public class FileSearcher {
-    public String findCountryByTag(String directory, String tag) {
-        File[] files = getFilesFromDirectory(directory);
+
+    private String directory;
+    public String getDirectory() {
+        return directory;
+    }
+
+    public void setDirectory(String directory) {
+        this.directory = directory;
+    }
+
+
+
+    public FileSearcher(String directory) {
+        this.directory = directory;
+    }
+
+    public String findCountryByTag(String tag) {
+        File[] files = getFilesFromDirectory();
         for (final File fileEntry : files) {
             if (fileEntry.isDirectory()) {
                 continue;
@@ -17,8 +33,8 @@ public class FileSearcher {
         throw new NoSuchElementException("Cannot find country with tag " + tag + " at " + directory);
     }
 
-    public String findAppendedFile(String directory, String keyword) {
-        File[] files = getFilesFromDirectory(directory);
+    public String findAppendedFile(String keyword) {
+        File[] files = getFilesFromDirectory();
         for (final File fileEntry : files) {
             if (fileEntry.isDirectory()) {
                 continue;
@@ -30,7 +46,7 @@ public class FileSearcher {
         throw new NoSuchElementException("Cannot find file containing " + keyword + " at " + directory);
     }
 
-    private static File[] getFilesFromDirectory(String directory) {
+    private File[] getFilesFromDirectory() {
         File baseDir = new File(directory);
         File[] files = baseDir.listFiles();
         if (files == null) {
@@ -38,8 +54,8 @@ public class FileSearcher {
         }
         return files;
     }
-    public String findExactFile(String directory, String filename) {
-        File[] files = getFilesFromDirectory(directory);
+    public String findExactFile(String filename) {
+        File[] files = getFilesFromDirectory();
         for (final File fileEntry : files) {
             if (fileEntry.isDirectory()) {
                 continue;

@@ -12,14 +12,14 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 public class CharacterManager {
-    FileSearcher searcher = new FileSearcher();
+    FileSearcher searcher = new FileSearcher(Destinations.get().characters());
     GameFilesReader reader = new GameFilesReader();
     GameFilesWriter writer = new GameFilesWriter();
     StringToPropertyConvertor convertor = new StringToPropertyConvertor();
 
     public GameCharacterList getCharactersForCountry(String countryTag) {
         try {
-            String name = searcher.findCountryByTag(Destinations.get().characters(), countryTag);
+            String name = searcher.findCountryByTag(countryTag);
             return getGameCharacterListFromFile(name);
         } catch (NoSuchElementException e) {
             //do something
@@ -41,7 +41,7 @@ public class CharacterManager {
 
     public void setCharactersForCountry(String countryTag, GameCharacterList characters) {
         try {
-            String name = searcher.findCountryByTag(Destinations.get().characters(), countryTag);
+            String name = searcher.findCountryByTag(countryTag);
             String message = charactersToFile(characters);
             writer.write(name, message);
         } catch (NoSuchElementException e) {
