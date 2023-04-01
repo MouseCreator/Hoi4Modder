@@ -19,4 +19,9 @@ public class CountryLeaderRoleController extends RoleController{
     public void addTrait() {
         super.addTrait(traitList, traitName.getText());
     }
+
+    @Override
+    public String filename() {
+        return "country-leader-item.fxml";
+    }
 }

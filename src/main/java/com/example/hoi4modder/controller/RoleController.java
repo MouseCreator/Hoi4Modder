@@ -12,7 +12,11 @@ public abstract class RoleController {
         this.characterItem = characterItem;
     }
     public void addTrait(ListView<String> listView, String trait) {
+        if (trait.isEmpty())
+            return;
         listView.getItems().add(trait);
     }
+
+    public abstract String filename();
 
 }
