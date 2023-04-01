@@ -36,4 +36,22 @@ public class Advisor extends Role{
     public String getTitle() {
         return "advisor";
     }
+
+    public void toLedger() {
+        if (slot.equals("high_command") || slot.equals("theorist")) {
+            for (String trait : traits) {
+                if (trait.contains("army")) {
+                    setLedger("army");
+                    return;
+                } else if (trait.contains("air")) {
+                    setLedger("air");
+                    return;
+                } else if (trait.contains("navy")) {
+                    setLedger("navy");
+                    return;
+                }
+            }
+        }
+        setLedger("");
+    }
 }

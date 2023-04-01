@@ -1,5 +1,6 @@
 package com.example.hoi4modder.controller;
 
+import com.example.hoi4modder.game.roles.Advisor;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -49,4 +50,17 @@ public class AdvisorRoleController extends RoleController implements Initializab
     public String filename() {
         return "advisor-item.fxml";
     }
+
+    public void fromAdvisor(Advisor template) {
+
+    }
+    public Advisor toAdvisor() {
+        Advisor advisor = new Advisor();
+        advisor.setCost(Integer.parseInt(costField.getText()));
+        advisor.setSlot(getSelectedFromBox());
+        advisor.setTraits(getTraits(traitList));
+        advisor.toLedger();
+        return advisor;
+    }
+
 }
