@@ -11,7 +11,7 @@ import javafx.scene.control.TextField;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class AdvisorRoleController extends RoleController implements Initializable {
+public class AdvisorRoleController extends RoleController<Advisor> implements Initializable {
     @FXML
     private TextField costField;
 
@@ -57,12 +57,12 @@ public class AdvisorRoleController extends RoleController implements Initializab
         return "advisor-item.fxml";
     }
 
-    public void fromAdvisor(Advisor advisor) {
+    public void fromRole(Advisor advisor) {
         costField.setText(String.valueOf(advisor.getCost()));
         setSelectedFromBox(advisor.getSlot());
         traitList.getItems().addAll(advisor.getTraits());
     }
-    public Advisor toAdvisor() {
+    public Advisor toRole() {
         Advisor advisor = new Advisor();
         advisor.setCost(Integer.parseInt(costField.getText()));
         advisor.setSlot(getSelectedFromBox());

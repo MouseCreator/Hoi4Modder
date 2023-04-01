@@ -1,11 +1,11 @@
 package com.example.hoi4modder.controller;
 
+import com.example.hoi4modder.game.roles.CountryLeader;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.Pane;
 
-public class CountryLeaderRoleController extends RoleController{
+public class CountryLeaderRoleController extends RoleController<CountryLeader> {
 
     @FXML
     private TextField ideologyField;
@@ -23,5 +23,19 @@ public class CountryLeaderRoleController extends RoleController{
     @Override
     public String filename() {
         return "country-leader-item.fxml";
+    }
+
+    @Override
+    public void fromRole(CountryLeader leader) {
+        ideologyField.setText(leader.getIdeology());
+        traitList.getItems().addAll(leader.getTraits());
+    }
+
+    @Override
+    public CountryLeader toRole() {
+        CountryLeader leader = new CountryLeader();
+        leader.setIdeology(ideologyField.getText());
+        leader.setTraits(getTraits(traitList));
+        return leader;
     }
 }

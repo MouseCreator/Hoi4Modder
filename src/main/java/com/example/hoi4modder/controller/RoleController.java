@@ -1,12 +1,13 @@
 package com.example.hoi4modder.controller;
 
+import com.example.hoi4modder.game.roles.Role;
 import javafx.collections.ObservableList;
 import javafx.scene.control.ListView;
 
 import java.util.HashSet;
 import java.util.Set;
 
-public abstract class RoleController {
+public abstract class RoleController<R extends Role> {
     protected CharacterItem characterItem;
     public CharacterItem getCharacterItem() {
         return characterItem;
@@ -27,5 +28,9 @@ public abstract class RoleController {
     }
 
     public abstract String filename();
+
+    public abstract void fromRole(R role);
+
+    public abstract R toRole();
 
 }
