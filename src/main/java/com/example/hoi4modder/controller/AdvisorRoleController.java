@@ -41,6 +41,12 @@ public class AdvisorRoleController extends RoleController implements Initializab
         return result.toLowerCase();
     }
 
+    private void setSelectedFromBox(String slot) {
+        slot.replace("_", " ");
+        slot = slot.substring(0, 1).toUpperCase() + slot.substring(1);
+        slotComboBox.getSelectionModel().select(slot);
+    }
+
     @FXML
     void addTrait(ActionEvent event) {
         super.addTrait(traitList, traitField.getText());
@@ -51,8 +57,10 @@ public class AdvisorRoleController extends RoleController implements Initializab
         return "advisor-item.fxml";
     }
 
-    public void fromAdvisor(Advisor template) {
-
+    public void fromAdvisor(Advisor advisor) {
+        costField.setText(String.valueOf(advisor.getCost()));
+        setSelectedFromBox(advisor.getSlot());
+        traitList.getItems().addAll(advisor.getTraits());
     }
     public Advisor toAdvisor() {
         Advisor advisor = new Advisor();

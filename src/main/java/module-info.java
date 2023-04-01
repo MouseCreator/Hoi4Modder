@@ -8,5 +8,6 @@ module com.example.hoi4modder {
     opens com.example.hoi4modder to javafx.fxml;
     exports com.example.hoi4modder;
     exports com.example.hoi4modder.controller;
+    exports com.example.hoi4modder.game.roles;
     opens com.example.hoi4modder.controller to javafx.fxml;
 }
