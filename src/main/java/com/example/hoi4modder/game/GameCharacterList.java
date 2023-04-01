@@ -5,8 +5,10 @@ import java.util.Iterator;
 import java.util.List;
 public class GameCharacterList implements Iterable<GameCharacter>{
     private final List<GameCharacter> characterList;
+
     public GameCharacterList(List<GameCharacter> list) {
         this.characterList = list;
+        list.iterator();
     }
 
     public void add(GameCharacter character) {

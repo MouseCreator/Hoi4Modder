@@ -7,6 +7,9 @@ import java.util.NoSuchElementException;
 public class DataPool<T> {
     private final Map<String, DataMap<T>> maps;
 
+    public static DataPool<String> getHashStringPool() {
+        return new DataPool<>(new HashMap<>());
+    }
     public DataPool(Map<String, DataMap<T>> maps) {
         this.maps = maps;
     }
@@ -33,12 +36,11 @@ public class DataPool<T> {
         return mapToAdd.put(key, value);
     }
 
-    public boolean createMapType(String type, String filename) {
+    public void createMapType(String type, String filename) {
         if (maps.containsKey(type)) {
-            return false;
+            return;
         }
         maps.put(type, new DataMap<>(new HashMap<>(), filename));
-        return true;
     }
     public boolean remove(String key) {
         for (String current : maps.keySet()) {
@@ -62,6 +64,9 @@ public class DataPool<T> {
     }
 
     public boolean replace(String type, String oldKey, String newKey) {
+        if (maps.containsKey(newKey)) {
+            throw new IllegalArgumentException("Map already contains " + newKey);
+        }
         return maps.get(type).replaceKey(oldKey, newKey);
     }
 
