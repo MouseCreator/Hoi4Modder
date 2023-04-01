@@ -8,34 +8,15 @@ public class FileSearcher {
 
     private String directory;
 
-    public String directoryFull;
-
-    public String getGameDirectory() {
-        return gameDirectory;
-    }
-
-    public void setGameDirectory(String gameDirectory) {
-        this.gameDirectory = gameDirectory;
-    }
-
-    private String gameDirectory;
-    private String modDirectory;
-
-    private String fromGame() {
-        return gameDirectory;
-    }
-    public String getDirectory() {
-        return directory;
-    }
 
     public void setDirectory(String directory) {
         this.directory = directory;
     }
 
-
-
     public FileSearcher(String directory) {
         this.directory = directory;
+    }
+    public FileSearcher() {
     }
 
     public String findCountryByTag(String tag) {
@@ -52,10 +33,10 @@ public class FileSearcher {
     }
 
     private File[] getFilesFromDirectory() {
-        File baseDir = new File(directoryFull);
+        File baseDir = new File(directory);
         File[] files = baseDir.listFiles();
         if (files == null) {
-            throw new RuntimeException("Cannot get files in" + directoryFull);
+            throw new RuntimeException("Cannot get files in" + directory);
         }
         return files;
     }
@@ -70,26 +51,5 @@ public class FileSearcher {
                 return fileEntry.getPath();
         }
         throw new NoSuchElementException("Cannot find file named " + filename + " at " + directory);
-    }
-
-    public String getModDirectory() {
-        return modDirectory;
-    }
-
-    public void setModDirectory(String modDirectory) {
-        this.modDirectory = modDirectory;
-    }
-
-    public void setFullDirectory(String begin) {
-        this.directoryFull = begin + directory;
-    }
-
-    public String toModFile(String filename) {
-        return filename.replace(gameDirectory, modDirectory);
-    }
-    private SearcherStrategy strategy;
-    public void setStrategy(SearcherStrategy strategy) {
-        strategy.setSearcher(this);
-        this.strategy = strategy;
     }
 }

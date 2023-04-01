@@ -1,4 +1,5 @@
 package com.example.hoi4modder.controller;
+import com.example.hoi4modder.model.files.manager.FileSearchService;
 import com.example.hoi4modder.model.files.manager.FileSearcher;
 import com.example.hoi4modder.service.ObjectPool;
 import javafx.fxml.FXML;
@@ -101,6 +102,7 @@ public class MainController implements Initializable {
 
     public MainController() {
         objectPool = ObjectPool.getHashObjectPool();
+        objectPool.put("filesearcher", new FileSearchService());
     }
 
     public ObjectPool getObjectPool() {
