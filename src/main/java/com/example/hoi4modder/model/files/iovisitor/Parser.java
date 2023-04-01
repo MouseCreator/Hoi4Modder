@@ -141,6 +141,8 @@ public class Parser implements Visitor{
     }
 
     private String noQuotes(String origin) {
+        if (!origin.contains("\""))
+            return origin;
         int from = origin.indexOf('"') + 1;
         int to = origin.lastIndexOf('"');
         return origin.substring(from, to);

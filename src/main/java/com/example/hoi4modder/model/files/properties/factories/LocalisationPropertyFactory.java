@@ -7,7 +7,6 @@ class LocalisationPropertyFactory extends PropertyFactoryMethod {
 
     private final LocalisationProperty property = new LocalisationProperty();
     private final FieldValuePropertyFactory next = new FieldValuePropertyFactory();
-
     @Override
     public ChainedFactory next() {
         return next;
@@ -18,8 +17,9 @@ class LocalisationPropertyFactory extends PropertyFactoryMethod {
         String[] strings = origin.split(":", 2);
         String key = strings[0];
         String value = strings[1];
+        int version = Integer.parseInt(value.split(" ")[0]);
         value = value.substring(value.indexOf('\"')+1, value.lastIndexOf("\""));
-        return new LocalisationProperty(key, value);
+        return new LocalisationProperty(key, value, version);
     }
 
     @Override

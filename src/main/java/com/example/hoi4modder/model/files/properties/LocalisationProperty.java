@@ -5,15 +5,24 @@ import com.example.hoi4modder.model.files.properties.lists.PropertyCollection;
 public class LocalisationProperty implements Property{
     private final String key;
     private final String value;
+    private final int version;
 
     public LocalisationProperty(String key, String value) {
         this.key = key;
         this.value = value;
+        this.version = 0;
     }
 
     public LocalisationProperty() {
         this.key = "";
         this.value = "";
+        this.version = 0;
+    }
+
+    public LocalisationProperty(String key, String value, int version) {
+        this.key = key;
+        this.value = value;
+        this.version = version;
     }
 
     @Override
@@ -23,12 +32,12 @@ public class LocalisationProperty implements Property{
 
     @Override
     public boolean containsDelimiter(String str) {
-        return str.contains(":0") || str.contains(":1") || str.contains(":2");
+        return str.matches("[a-zA-Z0-9-_]+:[0-9]+(.+)");
     }
 
     @Override
     public String toFile() {
-        return key + delimiter() + value;
+        return key + ":" + version + value;
     }
 
     @Override

@@ -10,6 +10,8 @@ public class LocalisationBlockFactory extends PropertyFactoryMethod{
 
     private final SingleValueFactory next = new SingleValueFactory();
 
+
+
     private final LocalisationBlock property = new LocalisationBlock();
     @Override
     public ChainedFactory next() {
