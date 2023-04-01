@@ -10,9 +10,8 @@ public class DataMap<T> {
     }
     private String filename;
 
-    public DataMap(Map<String, T> map, String filename) {
+    public DataMap(Map<String, T> map) {
         this.map = map;
-        this.filename = filename;
     }
 
     public T get(String key) {

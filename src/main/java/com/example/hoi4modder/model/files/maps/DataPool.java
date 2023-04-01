@@ -36,12 +36,6 @@ public class DataPool<T> {
         return mapToAdd.put(key, value);
     }
 
-    public void createMapType(String type, String filename) {
-        if (maps.containsKey(type)) {
-            return;
-        }
-        maps.put(type, new DataMap<>(new HashMap<>(), filename));
-    }
     public boolean remove(String key) {
         for (String current : maps.keySet()) {
             if(maps.get(current).remove(key))
