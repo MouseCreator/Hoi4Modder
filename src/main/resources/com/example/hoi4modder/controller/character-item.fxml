@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hoi4modder.controller.CharacterItem">
    <children>
       <Pane prefHeight="400.0" prefWidth="51.0" />
       <VBox prefHeight="400.0" prefWidth="787.0">
@@ -23,14 +23,14 @@
                         <HBox prefHeight="27.0" prefWidth="211.0">
                            <children>
                               <Label prefHeight="18.0" prefWidth="53.0" text="ID:" />
-                              <TextField prefHeight="26.0" prefWidth="166.0" />
+                              <TextField fx:id="characterIDField" prefHeight="26.0" prefWidth="166.0" />
                            </children>
                         </HBox>
                         <Pane prefHeight="7.0" prefWidth="242.0" />
                         <HBox prefHeight="27.0" prefWidth="211.0">
                            <children>
                               <Label prefHeight="18.0" prefWidth="53.0" text="Name:" />
-                              <TextField prefHeight="26.0" prefWidth="166.0" />
+                              <TextField fx:id="characterNameField" prefHeight="26.0" prefWidth="166.0" />
                            </children>
                         </HBox>
                      </children>
@@ -41,13 +41,13 @@
                         <HBox prefHeight="27.0" prefWidth="211.0">
                            <children>
                               <Label prefHeight="18.0" prefWidth="38.0" text="Roles:" />
-                              <CheckBox mnemonicParsing="false" text="Country Leader" />
+                              <CheckBox fx:id="countryLeaderBox" mnemonicParsing="false" text="Country Leader" />
                               <Pane prefHeight="27.0" prefWidth="10.0" />
-                              <CheckBox mnemonicParsing="false" prefHeight="18.0" prefWidth="72.0" text="Advisor" />
+                              <CheckBox fx:id="advisorBox" mnemonicParsing="false" prefHeight="18.0" prefWidth="72.0" text="Advisor" />
                               <Pane prefHeight="27.0" prefWidth="10.0" />
-                              <CheckBox mnemonicParsing="false" text="Unit Leader" />
+                              <CheckBox fx:id="unitLeaderBox" mnemonicParsing="false" text="Unit Leader" />
                               <Pane prefHeight="27.0" prefWidth="10.0" />
-                              <CheckBox mnemonicParsing="false" text="Navy Leader" />
+                              <CheckBox fx:id="navyLeaderBox" mnemonicParsing="false" text="Navy Leader" />
                            </children>
                         </HBox>
                      </children>
@@ -79,6 +79,8 @@
                <children>
                   <Label prefHeight="18.0" prefWidth="42.0" text="Small" />
                   <Button mnemonicParsing="false" text="Change" />
+                  <Pane prefHeight="26.0" prefWidth="10.0" />
+                  <Button fx:id="autoSmallPortrait" disable="true" mnemonicParsing="false" text="Auto" />
                </children>
             </HBox>
             <Pane prefHeight="200.0" prefWidth="200.0">
