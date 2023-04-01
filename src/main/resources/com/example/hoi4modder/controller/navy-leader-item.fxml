@@ -4,12 +4,14 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="262.0" prefWidth="189.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<VBox prefHeight="262.0" prefWidth="189.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hoi4modder.controller.NavyLeaderController">
    <children>
       <Label text="Navy Leader">
          <font>
@@ -19,31 +21,47 @@
       <Pane prefHeight="12.0" prefWidth="167.0" />
       <HBox prefHeight="30.0" prefWidth="167.0">
          <children>
-            <Label prefHeight="18.0" prefWidth="59.0" text="Level:" />
-            <TextField />
+            <Label prefHeight="18.0" prefWidth="59.0" text="Skill:" />
+            <TextField fx:id="skillField" />
          </children>
       </HBox>
       <HBox prefHeight="30.0" prefWidth="167.0">
          <children>
-            <Label prefHeight="18.0" prefWidth="70.0" text="Attack:" />
-            <TextField prefHeight="26.0" prefWidth="36.0" />
-            <Label prefHeight="18.0" prefWidth="66.0" text="Defense:" />
-            <TextField prefHeight="26.0" prefWidth="34.0" />
+            <ImageView fitHeight="29.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../data/image/interface/attackSkill.png" />
+               </image>
+            </ImageView>
+            <TextField fx:id="attackField" prefHeight="26.0" prefWidth="61.0" />
+            <ImageView fitHeight="29.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../data/image/interface/defenceSkill.png" />
+               </image>
+            </ImageView>
+            <TextField fx:id="defenceField" prefHeight="26.0" prefWidth="58.0" />
          </children>
       </HBox>
       <HBox prefHeight="30.0" prefWidth="167.0">
          <children>
-            <Label prefHeight="18.0" prefWidth="69.0" text="Manuver:" />
-            <TextField prefHeight="26.0" prefWidth="36.0" />
-            <Label prefHeight="18.0" prefWidth="66.0" text="Coordinate:" />
-            <TextField prefHeight="26.0" prefWidth="34.0" />
+            <ImageView fitHeight="29.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../data/image/interface/manuverSkill.png" />
+               </image>
+            </ImageView>
+            <TextField fx:id="manuverField" prefHeight="26.0" prefWidth="61.0" />
+            <ImageView fitHeight="29.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../data/image/interface/cordsSkill.png" />
+               </image>
+            </ImageView>
+            <TextField fx:id="cordsField" prefHeight="26.0" prefWidth="58.0" />
          </children>
       </HBox>
-      <ListView prefHeight="97.0" prefWidth="190.0" />
+      <ListView fx:id="traitsList" prefHeight="97.0" prefWidth="190.0" />
       <HBox prefHeight="35.0" prefWidth="208.0">
          <children>
             <Button mnemonicParsing="false" text="X" textFill="RED" />
-            <TextField prefHeight="26.0" prefWidth="126.0" />
+            <TextField fx:id="traitField" prefHeight="26.0" prefWidth="126.0" />
             <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="44.0" text="Add" />
          </children>
       </HBox>
