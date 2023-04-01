@@ -91,7 +91,7 @@ public class Parser implements Visitor{
         Property fieldMarshalProperty = mainProperty.getFirst("field_marshal");
         if (fieldMarshalProperty != null) {
             UnitLeader unitLeader = UnitLeader.createFieldMarshal();
-            parser.setBlock(commanderProperty);
+            parser.setBlock(fieldMarshalProperty);
             parser.visitUnitLeader(unitLeader);
             roles.put("field_marshal", unitLeader);
         }

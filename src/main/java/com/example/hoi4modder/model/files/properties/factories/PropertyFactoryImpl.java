@@ -6,7 +6,6 @@ public class PropertyFactoryImpl implements PropertyFactory{
     private final BlockPropertyFactory firstInChain = new BlockPropertyFactory();
     @Override
     public Property toProperty(String origin) {
-        System.out.println(origin);
         return firstInChain.createProperty(origin);
     }
 

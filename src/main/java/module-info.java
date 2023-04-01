@@ -12,5 +12,9 @@ module com.example.hoi4modder {
     exports com.example.hoi4modder.model.files.iovisitor;
     exports com.example.hoi4modder.service;
     exports com.example.hoi4modder.game;
+    exports com.example.hoi4modder.game.collection;
+    exports com.example.hoi4modder.model.files.properties;
+    exports com.example.hoi4modder.model.files.properties.factories;
+
     opens com.example.hoi4modder.controller to javafx.fxml;
 }
