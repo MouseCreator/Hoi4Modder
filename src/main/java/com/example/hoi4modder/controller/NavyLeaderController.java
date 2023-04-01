@@ -1,13 +1,37 @@
 package com.example.hoi4modder.controller;
 
 import com.example.hoi4modder.game.roles.NavyLeader;
-import com.example.hoi4modder.game.roles.Role;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class NavyLeaderController extends RoleController<NavyLeader> implements Initializable {
+
+    @FXML
+    private TextField attackField;
+
+    @FXML
+    private TextField cordsField;
+
+    @FXML
+    private TextField defenceField;
+
+    @FXML
+    private TextField manuverField;
+
+    @FXML
+    private TextField skillField;
+
+    @FXML
+    private TextField traitField;
+
+    @FXML
+    private ListView<String> traitsList;
+
     @Override
     public String filename() {
         return "navy-leader-item.fxml";
@@ -20,11 +44,19 @@ public class NavyLeaderController extends RoleController<NavyLeader> implements 
 
     @Override
     public NavyLeader toRole() {
-        return null;
+        NavyLeader navyLeader = new NavyLeader();
+        navyLeader.setSkill(Integer.parseInt(skillField.getText()));
+        navyLeader.setAttackSkill(Integer.parseInt(attackField.getText()));
+        navyLeader.setDefenceSkill(Integer.parseInt(defenceField.getText()));
+        navyLeader.setManeuveringSkill(Integer.parseInt(manuverField.getText()));
+        navyLeader.setCoordinationSkill(Integer.parseInt(cordsField.getText()));
+        navyLeader.setTraits(getTraits(traitsList));
+        return navyLeader;
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        NavyLeader navyLeader = NavyLeader.createCountryLeader();
+        fromRole(navyLeader);
     }
 }
