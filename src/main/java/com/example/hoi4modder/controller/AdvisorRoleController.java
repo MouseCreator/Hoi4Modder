@@ -29,9 +29,15 @@ public class AdvisorRoleController extends RoleController implements Initializab
     }
     private void initComboBox() {
         slotComboBox.getItems().removeAll(slotComboBox.getItems());
-        slotComboBox.getItems().addAll("political_advisor", "high_command", "theorist",
-                "army_chief", "navy_chief", "air_chief");
-        slotComboBox.getSelectionModel().select("political_advisor");
+        slotComboBox.getItems().addAll("Political advisor", "High command", "Theorist",
+                "Army chief", "Navy chief", "Air chief");
+        slotComboBox.getSelectionModel().select("Political advisor");
+    }
+
+    private String getSelectedFromBox() {
+        String result = slotComboBox.getValue();
+        result = result.replace(" ", "_");
+        return result.toLowerCase();
     }
 
     @FXML
