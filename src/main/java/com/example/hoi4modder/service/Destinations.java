@@ -44,4 +44,7 @@ public class Destinations {
     public String localisation(String filename) {
         return localisation + russian + s + yml;
     }
+    public String localisation() {
+        return localisation + russian;
+    }
 }

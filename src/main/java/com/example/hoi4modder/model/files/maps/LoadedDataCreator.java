@@ -1,5 +1,6 @@
 package com.example.hoi4modder.model.files.maps;
 
+import com.example.hoi4modder.model.files.manager.FileSearcher;
 import com.example.hoi4modder.service.Destinations;
 
 import java.util.HashMap;
@@ -13,11 +14,14 @@ public class LoadedDataCreator {
     }
 
     private DataPool<String> createLocalisationPool() {
-        DataMap<String> dataMap = new DataMap<>(new HashMap<>(), "");
 
+        FileSearcher fileSearcher = new FileSearcher();
 
         DataPool<String> localisationPool = DataPool.getHashStringPool();
-        localisationPool.createMapType("characters", Destinations.get().localisation("new-characters"));
+        localisationPool.createMapType("characters",
+                fileSearcher.findAppendedFile(Destinations.get().localisation(), "characters"));
+        localisationPool.createMapType("traits",
+                fileSearcher.findAppendedFile(Destinations.get().localisation(), "traits"));
         return localisationPool;
     }
 }
