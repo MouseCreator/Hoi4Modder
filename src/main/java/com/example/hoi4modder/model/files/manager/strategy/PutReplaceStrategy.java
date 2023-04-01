@@ -11,18 +11,15 @@ import java.nio.file.Paths;
 import java.util.NoSuchElementException;
 
 public class PutReplaceStrategy implements SearcherStrategy {
-    private FileSearcher searcher;
-
+    private final FileSearcher searcher = new FileSearcher();
     private FileSearchService searchService;
     public String toModFile(String filename) {
         return filename.replace(searchService.getGameDirectory(), searchService.getModDirectory());
     }
     public PutReplaceStrategy() {
     }
-    public void setSearcher(FileSearcher searcher) {
-        this.searcher = searcher;
-    }
     public String findCountryByTag(String tag) {
+        searcher.setDirectory(searchService.getFullModDirectory());
         try {
             return searcher.findCountryByTag(tag);
         } catch (NoSuchElementException e) {
@@ -36,6 +33,12 @@ public class PutReplaceStrategy implements SearcherStrategy {
         }
         throw new NoSuchElementException();
     }
+
+    @Override
+    public void setService(FileSearchService fileSearchService) {
+        this.searchService = fileSearchService;
+    }
+
     private File replaceFile(String file) throws IOException {
         Path gameFile = Paths.get(file);
         String newFile = toModFile(file);

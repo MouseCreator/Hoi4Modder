@@ -7,7 +7,7 @@ public class Destinations {
     public static Destinations get() {
         return destinations;
     }
-    private final String s = File.pathSeparator;
+    private final String s = File.separator;
     private final String history = "history" + s;
     private final String gfx = "gfx" + s;
     private final String common = "common" + s;
@@ -46,5 +46,9 @@ public class Destinations {
     }
     public String localisation() {
         return localisation + russian;
+    }
+
+    public String separator() {
+        return s;
     }
 }

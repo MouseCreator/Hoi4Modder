@@ -10,7 +10,7 @@ import java.io.IOException;
 public class AbstractFactory {
     private final static AbstractFactory factory = new AbstractFactory();
 
-    public AbstractFactory get() {
+    public static AbstractFactory get() {
         return factory;
     }
 

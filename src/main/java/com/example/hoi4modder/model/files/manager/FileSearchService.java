@@ -1,6 +1,7 @@
 package com.example.hoi4modder.model.files.manager;
 
 import com.example.hoi4modder.model.files.manager.strategy.SearcherStrategy;
+import com.example.hoi4modder.service.Destinations;
 
 public class FileSearchService {
 
@@ -8,7 +9,10 @@ public class FileSearchService {
         this.gameDirectory = gameDirectory;
         this.modDirectory = modDirectory;
     }
-    public FileSearchService() {}
+    public FileSearchService() {
+        this.gameDirectory = "D:\\Games\\Hoi4 1.10\\Hearts of Iron IV";
+        this.modDirectory = "C:\\Users\\mysha\\Documents\\Paradox Interactive\\Hearts of Iron IV\\mod\\leylamod12d";
+    }
     public String getGameDirectory() {
         return gameDirectory;
     }
@@ -38,9 +42,18 @@ public class FileSearchService {
     }
     public void setStrategy(SearcherStrategy strategy) {
        this.strategy = strategy;
+       strategy.setService(this);
     }
 
     public void setDirectory(String s) {
-        this.directory = directory;
+        this.directory = s;
+    }
+
+    public String getFullModDirectory() {
+        return modDirectory + Destinations.get().separator() + directory;
+    }
+
+    public String getFullGameDirectory() {
+        return gameDirectory + Destinations.get().separator() + directory;
     }
 }

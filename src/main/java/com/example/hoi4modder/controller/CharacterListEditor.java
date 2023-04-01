@@ -3,12 +3,15 @@ package com.example.hoi4modder.controller;
 import com.example.hoi4modder.game.GameCharacterList;
 import com.example.hoi4modder.model.files.manager.FileSearchService;
 import com.example.hoi4modder.model.files.manager.strategy.PutReplaceStrategy;
+import com.example.hoi4modder.service.AbstractFactory;
+import com.example.hoi4modder.service.Destinations;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 
+import java.io.IOException;
 import java.util.NoSuchElementException;
 
 public class CharacterListEditor extends ActivePaneController {
@@ -52,20 +55,27 @@ public class CharacterListEditor extends ActivePaneController {
 
     @FXML
     public void loadCharactersByTag() {
+        characters = loadListFromFile();
+        System.out.println(characters);
+    }
+    private GameCharacterList loadListFromFile() {
         if (tagTextField.getText().isEmpty())
-            return;
+            return GameCharacterList.getArrayList();
         String tag = tagTextField.getText().toUpperCase();
         try {
             FileSearchService searcher = (FileSearchService) parentController.getObjectPool().get("filesearcher");
             searcher.setStrategy(new PutReplaceStrategy());
-            searcher.setDirectory("common/characters");
+            searcher.setDirectory(Destinations.get().characters());
             String filename = searcher.findCountryByTag(tag);
-            //this.characters =
+            return AbstractFactory.get().getCharacterList(filename);
         } catch (NoSuchElementException e) {
             Alert alert = new Alert(Alert.AlertType.WARNING, "Cannot find country with tag " + tag, ButtonType.OK);
             alert.showAndWait();
+        } catch (IOException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Error occured during reading a file!", ButtonType.OK);
+            alert.showAndWait();
         }
-
+        return GameCharacterList.getArrayList();
     }
 }
 

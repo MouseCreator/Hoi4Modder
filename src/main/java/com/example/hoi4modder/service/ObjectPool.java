@@ -6,7 +6,8 @@ import java.util.Map;
 public class ObjectPool {
     private Map<String, Object> objectMap;
 
-    public ObjectPool(HashMap<String,Object> hashMap) {
+    public ObjectPool(HashMap<String,Object> map) {
+        this.objectMap = map;
     }
 
     public static ObjectPool getHashObjectPool() {
