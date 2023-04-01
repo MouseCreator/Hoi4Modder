@@ -27,6 +27,8 @@ public class AdvisorRoleController extends RoleController<Advisor> implements In
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         initComboBox();
+        Advisor advisor = Advisor.createAdvisor();
+        fromRole(advisor);
     }
     private void initComboBox() {
         slotComboBox.getItems().removeAll(slotComboBox.getItems());
@@ -35,17 +37,7 @@ public class AdvisorRoleController extends RoleController<Advisor> implements In
         slotComboBox.getSelectionModel().select("Political advisor");
     }
 
-    private String getSelectedFromBox() {
-        String result = slotComboBox.getValue();
-        result = result.replace(" ", "_");
-        return result.toLowerCase();
-    }
 
-    private void setSelectedFromBox(String slot) {
-        slot.replace("_", " ");
-        slot = slot.substring(0, 1).toUpperCase() + slot.substring(1);
-        slotComboBox.getSelectionModel().select(slot);
-    }
 
     @FXML
     void addTrait(ActionEvent event) {
@@ -59,13 +51,13 @@ public class AdvisorRoleController extends RoleController<Advisor> implements In
 
     public void fromRole(Advisor advisor) {
         costField.setText(String.valueOf(advisor.getCost()));
-        setSelectedFromBox(advisor.getSlot());
+        setSelectedFromBox(advisor.getSlot(), slotComboBox);
         traitList.getItems().addAll(advisor.getTraits());
     }
     public Advisor toRole() {
         Advisor advisor = new Advisor();
         advisor.setCost(Integer.parseInt(costField.getText()));
-        advisor.setSlot(getSelectedFromBox());
+        advisor.setSlot(getSelectedFromBox(slotComboBox));
         advisor.setTraits(getTraits(traitList));
         advisor.toLedger();
         return advisor;

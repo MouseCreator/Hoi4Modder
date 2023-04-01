@@ -2,6 +2,7 @@ package com.example.hoi4modder.controller;
 
 import com.example.hoi4modder.game.roles.Role;
 import javafx.collections.ObservableList;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 
 import java.util.HashSet;
@@ -32,5 +33,17 @@ public abstract class RoleController<R extends Role> {
     public abstract void fromRole(R role);
 
     public abstract R toRole();
+
+    protected String getSelectedFromBox(ComboBox<String> box) {
+        String result = box.getValue();
+        result = result.replace(" ", "_");
+        return result.toLowerCase();
+    }
+
+    protected void setSelectedFromBox(String slot, ComboBox<String> box) {
+        slot = slot.replace("_", " ");
+        slot = slot.substring(0, 1).toUpperCase() + slot.substring(1);
+        box.getSelectionModel().select(slot);
+    }
 
 }

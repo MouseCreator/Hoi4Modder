@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="262.0" prefWidth="189.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<VBox prefHeight="262.0" prefWidth="189.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hoi4modder.controller.AdvisorRoleController">
    <children>
       <Label text="Advisor">
          <font>
@@ -35,7 +35,7 @@
          <children>
             <Button mnemonicParsing="false" text="X" textFill="RED" />
             <TextField fx:id="traitField" prefHeight="26.0" prefWidth="126.0" />
-            <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="44.0" text="Add" />
+            <Button mnemonicParsing="false" onAction="#addTrait" prefHeight="26.0" prefWidth="44.0" text="Add" />
          </children>
       </HBox>
    </children>
