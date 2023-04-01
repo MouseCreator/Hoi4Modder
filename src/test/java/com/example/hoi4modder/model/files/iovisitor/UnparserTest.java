@@ -82,6 +82,10 @@ class UnparserTest {
                 }
                 	
                 	""";
+        testForSample(sample);
+    }
+
+    private static void testForSample(String sample) {
         StringToPropertyConvertor convertor = new StringToPropertyConvertor();
         Property baseProperty = convertor.forStructuredFile(sample);
         Parser parser = new Parser();
@@ -93,5 +97,25 @@ class UnparserTest {
         unparser.visitCharacterList(list);
         Property property = unparser.getBlock();
         System.out.println(property.toFile());
+    }
+
+
+    @Test
+    void testLocalisation() {
+        String sample = """
+                l_russian:
+                  #SOVIET UNION
+                  SOV_iosif_stalin:0 "Иосиф Сталин"
+                  SOV_konstantin_rodzayevsky:0 "Константин Родзаевский"
+                  SOV_aleksandr_kerensky:0 "Александр Керенский"
+                  SOV_supreme_soviet:0 "Верховный Совет"
+                  SOV_provisional_government:0 "Временное правительство"
+                 
+                  SOV_georgy_zhukov:0 "Георгий Жуков"
+                  SOV_konstantin_rokossovsky:0 "Константин Рокоссовский"
+                	
+                	""";
+        StringToPropertyConvertor convertor = new StringToPropertyConvertor();
+        convertor.forStructuredFile(sample);
     }
 }

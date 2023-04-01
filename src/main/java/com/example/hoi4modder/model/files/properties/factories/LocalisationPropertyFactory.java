@@ -17,8 +17,9 @@ class LocalisationPropertyFactory extends PropertyFactoryMethod {
         String[] strings = origin.split(":", 2);
         String key = strings[0];
         String value = strings[1];
-        int version = Integer.parseInt(value.split(" ")[0]);
-        value = value.substring(value.indexOf('\"')+1, value.lastIndexOf("\""));
+        String[] versionValue = value.split("\"", 2);
+        int version = Integer.parseInt(versionValue[0]);
+        value = "\"" + versionValue[1];
         return new LocalisationProperty(key, value, version);
     }
 

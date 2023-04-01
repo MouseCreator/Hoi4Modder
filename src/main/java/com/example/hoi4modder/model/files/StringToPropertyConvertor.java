@@ -15,9 +15,10 @@ public class StringToPropertyConvertor {
                 continue;
             line = line.replace(" =", "=");
             line = line.replace("= ", "=");
-            line = line.replace(":0 ", ":0");
-            line = line.replace(":1 ", ":1");
-            line = line.replace(":2 ", ":2");
+            if (line.matches("[a-zA-Z0-9-_]+:[0-9]+ \"(.+)\"")) {
+                String[] dotSplit = line.split("\"", 2);
+                line = dotSplit[0].trim() + "\"" + dotSplit[1];
+            }
             line = line.trim().replaceAll(" +", " ");
             if (line.isEmpty())
                 continue;
