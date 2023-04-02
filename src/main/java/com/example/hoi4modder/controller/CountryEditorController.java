@@ -1,17 +1,14 @@
 package com.example.hoi4modder.controller;
 
-import com.example.hoi4modder.model.files.images.DirectSurfaceManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.TransferMode;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -69,15 +66,6 @@ public class CountryEditorController extends ActivePaneController implements Ini
 
     @FXML
     void loadImage(ActionEvent event) {
-        DirectSurfaceManager dds = new DirectSurfaceManager();
-        String file = "C:\\Users\\mysha\\Documents\\Paradox Interactive\\Hearts of Iron IV\\mod\\leylamod12c\\gfx\\leaders\\MNK\\MNK_Oniona_Miniliana.dds";
-        try {
-            Image image = dds.loadDDS(file);
-            imageDDS.setImage(image);
-        } catch (IOException e) {
-            System.err.println("Cannot open required file");
-        }
-
 
     }
 }

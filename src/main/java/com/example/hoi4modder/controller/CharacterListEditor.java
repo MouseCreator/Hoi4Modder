@@ -24,6 +24,8 @@ public class CharacterListEditor extends ActivePaneController {
     @FXML
     private ListView<Pane> charactersListView;
     private final List<CharacterItemController> controllerList = new ArrayList<>();
+
+    private String countryTag;
     @FXML
     private TextField tagTextField;
     @Override
@@ -59,6 +61,7 @@ public class CharacterListEditor extends ActivePaneController {
 
     @FXML
     public void loadCharactersByTag() {
+        this.countryTag = tagTextField.getText();
         characters = loadListFromFile();
         createListOfCharacters();
     }
@@ -107,6 +110,14 @@ public class CharacterListEditor extends ActivePaneController {
         controller.setParent(this);
         controller.fromCharacter(character);
         controllerList.add(controller);
+    }
+
+    public String getCountryTag() {
+        return countryTag;
+    }
+
+    public void setCountryTag(String countryTag) {
+        this.countryTag = countryTag;
     }
 }
 
