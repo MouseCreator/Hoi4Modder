@@ -4,14 +4,8 @@ package com.example.hoi4modder.model.files.images;
  * DDSReader.java
  * Copyright (c) 2015 Kenji Sasaki
  * Released under the MIT license.
- * <a href="https://github.com/npedotnet/DDSReader/blob/master/LICENSE">...</a>
- * English document
- * <a href="https://github.com/npedotnet/DDSReader/blob/master/README.md">...</a>
- * Japanese document
- * <a href="http://3dtech.jp/wiki/index.php?DDSReader">...</a>
  * Minor improvements by MouseCreator
  */
-
 
 final class DDSReader {
 

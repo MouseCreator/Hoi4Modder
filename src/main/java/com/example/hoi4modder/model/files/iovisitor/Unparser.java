@@ -6,6 +6,9 @@ import com.example.hoi4modder.game.collection.SpriteList;
 import com.example.hoi4modder.game.roles.*;
 import com.example.hoi4modder.model.files.properties.*;
 
+/**
+ * Creates string from property
+ */
 public class Unparser implements Visitor {
     private Property baseProperty = new BlockProperty();
     @Override

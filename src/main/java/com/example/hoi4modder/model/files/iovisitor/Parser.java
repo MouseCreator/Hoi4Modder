@@ -8,6 +8,9 @@ import com.example.hoi4modder.model.files.properties.lists.PropertyCollection;
 
 import java.util.HashMap;
 
+/**
+ * Parses string to property
+ */
 public class Parser implements Visitor{
 
     private Property baseProperty;
