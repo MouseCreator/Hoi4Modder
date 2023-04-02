@@ -51,6 +51,9 @@ public class CharacterItemController implements Initializable {
 
     private CharacterListEditor listEditor;
 
+    private boolean hasBigPortrait = false;
+    private boolean hasSmallPortrait = false;
+
     public void setParent(CharacterListEditor editor) {
         this.listEditor = editor;
     }
@@ -77,8 +80,10 @@ public class CharacterItemController implements Initializable {
                 Image image = ddsPictures.loadDDS("C:\\Users\\mysha\\Documents\\Paradox Interactive\\Hearts of Iron IV\\mod\\leylamod12d\\" + filepath);
                 if (portraitType.equals("small")) {
                     smallPortraitImage.setImage(image);
+                    hasSmallPortrait = true;
                 } else if (portraitType.equals("large")){
                     bigPortraitImage.setImage(image);
+                    hasBigPortrait = true;
                 } else {
                     throw new RuntimeException();
                 }
@@ -87,5 +92,6 @@ public class CharacterItemController implements Initializable {
                 throw new RuntimeException(e);
             }
         }
+        this.autoSmallPortrait.setDisable(!(hasBigPortrait && !hasSmallPortrait));
     }
 }
