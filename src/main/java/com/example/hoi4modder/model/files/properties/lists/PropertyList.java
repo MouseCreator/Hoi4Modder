@@ -5,6 +5,9 @@ import com.example.hoi4modder.model.files.properties.Property;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+/**
+ * Property collection based on array list
+ */
 public class PropertyList implements PropertyCollection {
 
     private final ArrayList<Property> properties = new ArrayList<>();
@@ -16,10 +19,11 @@ public class PropertyList implements PropertyCollection {
         }
         return properties.get(index);
     }
-
+    @Override
     public void add(Property property) {
         properties.add(property);
     }
+    @Override
     public void pop(Property property) {
         properties.remove(property);
     }
@@ -33,7 +37,7 @@ public class PropertyList implements PropertyCollection {
     public int size() {
         return properties.size();
     }
-
+    @Override
     public String toFile() {
         StringBuilder builder = new StringBuilder();
         for (Property property : properties) {
@@ -41,6 +45,11 @@ public class PropertyList implements PropertyCollection {
         }
         return builder.toString();
     }
+
+    /**
+     *
+     * @return iterator of the property list
+     */
     @Override
     public Iterator<Property> iterator() {
         return properties.iterator();

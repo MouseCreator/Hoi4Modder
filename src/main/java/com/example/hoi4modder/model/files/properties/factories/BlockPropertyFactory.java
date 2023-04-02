@@ -3,6 +3,9 @@ package com.example.hoi4modder.model.files.properties.factories;
 import com.example.hoi4modder.model.files.properties.BlockProperty;
 import com.example.hoi4modder.model.files.properties.Property;
 
+/**
+ * Produces block properties
+ */
 public class BlockPropertyFactory extends PropertyFactoryMethod {
     private final BlockProperty property = new BlockProperty();
     private final LocalisationPropertyFactory nextInChain = new LocalisationPropertyFactory();

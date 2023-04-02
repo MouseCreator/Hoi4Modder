@@ -3,8 +3,10 @@ package com.example.hoi4modder.model.files.properties.factories;
 import com.example.hoi4modder.model.files.properties.FieldValueProperty;
 import com.example.hoi4modder.model.files.properties.Property;
 
+/**
+ * Produces field-value properties
+ */
 public class FieldValuePropertyFactory extends PropertyFactoryMethod {
-
     private final FieldValueProperty property = new FieldValueProperty();
     private final LocalisationBlockFactory next = new LocalisationBlockFactory();
     @Override

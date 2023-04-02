@@ -3,6 +3,9 @@ package com.example.hoi4modder.model.files.properties.factories;
 import com.example.hoi4modder.model.files.properties.Property;
 import com.example.hoi4modder.model.files.properties.SingleValue;
 
+/**
+ * Produces single value properties
+ */
 class SingleValueFactory extends PropertyFactoryMethod {
     private final SingleValue property = new SingleValue();
 

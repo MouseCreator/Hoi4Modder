@@ -3,15 +3,12 @@ package com.example.hoi4modder.model.files.properties.factories;
 import com.example.hoi4modder.model.files.properties.LocalisationBlock;
 import com.example.hoi4modder.model.files.properties.Property;
 
-
+/**
+ * Produces localisation blocks
+ */
 public class LocalisationBlockFactory extends PropertyFactoryMethod{
 
-
-
     private final SingleValueFactory next = new SingleValueFactory();
-
-
-
     private final LocalisationBlock property = new LocalisationBlock();
     @Override
     public ChainedFactory next() {
