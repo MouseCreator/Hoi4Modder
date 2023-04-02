@@ -77,7 +77,7 @@ public class CharacterListEditor extends ActivePaneController {
             Alert alert = new Alert(Alert.AlertType.WARNING, "Cannot find country with tag " + tag, ButtonType.OK);
             alert.showAndWait();
         } catch (IOException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Error occured during reading a file!", ButtonType.OK);
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Error occurred during reading a file!", ButtonType.OK);
             alert.showAndWait();
         }
         return GameCharacterList.getArrayList();

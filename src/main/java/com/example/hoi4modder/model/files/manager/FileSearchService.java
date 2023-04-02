@@ -10,15 +10,15 @@ public class FileSearchService {
         this.modDirectory = modDirectory;
     }
     public FileSearchService() {
-        this.gameDirectory = "D:\\Games\\Hoi4 1.10\\Hearts of Iron IV";
-        this.modDirectory = "C:\\Users\\mysha\\Documents\\Paradox Interactive\\Hearts of Iron IV\\mod\\leylamod12d";
+        this.gameDirectory = "D:\\Games\\Hoi4 1.10\\Hearts of Iron IV\\";
+        this.modDirectory = "C:\\Users\\mysha\\Documents\\Paradox Interactive\\Hearts of Iron IV\\mod\\leylamod12d\\";
     }
     public String getGameDirectory() {
         return gameDirectory;
     }
 
     public void setGameDirectory(String gameDirectory) {
-        this.gameDirectory = gameDirectory;
+        this.gameDirectory = gameDirectory + Destinations.get().separator();
     }
 
     public String getModDirectory() {
@@ -26,7 +26,7 @@ public class FileSearchService {
     }
 
     public void setModDirectory(String modDirectory) {
-        this.modDirectory = modDirectory;
+        this.modDirectory = modDirectory + Destinations.get().separator();
     }
 
     public SearcherStrategy getStrategy() {
@@ -50,7 +50,7 @@ public class FileSearchService {
     }
 
     public String getFullModDirectory() {
-        return modDirectory + Destinations.get().separator() + directory;
+        return modDirectory + directory;
     }
 
     public String getFullGameDirectory() {

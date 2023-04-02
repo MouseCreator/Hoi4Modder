@@ -3,6 +3,7 @@ package com.example.hoi4modder.controller;
 import com.example.hoi4modder.game.FieldValueMap;
 import com.example.hoi4modder.game.GameCharacter;
 import com.example.hoi4modder.model.files.images.DirectSurfaceManager;
+import com.example.hoi4modder.model.files.manager.FileSearchService;
 import com.example.hoi4modder.model.files.maps.DataPool;
 import com.example.hoi4modder.model.files.maps.LoadedData;
 import javafx.fxml.FXML;
@@ -77,7 +78,7 @@ public class CharacterItemController implements Initializable {
             String portrait = portraits.get(portraitType);
             String filepath = graphicsPool.get(portrait);
             try {
-                Image image = ddsPictures.loadDDS("C:\\Users\\mysha\\Documents\\Paradox Interactive\\Hearts of Iron IV\\mod\\leylamod12d\\" + filepath);
+                Image image = ddsPictures.loadDDS(modDirectory() + filepath);
                 if (portraitType.equals("small")) {
                     smallPortraitImage.setImage(image);
                     hasSmallPortrait = true;
@@ -93,5 +94,9 @@ public class CharacterItemController implements Initializable {
             }
         }
         this.autoSmallPortrait.setDisable(!(hasBigPortrait && !hasSmallPortrait));
+    }
+
+    private String modDirectory() {
+        return ((FileSearchService)listEditor.parentController.getObjectPool().get("filesearcher")).getModDirectory();
     }
 }
