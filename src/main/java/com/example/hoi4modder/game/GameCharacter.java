@@ -12,8 +12,8 @@ public class GameCharacter {
     private FieldValueMap<CharacterRole> roles;
     private FieldValueMap<String> portraits;
 
-    public GameCharacter clone() throws CloneNotSupportedException {
-        GameCharacter clone = (GameCharacter) super.clone();
+    public GameCharacter cloneCharacter() {
+        GameCharacter clone = new GameCharacter();
         clone.setIdentification(this.identification);
         clone.setName(this.name);
         clone.setRoles(new FieldValueMap<>(new HashMap<>()));

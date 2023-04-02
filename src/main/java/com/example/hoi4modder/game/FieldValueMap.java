@@ -40,4 +40,15 @@ public class FieldValueMap<T> {
         return map.values();
     }
 
+    public boolean equals(Object other) {
+        if (this == other)
+            return true;
+
+        if (!(other instanceof FieldValueMap<?>))
+            return false;
+
+        FieldValueMap<T> obj = (FieldValueMap<T>) other;
+        return this.map.equals(obj.map);
+
+    }
 }
