@@ -1,10 +1,10 @@
 package com.example.hoi4modder.game;
 
-import java.util.Iterator;
+import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
 
-public class FieldValueMap<T> implements Iterable<T>{
+public class FieldValueMap<T> {
     private final Map<String, T> map;
 
     public FieldValueMap(Map<String, T> map) {
@@ -28,16 +28,16 @@ public class FieldValueMap<T> implements Iterable<T>{
         return map.containsKey(key);
     }
 
-    public Set<String> fields() {
+    public Set<String> keys() {
         return map.keySet();
-    }
-
-    @Override
-    public Iterator<T> iterator() {
-        return map.values().iterator();
     }
 
     public boolean containsValue(T value) {
         return map.containsValue(value);
     }
+
+    public Collection<T> values() {
+        return map.values();
+    }
+
 }

@@ -96,6 +96,7 @@ public class CharacterListEditor extends ActivePaneController {
                 e.printStackTrace();
             }
         }
+        charactersListView.scrollTo(0);
     }
     private void loadItem(GameCharacter character) throws IOException {
         FXMLLoader itemLoader = new FXMLLoader();
@@ -103,6 +104,7 @@ public class CharacterListEditor extends ActivePaneController {
         Pane pane = itemLoader.load();
         charactersListView.getItems().add(pane);
         CharacterItemController controller = itemLoader.getController();
+        controller.setParent(this);
         controller.fromCharacter(character);
         controllerList.add(controller);
     }
