@@ -8,7 +8,6 @@ public class ImageTransformer {
     public void toPortrait(String origin, String frame, String destination) throws IOException, InterruptedException {
         try {
             File script = new File(Destinations.get().pythonScript("to_portrait"));
-            String saveDestination = "D:\\small.dds";
             ProcessBuilder processBuilder = new ProcessBuilder("python ",
                     script.getPath() + " ",
                     origin + " ",

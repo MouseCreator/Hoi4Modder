@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ObjectPool {
-    private Map<String, Object> objectMap;
+    private final Map<String, Object> objectMap;
 
     public ObjectPool(HashMap<String,Object> map) {
         this.objectMap = map;
