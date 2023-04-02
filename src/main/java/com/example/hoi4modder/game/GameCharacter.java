@@ -14,7 +14,7 @@ public class GameCharacter {
 
     public GameCharacter clone() throws CloneNotSupportedException {
         GameCharacter clone = (GameCharacter) super.clone();
-        clone.setIdentification(this.identification + "-copy");
+        clone.setIdentification(this.identification);
         clone.setName(this.name);
         clone.setRoles(new FieldValueMap<>(new HashMap<>()));
         clone.setPortraits(new FieldValueMap<>(new HashMap<>()));
