@@ -23,7 +23,7 @@ public class LocalisationBlock implements Block{
     }
     @Override
     public boolean containsDelimiter(String str) {
-        return str.matches("l_[a-zA-Z0-9]*:");
+        return str.endsWith(":");
     }
     @Override
     public String toFile() {

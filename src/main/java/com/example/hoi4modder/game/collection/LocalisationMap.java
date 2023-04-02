@@ -1,10 +1,13 @@
 package com.example.hoi4modder.game.collection;
 
+import com.example.hoi4modder.model.files.maps.DataMap;
+
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
 public class LocalisationMap {
-    private Map<String, String> map;
+    private final Map<String, String> map = new HashMap<>();
 
     public boolean containsKey(String key) {
         return map.containsKey(key);
@@ -18,5 +21,9 @@ public class LocalisationMap {
 
     public Set<String> keys() {
         return map.keySet();
+    }
+
+    public DataMap<String> toDataMap() {
+        return new DataMap<>(map);
     }
 }

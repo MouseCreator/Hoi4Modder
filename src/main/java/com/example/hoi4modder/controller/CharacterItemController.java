@@ -60,8 +60,9 @@ public class CharacterItemController implements Initializable {
     }
 
     public void fromCharacter(GameCharacter character) {
+        DataPool<String> localisationPool = ((LoadedData)listEditor.parentController.getObjectPool().get("data")).getLocalisationData();
         characterIDField.setText(character.getIdentification());
-        characterNameField.setText(character.getName());
+        characterNameField.setText(localisationPool.get(character.getName()));
         loadPortraits(character);
     }
 

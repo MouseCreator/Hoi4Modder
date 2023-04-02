@@ -22,7 +22,7 @@ public class LocalisationBlockFactory extends PropertyFactoryMethod{
     public Property toProperty(String origin) {
         PropertyFactoryImpl propertyFactory = new PropertyFactoryImpl();
         String[] titleAndKeys = origin.split(": ", 2);
-        String title = titleAndKeys [0];
+        String title = titleAndKeys[0].substring(titleAndKeys[0].indexOf("l_"));
         String[] strings = splitAll(titleAndKeys[1]);
         LocalisationBlock block = new LocalisationBlock(title);
         for (String current : strings) {

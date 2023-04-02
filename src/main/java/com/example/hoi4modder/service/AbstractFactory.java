@@ -2,6 +2,7 @@ package com.example.hoi4modder.service;
 
 import com.example.hoi4modder.game.GameCharacterList;
 import com.example.hoi4modder.game.SpriteType;
+import com.example.hoi4modder.game.collection.LocalisationMap;
 import com.example.hoi4modder.game.collection.SpriteList;
 import com.example.hoi4modder.model.files.StringToPropertyConvertor;
 import com.example.hoi4modder.model.files.iovisitor.Parser;
@@ -45,5 +46,16 @@ public class AbstractFactory {
             map.put(spriteType.getName(), spriteType.getTextureFile());
         }
         return map;
+    }
+
+    public DataMap<String> localeMap(String filename) throws IOException {
+        GameFilesReader reader = new GameFilesReader();
+        StringToPropertyConvertor convertor = new StringToPropertyConvertor();
+        String localisation = reader.read(filename);
+        Parser parser = new Parser();
+        parser.setBlock(convertor.forStructuredFile(localisation));
+        LocalisationMap localisationMap = new LocalisationMap();
+        parser.visitLocalisationMap(localisationMap);
+        return localisationMap.toDataMap();
     }
 }
