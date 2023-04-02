@@ -6,8 +6,13 @@ import com.example.hoi4modder.model.files.properties.factories.PropertyFactoryIm
 import java.util.ArrayList;
 import java.util.List;
 public class StringToPropertyConvertor {
-    PropertyFactoryImpl propertyFactory = new PropertyFactoryImpl();
+    private final PropertyFactoryImpl propertyFactory = new PropertyFactoryImpl();
     public Property forStructuredFile(List<String> input) {
+        String fullExpression = normalizeString(input);
+        return propertyFactory.toProperty(fullExpression);
+    }
+
+    protected String normalizeString(List<String> input) {
         StringBuilder builder = new StringBuilder();
         for (String line : input) {
             line = toNormalizedLine(line);
@@ -27,8 +32,9 @@ public class StringToPropertyConvertor {
             builder.append(line).append(" ");
         }
         String fullExpression = builder.toString();
-        return propertyFactory.toProperty(fullExpression);
+        return fullExpression;
     }
+
     public Property forStructuredFile(String input) {
        return forStructuredFile(toLines(input));
     }

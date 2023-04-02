@@ -64,8 +64,13 @@ class StringToPropertyConvertorTest {
                 	local_supplies=0.0\s
                 }
                 """;
+        String origin = convertor.normalizeString(convertor.toLines(sampleFile)).replace(" ","");
         Property property = convertor.forStructuredFile(sampleFile);
-        System.out.println(property.toFile());
+        String toFile = property.toFile();
+        toFile = toFile.replace("\n", "");
+        toFile = toFile.replace("\t", "");
+        toFile = toFile.replace(" ", "");
+        assertEquals(origin, toFile);
     }
     @Test
     void testLocalisation() {
