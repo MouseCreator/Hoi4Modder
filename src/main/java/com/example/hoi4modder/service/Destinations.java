@@ -16,6 +16,8 @@ public class Destinations {
     private final String python = "python" + s;
 
     private final String data = "data" + s;
+
+    private final String image = "image" + s;
     private final String txt = ".txt";
 
     private final String py = ".py";
@@ -56,5 +58,9 @@ public class Destinations {
 
     public String interfaceDir() {
         return interfaceDir;
+    }
+
+    public String testPortrait() {
+        return basedir + data + image + "Char.dds";
     }
 }

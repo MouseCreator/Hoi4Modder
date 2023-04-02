@@ -16,8 +16,7 @@ public class DirectSurfaceManager {
     private java.awt.image.BufferedImage loadAwtImage(String filename) throws IOException {
         FileInputStream inputStream = new FileInputStream(filename);
         byte [] buffer = new byte[inputStream.available()];
-        int b =inputStream.read(buffer);
-        assert b == inputStream.available();
+        inputStream.read(buffer);
         inputStream.close();
         int [] pixels = DDSReader.read(buffer, DDSReader.ARGB, 0);
         int width = DDSReader.getWidth(buffer);
