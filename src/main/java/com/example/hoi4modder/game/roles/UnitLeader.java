@@ -46,4 +46,8 @@ public class UnitLeader extends Role {
     public String getTitle() {
         return fieldMarshal ? "field_marshal" : "corps_commander";
     }
+
+    public boolean getFieldMarshal() {
+        return fieldMarshal;
+    }
 }

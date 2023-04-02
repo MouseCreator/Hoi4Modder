@@ -22,13 +22,13 @@ public class UnitLeaderController extends RoleController<UnitLeader> implements 
     private CheckBox fieldMarshalBox;
 
     @FXML
-    private TextField skillField;
-
-    @FXML
     private TextField logisticsField;
 
     @FXML
     private TextField planningField;
+
+    @FXML
+    private TextField skillField;
 
     @FXML
     private TextField traitField;
@@ -48,6 +48,7 @@ public class UnitLeaderController extends RoleController<UnitLeader> implements 
         logisticsField.setText(String.valueOf(unitLeader.getLogisticsSkill()));
         planningField.setText(String.valueOf(unitLeader.getPlanningSkill()));
         traitsList.getItems().clear();
+        fieldMarshalBox.setSelected(unitLeader.getFieldMarshal());
         traitsList.getItems().addAll(unitLeader.getTraits());
     }
 
@@ -66,7 +67,5 @@ public class UnitLeaderController extends RoleController<UnitLeader> implements 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        UnitLeader templateLeader = UnitLeader.createCorpsCommander();
-        fromRole(templateLeader);
     }
 }

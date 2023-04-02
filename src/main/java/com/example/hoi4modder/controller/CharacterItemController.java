@@ -2,9 +2,7 @@ package com.example.hoi4modder.controller;
 
 import com.example.hoi4modder.game.FieldValueMap;
 import com.example.hoi4modder.game.GameCharacter;
-import com.example.hoi4modder.game.roles.Advisor;
-import com.example.hoi4modder.game.roles.CharacterRole;
-import com.example.hoi4modder.game.roles.CountryLeader;
+import com.example.hoi4modder.game.roles.*;
 import com.example.hoi4modder.model.files.images.DirectSurfaceManager;
 import com.example.hoi4modder.model.files.manager.FileSearchService;
 import com.example.hoi4modder.model.files.maps.DataPool;
@@ -79,17 +77,40 @@ public class CharacterItemController implements Initializable {
     private void loadRoles(GameCharacter character) {
         try {
             for (String role : character.getRoles().keys()) {
-                if (role.equals("advisor")) {
-                    loadAdvisor(character, role);
-                } else if (role.equals("country_leader")) {
-                    loadCountryLeader(character, role);
-                } else if (role.equals("corps_commander")) {
-                    loadCountryLeader(character, role);
+                switch (role) {
+                    case "advisor" -> loadAdvisor(character, role);
+                    case "country_leader" -> loadCountryLeader(character, role);
+                    case "corps_commander", "field_marshal" -> loadUnitLeader(character, role);
+                    case "navy_leader" -> loadNavyLeader(character, role);
                 }
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private void loadNavyLeader(GameCharacter character, String role) throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        NavyLeader navyLeader = (NavyLeader) character.getRoles().get(role);
+        loader.setLocation(getClass().getResource("navy-leader-item.fxml"));
+        Pane pane = loader.load();
+        rolesBox.getChildren().add(pane);
+        NavyLeaderController controller = loader.getController();
+        controller.setParent(this);
+        controller.fromRole(navyLeader);
+        unitLeaderBox.setSelected(true);
+    }
+
+    private void loadUnitLeader(GameCharacter character, String role) throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        UnitLeader unitLeader = (UnitLeader) character.getRoles().get(role);
+        loader.setLocation(getClass().getResource("unit-leader-item.fxml"));
+        Pane pane =  loader.load();
+        rolesBox.getChildren().add(pane);
+        UnitLeaderController controller = loader.getController();
+        controller.setParent(this);
+        controller.fromRole(unitLeader);
+        unitLeaderBox.setSelected(true);
     }
 
     private void loadCountryLeader(GameCharacter character, String role) throws IOException {
