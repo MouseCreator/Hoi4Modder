@@ -17,6 +17,7 @@ module com.example.hoi4modder {
     exports com.example.hoi4modder.model.files.properties.factories;
     exports com.example.hoi4modder.model.files.maps;
     exports com.example.hoi4modder.model.files.properties.lists;
+    exports com.example.hoi4modder.model.files.properties.styles;
 
     opens com.example.hoi4modder.controller to javafx.fxml;
 }

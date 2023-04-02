@@ -6,31 +6,45 @@ import com.example.hoi4modder.model.files.properties.styles.NormalStyle;
 import com.example.hoi4modder.model.files.properties.styles.PrintRules;
 import com.example.hoi4modder.model.files.properties.styles.PrintStyle;
 
+/**
+ * Property that consists of FieldValue properties and other Block properties (expressions)
+ */
 public class BlockProperty implements Block {
     private String key;
     private PrintStyle style;
     private final PropertyList block;
-    public BlockProperty(String name, PropertyList expressions) {
-        this.key = name;
-        this.block = expressions;
-        PrintRules rules = new PrintRules();
-        rules.forBlock(this);
-    }
+
+    /**
+     * Empty unnamed block property
+     */
     public BlockProperty() {
         this.key = "";
         this.block = new PropertyList();
         this.style = new NormalStyle();
     }
 
+    /**
+     * Empty named block property
+     * @param key - name of the property
+     */
     public BlockProperty(String key) {
         this.key = key;
         this.block = new PropertyList();
         this.style = new NormalStyle();
     }
 
+    /**
+     *
+     * @return name of the block
+     */
     public String getKey() {
         return key;
     }
+
+    /**
+     * Sets name of the block
+     * @param key - new block name
+     */
     public void setKey(String key) {
         this.key = key;
         PrintRules rules = new PrintRules();
@@ -49,11 +63,16 @@ public class BlockProperty implements Block {
     public String prefix() {
         return key + " = {";
     }
-
+    @Override
     public String suffix() {
         return "}";
     }
 
+    /**
+     *
+     * @return all elements of the block
+     */
+    @Override
     public PropertyList getElements() {
         return block;
     }
@@ -107,7 +126,10 @@ public class BlockProperty implements Block {
         return null;
     }
 
-
+    /**
+     *
+     * @param style - style to print block property
+     */
     public void setStyle(PrintStyle style) {
         this.style = style;
     }

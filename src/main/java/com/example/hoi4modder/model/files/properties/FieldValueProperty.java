@@ -1,15 +1,28 @@
 package com.example.hoi4modder.model.files.properties;
 
 import com.example.hoi4modder.model.files.properties.lists.PropertyCollection;
-import com.example.hoi4modder.model.files.properties.lists.PropertyList;
 
+/**
+ * Property with named value
+ * Uses name=value format
+ */
 public class FieldValueProperty implements Property {
     private final String value;
     private final String field;
+
+    /**
+     * Empty property. Nothing equals anything
+     */
     public FieldValueProperty() {
         field = "";
         value = "";
     }
+
+    /**
+     *
+     * @param field - field name
+     * @param value - field value
+     */
     public FieldValueProperty(String field, String value) {
         this.field = field;
         this.value = value;
@@ -25,16 +38,28 @@ public class FieldValueProperty implements Property {
         return str.contains("=");
     }
 
+    /**
+     *
+     * @return string in file format: field = value
+     */
     @Override
     public String toFile() {
         return field + delimiter() + value;
     }
 
+    /**
+     *
+     * @return name of the field
+     */
     @Override
     public String name() {
         return field;
     }
 
+    /**
+     *
+     * @return field value
+     */
     @Override
     public String value() {
         return value;
