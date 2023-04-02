@@ -1,6 +1,12 @@
 package com.example.hoi4modder.service;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+
+/**
+ * Class for resizing flags images
+ * Was replaced with python script
+ */
+@Deprecated
 public class Resizer {
     private BufferedImage resizeImage(BufferedImage originalImage, int targetWidth, int targetHeight) {
         BufferedImage resizedImage = new BufferedImage(targetWidth, targetHeight, BufferedImage.TYPE_INT_RGB);

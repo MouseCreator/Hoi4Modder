@@ -7,6 +7,9 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * Main class to create main window and start application
+ */
 public class ModApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {

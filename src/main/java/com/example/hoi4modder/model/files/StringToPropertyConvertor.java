@@ -31,8 +31,7 @@ public class StringToPropertyConvertor {
                 continue;
             builder.append(line).append(" ");
         }
-        String fullExpression = builder.toString();
-        return fullExpression;
+        return builder.toString();
     }
 
     public Property forStructuredFile(String input) {
