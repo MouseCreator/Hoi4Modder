@@ -24,6 +24,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Controller for single character
+ */
 public class CharacterItemController implements Initializable {
     @FXML
     private CheckBox advisorBox;

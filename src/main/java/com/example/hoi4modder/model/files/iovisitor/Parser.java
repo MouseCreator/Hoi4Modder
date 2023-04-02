@@ -109,7 +109,7 @@ public class Parser implements Visitor{
 
         Property navyLeaderProperty = mainProperty.getFirst("navy_leader");
         if (navyLeaderProperty != null) {
-            NavyLeader navyLeader = NavyLeader.createCountryLeader();
+            NavyLeader navyLeader = NavyLeader.createNavyLeader();
             parser.setBlock(navyLeaderProperty);
             navyLeader.acceptVisitor(parser);
             roles.put("navy_leader", navyLeader);

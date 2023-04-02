@@ -5,6 +5,9 @@ import lombok.Data;
 
 import java.util.HashMap;
 
+/**
+ * In-game character: country leader, advisor, army general or admiral
+ */
 @Data
 public class GameCharacter {
     private String identification;
@@ -12,6 +15,10 @@ public class GameCharacter {
     private FieldValueMap<CharacterRole> roles;
     private FieldValueMap<String> portraits;
 
+    /**
+     * Clones character
+     * @return duplicate character
+     */
     public GameCharacter cloneCharacter() {
         GameCharacter clone = new GameCharacter();
         clone.setIdentification(this.identification);

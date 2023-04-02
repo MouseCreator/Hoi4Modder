@@ -6,6 +6,9 @@ import lombok.EqualsAndHashCode;
 
 import java.util.HashSet;
 
+/**
+ * Political / army advisor
+ */
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class Advisor extends Role{
@@ -17,6 +20,10 @@ public class Advisor extends Role{
     public Advisor() {
     }
 
+    /**
+     *
+     * @return creates sample of advisor
+     */
     public static Advisor createAdvisor() {
         Advisor result = new Advisor();
         result.cost = 150;
@@ -37,6 +44,9 @@ public class Advisor extends Role{
         return "advisor";
     }
 
+    /**
+     * Generates ledger for advisor
+     */
     public void toLedger() {
         if (slot.equals("high_command") || slot.equals("theorist")) {
             for (String trait : traits) {

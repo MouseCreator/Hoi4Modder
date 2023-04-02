@@ -10,6 +10,9 @@ import javafx.scene.control.TextField;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Controller for advisor
+ */
 public class AdvisorRoleController extends RoleController<Advisor> implements Initializable {
 
     @FXML

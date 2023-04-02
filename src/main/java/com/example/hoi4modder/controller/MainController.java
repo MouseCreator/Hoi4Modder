@@ -12,6 +12,9 @@ import javafx.scene.layout.Pane;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Controller of the main window and scene
+ */
 public class MainController implements Initializable {
 
     @FXML

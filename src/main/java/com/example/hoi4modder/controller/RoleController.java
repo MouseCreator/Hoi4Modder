@@ -8,6 +8,10 @@ import javafx.scene.control.ListView;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Controller for roles panes
+ * @param <R> - role of the controller
+ */
 public abstract class RoleController<R extends Role> {
     protected CharacterItemController characterItemController;
     public CharacterItemController getCharacterItem() {

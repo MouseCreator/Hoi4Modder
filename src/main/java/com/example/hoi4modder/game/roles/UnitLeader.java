@@ -5,6 +5,9 @@ import lombok.*;
 
 import java.util.HashSet;
 
+/**
+ * Army commander
+ */
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class UnitLeader extends Role {
@@ -16,11 +19,19 @@ public class UnitLeader extends Role {
     private int planningSkill;
     private int logisticsSkill;
 
+    /**
+     *
+     * @return sample corps commander
+     */
     public static UnitLeader createCorpsCommander() {
         UnitLeader commander = weakUnitLeader();
         commander.fieldMarshal=false;
         return commander;
     }
+    /**
+     *
+     * @return sample field marshal
+     */
     public static UnitLeader createFieldMarshal() {
         UnitLeader commander = weakUnitLeader();
         commander.fieldMarshal=true;
@@ -47,6 +58,10 @@ public class UnitLeader extends Role {
         return fieldMarshal ? "field_marshal" : "corps_commander";
     }
 
+    /**
+     *
+     * @return true, if the leader is field marshal
+     */
     public boolean getFieldMarshal() {
         return fieldMarshal;
     }

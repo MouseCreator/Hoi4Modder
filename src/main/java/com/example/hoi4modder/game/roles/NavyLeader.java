@@ -6,6 +6,9 @@ import lombok.EqualsAndHashCode;
 
 import java.util.HashSet;
 
+/**
+ * Leader of the navy
+ */
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class NavyLeader extends Role {
@@ -15,7 +18,11 @@ public class NavyLeader extends Role {
     private int maneuveringSkill;
     private int coordinationSkill;
 
-    public static NavyLeader createCountryLeader() {
+    /**
+     *
+     * @return sample navy leader
+     */
+    public static NavyLeader createNavyLeader() {
         NavyLeader leader = new NavyLeader();
         leader.setSkill(1);
         leader.setManeuveringSkill(1);

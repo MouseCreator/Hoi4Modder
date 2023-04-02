@@ -10,6 +10,9 @@ import javafx.scene.control.TextField;
 import java.net.URL;
 import java.util.*;
 
+/**
+ * Controller for country leader
+ */
 public class CountryLeaderRoleController extends RoleController<CountryLeader> implements Initializable {
 
     @FXML

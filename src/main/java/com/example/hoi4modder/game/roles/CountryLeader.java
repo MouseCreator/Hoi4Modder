@@ -6,11 +6,18 @@ import lombok.EqualsAndHashCode;
 
 import java.util.HashSet;
 
+/**
+ * Leader of the country
+ */
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class CountryLeader extends Role {
     private String ideology;
 
+    /**
+     *
+     * @return sample country leader
+     */
     public static CountryLeader createCountryLeader() {
         CountryLeader leader = new CountryLeader();
         leader.setTraits(new HashSet<>());

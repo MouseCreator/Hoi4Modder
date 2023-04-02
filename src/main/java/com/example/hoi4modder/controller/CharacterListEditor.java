@@ -19,6 +19,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+/**
+ * Controller for character list
+ */
 public class CharacterListEditor extends ActivePaneController {
 
     @FXML

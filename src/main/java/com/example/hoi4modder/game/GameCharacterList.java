@@ -7,6 +7,10 @@ import com.example.hoi4modder.model.files.iovisitor.Visitor;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
+/**
+ * List of characters
+ */
 public class GameCharacterList implements Iterable<GameCharacter>, Visitable {
     private final List<GameCharacter> characterList;
 

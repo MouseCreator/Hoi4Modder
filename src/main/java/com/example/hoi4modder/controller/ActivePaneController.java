@@ -5,7 +5,9 @@ import javafx.scene.layout.Pane;
 
 import java.io.IOException;
 
-
+/**
+ * Class for controllers in active workspace
+ */
 public abstract class ActivePaneController {
     private Pane content;
     protected MainController parentController;

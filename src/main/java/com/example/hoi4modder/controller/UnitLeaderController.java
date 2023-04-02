@@ -10,6 +10,9 @@ import javafx.scene.control.TextField;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Controller for unit leader
+ */
 public class UnitLeaderController extends RoleController<UnitLeader> implements Initializable {
 
     @FXML

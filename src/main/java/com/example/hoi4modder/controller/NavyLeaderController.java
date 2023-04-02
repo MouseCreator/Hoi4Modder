@@ -9,6 +9,9 @@ import javafx.scene.control.TextField;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Controller for navy leader
+ */
 public class NavyLeaderController extends RoleController<NavyLeader> implements Initializable {
 
     @FXML
@@ -62,7 +65,7 @@ public class NavyLeaderController extends RoleController<NavyLeader> implements 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        NavyLeader navyLeader = NavyLeader.createCountryLeader();
+        NavyLeader navyLeader = NavyLeader.createNavyLeader();
         fromRole(navyLeader);
     }
 }

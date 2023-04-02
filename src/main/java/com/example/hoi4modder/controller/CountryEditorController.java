@@ -12,7 +12,7 @@ import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
-
+@Deprecated
 public class CountryEditorController extends ActivePaneController implements Initializable {
 
     @FXML
