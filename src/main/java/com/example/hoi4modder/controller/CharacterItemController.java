@@ -98,7 +98,8 @@ public class CharacterItemController implements Initializable {
         NavyLeaderController controller = loader.getController();
         controller.setParent(this);
         controller.fromRole(navyLeader);
-        unitLeaderBox.setSelected(true);
+        navyLeaderBox.setSelected(true);
+
     }
 
     private void loadUnitLeader(GameCharacter character, String role) throws IOException {
