@@ -11,6 +11,7 @@ import com.example.hoi4modder.model.files.manager.GameFilesReader;
 import java.io.IOException;
 
 /**
+ * FACADE PATTERN
  * Facade class for loading data from game files by filename
  */
 public class ParserFacade {

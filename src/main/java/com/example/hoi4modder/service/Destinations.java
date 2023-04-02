@@ -2,6 +2,9 @@ package com.example.hoi4modder.service;
 
 import java.io.File;
 
+/**
+ * Class that saves static path values for file services
+ */
 public class Destinations {
     private static final Destinations destinations = new Destinations();
     public static Destinations get() {
@@ -19,47 +22,59 @@ public class Destinations {
 
     private final String image = "image" + s;
     private final String txt = ".txt";
-
     private final String py = ".py";
-    private final String countries = "countries" + s;
-
     private final String localisation = "localisation" + s;
 
     private final String russian = "russian" + s;
     private final String yml = ".yml";
-
-    private final String mod_countries = "mod_countries_l_russian";
-    private final String mod_characters = "mod_characters_l_russian";
-
     private final String interfaceDir = "interface" + s;
     private final String states = "states" + s;
-    public String stateFile(int id) {
-        return history + states + id + txt;
-    }
 
+    /**
+     *
+     * @param filename - name of python script (without py included)
+     * @return path to python script
+     */
     public String pythonScript(String filename) {
         return basedir + data + python + filename + py;
     }
 
+    /**
+     *
+     * @return path to characters folder
+     */
     public String characters() {
         return common + characters;
     }
 
-    public String localisation(String filename) {
-        return localisation + russian + s + yml;
-    }
+    /**
+     *
+     * @return path to localisation folder
+     */
     public String localisation() {
         return localisation + russian;
     }
 
+    /**
+     *
+     * @return system file path separator
+     */
     public String separator() {
         return s;
     }
 
+    /**
+     *
+     * @return position of interface base directory
+     */
     public String interfaceDir() {
         return interfaceDir;
     }
 
+    /**
+     *
+     * @return image for portraits test
+     */
     public String testPortrait() {
         return basedir + data + image + "Char.dds";
     }

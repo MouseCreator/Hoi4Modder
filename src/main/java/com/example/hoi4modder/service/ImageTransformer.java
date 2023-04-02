@@ -1,11 +1,19 @@
 package com.example.hoi4modder.service;
 
 import java.io.File;
-import java.io.IOException;
 
+/**
+ * Class, used to transform images to game requirements
+ * Requires python with pillow installed to use
+ */
 public class ImageTransformer {
-
-    public void toPortrait(String origin, String frame, String destination) throws IOException, InterruptedException {
+    /**
+     *
+     * @param origin - path to large portrait of the character
+     * @param frame - path to frame of the portrait
+     * @param destination -path to save created portrait
+     */
+    public void toPortrait(String origin, String frame, String destination) {
         try {
             File script = new File(Destinations.get().pythonScript("to_portrait"));
             ProcessBuilder processBuilder = new ProcessBuilder("python ",
