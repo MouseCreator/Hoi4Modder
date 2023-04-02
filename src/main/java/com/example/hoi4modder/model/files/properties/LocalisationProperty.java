@@ -37,7 +37,7 @@ public class LocalisationProperty implements Property{
 
     @Override
     public String toFile() {
-        return key + ":" + version + value;
+        return key + ":" + version + " " + value;
     }
 
     @Override

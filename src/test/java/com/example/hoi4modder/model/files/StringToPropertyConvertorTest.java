@@ -3,6 +3,8 @@ package com.example.hoi4modder.model.files;
 import com.example.hoi4modder.model.files.properties.Property;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 class StringToPropertyConvertorTest {
 
     @Test
@@ -91,7 +93,11 @@ class StringToPropertyConvertorTest {
                  henschel_desc:1 "«Хеншель» отвечал за все серийные модели «Тигров». После того как ранние проблемы с надежностью были устранены, танки показали себя вполне достойно."
                  GER_MAN:0 "MAN\"""";
         Property property = convertor.forStructuredFile(convertor.toLines(localisationFile));
-        System.out.println(property.toFile());
+        String toFile = property.toFile();
+        while (toFile.endsWith("\n")) {
+            toFile = toFile.substring(0, toFile.length()-1);
+        }
+        assertEquals(localisationFile, toFile);
     }
 
 }
