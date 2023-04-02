@@ -83,10 +83,12 @@ public class CharacterListEditor extends ActivePaneController {
     }
 
     private String getFilename(String tag) {
-        FileSearchService searcher = (FileSearchService) parentController.getObjectPool().get("filesearcher");
+        FileSearchService searcher = (FileSearchService) parentController.getObjectPool().extract("filesearcher");
         searcher.setStrategy(new PutReplaceStrategy());
         searcher.setDirectory(Destinations.get().characters());
-        return searcher.findCountryByTag(tag);
+        String fileName = searcher.findCountryByTag(tag);
+        parentController.getObjectPool().put("filesearcher", searcher);
+        return fileName;
     }
 
     private void createListOfCharacters() {

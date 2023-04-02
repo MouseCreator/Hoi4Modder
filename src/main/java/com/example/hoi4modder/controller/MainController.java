@@ -113,7 +113,7 @@ public class MainController implements Initializable {
     }
     private DataPool<String> loadLocalisationData() {
         DataPool<String> localisationData = DataPool.getHashStringPool();
-        FileSearchService searcher = (FileSearchService) objectPool.get("filesearcher");
+        FileSearchService searcher = (FileSearchService) objectPool.extract("filesearcher");
         searcher.setDirectory(Destinations.get().localisation());
         searcher.setStrategy(new PutStrategy());
         String[] keywords = new String[] {"characters"};
@@ -123,11 +123,12 @@ public class MainController implements Initializable {
                 localisationData.addDataMap(s, map);
             }
         }
+        objectPool.put("filesearcher", searcher);
         return localisationData;
     }
     private DataPool<String> loadGraphicsData() {
         DataPool<String> graphicData = DataPool.getHashStringPool();
-        FileSearchService searcher = (FileSearchService) objectPool.get("filesearcher");
+        FileSearchService searcher = (FileSearchService) objectPool.extract("filesearcher");
         searcher.setDirectory(Destinations.get().interfaceDir());
         searcher.setStrategy(new PutStrategy());
         String[] keywords = new String[] {"leader", "ideas_characters"};
@@ -137,6 +138,7 @@ public class MainController implements Initializable {
                 graphicData.addDataMap(s, map);
             }
         }
+        objectPool.put("filesearcher", searcher);
         return graphicData;
     }
 

@@ -67,7 +67,9 @@ public class CharacterItemController implements Initializable {
     }
 
     public void fromCharacter(GameCharacter character) {
-        DataPool<String> localisationPool = ((LoadedData)listEditor.parentController.getObjectPool().get("data")).getLocalisationData();
+        LoadedData data = (LoadedData)listEditor.parentController.getObjectPool().extract("data");
+        DataPool<String> localisationPool = data.getLocalisationData();
+        listEditor.parentController.getObjectPool().put("data", data);
         characterIDField.setText(character.getIdentification());
         characterNameField.setText(localisationPool.get(character.getName()));
         loadPortraits(character);
@@ -139,7 +141,9 @@ public class CharacterItemController implements Initializable {
     }
 
     private void loadPortraits(GameCharacter character) {
-        DataPool<String> graphicsPool = ((LoadedData)listEditor.parentController.getObjectPool().get("data")).getGraphicsData();
+        LoadedData data = (LoadedData)listEditor.parentController.getObjectPool().extract("data");
+        DataPool<String> graphicsPool = data.getGraphicsData();
+        listEditor.parentController.getObjectPool().put("data", data);
         DirectSurfaceManager ddsPictures = new DirectSurfaceManager();
         FieldValueMap<String> portraits = character.getPortraits();
         for (String portraitType : portraits.keys()) {
@@ -165,6 +169,9 @@ public class CharacterItemController implements Initializable {
     }
 
     private String modDirectory() {
-        return ((FileSearchService)listEditor.parentController.getObjectPool().get("filesearcher")).getModDirectory();
+        FileSearchService service = (FileSearchService)listEditor.parentController.getObjectPool().extract("filesearcher");
+        String modDir = service.getModDirectory();
+        listEditor.parentController.getObjectPool().put("filesearcher", service);
+        return modDir;
     }
 }

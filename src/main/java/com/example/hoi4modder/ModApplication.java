@@ -11,6 +11,11 @@ import java.io.IOException;
  * Main class to create main window and start application
  */
 public class ModApplication extends Application {
+    /**
+     *
+     * @param stage - main state
+     * @throws IOException if main view was not found
+     */
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(ModApplication.class.getResource("controller/main-view.fxml"));
@@ -23,7 +28,6 @@ public class ModApplication extends Application {
         stage.setMinHeight(400);
         stage.setResizable(true);
     }
-
     public static void main(String[] args) {
         launch();
     }
