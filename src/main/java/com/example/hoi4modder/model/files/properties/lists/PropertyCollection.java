@@ -8,4 +8,5 @@ public interface PropertyCollection extends Iterable<Property> {
     void pop(Property property);
 
     void clear();
+    int size();
 }

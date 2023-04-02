@@ -7,6 +7,8 @@ import org.junit.jupiter.api.Test;
 
 import java.util.LinkedList;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 class ParserTest {
     @Test
     void testForCharacterList() {
@@ -85,5 +87,6 @@ class ParserTest {
         GameCharacterList list = new GameCharacterList(new LinkedList<>());
         parser.setBlock(baseProperty);
         parser.visitCharacterList(list);
+        assertEquals(3, list.size());
     }
 }

@@ -29,6 +29,11 @@ public class PropertyList implements PropertyCollection {
         this.properties.clear();
     }
 
+    @Override
+    public int size() {
+        return properties.size();
+    }
+
     public String toFile() {
         StringBuilder builder = new StringBuilder();
         for (Property property : properties) {

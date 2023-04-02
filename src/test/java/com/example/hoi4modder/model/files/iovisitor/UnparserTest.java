@@ -1,6 +1,7 @@
 package com.example.hoi4modder.model.files.iovisitor;
 
 import com.example.hoi4modder.game.GameCharacterList;
+import com.example.hoi4modder.game.collection.LocalisationMap;
 import com.example.hoi4modder.model.files.StringToPropertyConvertor;
 import com.example.hoi4modder.model.files.properties.Property;
 import org.junit.jupiter.api.Test;
@@ -96,7 +97,7 @@ class UnparserTest {
         Unparser unparser = new Unparser();
         unparser.visitCharacterList(list);
         Property property = unparser.getBlock();
-        System.out.println(property.toFile());
+        assertEquals(3, property.getAll().size());
     }
 
 
@@ -116,6 +117,16 @@ class UnparserTest {
                 	
                 	""";
         StringToPropertyConvertor convertor = new StringToPropertyConvertor();
-        convertor.forStructuredFile(sample);
+        Property baseProperty = convertor.forStructuredFile(sample);
+
+        Parser parser = new Parser();
+        LocalisationMap map = new LocalisationMap();
+        parser.setBlock(baseProperty);
+        parser.visitLocalisationMap(map);
+
+        Unparser unparser = new Unparser();
+        unparser.visitLocalisationMap(map);
+        Property property = unparser.getBlock();
+        assertEquals(7, property.getAll().size());
     }
 }

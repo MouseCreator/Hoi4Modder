@@ -23,4 +23,8 @@ public class GameCharacterList implements Iterable<GameCharacter>{
     public Iterator<GameCharacter> iterator() {
         return characterList.iterator();
     }
+
+    public int size() {
+        return characterList.size();
+    }
 }
