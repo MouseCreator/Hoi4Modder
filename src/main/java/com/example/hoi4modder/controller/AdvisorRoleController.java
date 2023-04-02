@@ -1,7 +1,6 @@
 package com.example.hoi4modder.controller;
 
 import com.example.hoi4modder.game.roles.Advisor;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
@@ -41,7 +40,7 @@ public class AdvisorRoleController extends RoleController<Advisor> implements In
 
 
     @FXML
-    void addTrait(ActionEvent event) {
+    void addTrait() {
         super.addTrait(traitList, traitField.getText());
     }
 

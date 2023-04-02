@@ -7,12 +7,15 @@ import java.io.File;
  */
 public class Destinations {
     private static final Destinations destinations = new Destinations();
+
     public static Destinations get() {
         return destinations;
     }
     private final String s = File.separator;
     private final String history = "history" + s;
     private final String gfx = "gfx" + s;
+
+    private final String ideas = "ideas" + s;
     private final String common = "common" + s;
     private final String characters = "characters" + s;
     private final String basedir = "src/main/resources/com/example/hoi4modder/";
@@ -77,5 +80,13 @@ public class Destinations {
      */
     public String testPortrait() {
         return basedir + data + image + "Char.dds";
+    }
+
+    public String frameImage() {
+        return basedir + data + image + "frame.png";
+    }
+
+    public String ideasGFX() {
+        return gfx + interfaceDir + ideas;
     }
 }

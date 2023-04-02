@@ -7,6 +7,8 @@ import com.example.hoi4modder.model.files.images.DirectSurfaceManager;
 import com.example.hoi4modder.model.files.manager.FileSearchService;
 import com.example.hoi4modder.model.files.maps.DataPool;
 import com.example.hoi4modder.model.files.maps.LoadedData;
+import com.example.hoi4modder.service.Destinations;
+import com.example.hoi4modder.service.ImageTransformer;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -58,6 +60,8 @@ public class CharacterItemController implements Initializable {
     private boolean hasBigPortrait = false;
     private boolean hasSmallPortrait = false;
 
+    private GameCharacter gameCharacter;
+
     public void setParent(CharacterListEditor editor) {
         this.listEditor = editor;
     }
@@ -74,6 +78,7 @@ public class CharacterItemController implements Initializable {
         characterNameField.setText(localisationPool.get(character.getName()));
         loadPortraits(character);
         loadRoles(character);
+        this.gameCharacter = character;
     }
 
     private void loadRoles(GameCharacter character) {
@@ -173,5 +178,31 @@ public class CharacterItemController implements Initializable {
         String modDir = service.getModDirectory();
         listEditor.parentController.getObjectPool().put("filesearcher", service);
         return modDir;
+    }
+
+    @FXML
+    void toSmallPortrait() {
+        ImageTransformer transformer = new ImageTransformer();
+        FileSearchService service = (FileSearchService)listEditor.parentController.getObjectPool().extract("filesearcher");
+        LoadedData data = (LoadedData) listEditor.parentController.getObjectPool().extract("data");
+        DataPool<String> graphicsData = data.getGraphicsData();
+        DirectSurfaceManager ddsImage = new DirectSurfaceManager();
+
+
+        String source = service.getModDirectory() + graphicsData.get(gameCharacter.getPortraits().get("large"));
+        String frame =  Destinations.get().frameImage();
+        String filename = "idea_" + gameCharacter.getIdentification();
+        String destination = service.getModDirectory() + Destinations.get().ideasGFX() + filename + ".dds";
+        String key = "GFX_" + filename;
+        transformer.toPortrait(source,frame,destination);
+        graphicsData.put("ideas_characters", key, Destinations.get().ideasGFX() + filename + ".dds");
+        gameCharacter.getPortraits().put("small", key);
+        try {
+            smallPortraitImage.setImage(ddsImage.loadDDS(destination));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        listEditor.parentController.getObjectPool().put("filesearcher", service);
+        listEditor.parentController.getObjectPool().put("data", data);
     }
 }
