@@ -1,11 +1,6 @@
 package com.example.hoi4modder.controller;
 import com.example.hoi4modder.model.files.manager.FileSearchService;
-import com.example.hoi4modder.model.files.manager.strategy.PutStrategy;
-import com.example.hoi4modder.model.files.maps.DataMap;
-import com.example.hoi4modder.model.files.maps.DataPool;
-import com.example.hoi4modder.model.files.maps.LoadedData;
-import com.example.hoi4modder.service.AbstractFactory;
-import com.example.hoi4modder.service.Destinations;
+import com.example.hoi4modder.model.files.maps.*;
 import com.example.hoi4modder.service.ObjectPool;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -106,57 +101,13 @@ public class MainController implements Initializable {
         return objectPool;
     }
     private LoadedData getLoadedData() {
+        PoolDirector director = new PoolDirector();
         LoadedData loadedData = new LoadedData();
-        loadedData.setGraphicsData(loadGraphicsData());
-        loadedData.setLocalisationData(loadLocalisationData());
+        director.setBuilder(new GraphicsBuilder());
+        loadedData.setGraphicsData(director.makeDataPool(objectPool));
+        director.setBuilder(new LocalisationBuilder());
+        loadedData.setLocalisationData(director.makeDataPool(objectPool));
         return loadedData;
     }
-    private DataPool<String> loadLocalisationData() {
-        DataPool<String> localisationData = DataPool.getHashStringPool();
-        FileSearchService searcher = (FileSearchService) objectPool.extract("filesearcher");
-        searcher.setDirectory(Destinations.get().localisation());
-        searcher.setStrategy(new PutStrategy());
-        String[] keywords = new String[] {"characters"};
-        for(String s : keywords) {
-            DataMap<String> map = createLocaleMap(searcher, s);
-            if (map != null) {
-                localisationData.addDataMap(s, map);
-            }
-        }
-        objectPool.put("filesearcher", searcher);
-        return localisationData;
-    }
-    private DataPool<String> loadGraphicsData() {
-        DataPool<String> graphicData = DataPool.getHashStringPool();
-        FileSearchService searcher = (FileSearchService) objectPool.extract("filesearcher");
-        searcher.setDirectory(Destinations.get().interfaceDir());
-        searcher.setStrategy(new PutStrategy());
-        String[] keywords = new String[] {"leader", "ideas_characters"};
-        for(String s : keywords) {
-            DataMap<String> map = createGraphicsMap(searcher, s);
-            if (map != null) {
-                graphicData.addDataMap(s, map);
-            }
-        }
-        objectPool.put("filesearcher", searcher);
-        return graphicData;
-    }
 
-    private DataMap<String> createGraphicsMap(FileSearchService searcher, String keyword) {
-        try {
-            String filename = searcher.findInstance(keyword);
-            return AbstractFactory.get().graphicsMap(filename);
-        } catch (Exception e) {
-            return null;
-        }
-    }
-
-    private DataMap<String> createLocaleMap(FileSearchService searcher, String keyword) {
-        try {
-            String filename = searcher.findInstance(keyword);
-            return AbstractFactory.get().localeMap(filename);
-        } catch (Exception e) {
-            return null;
-        }
-    }
 }
