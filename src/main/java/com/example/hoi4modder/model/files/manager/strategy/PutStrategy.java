@@ -5,8 +5,11 @@ import com.example.hoi4modder.model.files.manager.FileSearcher;
 
 import java.util.NoSuchElementException;
 
+/**
+ * Strategy to look for file only in mod directory
+ */
 public class PutStrategy implements SearcherStrategy {
-    private FileSearcher searcher = new FileSearcher() ;
+    private final FileSearcher searcher = new FileSearcher() ;
     private FileSearchService searchService;
 
     @Override

@@ -10,6 +10,10 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.NoSuchElementException;
 
+/**
+ * Strategy to look for file in both mod and game directory.
+ * If the file is present in game directory only, duplicates it to the mod directory
+ */
 public class PutReplaceStrategy implements SearcherStrategy {
     private final FileSearcher searcher = new FileSearcher();
     private FileSearchService searchService;

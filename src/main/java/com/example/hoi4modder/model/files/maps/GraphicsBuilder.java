@@ -6,6 +6,9 @@ import com.example.hoi4modder.service.AbstractFactory;
 import com.example.hoi4modder.service.Destinations;
 import com.example.hoi4modder.service.ObjectPool;
 
+/**
+ * Builder for graphics objects
+ */
 public class GraphicsBuilder implements DataPoolBuilder<String> {
 
     private final DataPool<String> dataPool = DataPool.getHashStringPool();

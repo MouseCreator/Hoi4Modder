@@ -4,6 +4,9 @@ import com.example.hoi4modder.model.files.manager.FileSearchService;
 
 import java.util.NoSuchElementException;
 
+/**
+ * Strategy, used to search files
+ */
 public interface SearcherStrategy {
 
     String findCountryByTag(String tag) throws NoSuchElementException;
