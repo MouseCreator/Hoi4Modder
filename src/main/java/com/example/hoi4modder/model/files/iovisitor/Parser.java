@@ -160,7 +160,7 @@ public class Parser implements Visitor{
     public void visitLocalisationMap(LocalisationMap localisationMap) {
         PropertyCollection list = baseProperty.getAll();
         for (Property property : list) {
-            localisationMap.put(property.name(), property.value());
+            localisationMap.put(property.name(), noQuotes(property.value()));
         }
     }
 
