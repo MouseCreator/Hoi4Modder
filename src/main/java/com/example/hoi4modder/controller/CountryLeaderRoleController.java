@@ -24,10 +24,10 @@ public class CountryLeaderRoleController extends RoleController<CountryLeader> i
 
     public CountryLeaderRoleController() {
         this.ideologies = new HashMap<>();
-        ideologies.put("democratic", List.of("conservatism liberalism socialism".split(" ")));
-        ideologies.put("communism", List.of("marxism leninism stalinism anti_revisionism anarchist_communism".split(" ")));
-        ideologies.put("fascism", List.of("nazism gen_nazism fascism_ideology falangism rexism".split(" ")));
-        ideologies.put("neutrality", List.of("despotism oligarchism anarchism moderatism centrism".split(" ")));
+        ideologies.put("Democratic", List.of("conservatism liberalism socialism".split(" ")));
+        ideologies.put("Communism", List.of("marxism leninism stalinism anti_revisionism anarchist_communism".split(" ")));
+        ideologies.put("Fascism", List.of("nazism gen_nazism fascism_ideology falangism rexism".split(" ")));
+        ideologies.put("Neutrality", List.of("despotism oligarchism anarchism moderatism centrism".split(" ")));
     }
 
     public void addTrait() {
@@ -46,7 +46,7 @@ public class CountryLeaderRoleController extends RoleController<CountryLeader> i
             if (ideologies.get(ideology).contains(type)) {
                 ideologyBox.getSelectionModel().select(ideology);
                 setTypesFromIdeology(ideology);
-                typeBox.getSelectionModel().select(type);
+                typeBox.getSelectionModel().select(stringToUpperCase(type));
             }
         }
         traitList.getItems().clear();
@@ -63,15 +63,15 @@ public class CountryLeaderRoleController extends RoleController<CountryLeader> i
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ideologyBox.getItems().removeAll(ideologyBox.getItems());
-        ideologyBox.getItems().addAll("neutrality", "democratic", "fascism", "communism");
-        ideologyBox.getSelectionModel().select("neutrality");
-        setTypesFromIdeology("neutrality");
+        ideologyBox.getItems().addAll("Neutrality", "Democratic", "Fascism", "Communism");
+        ideologyBox.getSelectionModel().select("Neutrality");
+        setTypesFromIdeology("Neutrality");
     }
     private void setTypesFromIdeology(String ideology) {
         typeBox.getItems().removeAll(ideologyBox.getItems());
         List<String> list = ideologies.get(ideology);
         for(String str : list)
-            ideologyBox.getItems().add(stringToUpperCase(str));
+            typeBox.getItems().add(stringToUpperCase(str));
     }
     private final Map<String, List<String>> ideologies;
 }

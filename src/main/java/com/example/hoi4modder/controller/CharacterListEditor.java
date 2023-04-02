@@ -24,7 +24,6 @@ public class CharacterListEditor extends ActivePaneController {
     @FXML
     private ListView<Pane> charactersListView;
     private final List<CharacterItemController> controllerList = new ArrayList<>();
-
     private String countryTag;
     @FXML
     private TextField tagTextField;

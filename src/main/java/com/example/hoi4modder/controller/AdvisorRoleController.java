@@ -12,6 +12,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class AdvisorRoleController extends RoleController<Advisor> implements Initializable {
+
     @FXML
     private TextField costField;
 

@@ -54,4 +54,8 @@ public abstract class RoleController<R extends Role> {
         box.getSelectionModel().select(stringToUpperCase(slot));
     }
 
+    protected void setParent(CharacterItemController controller) {
+        this.characterItemController = controller;
+    }
+
 }
