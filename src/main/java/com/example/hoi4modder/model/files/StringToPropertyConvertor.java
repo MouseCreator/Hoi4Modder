@@ -5,13 +5,28 @@ import com.example.hoi4modder.model.files.properties.factories.PropertyFactoryIm
 
 import java.util.ArrayList;
 import java.util.List;
+
+/**
+ * Class to convert input string to property composite tree
+ */
 public class StringToPropertyConvertor {
     private final PropertyFactoryImpl propertyFactory = new PropertyFactoryImpl();
+
+    /**
+     *
+     * @param input - list of strings, divided by lines
+     * @return property tree, created from input lines
+     */
     public Property forStructuredFile(List<String> input) {
         String fullExpression = normalizeString(input);
         return propertyFactory.toProperty(fullExpression);
     }
 
+    /**
+     *
+     * @param input - inputs string
+     * @return string that can be parsed to property with property factory
+     */
     protected String normalizeString(List<String> input) {
         StringBuilder builder = new StringBuilder();
         for (String line : input) {
@@ -34,6 +49,11 @@ public class StringToPropertyConvertor {
         return builder.toString();
     }
 
+    /**
+     *
+     * @param input - data from game file
+     * @return property tree, created from input string
+     */
     public Property forStructuredFile(String input) {
        return forStructuredFile(toLines(input));
     }
@@ -44,8 +64,12 @@ public class StringToPropertyConvertor {
         return result.trim();
     }
 
-
-    public ArrayList<String> toLines(String file) {
-        return new ArrayList<>(List.of(file.split("\n")));
+    /**
+     *
+     * @param str - input string from game file
+     * @return list of strings, separated by lines
+     */
+    public ArrayList<String> toLines(String str) {
+        return new ArrayList<>(List.of(str.split("\n")));
     }
 }
