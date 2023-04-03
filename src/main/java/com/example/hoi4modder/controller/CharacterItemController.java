@@ -9,7 +9,6 @@ import com.example.hoi4modder.model.files.maps.DataPool;
 import com.example.hoi4modder.model.files.maps.LoadedData;
 import com.example.hoi4modder.service.Destinations;
 import com.example.hoi4modder.service.ImageTransformer;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -214,7 +213,7 @@ public class CharacterItemController implements Initializable {
     }
 
     @FXML
-    void changeLarge(ActionEvent event) {
+    void changeLarge() {
         FileChooser fileChooser = initFileChooser();
         Window stage = listEditor.parentController.getWindow();
         File file = fileChooser.showOpenDialog(stage);
@@ -226,17 +225,23 @@ public class CharacterItemController implements Initializable {
         ImageTransformer transformer = new ImageTransformer();
 
         FileSearchService service = (FileSearchService)listEditor.parentController.getObjectPool().extract("filesearcher");
+        LoadedData data = (LoadedData) listEditor.parentController.getObjectPool().extract("data");
         DirectSurfaceManager ddsImage = new DirectSurfaceManager();
         String filename = "Portrait_" + gameCharacter.getIdentification() + ".dds";
         String destination = service.getModDirectory() + Destinations.get().leaderGFX(listEditor.getCountryTag());
         String fullNewPath = destination + filename;
+        String pathToPut = Destinations.get().leaderGFX(listEditor.getCountryTag()) + filename;
+        String key = "GFX_Portrait_" + gameCharacter.getIdentification();
         transformer.toBigImage(file, fullNewPath);
+        gameCharacter.getPortraits().put("large", key);
+        data.getGraphicsData().put("leader", key, pathToPut);
         try {
-            bigPortraitImage.setImage(ddsImage.loadDDS(fullNewPath));;
+            bigPortraitImage.setImage(ddsImage.loadDDS(fullNewPath));
         } catch (Exception e) {
             e.printStackTrace();
         }
         listEditor.parentController.getObjectPool().put("filesearcher", service);
+        listEditor.parentController.getObjectPool().put("data", data);
 
     }
     private FileChooser initFileChooser() {
@@ -246,17 +251,25 @@ public class CharacterItemController implements Initializable {
         return fileChooser;
     }
 
+    private void resetLargeImage() {
+        bigPortraitImage.setImage(new Image(new File(Destinations.get().noLargePortrait()).getAbsolutePath()));
+    }
+    private void resetSmallImage() {
+        smallPortraitImage.setImage(new Image(new File(Destinations.get().noSmallPortrait()).getAbsolutePath()));
+    }
     @FXML
-    void changeSmall(ActionEvent event) {
+    void changeSmall() {
 
     }
     @FXML
-    void removeLarge(ActionEvent event) {
-
+    void removeLarge() {
+        resetLargeImage();
+        gameCharacter.getPortraits().remove("large");
     }
 
     @FXML
-    void removeSmall(ActionEvent event) {
-
+    void removeSmall() {
+        resetSmallImage();
+        gameCharacter.getPortraits().remove("small");
     }
 }

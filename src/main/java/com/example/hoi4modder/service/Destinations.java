@@ -1,5 +1,7 @@
 package com.example.hoi4modder.service;
 
+import javafx.scene.image.Image;
+
 import java.io.File;
 
 /**
@@ -93,5 +95,12 @@ public class Destinations {
 
     public String leaderGFX(String tag) {
         return gfx + leaders + tag + s;
+    }
+
+    public String noSmallPortrait() {
+        return basedir + data + image + interfaceDir + "NoIdea.png";
+    }
+    public String noLargePortrait() {
+        return basedir + data + image + interfaceDir + "NoLeader.png";
     }
 }

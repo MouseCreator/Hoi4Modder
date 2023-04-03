@@ -3,6 +3,7 @@ package com.example.hoi4modder.service;
 import javafx.scene.image.Image;
 
 import java.io.File;
+import java.io.IOException;
 
 /**
  * Class, used to transform images to game requirements
@@ -17,19 +18,7 @@ public class ImageTransformer {
      */
     public void toPortrait(String origin, String frame, String destination) {
         try {
-            File script = new File(Destinations.get().pythonScript("to_portrait"));
-            ProcessBuilder processBuilder = new ProcessBuilder("python ",
-                    script.getPath() + " ",
-                    origin + " ",
-                    frame + " ",
-                    destination);
-
-            processBuilder.redirectErrorStream(true);
-            Process process = processBuilder.start();
-
-            int exitCode = process.waitFor();
-            System.out.println(exitCode);
-            System.out.println(process.waitFor());
+            callScript("to_portrait", origin, frame, destination);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -37,21 +26,33 @@ public class ImageTransformer {
 
     public void toBigImage(File origin, String destination) {
         try {
-            File script = new File(Destinations.get().pythonScript("toDDS"));
-            ProcessBuilder processBuilder = new ProcessBuilder("python ",
-                    script.getPath() + " ",
-                    origin.getAbsolutePath() + " ",
-                    destination + " ",
-                    destination);
-
-            processBuilder.redirectErrorStream(true);
-            Process process = processBuilder.start();
-
-            int exitCode = process.waitFor();
-            System.out.println(exitCode);
-            System.out.println(process.waitFor());
+            callScript("toDDS", origin.getAbsolutePath(), destination, destination);
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void toSmallImage(File origin, String destination) {
+        try {
+            callScript("toSmallDDS", origin.getAbsolutePath(), destination, destination);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void callScript(String name, String origin, String destination, String destination1) throws IOException, InterruptedException {
+        File script = new File(Destinations.get().pythonScript(name));
+        ProcessBuilder processBuilder = new ProcessBuilder("python ",
+                script.getPath() + " ",
+                origin + " ",
+                destination + " ",
+                destination1);
+
+        processBuilder.redirectErrorStream(true);
+        Process process = processBuilder.start();
+
+        int exitCode = process.waitFor();
+        System.out.println(exitCode);
+        System.out.println(process.waitFor());
     }
 }
