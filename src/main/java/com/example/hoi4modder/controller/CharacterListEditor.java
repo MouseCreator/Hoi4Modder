@@ -8,6 +8,7 @@ import com.example.hoi4modder.service.AbstractFactory;
 import com.example.hoi4modder.service.Destinations;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ListView;
@@ -15,14 +16,16 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.ResourceBundle;
 
 /**
  * Controller for character list
  */
-public class CharacterListEditor extends ActivePaneController {
+public class CharacterListEditor extends ActivePaneController implements Initializable {
 
     @FXML
     private ListView<Pane> charactersListView;
@@ -122,6 +125,11 @@ public class CharacterListEditor extends ActivePaneController {
 
     public void setCountryTag(String countryTag) {
         this.countryTag = countryTag;
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        charactersListView.setFocusTraversable( false );
     }
 }
 

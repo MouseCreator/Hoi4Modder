@@ -176,6 +176,10 @@ public class CharacterItemController implements Initializable {
                 throw new RuntimeException(e);
             }
         }
+        setAutoButton();
+    }
+
+    private void setAutoButton() {
         this.autoSmallPortrait.setDisable(!(hasBigPortrait && !hasSmallPortrait));
     }
 
@@ -219,6 +223,8 @@ public class CharacterItemController implements Initializable {
         File file = fileChooser.showOpenDialog(stage);
         if (file != null) {
             setLargePortrait(file);
+            this.hasBigPortrait = true;
+            setAutoButton();
         }
     }
     private void setLargePortrait(File file) {
@@ -250,26 +256,59 @@ public class CharacterItemController implements Initializable {
         fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Image","*.png", ".jpg", ".dds", ".bmp"));
         return fileChooser;
     }
+    private void setSmallPortrait(File file) {
+        ImageTransformer transformer = new ImageTransformer();
 
+        FileSearchService service = (FileSearchService)listEditor.parentController.getObjectPool().extract("filesearcher");
+        LoadedData data = (LoadedData) listEditor.parentController.getObjectPool().extract("data");
+        DirectSurfaceManager ddsImage = new DirectSurfaceManager();
+        String filename = "idea_" + gameCharacter.getIdentification() + ".dds";
+        String destination = service.getModDirectory() + Destinations.get().ideasGFX();
+        String fullNewPath = destination + filename;
+        String pathToPut = Destinations.get().ideasGFX() + filename;
+        String key = "GFX_idea_" + gameCharacter.getIdentification();
+        transformer.toSmallImage(file, fullNewPath);
+        gameCharacter.getPortraits().put("small", key);
+        data.getGraphicsData().put("ideas_characters", key, pathToPut);
+        try {
+            smallPortraitImage.setImage(ddsImage.loadDDS(fullNewPath));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        listEditor.parentController.getObjectPool().put("filesearcher", service);
+        listEditor.parentController.getObjectPool().put("data", data);
+
+    }
     private void resetLargeImage() {
-        bigPortraitImage.setImage(new Image(new File(Destinations.get().noLargePortrait()).getAbsolutePath()));
+        bigPortraitImage.setImage(new Image(new File(Destinations.get().noLargePortrait()).toURI().toString()));
+        this.hasSmallPortrait = false;
     }
     private void resetSmallImage() {
-        smallPortraitImage.setImage(new Image(new File(Destinations.get().noSmallPortrait()).getAbsolutePath()));
+        smallPortraitImage.setImage(new Image(new File(Destinations.get().noSmallPortrait()).toURI().toString()));
+        this.hasSmallPortrait = false;
     }
     @FXML
     void changeSmall() {
-
+        FileChooser fileChooser = initFileChooser();
+        Window stage = listEditor.parentController.getWindow();
+        File file = fileChooser.showOpenDialog(stage);
+        if (file != null) {
+            setSmallPortrait(file);
+            this.hasSmallPortrait = true;
+            setAutoButton();
+        }
     }
     @FXML
     void removeLarge() {
         resetLargeImage();
         gameCharacter.getPortraits().remove("large");
+        setAutoButton();
     }
 
     @FXML
     void removeSmall() {
         resetSmallImage();
         gameCharacter.getPortraits().remove("small");
+        setAutoButton();
     }
 }

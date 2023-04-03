@@ -1,7 +1,5 @@
 package com.example.hoi4modder.service;
 
-import javafx.scene.image.Image;
-
 import java.io.File;
 import java.io.IOException;
 
