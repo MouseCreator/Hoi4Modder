@@ -17,6 +17,7 @@ public class Destinations {
 
     private final String ideas = "ideas" + s;
     private final String common = "common" + s;
+    private final String leaders = "leaders" + s;
     private final String characters = "characters" + s;
     private final String basedir = "src/main/resources/com/example/hoi4modder/";
     private final String python = "python" + s;
@@ -88,5 +89,9 @@ public class Destinations {
 
     public String ideasGFX() {
         return gfx + interfaceDir + ideas;
+    }
+
+    public String leaderGFX(String tag) {
+        return gfx + leaders + tag + s;
     }
 }

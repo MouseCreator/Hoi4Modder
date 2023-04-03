@@ -9,6 +9,7 @@ import com.example.hoi4modder.model.files.maps.DataPool;
 import com.example.hoi4modder.model.files.maps.LoadedData;
 import com.example.hoi4modder.service.Destinations;
 import com.example.hoi4modder.service.ImageTransformer;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -19,7 +20,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.stage.FileChooser;
+import javafx.stage.Window;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -207,5 +211,52 @@ public class CharacterItemController implements Initializable {
         }
         listEditor.parentController.getObjectPool().put("filesearcher", service);
         listEditor.parentController.getObjectPool().put("data", data);
+    }
+
+    @FXML
+    void changeLarge(ActionEvent event) {
+        FileChooser fileChooser = initFileChooser();
+        Window stage = listEditor.parentController.getWindow();
+        File file = fileChooser.showOpenDialog(stage);
+        if (file != null) {
+            setLargePortrait(file);
+        }
+    }
+    private void setLargePortrait(File file) {
+        ImageTransformer transformer = new ImageTransformer();
+
+        FileSearchService service = (FileSearchService)listEditor.parentController.getObjectPool().extract("filesearcher");
+        DirectSurfaceManager ddsImage = new DirectSurfaceManager();
+        String filename = "Portrait_" + gameCharacter.getIdentification() + ".dds";
+        String destination = service.getModDirectory() + Destinations.get().leaderGFX(listEditor.getCountryTag());
+        String fullNewPath = destination + filename;
+        transformer.toBigImage(file, fullNewPath);
+        try {
+            bigPortraitImage.setImage(ddsImage.loadDDS(fullNewPath));;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        listEditor.parentController.getObjectPool().put("filesearcher", service);
+
+    }
+    private FileChooser initFileChooser() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Choose image");
+        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Image","*.png", ".jpg", ".dds", ".bmp"));
+        return fileChooser;
+    }
+
+    @FXML
+    void changeSmall(ActionEvent event) {
+
+    }
+    @FXML
+    void removeLarge(ActionEvent event) {
+
+    }
+
+    @FXML
+    void removeSmall(ActionEvent event) {
+
     }
 }

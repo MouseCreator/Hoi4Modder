@@ -66,28 +66,30 @@
             </ImageView>
             <HBox prefHeight="29.0" prefWidth="200.0">
                <children>
-                  <Label prefHeight="18.0" prefWidth="42.0" text="Large" />
-                  <Button mnemonicParsing="false" text="Change" />
+                  <Button mnemonicParsing="false" onAction="#changeLarge" text="Change" />
+                  <Pane prefHeight="26.0" prefWidth="10.0" />
+                  <Button mnemonicParsing="false" onAction="#removeLarge" text="X" textFill="RED" />
                </children>
             </HBox>
-            <ImageView fx:id="smallPortraitImage" fitHeight="77.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../data/image/interface/NoIdea.png" />
-               </image>
-            </ImageView>
+            <HBox>
+               <children>
+                  <ImageView fx:id="smallPortraitImage" fitHeight="77.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../data/image/interface/NoIdea.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </HBox>
             <HBox prefHeight="29.0" prefWidth="200.0">
                <children>
-                  <Label prefHeight="18.0" prefWidth="42.0" text="Small" />
-                  <Button mnemonicParsing="false" text="Change" />
+                  <Button mnemonicParsing="false" onAction="#changeSmall" text="Change" />
                   <Pane prefHeight="26.0" prefWidth="10.0" />
                   <Button fx:id="autoSmallPortrait" disable="true" mnemonicParsing="false" onAction="#toSmallPortrait" text="Auto" />
+                  <Pane prefHeight="26.0" prefWidth="10.0" />
+                  <Button mnemonicParsing="false" onAction="#removeSmall" text="X" textFill="RED" />
                </children>
             </HBox>
-            <Pane prefHeight="200.0" prefWidth="200.0">
-               <children>
-                  <Button layoutX="35.0" layoutY="21.0" mnemonicParsing="false" text="New portrait" />
-               </children>
-            </Pane>
+            <Pane prefHeight="200.0" prefWidth="200.0" />
          </children>
       </VBox>
    </children>

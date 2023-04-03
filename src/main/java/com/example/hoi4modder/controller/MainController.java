@@ -8,6 +8,7 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.Pane;
+import javafx.stage.Window;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -113,4 +114,7 @@ public class MainController implements Initializable {
         return loadedData;
     }
 
+    public Window getWindow() {
+        return mainPane.getScene().getWindow();
+    }
 }

@@ -1,5 +1,7 @@
 package com.example.hoi4modder.service;
 
+import javafx.scene.image.Image;
+
 import java.io.File;
 
 /**
@@ -20,6 +22,26 @@ public class ImageTransformer {
                     script.getPath() + " ",
                     origin + " ",
                     frame + " ",
+                    destination);
+
+            processBuilder.redirectErrorStream(true);
+            Process process = processBuilder.start();
+
+            int exitCode = process.waitFor();
+            System.out.println(exitCode);
+            System.out.println(process.waitFor());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void toBigImage(File origin, String destination) {
+        try {
+            File script = new File(Destinations.get().pythonScript("toDDS"));
+            ProcessBuilder processBuilder = new ProcessBuilder("python ",
+                    script.getPath() + " ",
+                    origin.getAbsolutePath() + " ",
+                    destination + " ",
                     destination);
 
             processBuilder.redirectErrorStream(true);
