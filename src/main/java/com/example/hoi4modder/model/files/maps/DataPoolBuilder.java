@@ -1,6 +1,6 @@
 package com.example.hoi4modder.model.files.maps;
 
-import com.example.hoi4modder.service.ObjectPool;
+import com.example.hoi4modder.model.files.manager.FileSearchService;
 
 /**
  * BUILDER.
@@ -10,9 +10,9 @@ import com.example.hoi4modder.service.ObjectPool;
 public interface DataPoolBuilder<T> {
     /**
      * Loads data to Pool
-     * @param objectPool - object pool to insert data
+     * @param fileSearchService - file searcher to load files
      */
-    void loadData(ObjectPool objectPool);
+    void loadData(FileSearchService fileSearchService);
 
     /**
      *

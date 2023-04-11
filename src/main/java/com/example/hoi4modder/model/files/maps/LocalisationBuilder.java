@@ -4,7 +4,6 @@ import com.example.hoi4modder.model.files.manager.FileSearchService;
 import com.example.hoi4modder.model.files.manager.strategy.PutStrategy;
 import com.example.hoi4modder.service.AbstractFactory;
 import com.example.hoi4modder.service.Destinations;
-import com.example.hoi4modder.service.ObjectPool;
 
 /**
  * Builder for localisation pool
@@ -12,8 +11,7 @@ import com.example.hoi4modder.service.ObjectPool;
 public class LocalisationBuilder implements DataPoolBuilder<String>{
     private final DataPool<String> localisationData = DataPool.getHashStringPool();
     @Override
-    public void loadData(ObjectPool objectPool) {
-        FileSearchService searcher = (FileSearchService) objectPool.extract("filesearcher");
+    public void loadData(FileSearchService searcher) {
         searcher.setDirectory(Destinations.get().localisation());
         searcher.setStrategy(new PutStrategy());
         String[] keywords = new String[] {"characters"};
@@ -23,8 +21,6 @@ public class LocalisationBuilder implements DataPoolBuilder<String>{
                 localisationData.addDataMap(s, map);
             }
         }
-        objectPool.put("filesearcher", searcher);
-
     }
     @Override
     public DataPool<String> getResult() {

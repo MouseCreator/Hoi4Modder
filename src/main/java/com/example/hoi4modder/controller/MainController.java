@@ -1,7 +1,6 @@
 package com.example.hoi4modder.controller;
-import com.example.hoi4modder.model.files.manager.FileSearchService;
-import com.example.hoi4modder.model.files.maps.*;
-import com.example.hoi4modder.service.ObjectPool;
+import com.example.hoi4modder.service.SavedData;
+import com.example.hoi4modder.service.SavedDataFactory;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.MenuBar;
@@ -94,24 +93,13 @@ public class MainController implements Initializable {
         this.consoleView.setStyle("-fx-text-fill: green");
     }
 
-    private final ObjectPool objectPool;
+    private final SavedData savedData;
 
     public MainController() {
-        objectPool = ObjectPool.getHashObjectPool();
-        objectPool.put("filesearcher", new FileSearchService());
-        objectPool.put("data", getLoadedData());
+        savedData = SavedDataFactory.factory().getSavedData();
     }
-    public ObjectPool getObjectPool() {
-        return objectPool;
-    }
-    private LoadedData getLoadedData() {
-        PoolDirector director = new PoolDirector();
-        LoadedData loadedData = new LoadedData();
-        director.setBuilder(new GraphicsBuilder());
-        loadedData.setGraphicsData(director.makeDataPool(objectPool));
-        director.setBuilder(new LocalisationBuilder());
-        loadedData.setLocalisationData(director.makeDataPool(objectPool));
-        return loadedData;
+    public SavedData getSavedData() {
+        return savedData;
     }
 
     public Window getWindow() {

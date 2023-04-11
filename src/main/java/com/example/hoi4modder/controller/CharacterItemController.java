@@ -77,9 +77,8 @@ public class CharacterItemController implements Initializable {
     }
 
     public void fromCharacter(GameCharacter character) {
-        LoadedData data = (LoadedData)listEditor.parentController.getObjectPool().extract("data");
+        LoadedData data = listEditor.parentController.getSavedData().loadedData();
         DataPool<String> localisationPool = data.getLocalisationData();
-        listEditor.parentController.getObjectPool().put("data", data);
         characterIDField.setText(character.getIdentification());
         characterNameField.setText(localisationPool.get(character.getName()));
         loadPortraits(character);
@@ -152,7 +151,7 @@ public class CharacterItemController implements Initializable {
     }
 
     private void loadPortraits(GameCharacter character) {
-        LoadedData data = (LoadedData)listEditor.parentController.getObjectPool().extract("data");
+        LoadedData data = listEditor.parentController.getSavedData().loadedData();
         DataPool<String> graphicsPool = data.getGraphicsData();
         DirectSurfaceManager ddsPictures = new DirectSurfaceManager();
         FieldValueMap<String> portraits = character.getPortraits();
@@ -173,8 +172,6 @@ public class CharacterItemController implements Initializable {
             }
             catch (IOException e) {
                 e.printStackTrace();
-            } finally {
-                listEditor.parentController.getObjectPool().put("data", data);
             }
         }
         setAutoButton();
@@ -185,17 +182,15 @@ public class CharacterItemController implements Initializable {
     }
 
     private String modDirectory() {
-        FileSearchService service = (FileSearchService)listEditor.parentController.getObjectPool().extract("filesearcher");
-        String modDir = service.getModDirectory();
-        listEditor.parentController.getObjectPool().put("filesearcher", service);
-        return modDir;
+        FileSearchService service = listEditor.parentController.getSavedData().fileSearchService();
+        return service.getModDirectory();
     }
 
     @FXML
     void toSmallPortrait() {
         ImageTransformer transformer = new ImageTransformer();
-        FileSearchService service = (FileSearchService)listEditor.parentController.getObjectPool().extract("filesearcher");
-        LoadedData data = (LoadedData) listEditor.parentController.getObjectPool().extract("data");
+        FileSearchService service = listEditor.parentController.getSavedData().fileSearchService();
+        LoadedData data =  listEditor.parentController.getSavedData().loadedData();
         DataPool<String> graphicsData = data.getGraphicsData();
         DirectSurfaceManager ddsImage = new DirectSurfaceManager();
 
@@ -213,8 +208,6 @@ public class CharacterItemController implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        listEditor.parentController.getObjectPool().put("filesearcher", service);
-        listEditor.parentController.getObjectPool().put("data", data);
     }
 
     @FXML
@@ -231,8 +224,8 @@ public class CharacterItemController implements Initializable {
     private void setLargePortrait(File file) {
         ImageTransformer transformer = new ImageTransformer();
 
-        FileSearchService service = (FileSearchService)listEditor.parentController.getObjectPool().extract("filesearcher");
-        LoadedData data = (LoadedData) listEditor.parentController.getObjectPool().extract("data");
+        FileSearchService service = listEditor.parentController.getSavedData().fileSearchService();
+        LoadedData data = listEditor.parentController.getSavedData().loadedData();
         DirectSurfaceManager ddsImage = new DirectSurfaceManager();
         String filename = "Portrait_" + gameCharacter.getIdentification() + ".dds";
         String destination = service.getModDirectory() + Destinations.get().leaderGFX(listEditor.getCountryTag());
@@ -247,9 +240,6 @@ public class CharacterItemController implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        listEditor.parentController.getObjectPool().put("filesearcher", service);
-        listEditor.parentController.getObjectPool().put("data", data);
-
     }
     private FileChooser initFileChooser() {
         FileChooser fileChooser = new FileChooser();
@@ -260,8 +250,8 @@ public class CharacterItemController implements Initializable {
     private void setSmallPortrait(File file) {
         ImageTransformer transformer = new ImageTransformer();
 
-        FileSearchService service = (FileSearchService)listEditor.parentController.getObjectPool().extract("filesearcher");
-        LoadedData data = (LoadedData) listEditor.parentController.getObjectPool().extract("data");
+        FileSearchService service = listEditor.parentController.getSavedData().fileSearchService();
+        LoadedData data = listEditor.parentController.getSavedData().loadedData();
         DirectSurfaceManager ddsImage = new DirectSurfaceManager();
         String filename = "idea_" + gameCharacter.getIdentification() + ".dds";
         String destination = service.getModDirectory() + Destinations.get().ideasGFX();
@@ -276,8 +266,6 @@ public class CharacterItemController implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        listEditor.parentController.getObjectPool().put("filesearcher", service);
-        listEditor.parentController.getObjectPool().put("data", data);
 
     }
     private void resetLargeImage() {

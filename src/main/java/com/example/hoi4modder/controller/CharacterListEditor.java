@@ -89,12 +89,10 @@ public class CharacterListEditor extends ActivePaneController implements Initial
     }
 
     private String getFilename(String tag) {
-        FileSearchService searcher = (FileSearchService) parentController.getObjectPool().extract("filesearcher");
+        FileSearchService searcher = parentController.getSavedData().fileSearchService();
         searcher.setStrategy(new PutReplaceStrategy());
         searcher.setDirectory(Destinations.get().characters());
-        String fileName = searcher.findCountryByTag(tag);
-        parentController.getObjectPool().put("filesearcher", searcher);
-        return fileName;
+        return searcher.findCountryByTag(tag);
     }
 
     private void createListOfCharacters() {

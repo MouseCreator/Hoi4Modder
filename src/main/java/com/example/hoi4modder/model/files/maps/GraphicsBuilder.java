@@ -4,7 +4,6 @@ import com.example.hoi4modder.model.files.manager.FileSearchService;
 import com.example.hoi4modder.model.files.manager.strategy.PutStrategy;
 import com.example.hoi4modder.service.AbstractFactory;
 import com.example.hoi4modder.service.Destinations;
-import com.example.hoi4modder.service.ObjectPool;
 
 /**
  * Builder for graphics objects
@@ -13,8 +12,7 @@ public class GraphicsBuilder implements DataPoolBuilder<String> {
 
     private final DataPool<String> dataPool = DataPool.getHashStringPool();
     @Override
-    public void loadData(ObjectPool objectPool) {
-        FileSearchService searcher = (FileSearchService) objectPool.extract("filesearcher");
+    public void loadData(FileSearchService searcher) {
         searcher.setDirectory(Destinations.get().interfaceDir());
         searcher.setStrategy(new PutStrategy());
         String[] keywords = new String[] {"leader", "ideas_characters"};
@@ -24,7 +22,6 @@ public class GraphicsBuilder implements DataPoolBuilder<String> {
                 dataPool.addDataMap(s, map);
             }
         }
-        objectPool.put("filesearcher", searcher);
     }
     private DataMap<String> createGraphicsMap(FileSearchService searcher, String keyword) {
         try {

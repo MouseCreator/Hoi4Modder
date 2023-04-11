@@ -1,6 +1,6 @@
 package com.example.hoi4modder.model.files.maps;
 
-import com.example.hoi4modder.service.ObjectPool;
+import com.example.hoi4modder.model.files.manager.FileSearchService;
 
 /**
  * Director for data pool builders
@@ -18,11 +18,11 @@ public class PoolDirector {
 
     /**
      *
-     * @param pool - object pool to load service
+     * @param service - file searcher to load data
      * @return data pool created by builder
      */
-    public DataPool<String> makeDataPool(ObjectPool pool) {
-        builder.loadData(pool);
+    public DataPool<String> makeDataPool(FileSearchService service) {
+        builder.loadData(service);
         return builder.getResult();
     }
 }
