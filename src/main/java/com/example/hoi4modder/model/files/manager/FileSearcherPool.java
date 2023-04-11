@@ -10,7 +10,7 @@ public class FileSearcherPool {
     private final BlockingQueue<FileSearchService> fileSearchers;
     private final int capacity;
     private int remaining;
-    FileSearcherPool(BlockingQueue<FileSearchService> queue, int capacity) {
+    private FileSearcherPool(BlockingQueue<FileSearchService> queue, int capacity) {
         this.fileSearchers = queue;
         this.capacity = capacity;
         this.remaining = capacity;
