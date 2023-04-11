@@ -154,7 +154,6 @@ public class CharacterItemController implements Initializable {
     private void loadPortraits(GameCharacter character) {
         LoadedData data = (LoadedData)listEditor.parentController.getObjectPool().extract("data");
         DataPool<String> graphicsPool = data.getGraphicsData();
-        listEditor.parentController.getObjectPool().put("data", data);
         DirectSurfaceManager ddsPictures = new DirectSurfaceManager();
         FieldValueMap<String> portraits = character.getPortraits();
         for (String portraitType : portraits.keys()) {
@@ -173,7 +172,9 @@ public class CharacterItemController implements Initializable {
                 }
             }
             catch (IOException e) {
-                throw new RuntimeException(e);
+                e.printStackTrace();
+            } finally {
+                listEditor.parentController.getObjectPool().put("data", data);
             }
         }
         setAutoButton();
