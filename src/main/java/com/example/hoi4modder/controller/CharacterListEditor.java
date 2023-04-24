@@ -1,11 +1,15 @@
 package com.example.hoi4modder.controller;
 
 import com.example.hoi4modder.controller.multithreading.LoadingTask;
+import com.example.hoi4modder.game.GameCharacter;
 import com.example.hoi4modder.game.GameCharacterList;
 import com.example.hoi4modder.model.files.manager.FileSearchService;
 import com.example.hoi4modder.model.files.manager.strategy.PutReplaceStrategy;
+import com.example.hoi4modder.service.AbstractFactory;
 import com.example.hoi4modder.service.Destinations;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
@@ -13,6 +17,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -93,6 +98,19 @@ public class CharacterListEditor extends ActivePaneController implements Initial
         thread.start();
     }
 
+    private void loadSingleThread(String filename) {
+    }
+    public void loadItem(GameCharacter character) throws IOException {
+        FXMLLoader itemLoader = new FXMLLoader();
+        itemLoader.setLocation(getClass().getResource("character-item.fxml"));
+        Pane pane = itemLoader.load();
+        Platform.runLater(() -> charactersListView.getItems().add(pane));
+
+        CharacterItemController controller = itemLoader.getController();
+        controller.setParent(this);
+        controller.fromCharacter(character);
+        controllerList.add(controller);
+    }
     public String getCountryTag() {
         return countryTag;
     }

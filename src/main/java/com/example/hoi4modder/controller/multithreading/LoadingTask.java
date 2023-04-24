@@ -5,16 +5,16 @@ import com.example.hoi4modder.controller.CharacterListEditor;
 import com.example.hoi4modder.game.GameCharacter;
 import com.example.hoi4modder.game.GameCharacterList;
 import com.example.hoi4modder.service.AbstractFactory;
-import javafx.fxml.FXMLLoader;
+import javafx.concurrent.Task;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Pane;
 
 import java.io.IOException;
 import java.util.List;
 
-public class LoadingTask implements Runnable{
+public class LoadingTask extends Task<Void> {
 
-    private final GameCharacterList characters;
+    private GameCharacterList characters;
 
     private CharacterListEditor editor;
 
@@ -22,7 +22,7 @@ public class LoadingTask implements Runnable{
 
     private final List<CharacterItemController> controllerList;
 
-    private String filename;
+    private final String filename;
 
     public LoadingTask(CharacterListEditor editor, String filename, GameCharacterList characters,
                        ListView<Pane> charactersListView, List<CharacterItemController> controllers) {
@@ -32,22 +32,13 @@ public class LoadingTask implements Runnable{
         this.charactersListView = charactersListView;
         this.controllerList = controllers;
     }
-    @Override
-    public void run() {
-        try {
-            AbstractFactory.get().getCharacterList(filename);
-            createListOfCharacters();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
 
 
     private void createListOfCharacters() {
         charactersListView.getItems().clear();
         for (GameCharacter character : characters) {
             try {
-                loadItem(character);
+                editor.loadItem(character);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -55,14 +46,11 @@ public class LoadingTask implements Runnable{
         if (!charactersListView.getItems().isEmpty())
             charactersListView.scrollTo(0);
     }
-    private void loadItem(GameCharacter character) throws IOException {
-        FXMLLoader itemLoader = new FXMLLoader();
-        itemLoader.setLocation(getClass().getResource("character-item.fxml"));
-        Pane pane = itemLoader.load();
-        charactersListView.getItems().add(pane);
-        CharacterItemController controller = itemLoader.getController();
-        controller.setParent(editor);
-        controller.fromCharacter(character);
-        controllerList.add(controller);
+
+    @Override
+    protected Void call() throws Exception {
+        this.characters = AbstractFactory.get().getCharacterList(filename);
+        createListOfCharacters();
+        return null;
     }
 }
