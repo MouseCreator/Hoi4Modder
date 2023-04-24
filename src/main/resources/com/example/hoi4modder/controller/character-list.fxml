@@ -13,19 +13,40 @@
       <Pane prefHeight="18.0" prefWidth="1000.0" />
       <HBox prefHeight="30.0" prefWidth="1000.0">
          <children>
-            <Pane prefHeight="29.0" prefWidth="56.0" />
-            <VBox prefHeight="29.0" prefWidth="71.0">
+            <HBox>
                <children>
-                  <Label text="Country Tag:" />
+                  <Pane prefHeight="30.0" prefWidth="32.0" />
+                  <VBox prefHeight="29.0" prefWidth="71.0">
+                     <children>
+                        <Label text="Country Tag:" />
+                     </children>
+                  </VBox>
+                  <TextField fx:id="tagTextField" prefHeight="26.0" prefWidth="54.0" />
+                  <Pane prefHeight="30.0" prefWidth="15.0" />
+                  <Pane prefHeight="30.0" prefWidth="80.0">
+                     <children>
+                        <Button layoutY="1.0" mnemonicParsing="false" onAction="#loadCharactersByTag" text="Open" />
+                     </children>
+                  </Pane>
                </children>
-            </VBox>
-            <TextField fx:id="tagTextField" />
-            <Pane prefHeight="30.0" prefWidth="15.0" />
-            <Pane prefHeight="200.0" prefWidth="200.0">
+            </HBox>
+            <HBox>
                <children>
-                  <Button layoutY="1.0" mnemonicParsing="false" onAction="#loadCharactersByTag" text="Open" />
-               </children></Pane>
-            <Button mnemonicParsing="false" onAction="#addEmptyCharacter" text="New character" />
+                  <VBox prefHeight="30.0" prefWidth="50.0">
+                     <children>
+                        <Label text="Search:" />
+                     </children>
+                  </VBox>
+                  <TextField fx:id="searchTextField" prefHeight="26.0" prefWidth="86.0" />
+                  <Pane prefHeight="30.0" prefWidth="15.0" />
+                  <Pane prefHeight="30.0" prefWidth="111.0">
+                     <children>
+                        <Button layoutY="1.0" mnemonicParsing="false" onAction="#findCharacterByName" text="Search" />
+                     </children>
+                  </Pane>
+                  <Button mnemonicParsing="false" onAction="#addEmptyCharacter" text="New character" />
+               </children>
+            </HBox>
             <Pane prefHeight="29.0" prefWidth="20.0" />
             <Button mnemonicParsing="false" onAction="#duplicateSelected" text="Duplicate" />
             <Pane prefHeight="29.0" prefWidth="20.0" />

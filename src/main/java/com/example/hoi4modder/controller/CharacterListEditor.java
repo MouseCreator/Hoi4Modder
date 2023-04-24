@@ -5,7 +5,6 @@ import com.example.hoi4modder.game.GameCharacter;
 import com.example.hoi4modder.game.GameCharacterList;
 import com.example.hoi4modder.model.files.manager.FileSearchService;
 import com.example.hoi4modder.model.files.manager.strategy.PutReplaceStrategy;
-import com.example.hoi4modder.service.AbstractFactory;
 import com.example.hoi4modder.service.Destinations;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -37,6 +36,10 @@ public class CharacterListEditor extends ActivePaneController implements Initial
     private final GameCharacterList characters = GameCharacterList.getArrayList();
     @FXML
     private TextField tagTextField;
+
+
+    @FXML
+    private TextField searchTextField;
     @Override
     protected String getFilename() {
         return "character-list.fxml";
@@ -120,6 +123,11 @@ public class CharacterListEditor extends ActivePaneController implements Initial
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         charactersListView.setFocusTraversable( false );
+    }
+
+    @FXML
+    public void findCharacterByName() {
+
     }
 }
 
