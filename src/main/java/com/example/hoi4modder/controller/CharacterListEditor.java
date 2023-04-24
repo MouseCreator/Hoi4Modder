@@ -34,7 +34,7 @@ public class CharacterListEditor extends ActivePaneController implements Initial
     private final List<CharacterItemController> controllerList = new ArrayList<>();
     private String countryTag;
 
-    private GameCharacterList characters = GameCharacterList.getArrayList();
+    private final GameCharacterList characters = GameCharacterList.getArrayList();
     @FXML
     private TextField tagTextField;
     @Override
@@ -93,13 +93,11 @@ public class CharacterListEditor extends ActivePaneController implements Initial
     }
 
     private void loadFromThread(String filename) {
-        Thread thread = new Thread(new LoadingTask(this, filename, characters, charactersListView, controllerList));
+        Thread thread = new Thread(new LoadingTask(this, filename, characters, charactersListView));
         thread.setName("CharacterLoadingThread");
         thread.start();
     }
 
-    private void loadSingleThread(String filename) {
-    }
     public void loadItem(GameCharacter character) throws IOException {
         FXMLLoader itemLoader = new FXMLLoader();
         itemLoader.setLocation(getClass().getResource("character-item.fxml"));

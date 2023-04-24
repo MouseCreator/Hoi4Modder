@@ -5,6 +5,7 @@ import com.example.hoi4modder.controller.CharacterListEditor;
 import com.example.hoi4modder.game.GameCharacter;
 import com.example.hoi4modder.game.GameCharacterList;
 import com.example.hoi4modder.service.AbstractFactory;
+import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Pane;
@@ -16,26 +17,23 @@ public class LoadingTask extends Task<Void> {
 
     private GameCharacterList characters;
 
-    private CharacterListEditor editor;
+    private final CharacterListEditor editor;
 
     private final ListView<Pane> charactersListView;
-
-    private final List<CharacterItemController> controllerList;
 
     private final String filename;
 
     public LoadingTask(CharacterListEditor editor, String filename, GameCharacterList characters,
-                       ListView<Pane> charactersListView, List<CharacterItemController> controllers) {
+                       ListView<Pane> charactersListView) {
         this.characters = characters;
         this.editor = editor;
         this.filename = filename;
         this.charactersListView = charactersListView;
-        this.controllerList = controllers;
     }
 
 
     private void createListOfCharacters() {
-        charactersListView.getItems().clear();
+       Platform.runLater(()-> charactersListView.getItems().clear());
         for (GameCharacter character : characters) {
             try {
                 editor.loadItem(character);
