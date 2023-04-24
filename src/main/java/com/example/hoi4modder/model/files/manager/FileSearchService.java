@@ -19,7 +19,7 @@ public class FileSearchService {
      * Example of file searcher
      */
     public FileSearchService() {
-        this.gameDirectory = "D:\\Games\\Hoi4 1.10\\Hearts of Iron IV\\";
+        this.gameDirectory = "D:\\Games\\Hoi4 1.12\\Hearts of Iron IV\\";
         this.modDirectory = "C:\\Users\\mysha\\Documents\\Paradox Interactive\\Hearts of Iron IV\\mod\\leylamod12d\\";
     }
     public String getGameDirectory() {

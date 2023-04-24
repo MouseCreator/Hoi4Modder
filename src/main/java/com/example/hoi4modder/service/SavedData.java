@@ -5,7 +5,7 @@ import com.example.hoi4modder.model.files.maps.LoadedData;
 
 /**
  * was: OBJECT POOL PATTERN?
- * Might be reused to create multiple file searchers
+ * Replaced with file searchers pool
  */
 public record SavedData(FileSearchService fileSearchService, LoadedData loadedData) {
 }
