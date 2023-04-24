@@ -32,8 +32,8 @@ public class AbstractFactory {
      * @return list of characters, saved in file
      * @throws IOException if file was not found or an error occurred during reading a file
      */
-    public GameCharacterList getCharacterList(String fromFile) throws IOException {
-        return parserFacade.characterListFromFile(fromFile);
+    public GameCharacterList getCharacterList(GameCharacterList list, String fromFile) throws IOException {
+        return parserFacade.characterListFromFile(list, fromFile);
     }
     /**
      *

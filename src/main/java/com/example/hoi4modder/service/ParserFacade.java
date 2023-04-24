@@ -21,8 +21,7 @@ public class ParserFacade {
      * @return list of characters in the file.
      * @throws IOException if file was not found or error occurred during reading a file
      */
-    public GameCharacterList characterListFromFile(String filename) throws IOException {
-        GameCharacterList list = GameCharacterList.getArrayList();
+    public GameCharacterList characterListFromFile(GameCharacterList list, String filename) throws IOException {
         parseVisitable(filename, list);
         return list;
     }

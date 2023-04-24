@@ -47,7 +47,7 @@ public class LoadingTask extends Task<Void> {
 
     @Override
     protected Void call() throws Exception {
-        this.characters = AbstractFactory.get().getCharacterList(filename);
+        AbstractFactory.get().getCharacterList(characters, filename);
         createListOfCharacters();
         return null;
     }

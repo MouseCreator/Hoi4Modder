@@ -1,11 +1,15 @@
 package com.example.hoi4modder.controller;
 
 import com.example.hoi4modder.controller.multithreading.LoadingTask;
+import com.example.hoi4modder.controller.multithreading.SearchingTask;
 import com.example.hoi4modder.game.GameCharacter;
 import com.example.hoi4modder.game.GameCharacterList;
 import com.example.hoi4modder.model.files.manager.FileSearchService;
 import com.example.hoi4modder.model.files.manager.strategy.PutReplaceStrategy;
+import com.example.hoi4modder.model.files.maps.DataPool;
+import com.example.hoi4modder.model.files.maps.LoadedData;
 import com.example.hoi4modder.service.Destinations;
+import com.example.hoi4modder.utilities.Strings;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -127,7 +131,52 @@ public class CharacterListEditor extends ActivePaneController implements Initial
 
     @FXML
     public void findCharacterByName() {
+        Thread searchingThread = new Thread(new SearchingTask(this));
+        searchingThread.setName("Searching-Thread");
+        searchingThread.start();
+    }
 
+    public void findCharacters() {
+        String target = searchTextField.getText();
+        if (target.startsWith("\"")) {
+            loadByName(target);
+        } else {
+            loadByID(target);
+        }
+    }
+
+    private void loadByID(String name) {
+        Platform.runLater(()-> this.charactersListView.getItems().clear());
+        for (GameCharacter character : characters) {
+            if (Strings.containsIgnoreCase(character.getIdentification(),name)) {
+                try {
+                    loadItem(character);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
+        if (!charactersListView.getItems().isEmpty())
+            charactersListView.scrollTo(0);
+    }
+
+    private void loadByName(String name) {
+        name = name.replace("\"", "");
+        Platform.runLater(()-> this.charactersListView.getItems().clear());
+        LoadedData data = parentController.getSavedData().loadedData();
+        DataPool<String> localisationPool = data.getLocalisationData();
+        for (GameCharacter character : characters) {
+            String expected = localisationPool.get(character.getName());
+            if (Strings.containsIgnoreCase(expected, name)) {
+                try {
+                    loadItem(character);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
+        if (!charactersListView.getItems().isEmpty())
+            charactersListView.scrollTo(0);
     }
 }
 
