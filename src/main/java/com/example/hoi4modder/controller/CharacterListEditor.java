@@ -9,6 +9,7 @@ import com.example.hoi4modder.model.files.manager.strategy.PutReplaceStrategy;
 import com.example.hoi4modder.model.files.maps.DataPool;
 import com.example.hoi4modder.model.files.maps.LoadedData;
 import com.example.hoi4modder.service.Destinations;
+import com.example.hoi4modder.service.saver.CharacterSaver;
 import com.example.hoi4modder.utilities.Strings;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -50,7 +51,8 @@ public class CharacterListEditor extends ActivePaneController implements Initial
 
     @Override
     public void save() {
-
+        CharacterSaver saver = new CharacterSaver(this);
+        saver.save();
     }
 
     @Override
@@ -177,6 +179,9 @@ public class CharacterListEditor extends ActivePaneController implements Initial
         }
         if (!charactersListView.getItems().isEmpty())
             charactersListView.scrollTo(0);
+    }
+    public MainController getParent() {
+        return this.parentController;
     }
 }
 
