@@ -148,7 +148,8 @@ public class CharacterListEditor extends ActivePaneController implements Initial
     private void loadByID(String name) {
         Platform.runLater(()-> this.charactersListView.getItems().clear());
         for (GameCharacter character : characters) {
-            if (Strings.containsIgnoreCase(character.getIdentification(),name)) {
+            String expected = character.getIdentification();
+            if (Strings.containsIgnoreCase(expected, name)) {
                 try {
                     loadItem(character);
                 } catch (IOException e) {
@@ -161,13 +162,13 @@ public class CharacterListEditor extends ActivePaneController implements Initial
     }
 
     private void loadByName(String name) {
-        name = name.replace("\"", "");
+        final String targetName = name.replace("\"", "");
         Platform.runLater(()-> this.charactersListView.getItems().clear());
         LoadedData data = parentController.getSavedData().loadedData();
         DataPool<String> localisationPool = data.getLocalisationData();
         for (GameCharacter character : characters) {
             String expected = localisationPool.get(character.getName());
-            if (Strings.containsIgnoreCase(expected, name)) {
+            if (Strings.containsIgnoreCase(expected, targetName)) {
                 try {
                     loadItem(character);
                 } catch (IOException e) {
