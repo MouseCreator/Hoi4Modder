@@ -52,7 +52,8 @@ public class LoadingTask implements Runnable{
                 e.printStackTrace();
             }
         }
-        //charactersListView.scrollTo(0);
+        if (!charactersListView.getItems().isEmpty())
+            charactersListView.scrollTo(0);
     }
     private void loadItem(GameCharacter character) throws IOException {
         FXMLLoader itemLoader = new FXMLLoader();
