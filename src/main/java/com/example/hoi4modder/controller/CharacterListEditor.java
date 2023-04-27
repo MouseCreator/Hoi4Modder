@@ -104,13 +104,8 @@ public class CharacterListEditor extends ActivePaneController implements Initial
         LoadingTask task = new LoadingTask(this, filename);
         Thread thread = new Thread(task);
         task.setOnSucceeded(workerStateEvent -> {
-            charactersListView.getItems().clear();
-            charactersListView.getItems().addAll(task.getPanes());
             controllerList.clear();
             controllerList.addAll(task.getControllers());
-            if (!charactersListView.getItems().isEmpty()) {
-                charactersListView.scrollTo(0);
-            }
         });
         task.setOnFailed(workerStateEvent -> {
             Alert alert = new Alert(Alert.AlertType.ERROR, "An error occurred during loading characters!");
@@ -120,21 +115,15 @@ public class CharacterListEditor extends ActivePaneController implements Initial
         thread.start();
     }
 
-    public Pane loadItem(GameCharacter character)  {
+    public void loadItem(List<Pane> panes)  {
 
-        FXMLLoader itemLoader = new FXMLLoader();
-        itemLoader.setLocation(getClass().getResource("character-item.fxml"));
-        try {
-            Pane pane = itemLoader.load();
-            CharacterItemController controller = itemLoader.getController();
-            controller.setParent(this);
-            controller.fromCharacter(character);
-            controllerList.add(controller);
-            return pane;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return new Pane();
+        Platform.runLater(()-> {
+            charactersListView.getItems().clear();
+            charactersListView.getItems().addAll(panes);
+            if (!charactersListView.getItems().isEmpty()) {
+                charactersListView.scrollTo(0);
+            }
+        });
     }
     public String getCountryTag() {
         return countryTag;

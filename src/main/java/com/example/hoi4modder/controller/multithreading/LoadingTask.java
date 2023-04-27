@@ -5,8 +5,10 @@ import com.example.hoi4modder.controller.CharacterListEditor;
 import com.example.hoi4modder.game.GameCharacter;
 import com.example.hoi4modder.game.GameCharacterList;
 import com.example.hoi4modder.service.AbstractFactory;
+import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.ListView;
 import javafx.scene.layout.Pane;
 
 import java.io.IOException;
@@ -19,10 +21,8 @@ public class LoadingTask extends Task<Void> {
     private final GameCharacterList characters;
     private final String filename;
     private final CharacterListEditor editor;
-
     private final List<Pane> paneList = new LinkedList<>();
     private final List<CharacterItemController> controllerList = new LinkedList<>();
-
 
     public LoadingTask(CharacterListEditor editor, String filename) {
         this.characters = GameCharacterList.getArrayList();
@@ -46,6 +46,9 @@ public class LoadingTask extends Task<Void> {
                 e.printStackTrace();
             }
         }
+        Platform.runLater(()-> {
+            editor.loadItem(paneList);
+        });
     }
 
     @Override
