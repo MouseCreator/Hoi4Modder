@@ -11,11 +11,7 @@ import com.example.hoi4modder.model.files.maps.LoadedData;
 import com.example.hoi4modder.service.Destinations;
 import com.example.hoi4modder.service.saver.CharacterSaver;
 import com.example.hoi4modder.utilities.Strings;
-import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -105,8 +101,21 @@ public class CharacterListEditor extends ActivePaneController implements Initial
     }
 
     private void loadFromThread(String filename) {
-        Task task = new LoadingTask(filename);
+        LoadingTask task = new LoadingTask(this, filename);
         Thread thread = new Thread(task);
+        task.setOnSucceeded(workerStateEvent -> {
+            charactersListView.getItems().clear();
+            charactersListView.getItems().addAll(task.getPanes());
+            controllerList.clear();
+            controllerList.addAll(task.getControllers());
+            if (!charactersListView.getItems().isEmpty()) {
+                charactersListView.scrollTo(0);
+            }
+        });
+        task.setOnFailed(workerStateEvent -> {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "An error occurred during loading characters!");
+            alert.showAndWait();
+        });
         thread.setName("CharacterLoadingThread");
         thread.start();
     }
