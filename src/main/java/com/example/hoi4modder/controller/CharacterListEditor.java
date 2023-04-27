@@ -11,7 +11,11 @@ import com.example.hoi4modder.model.files.maps.LoadedData;
 import com.example.hoi4modder.service.Destinations;
 import com.example.hoi4modder.service.saver.CharacterSaver;
 import com.example.hoi4modder.utilities.Strings;
+import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -101,21 +105,27 @@ public class CharacterListEditor extends ActivePaneController implements Initial
     }
 
     private void loadFromThread(String filename) {
-        Thread thread = new Thread(new LoadingTask(this, filename, characters, charactersListView));
+        Task task = new LoadingTask(filename);
+        Thread thread = new Thread(task);
         thread.setName("CharacterLoadingThread");
         thread.start();
     }
 
-    public void loadItem(GameCharacter character) throws IOException {
+    public Pane loadItem(GameCharacter character)  {
+
         FXMLLoader itemLoader = new FXMLLoader();
         itemLoader.setLocation(getClass().getResource("character-item.fxml"));
-        Pane pane = itemLoader.load();
-        Platform.runLater(() -> charactersListView.getItems().add(pane));
-
-        CharacterItemController controller = itemLoader.getController();
-        controller.setParent(this);
-        controller.fromCharacter(character);
-        controllerList.add(controller);
+        try {
+            Pane pane = itemLoader.load();
+            CharacterItemController controller = itemLoader.getController();
+            controller.setParent(this);
+            controller.fromCharacter(character);
+            controllerList.add(controller);
+            return pane;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return new Pane();
     }
     public String getCountryTag() {
         return countryTag;
@@ -147,15 +157,11 @@ public class CharacterListEditor extends ActivePaneController implements Initial
     }
 
     private void loadByID(String name) {
-        Platform.runLater(()-> this.charactersListView.getItems().clear());
+        this.charactersListView.getItems().clear();
         for (GameCharacter character : characters) {
             String expected = character.getIdentification();
             if (Strings.containsIgnoreCase(expected, name)) {
-                try {
-                    loadItem(character);
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
+               //loadItem
             }
         }
         if (!charactersListView.getItems().isEmpty())
@@ -170,11 +176,7 @@ public class CharacterListEditor extends ActivePaneController implements Initial
         for (GameCharacter character : characters) {
             String expected = localisationPool.get(character.getName());
             if (Strings.containsIgnoreCase(expected, targetName)) {
-                try {
-                    loadItem(character);
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
+               //load item
             }
         }
         if (!charactersListView.getItems().isEmpty())

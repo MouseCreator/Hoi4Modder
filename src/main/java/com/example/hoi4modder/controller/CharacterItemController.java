@@ -9,7 +9,6 @@ import com.example.hoi4modder.model.files.maps.DataPool;
 import com.example.hoi4modder.model.files.maps.LoadedData;
 import com.example.hoi4modder.service.Destinations;
 import com.example.hoi4modder.service.ImageTransformer;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -107,7 +106,7 @@ public class CharacterItemController implements Initializable {
         NavyLeader navyLeader = (NavyLeader) character.getRoles().get(role);
         loader.setLocation(getClass().getResource("navy-leader-item.fxml"));
         Pane pane = loader.load();
-        Platform.runLater(()-> rolesBox.getChildren().add(pane));
+        rolesBox.getChildren().add(pane);
         NavyLeaderController controller = loader.getController();
         controller.setParent(this);
         controller.fromRole(navyLeader);
@@ -120,7 +119,7 @@ public class CharacterItemController implements Initializable {
         UnitLeader unitLeader = (UnitLeader) character.getRoles().get(role);
         loader.setLocation(getClass().getResource("unit-leader-item.fxml"));
         Pane pane =  loader.load();
-        Platform.runLater(()-> rolesBox.getChildren().add(pane));
+        rolesBox.getChildren().add(pane);
         UnitLeaderController controller = loader.getController();
         controller.setParent(this);
         controller.fromRole(unitLeader);
@@ -132,7 +131,7 @@ public class CharacterItemController implements Initializable {
         CountryLeader countryLeader = (CountryLeader) character.getRoles().get(role);
         loader.setLocation(getClass().getResource("country-leader-item.fxml"));
         Pane pane = loader.load();
-        Platform.runLater(()-> rolesBox.getChildren().add(pane));
+        rolesBox.getChildren().add(pane);
         CountryLeaderRoleController controller = loader.getController();
         controller.setParent(this);
         controller.fromRole(countryLeader);
@@ -144,7 +143,7 @@ public class CharacterItemController implements Initializable {
         Advisor advisor = (Advisor) character.getRoles().get(role);
         loader.setLocation(getClass().getResource("advisor-item.fxml"));
         Pane pane = loader.load();
-        Platform.runLater(()-> rolesBox.getChildren().add(pane));
+        rolesBox.getChildren().add(pane);
         AdvisorRoleController controller = loader.getController();
         controller.setParent(this);
         controller.fromRole(advisor);
