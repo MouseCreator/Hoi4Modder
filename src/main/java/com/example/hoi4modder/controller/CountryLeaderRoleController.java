@@ -65,13 +65,13 @@ public class CountryLeaderRoleController extends RoleController<CountryLeader> i
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        ideologyBox.getItems().removeAll(ideologyBox.getItems());
+        ideologyBox.getItems().clear();
         ideologyBox.getItems().addAll("Neutrality", "Democratic", "Fascism", "Communism");
         ideologyBox.getSelectionModel().select("Neutrality");
         setTypesFromIdeology("Neutrality");
     }
     private void setTypesFromIdeology(String ideology) {
-        typeBox.getItems().removeAll(ideologyBox.getItems());
+        typeBox.getItems().clear();
         List<String> list = ideologies.get(ideology);
         for(String str : list)
             typeBox.getItems().add(stringToUpperCase(str));
