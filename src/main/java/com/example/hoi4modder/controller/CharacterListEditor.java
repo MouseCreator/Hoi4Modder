@@ -9,12 +9,13 @@ import com.example.hoi4modder.model.files.manager.FileSearchService;
 import com.example.hoi4modder.model.files.manager.strategy.PutReplaceStrategy;
 import com.example.hoi4modder.service.Destinations;
 import com.example.hoi4modder.service.saver.CharacterSaver;
-import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
+import org.controlsfx.control.textfield.AutoCompletionBinding;
+import org.controlsfx.control.textfield.TextFields;
 
 import java.net.URL;
 import java.util.*;
@@ -29,13 +30,12 @@ public class CharacterListEditor extends ActivePaneController implements Initial
     private final List<CharacterItemController> controllerList = new ArrayList<>();
     private String countryTag;
 
-    private AutocompleteTextField searchAutocomplete;
+    private final Set<String> possibleSearchCompletionSet = new HashSet<>();
 
+    private AutoCompletionBinding<String> autoCompletionBinding;
     private final GameCharacterList characters = GameCharacterList.getArrayList();
     @FXML
     private TextField tagTextField;
-
-
     @FXML
     private TextField searchTextField;
     @Override
@@ -101,7 +101,7 @@ public class CharacterListEditor extends ActivePaneController implements Initial
             controllerList.clear();
             controllerList.addAll(task.getControllers());
             loadItems(task.getPanes());
-            addSearchSuggestions();
+            updateSearchAutocompletion();
         });
         task.setOnFailed(workerStateEvent -> {
             Alert alert = new Alert(Alert.AlertType.ERROR, "An error occurred during loading characters!");
@@ -110,28 +110,25 @@ public class CharacterListEditor extends ActivePaneController implements Initial
         thread.setName("CharacterLoadingThread");
         thread.start();
     }
-    private SortedSet<String> characterIDs() {
-        SortedSet<String> set = new TreeSet<>();
-        for (GameCharacter character : characters) {
-            set.add(character.getIdentification());
-        }
-        return set;
-    }
-    private void addSearchSuggestions() {
-        if (searchAutocomplete == null) {
-            searchAutocomplete = new AutocompleteTextField(searchTextField, characterIDs());
-        } else {
-            searchAutocomplete.clearSuggestions();
-            searchAutocomplete.addAllSuggestions(characterIDs());
-        }
-    }
+
 
     private void loadItems(ObservableList<Pane> panes)  {
         charactersListView.setItems(panes);
         if (!charactersListView.getItems().isEmpty()) {
             charactersListView.scrollTo(0);
         }
+
     }
+
+    private void updateSearchAutocompletion() {
+        possibleSearchCompletionSet.clear();
+        for (GameCharacter character : characters) {
+           possibleSearchCompletionSet.add(character.getIdentification());
+        }
+        autoCompletionBinding.dispose();
+        autoCompletionBinding = TextFields.bindAutoCompletion(searchTextField, possibleSearchCompletionSet);
+    }
+
     public String getCountryTag() {
         return countryTag;
     }
@@ -143,6 +140,7 @@ public class CharacterListEditor extends ActivePaneController implements Initial
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         charactersListView.setFocusTraversable(false);
+        autoCompletionBinding = TextFields.bindAutoCompletion(searchTextField, possibleSearchCompletionSet);
     }
 
     @FXML
