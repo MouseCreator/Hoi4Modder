@@ -1,6 +1,7 @@
 package com.example.hoi4modder.controller;
 
 import com.example.hoi4modder.controller.autocomplete.AutocompleteTextField;
+import com.example.hoi4modder.controller.multithreading.EditorListTask;
 import com.example.hoi4modder.controller.multithreading.LoadingTask;
 import com.example.hoi4modder.controller.multithreading.SearchingTask;
 import com.example.hoi4modder.game.GameCharacter;
@@ -91,7 +92,7 @@ public class CharacterListEditor extends ActivePaneController implements Initial
     }
 
     private void loadFromThread(String filename) {
-        LoadingTask task = new LoadingTask(this, filename, characters);
+        EditorListTask task = new LoadingTask(this, filename, characters);
         Thread thread = new Thread(task);
         task.setOnSucceeded(workerStateEvent -> {
             controllerList.clear();
@@ -143,7 +144,7 @@ public class CharacterListEditor extends ActivePaneController implements Initial
 
     @FXML
     public void findCharacterByName() {
-        SearchingTask task = new SearchingTask(this, searchTextField.getText(), characters);
+        EditorListTask task = new SearchingTask(this, searchTextField.getText(), characters);
         Thread searchingThread = new Thread(task);
         task.setOnSucceeded(workerStateEvent -> {
             controllerList.clear();
