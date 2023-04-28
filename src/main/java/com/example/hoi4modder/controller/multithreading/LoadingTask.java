@@ -5,6 +5,8 @@ import com.example.hoi4modder.controller.CharacterListEditor;
 import com.example.hoi4modder.game.GameCharacter;
 import com.example.hoi4modder.game.GameCharacterList;
 import com.example.hoi4modder.service.AbstractFactory;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.Pane;
@@ -56,7 +58,7 @@ public class LoadingTask extends Task<Void> {
         return controllerList;
     }
 
-    public List<Pane> getPanes() {
-        return paneList;
+    public ObservableList<Pane> getPanes() {
+        return FXCollections.observableList(paneList);
     }
 }

@@ -7,6 +7,8 @@ import com.example.hoi4modder.game.GameCharacterList;
 import com.example.hoi4modder.model.files.maps.DataPool;
 import com.example.hoi4modder.model.files.maps.LoadedData;
 import com.example.hoi4modder.utilities.Strings;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.Pane;
@@ -91,8 +93,8 @@ public class SearchingTask extends Task<Void> {
         return controllers;
     }
 
-    public List<Pane> getPanes() {
-        return panes;
+    public ObservableList<Pane> getPanes() {
+        return FXCollections.observableList(panes);
     }
 
 }

@@ -73,7 +73,7 @@ public class CharacterItemController implements Initializable {
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        rolesBox.setFillHeight(true);
     }
 
     public void fromCharacter(GameCharacter character) {

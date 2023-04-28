@@ -9,7 +9,8 @@ import com.example.hoi4modder.model.files.manager.FileSearchService;
 import com.example.hoi4modder.model.files.manager.strategy.PutReplaceStrategy;
 import com.example.hoi4modder.service.Destinations;
 import com.example.hoi4modder.service.saver.CharacterSaver;
-import javafx.collections.FXCollections;
+import javafx.application.Platform;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -125,8 +126,8 @@ public class CharacterListEditor extends ActivePaneController implements Initial
         }
     }
 
-    private void loadItems(List<Pane> panes)  {
-        charactersListView.setItems(FXCollections.observableList(panes));
+    private void loadItems(ObservableList<Pane> panes)  {
+        charactersListView.setItems(panes);
         if (!charactersListView.getItems().isEmpty()) {
             charactersListView.scrollTo(0);
         }
