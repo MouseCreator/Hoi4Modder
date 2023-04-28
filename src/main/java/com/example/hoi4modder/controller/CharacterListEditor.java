@@ -2,18 +2,12 @@ package com.example.hoi4modder.controller;
 
 import com.example.hoi4modder.controller.multithreading.LoadingTask;
 import com.example.hoi4modder.controller.multithreading.SearchingTask;
-import com.example.hoi4modder.game.GameCharacter;
 import com.example.hoi4modder.game.GameCharacterList;
 import com.example.hoi4modder.model.files.manager.FileSearchService;
 import com.example.hoi4modder.model.files.manager.strategy.PutReplaceStrategy;
-import com.example.hoi4modder.model.files.maps.DataPool;
-import com.example.hoi4modder.model.files.maps.LoadedData;
 import com.example.hoi4modder.service.Destinations;
 import com.example.hoi4modder.service.saver.CharacterSaver;
-import com.example.hoi4modder.utilities.Strings;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
@@ -21,7 +15,6 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -101,11 +94,12 @@ public class CharacterListEditor extends ActivePaneController implements Initial
     }
 
     private void loadFromThread(String filename) {
-        LoadingTask task = new LoadingTask(this, filename);
+        LoadingTask task = new LoadingTask(this, filename, characters);
         Thread thread = new Thread(task);
         task.setOnSucceeded(workerStateEvent -> {
             controllerList.clear();
             controllerList.addAll(task.getControllers());
+            loadItems(task.getPanes());
         });
         task.setOnFailed(workerStateEvent -> {
             Alert alert = new Alert(Alert.AlertType.ERROR, "An error occurred during loading characters!");
@@ -115,15 +109,14 @@ public class CharacterListEditor extends ActivePaneController implements Initial
         thread.start();
     }
 
-    public void loadItem(List<Pane> panes)  {
+    private void loadItems(List<Pane> panes)  {
 
-        Platform.runLater(()-> {
-            charactersListView.getItems().clear();
-            charactersListView.getItems().addAll(panes);
-            if (!charactersListView.getItems().isEmpty()) {
-                charactersListView.scrollTo(0);
-            }
-        });
+        charactersListView.getItems().clear();
+        charactersListView.getItems().addAll(panes);
+        if (!charactersListView.getItems().isEmpty()) {
+            charactersListView.scrollTo(0);
+        }
+        charactersListView.refresh();
     }
     public String getCountryTag() {
         return countryTag;
@@ -140,46 +133,22 @@ public class CharacterListEditor extends ActivePaneController implements Initial
 
     @FXML
     public void findCharacterByName() {
-        Thread searchingThread = new Thread(new SearchingTask(this));
+        SearchingTask task = new SearchingTask(this, searchTextField.getText(), characters);
+        Thread searchingThread = new Thread(task);
+        task.setOnSucceeded(workerStateEvent -> {
+            controllerList.clear();
+            controllerList.addAll(task.getControllers());
+            loadItems(task.getPanes());
+        });
+        task.setOnFailed(workerStateEvent -> {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "An error occurred during searching characters!");
+            alert.showAndWait();
+        });
         searchingThread.setName("Searching-Thread");
         searchingThread.start();
     }
 
-    public void findCharacters() {
-        String target = searchTextField.getText();
-        if (target.startsWith("\"")) {
-            loadByName(target);
-        } else {
-            loadByID(target);
-        }
-    }
 
-    private void loadByID(String name) {
-        this.charactersListView.getItems().clear();
-        for (GameCharacter character : characters) {
-            String expected = character.getIdentification();
-            if (Strings.containsIgnoreCase(expected, name)) {
-               //loadItem
-            }
-        }
-        if (!charactersListView.getItems().isEmpty())
-            charactersListView.scrollTo(0);
-    }
-
-    private void loadByName(String name) {
-        final String targetName = name.replace("\"", "");
-        Platform.runLater(()-> this.charactersListView.getItems().clear());
-        LoadedData data = parentController.getSavedData().loadedData();
-        DataPool<String> localisationPool = data.getLocalisationData();
-        for (GameCharacter character : characters) {
-            String expected = localisationPool.get(character.getName());
-            if (Strings.containsIgnoreCase(expected, targetName)) {
-               //load item
-            }
-        }
-        if (!charactersListView.getItems().isEmpty())
-            charactersListView.scrollTo(0);
-    }
     public MainController getParent() {
         return this.parentController;
     }

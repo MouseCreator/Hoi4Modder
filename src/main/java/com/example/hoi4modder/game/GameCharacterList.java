@@ -39,4 +39,8 @@ public class GameCharacterList implements Iterable<GameCharacter>, Visitable {
     public void acceptVisitor(Visitor visitor) {
         visitor.visitCharacterList(this);
     }
+
+    public void clear() {
+        characterList.clear();
+    }
 }

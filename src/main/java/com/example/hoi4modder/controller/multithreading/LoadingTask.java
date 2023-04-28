@@ -5,14 +5,12 @@ import com.example.hoi4modder.controller.CharacterListEditor;
 import com.example.hoi4modder.game.GameCharacter;
 import com.example.hoi4modder.game.GameCharacterList;
 import com.example.hoi4modder.service.AbstractFactory;
-import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.ListView;
 import javafx.scene.layout.Pane;
 
 import java.io.IOException;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -21,16 +19,14 @@ public class LoadingTask extends Task<Void> {
     private final GameCharacterList characters;
     private final String filename;
     private final CharacterListEditor editor;
-    private final List<Pane> paneList = new LinkedList<>();
-    private final List<CharacterItemController> controllerList = new LinkedList<>();
+    private final List<Pane> paneList = new ArrayList<>();
+    private final List<CharacterItemController> controllerList = new ArrayList<>();
 
-    public LoadingTask(CharacterListEditor editor, String filename) {
-        this.characters = GameCharacterList.getArrayList();
+    public LoadingTask(CharacterListEditor editor, String filename, GameCharacterList characters) {
+        this.characters = characters;
         this.filename = filename;
         this.editor = editor;
     }
-
-
     private void createListOfCharacters() {
         for (GameCharacter character : characters) {
             FXMLLoader itemLoader = new FXMLLoader();
@@ -46,13 +42,11 @@ public class LoadingTask extends Task<Void> {
                 e.printStackTrace();
             }
         }
-        Platform.runLater(()-> {
-            editor.loadItem(paneList);
-        });
     }
 
     @Override
     protected Void call() throws Exception {
+        characters.clear();
         AbstractFactory.get().getCharacterList(characters, filename);
         createListOfCharacters();
         return null;
@@ -62,8 +56,7 @@ public class LoadingTask extends Task<Void> {
         return controllerList;
     }
 
-    public Pane[] getPanes() {
-        Pane[] panes = new Pane[paneList.size()];
-        return paneList.toArray(panes);
+    public List<Pane> getPanes() {
+        return paneList;
     }
 }
