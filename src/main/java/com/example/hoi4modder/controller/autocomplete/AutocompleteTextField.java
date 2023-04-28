@@ -10,6 +10,8 @@ public class AutocompleteTextField {
 
     private final ScrollPane optionsScroll; // ?
     private final SortedSet<String> suggestions;
+
+    private final int maxMenuOptions = 7;
     private final ContextMenu suggestionsPopup;
     public AutocompleteTextField(TextField field, SortedSet<String> suggestions) {
         textField = field;
@@ -47,7 +49,9 @@ public class AutocompleteTextField {
 
     private void fillPopup(List<String> possibleValues) {
         List<CustomMenuItem> menuItems = new ArrayList<>();
-        for (String suggestion : possibleValues) {
+        int menuItemsSize = Math.min(maxMenuOptions,possibleValues.size());
+        for (int i = 0; i < menuItemsSize;i++) {
+            String suggestion = possibleValues.get(i);
             final String res = suggestion;
             Label entryLabel = new Label();
             entryLabel.setText(suggestion);
