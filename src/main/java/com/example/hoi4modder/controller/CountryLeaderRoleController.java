@@ -23,9 +23,7 @@ public class CountryLeaderRoleController extends RoleController<CountryLeader> i
     private ListView<String> traitList;
     @FXML
     private ComboBox<String> typeBox;
-
-    @FXML
-    private VBox mainBox;
+    
     @FXML
     private TextField traitName;
 
@@ -81,4 +79,11 @@ public class CountryLeaderRoleController extends RoleController<CountryLeader> i
             typeBox.getItems().add(stringToUpperCase(str));
     }
     private final Map<String, List<String>> ideologies;
+
+
+    @FXML
+    void updateIdeologyType() {
+        setTypesFromIdeology(ideologyBox.getValue());
+        typeBox.getSelectionModel().select(0);
+    }
 }

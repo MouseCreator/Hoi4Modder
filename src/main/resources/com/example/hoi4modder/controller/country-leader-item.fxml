@@ -21,7 +21,7 @@
       <HBox prefHeight="30.0" prefWidth="167.0">
          <children>
             <Label prefHeight="18.0" prefWidth="59.0" text="Ideology:" />
-            <ComboBox fx:id="ideologyBox" prefWidth="150.0" />
+            <ComboBox fx:id="ideologyBox" onAction="#updateIdeologyType" prefWidth="150.0" />
          </children>
       </HBox>
       <HBox prefHeight="30.0" prefWidth="167.0">

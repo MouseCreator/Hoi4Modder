@@ -7,6 +7,7 @@ import com.example.hoi4modder.model.files.images.DirectSurfaceManager;
 import com.example.hoi4modder.model.files.manager.FileSearchService;
 import com.example.hoi4modder.model.files.maps.DataPool;
 import com.example.hoi4modder.model.files.maps.LoadedData;
+import com.example.hoi4modder.service.AppConfig;
 import com.example.hoi4modder.service.Destinations;
 import com.example.hoi4modder.service.ImageTransformer;
 import javafx.fxml.FXML;
@@ -74,6 +75,11 @@ public class CharacterItemController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         rolesBox.setFillHeight(true);
+       /* countryLeaderBox.selectedProperty().addListener((observableValue, oldValue, newValue) -> {
+            countryLeaderBox.setSelected(!newValue);
+            gameCharacter.getRoles().put("country_leader", CountryLeader.createCountryLeader());
+            loadCountryLeader(gameCharacter, "country_leader");
+        }); */
     }
 
     public void fromCharacter(GameCharacter character) {
@@ -87,25 +93,27 @@ public class CharacterItemController implements Initializable {
     }
 
     private void loadRoles(GameCharacter character) {
-        try {
-            for (String role : character.getRoles().keys()) {
-                switch (role) {
-                    case "advisor" -> loadAdvisor(character, role);
-                    case "country_leader" -> loadCountryLeader(character, role);
-                    case "corps_commander", "field_marshal" -> loadUnitLeader(character, role);
-                    case "navy_leader" -> loadNavyLeader(character, role);
-                }
+        for (String role : character.getRoles().keys()) {
+            switch (role) {
+                case "advisor" -> loadAdvisor(character, role);
+                case "country_leader" -> loadCountryLeader(character, role);
+                case "corps_commander", "field_marshal" -> loadUnitLeader(character, role);
+                case "navy_leader" -> loadNavyLeader(character, role);
             }
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 
-    private void loadNavyLeader(GameCharacter character, String role) throws IOException {
+    private void loadNavyLeader(GameCharacter character, String role) {
         FXMLLoader loader = new FXMLLoader();
         NavyLeader navyLeader = (NavyLeader) character.getRoles().get(role);
         loader.setLocation(getClass().getResource("navy-leader-item.fxml"));
-        Pane pane = loader.load();
+        Pane pane;
+        try {
+            pane = loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
         rolesBox.getChildren().add(pane);
         NavyLeaderController controller = loader.getController();
         controller.setParent(this);
@@ -114,11 +122,17 @@ public class CharacterItemController implements Initializable {
 
     }
 
-    private void loadUnitLeader(GameCharacter character, String role) throws IOException {
+    private void loadUnitLeader(GameCharacter character, String role) {
         FXMLLoader loader = new FXMLLoader();
         UnitLeader unitLeader = (UnitLeader) character.getRoles().get(role);
         loader.setLocation(getClass().getResource("unit-leader-item.fxml"));
-        Pane pane =  loader.load();
+        Pane pane;
+        try {
+            pane = loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
         rolesBox.getChildren().add(pane);
         UnitLeaderController controller = loader.getController();
         controller.setParent(this);
@@ -126,11 +140,17 @@ public class CharacterItemController implements Initializable {
         unitLeaderBox.setSelected(true);
     }
 
-    private void loadCountryLeader(GameCharacter character, String role) throws IOException {
+    private void loadCountryLeader(GameCharacter character, String role) {
         FXMLLoader loader = new FXMLLoader();
         CountryLeader countryLeader = (CountryLeader) character.getRoles().get(role);
         loader.setLocation(getClass().getResource("country-leader-item.fxml"));
-        Pane pane = loader.load();
+        Pane pane;
+        try {
+            pane = loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
         rolesBox.getChildren().add(pane);
         CountryLeaderRoleController controller = loader.getController();
         controller.setParent(this);
@@ -138,11 +158,17 @@ public class CharacterItemController implements Initializable {
         countryLeaderBox.setSelected(true);
     }
 
-    private void loadAdvisor(GameCharacter character, String role) throws IOException {
+    private void loadAdvisor(GameCharacter character, String role) {
         FXMLLoader loader = new FXMLLoader();
         Advisor advisor = (Advisor) character.getRoles().get(role);
         loader.setLocation(getClass().getResource("advisor-item.fxml"));
-        Pane pane = loader.load();
+        Pane pane;
+        try {
+            pane = loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
         rolesBox.getChildren().add(pane);
         AdvisorRoleController controller = loader.getController();
         controller.setParent(this);
@@ -182,8 +208,7 @@ public class CharacterItemController implements Initializable {
     }
 
     private String modDirectory() {
-        FileSearchService service = listEditor.parentController.getSavedData().fileSearchService();
-        return service.getModDirectory();
+        return new AppConfig().getModDirectory();
     }
 
     @FXML
