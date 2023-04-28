@@ -5,6 +5,7 @@ import com.example.hoi4modder.service.SavedData;
 import com.example.hoi4modder.service.SavedDataFactory;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
@@ -115,12 +116,12 @@ public class MainController implements Initializable {
         AppConfig appConfig = new AppConfig();
         String gameDir = appConfig.getGameDirectory();
         String gameExe = Destinations.get().gamePath(gameDir);
-        System.out.println(gameExe);
         try {
             Runtime.getRuntime().exec(gameExe, null, new File(gameDir));
         } catch (IOException e) {
-            e.printStackTrace();
-            throw new RuntimeException(e);
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Unable to start hoi4.exe; " +
+                    "Make sure that location is set properly and .exe file is in the specified directory!");
+            alert.showAndWait();
         }
     }
 }
