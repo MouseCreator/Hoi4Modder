@@ -6,7 +6,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.VBox;
 
 import java.net.URL;
 import java.util.*;
@@ -23,7 +22,7 @@ public class CountryLeaderRoleController extends RoleController<CountryLeader> i
     private ListView<String> traitList;
     @FXML
     private ComboBox<String> typeBox;
-    
+
     @FXML
     private TextField traitName;
 

@@ -30,6 +30,11 @@
                     <MenuItem mnemonicParsing="false" text="About" />
                   </items>
                 </Menu>
+                  <Menu mnemonicParsing="false" text="Game">
+                    <items>
+                      <MenuItem mnemonicParsing="false" onAction="#runGame" text="Run game" />
+                    </items>
+                  </Menu>
               </menus>
             </MenuBar>
             <HBox prefHeight="698.0" prefWidth="1280.0">

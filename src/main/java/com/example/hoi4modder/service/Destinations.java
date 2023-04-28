@@ -103,4 +103,8 @@ public class Destinations {
     public String noLargePortrait() {
         return basedir + data + image + interfaceDir + "NoLeader.png";
     }
+
+    public String gamePath(String gameDirectory) {
+        return gameDirectory + "hoi4.exe";
+    }
 }
