@@ -2,6 +2,7 @@ package com.example.hoi4modder.controller;
 
 import com.example.hoi4modder.controller.multithreading.LoadingTask;
 import com.example.hoi4modder.controller.multithreading.SearchingTask;
+import com.example.hoi4modder.game.GameCharacter;
 import com.example.hoi4modder.game.GameCharacterList;
 import com.example.hoi4modder.model.files.manager.FileSearchService;
 import com.example.hoi4modder.model.files.manager.strategy.PutReplaceStrategy;
@@ -16,10 +17,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.ResourceBundle;
+import java.util.*;
+
 /**
  * Controller for character list
  */
@@ -100,6 +99,7 @@ public class CharacterListEditor extends ActivePaneController implements Initial
             controllerList.clear();
             controllerList.addAll(task.getControllers());
             loadItems(task.getPanes());
+            addSearchSuggestions();
         });
         task.setOnFailed(workerStateEvent -> {
             Alert alert = new Alert(Alert.AlertType.ERROR, "An error occurred during loading characters!");
@@ -107,6 +107,16 @@ public class CharacterListEditor extends ActivePaneController implements Initial
         });
         thread.setName("CharacterLoadingThread");
         thread.start();
+    }
+    private SortedSet<String> characterIDs() {
+        SortedSet<String> set = new TreeSet<>();
+        for (GameCharacter character : characters) {
+            set.add(character.getIdentification());
+        }
+        return set;
+    }
+    private void addSearchSuggestions() {
+
     }
 
     private void loadItems(List<Pane> panes)  {
