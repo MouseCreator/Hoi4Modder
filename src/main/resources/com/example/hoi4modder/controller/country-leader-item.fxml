@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="280.0" prefWidth="189.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hoi4modder.controller.CountryLeaderRoleController">
+<VBox fx:id="mainBox" prefHeight="280.0" prefWidth="189.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hoi4modder.controller.CountryLeaderRoleController">
    <children>
       <Label text="Country leader">
          <font>
@@ -33,7 +33,7 @@
       <VBox>
          <children>
             <Label text="Traits:" />
-            <ListView fx:id="traitList" prefHeight="166.0" prefWidth="190.0" />
+            <ListView fx:id="traitList" prefHeight="128.0" prefWidth="190.0" />
             <HBox prefHeight="26.0" prefWidth="190.0">
                <children>
                   <Button mnemonicParsing="false" text="X" textFill="RED" />
