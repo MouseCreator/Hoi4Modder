@@ -9,12 +9,10 @@ import com.example.hoi4modder.model.files.manager.FileSearchService;
 import com.example.hoi4modder.model.files.manager.strategy.PutReplaceStrategy;
 import com.example.hoi4modder.service.Destinations;
 import com.example.hoi4modder.service.saver.CharacterSaver;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 
 import java.net.URL;
@@ -128,13 +126,10 @@ public class CharacterListEditor extends ActivePaneController implements Initial
     }
 
     private void loadItems(List<Pane> panes)  {
-
-        charactersListView.getItems().clear();
-        charactersListView.getItems().addAll(panes);
+        charactersListView.setItems(FXCollections.observableList(panes));
         if (!charactersListView.getItems().isEmpty()) {
             charactersListView.scrollTo(0);
         }
-        charactersListView.refresh();
     }
     public String getCountryTag() {
         return countryTag;
@@ -146,7 +141,7 @@ public class CharacterListEditor extends ActivePaneController implements Initial
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        charactersListView.setFocusTraversable( false );
+        charactersListView.setFocusTraversable(false);
     }
 
     @FXML
