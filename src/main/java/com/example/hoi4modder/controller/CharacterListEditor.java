@@ -1,5 +1,6 @@
 package com.example.hoi4modder.controller;
 
+import com.example.hoi4modder.controller.autocomplete.AutocompleteTextField;
 import com.example.hoi4modder.controller.multithreading.LoadingTask;
 import com.example.hoi4modder.controller.multithreading.SearchingTask;
 import com.example.hoi4modder.game.GameCharacter;
@@ -28,6 +29,8 @@ public class CharacterListEditor extends ActivePaneController implements Initial
     private ListView<Pane> charactersListView;
     private final List<CharacterItemController> controllerList = new ArrayList<>();
     private String countryTag;
+
+    private AutocompleteTextField searchAutocomplete;
 
     private final GameCharacterList characters = GameCharacterList.getArrayList();
     @FXML
@@ -116,7 +119,12 @@ public class CharacterListEditor extends ActivePaneController implements Initial
         return set;
     }
     private void addSearchSuggestions() {
-
+        if (searchAutocomplete == null) {
+            searchAutocomplete = new AutocompleteTextField(searchTextField, characterIDs());
+        } else {
+            searchAutocomplete.clearSuggestions();
+            searchAutocomplete.addAllSuggestions(characterIDs());
+        }
     }
 
     private void loadItems(List<Pane> panes)  {

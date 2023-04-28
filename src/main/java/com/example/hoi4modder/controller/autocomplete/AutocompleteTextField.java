@@ -1,20 +1,20 @@
 package com.example.hoi4modder.controller.autocomplete;
 
 import javafx.geometry.Side;
-import javafx.scene.control.ContextMenu;
-import javafx.scene.control.CustomMenuItem;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 import java.util.*;
 
 public class AutocompleteTextField {
     private final TextField textField;
+
+    private final ScrollPane optionsScroll; // ?
     private final SortedSet<String> suggestions;
     private final ContextMenu suggestionsPopup;
     public AutocompleteTextField(TextField field, SortedSet<String> suggestions) {
         textField = field;
         this.suggestions = suggestions;
+        optionsScroll = new ScrollPane();
         suggestionsPopup = new ContextMenu();
         setListener();
     }
@@ -40,24 +40,26 @@ public class AutocompleteTextField {
                 suggestionsPopup.hide();
                 return;
             }
-            showPopup(filtered, enteredValue);
+            fillPopup(filtered);
             suggestionsPopup.show(textField, Side.BOTTOM, 0, 0);
         });
     }
 
-    private void showPopup(List<String> possibleValues, String enteredValue) {
+    private void fillPopup(List<String> possibleValues) {
         List<CustomMenuItem> menuItems = new ArrayList<>();
         for (String suggestion : possibleValues) {
             final String res = suggestion;
             Label entryLabel = new Label();
+            entryLabel.setText(suggestion);
             CustomMenuItem item = new CustomMenuItem(entryLabel, true);
-            menuItems.add(item);
-
             item.setOnAction(actionEvent -> {
                 textField.setText(res);
                 textField.positionCaret(res.length());
                 suggestionsPopup.hide();
             });
+            menuItems.add(item);
+
+
         }
         suggestionsPopup.getItems().clear();
         suggestionsPopup.getItems().addAll(menuItems);
