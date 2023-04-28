@@ -21,9 +21,8 @@ public class LoadingTask extends Task<Void> {
     private final GameCharacterList characters;
     private final String filename;
     private final CharacterListEditor editor;
-    private final List<Pane> paneList = new ArrayList<>();
+    private final ObservableList<Pane> paneList = FXCollections.observableArrayList();
     private final List<CharacterItemController> controllerList = new ArrayList<>();
-
     public LoadingTask(CharacterListEditor editor, String filename, GameCharacterList characters) {
         this.characters = characters;
         this.filename = filename;
@@ -59,6 +58,6 @@ public class LoadingTask extends Task<Void> {
     }
 
     public ObservableList<Pane> getPanes() {
-        return FXCollections.observableList(paneList);
+        return paneList;
     }
 }

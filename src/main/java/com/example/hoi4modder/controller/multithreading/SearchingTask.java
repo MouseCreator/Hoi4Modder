@@ -21,7 +21,7 @@ public class SearchingTask extends Task<Void> {
 
     private final CharacterListEditor editor;
     private final String targetString;
-    private final List<Pane> panes = new ArrayList<>();
+    private final ObservableList<Pane> panes = FXCollections.observableArrayList();
 
     private final GameCharacterList characters;
     private final GameCharacterList initialCharacters;
@@ -94,7 +94,7 @@ public class SearchingTask extends Task<Void> {
     }
 
     public ObservableList<Pane> getPanes() {
-        return FXCollections.observableList(panes);
+        return panes;
     }
 
 }
