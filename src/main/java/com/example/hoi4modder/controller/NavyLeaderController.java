@@ -81,4 +81,14 @@ public class NavyLeaderController extends RoleController<NavyLeader> implements 
         manuverField.textProperty().addListener((observableValue, old, newValue) -> navyLeader.setManeuveringSkill(Integer.parseInt(newValue)));
         cordsField.textProperty().addListener((observableValue, old, newValue) -> navyLeader.setCoordinationSkill(Integer.parseInt(newValue)));
     }
+
+    @FXML
+    void addTrait() {
+        super.addTrait(traitsList, traitField.getText());
+    }
+
+    @FXML
+    void removeTrait() {
+        super.removeTrait(traitsList);
+    }
 }

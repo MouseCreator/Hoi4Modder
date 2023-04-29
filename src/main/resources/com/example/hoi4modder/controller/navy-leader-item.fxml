@@ -60,9 +60,9 @@
       <ListView fx:id="traitsList" prefHeight="97.0" prefWidth="190.0" />
       <HBox prefHeight="35.0" prefWidth="208.0">
          <children>
-            <Button mnemonicParsing="false" text="X" textFill="RED" />
+            <Button mnemonicParsing="false" onAction="#removeTrait" text="X" textFill="RED" />
             <TextField fx:id="traitField" prefHeight="26.0" prefWidth="126.0" />
-            <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="44.0" text="Add" />
+            <Button mnemonicParsing="false" onAction="#addTrait" prefHeight="26.0" prefWidth="44.0" text="Add" />
          </children>
       </HBox>
    </children>
