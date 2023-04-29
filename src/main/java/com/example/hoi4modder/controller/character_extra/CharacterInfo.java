@@ -5,21 +5,16 @@ import java.util.List;
 
 public class CharacterInfo {
     private final List<Integer> positions = new LinkedList<>();
-
-    public void insertPosition(int i) {
-        positions.add(i);
-        positions.sort(Integer::compareTo);
-    }
     public int getAndInsertPosition(int target) {
         int result = 0;
         for (int i : positions) {
             if (i > target) {
-                insertPosition(target);
+                positions.add(result, target);
                 return result;
             }
             result++;
         }
-        insertPosition(target);
+        positions.add(target);
         return positions.size()-1;
     }
 
