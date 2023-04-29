@@ -120,7 +120,7 @@ public class MainController implements Initializable {
             Runtime.getRuntime().exec(gameExe, null, new File(gameDir));
         } catch (IOException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Unable to start hoi4.exe; " +
-                    "Make sure that location is set properly and .exe file is in the specified directory!");
+                    "Make sure that location to game is set properly and hoi4.exe is in the specified directory!");
             alert.showAndWait();
         }
     }
