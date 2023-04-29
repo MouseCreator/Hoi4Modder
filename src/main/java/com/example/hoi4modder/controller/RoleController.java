@@ -62,6 +62,4 @@ public abstract class RoleController<R extends Role> {
     }
 
     public abstract String getRoleType();
-
-    public abstract R getRoleInstance();
 }

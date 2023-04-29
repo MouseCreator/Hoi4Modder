@@ -71,10 +71,6 @@ public class CountryLeaderRoleController extends RoleController<CountryLeader> i
         return CharacterRoles.COUNTRY_LEADER;
     }
 
-    @Override
-    public CountryLeader getRoleInstance() {
-        return CountryLeader.createCountryLeader();
-    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

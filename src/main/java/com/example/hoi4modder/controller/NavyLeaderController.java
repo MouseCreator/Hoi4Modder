@@ -69,10 +69,6 @@ public class NavyLeaderController extends RoleController<NavyLeader> implements 
         return CharacterRoles.NAVY_LEADER;
     }
 
-    @Override
-    public NavyLeader getRoleInstance() {
-        return NavyLeader.createNavyLeader();
-    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

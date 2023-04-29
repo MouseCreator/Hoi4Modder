@@ -73,9 +73,4 @@ public class AdvisorRoleController extends RoleController<Advisor> implements In
         return CharacterRoles.ADVISOR;
     }
 
-    @Override
-    public Advisor getRoleInstance() {
-        return Advisor.createAdvisor();
-    }
-
 }
