@@ -1,6 +1,7 @@
 package com.example.hoi4modder.controller;
 
-import com.example.hoi4modder.controller.character_extra.RolePaneControllerPair;
+import com.example.hoi4modder.controller.character_extra.RoleSwitcher;
+import com.example.hoi4modder.controller.character_extra.RoleSwitcherBuilder;
 import com.example.hoi4modder.game.FieldValueMap;
 import com.example.hoi4modder.game.GameCharacter;
 import com.example.hoi4modder.game.roles.*;
@@ -21,7 +22,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Window;
 
@@ -71,10 +71,18 @@ public class CharacterItemController implements Initializable {
 
     private GameCharacter gameCharacter;
 
-    private final RolePaneControllerPair<CountryLeader> countryLeaderPair = new RolePaneControllerPair<>();
-    private final RolePaneControllerPair<NavyLeader> navyLeaderPair = new RolePaneControllerPair<>();
-    private final RolePaneControllerPair<UnitLeader> unitLeaderPair = new RolePaneControllerPair<>();
-    private final RolePaneControllerPair<Advisor> advisorPair = new RolePaneControllerPair<>();
+    private final RoleSwitcher<CountryLeader> countryLeaderRoleSwitcher;
+    private final RoleSwitcher<NavyLeader> navyLeaderRoleSwitcher;
+    private final RoleSwitcher<UnitLeader> unitLeaderRoleSwitcher;
+    private final RoleSwitcher<Advisor> advisorRoleSwitcher;
+
+    public CharacterItemController() {
+        RoleSwitcherBuilder builder = new RoleSwitcherBuilder();
+        countryLeaderRoleSwitcher = builder.buildCountryLeaderSwitcher(this);
+        navyLeaderRoleSwitcher = builder.buildNavyLeaderSwitcher(this);
+        unitLeaderRoleSwitcher = builder.buildUnitLeaderSwitcher(this);
+        advisorRoleSwitcher = builder.buildAdvisorSwitcher(this);
+    }
 
     public void setParent(CharacterListEditor editor) {
         this.listEditor = editor;
@@ -82,7 +90,10 @@ public class CharacterItemController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         rolesBox.setFillHeight(true);
-
+        countryLeaderRoleSwitcher.bindCheckBox(countryLeaderBox);
+        unitLeaderRoleSwitcher.bindCheckBox(unitLeaderBox);
+        navyLeaderRoleSwitcher.bindCheckBox(navyLeaderBox);
+        advisorRoleSwitcher.bindCheckBox(advisorBox);
     }
 
     public void fromCharacter(GameCharacter character) {
@@ -143,24 +154,9 @@ public class CharacterItemController implements Initializable {
         unitLeaderBox.setSelected(true);
     }
 
-    private void createCountryLeaderPane() {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("country-leader-item.fxml"));
-        try {
-            Pane pane = loader.load();
-            CountryLeaderRoleController controller = loader.getController();
-            countryLeaderPair.update(pane, controller);
-            controller.setParent(this);
-            rolesBox.getChildren().add(0, pane);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     private void loadCountryLeader(GameCharacter character) {
         CountryLeader countryLeader = (CountryLeader) character.getRoles().get(CharacterRoles.COUNTRY_LEADER);
         countryLeaderBox.setSelected(true);
-        countryLeaderPair.getController().fromRole(countryLeader);
     }
 
     private void loadAdvisor(GameCharacter character, String role) {
@@ -333,18 +329,5 @@ public class CharacterItemController implements Initializable {
 
     public Pane getRolesBox() {
         return rolesBox;
-    }
-
-    public CheckBox getAdvisorCheckBox() {
-        return advisorBox;
-    }
-    public CheckBox getCountryLeaderBox() {
-        return countryLeaderBox;
-    }
-    public CheckBox getNavyLeaderBox() {
-        return navyLeaderBox;
-    }
-    public CheckBox getUnitLeaderBox() {
-        return unitLeaderBox;
     }
 }

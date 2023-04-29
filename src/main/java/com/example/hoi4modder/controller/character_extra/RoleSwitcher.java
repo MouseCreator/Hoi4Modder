@@ -11,10 +11,9 @@ public class RoleSwitcher<R extends Role> {
     private RolePaneControllerPair<R> rolePaneControllerPair;
     private Pane rolesBox;
     private int targetIndex;
-    private CharacterItemController itemController;
+    private final CharacterItemController itemController;
     public RoleSwitcher(CharacterItemController itemController) {
         this.itemController = itemController;
-
     }
     void setPaneController(RolePaneControllerPair<R> rolePaneControllerPair) {
         this.rolePaneControllerPair = rolePaneControllerPair;;
@@ -25,7 +24,7 @@ public class RoleSwitcher<R extends Role> {
     void setTargetIndex(int index) {
         this.targetIndex = index;
     }
-    void bindCheckBox(CheckBox checkBox) {
+    public void bindCheckBox(CheckBox checkBox) {
         checkBox.selectedProperty().addListener((observableValue, oldValue, newValue) -> {
             if(checkBox.isSelected())
                 createRolePane();
@@ -33,7 +32,6 @@ public class RoleSwitcher<R extends Role> {
                 destructRolePane();
         });
     }
-
     private void destructRolePane() {
         if (rolePaneControllerPair.isFilled()) {
             rolesBox.getChildren().remove(rolePaneControllerPair.getPane());
