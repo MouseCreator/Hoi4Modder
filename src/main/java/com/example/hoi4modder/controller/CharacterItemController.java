@@ -69,17 +69,21 @@ public class CharacterItemController implements Initializable {
 
     private GameCharacter gameCharacter;
 
+    private final RolePaneControllerPair countryLeaderPair = new RolePaneControllerPair();
+    private final RolePaneControllerPair navyLeaderPair = new RolePaneControllerPair();
+    private final RolePaneControllerPair unitLeaderPair = new RolePaneControllerPair();
+    private final RolePaneControllerPair advisorPair = new RolePaneControllerPair();
+
     public void setParent(CharacterListEditor editor) {
         this.listEditor = editor;
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         rolesBox.setFillHeight(true);
-       /* countryLeaderBox.selectedProperty().addListener((observableValue, oldValue, newValue) -> {
+        countryLeaderBox.selectedProperty().addListener((observableValue, oldValue, newValue) -> {
             countryLeaderBox.setSelected(!newValue);
-            gameCharacter.getRoles().put("country_leader", CountryLeader.createCountryLeader());
-            loadCountryLeader(gameCharacter, "country_leader");
-        }); */
+            loadCountryLeader(gameCharacter);
+        });
     }
 
     public void fromCharacter(GameCharacter character) {
@@ -96,7 +100,7 @@ public class CharacterItemController implements Initializable {
         for (String role : character.getRoles().keys()) {
             switch (role) {
                 case "advisor" -> loadAdvisor(character, role);
-                case "country_leader" -> loadCountryLeader(character, role);
+                case "country_leader" -> loadCountryLeader(character);
                 case "corps_commander", "field_marshal" -> loadUnitLeader(character, role);
                 case "navy_leader" -> loadNavyLeader(character, role);
             }
@@ -140,9 +144,9 @@ public class CharacterItemController implements Initializable {
         unitLeaderBox.setSelected(true);
     }
 
-    private void loadCountryLeader(GameCharacter character, String role) {
+    private void loadCountryLeader(CountryLeader countryLeader) {
+        countryLeaderBox.setSelected(true);
         FXMLLoader loader = new FXMLLoader();
-        CountryLeader countryLeader = (CountryLeader) character.getRoles().get(role);
         loader.setLocation(getClass().getResource("country-leader-item.fxml"));
         Pane pane;
         try {
@@ -155,7 +159,20 @@ public class CharacterItemController implements Initializable {
         CountryLeaderRoleController controller = loader.getController();
         controller.setParent(this);
         controller.fromRole(countryLeader);
-        countryLeaderBox.setSelected(true);
+    }
+    private void createCountryLeaderPane() {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("country-leader-item.fxml"));
+        try {
+            Pane pane = loader.load();
+            countryLeaderPair.setPane(pane);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+    private void loadCountryLeader(GameCharacter character) {
+        CountryLeader countryLeader = (CountryLeader) character.getRoles().get(CharacterRoles.COUNTRY_LEADER);
+        loadCountryLeader(countryLeader);
     }
 
     private void loadAdvisor(GameCharacter character, String role) {
