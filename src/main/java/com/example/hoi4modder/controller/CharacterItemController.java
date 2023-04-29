@@ -1,5 +1,6 @@
 package com.example.hoi4modder.controller;
 
+import com.example.hoi4modder.controller.character_extra.CharacterInfo;
 import com.example.hoi4modder.controller.character_extra.RoleSwitcher;
 import com.example.hoi4modder.controller.character_extra.RoleSwitcherBuilder;
 import com.example.hoi4modder.game.FieldValueMap;
@@ -13,7 +14,6 @@ import com.example.hoi4modder.service.AppConfig;
 import com.example.hoi4modder.service.Destinations;
 import com.example.hoi4modder.service.ImageTransformer;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -21,7 +21,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 import javafx.stage.Window;
 
@@ -65,18 +64,20 @@ public class CharacterItemController implements Initializable {
     private CheckBox unitLeaderBox;
 
     private CharacterListEditor listEditor;
-
+    private final CharacterInfo characterInfo;
     private boolean hasBigPortrait = false;
     private boolean hasSmallPortrait = false;
-
     private GameCharacter gameCharacter;
-
     private final RoleSwitcher<CountryLeader> countryLeaderRoleSwitcher;
     private final RoleSwitcher<NavyLeader> navyLeaderRoleSwitcher;
     private final RoleSwitcher<UnitLeader> unitLeaderRoleSwitcher;
     private final RoleSwitcher<Advisor> advisorRoleSwitcher;
 
+    public CharacterInfo getCharacterInfo() {
+        return characterInfo;
+    }
     public CharacterItemController() {
+        characterInfo = new CharacterInfo();
         RoleSwitcherBuilder builder = new RoleSwitcherBuilder();
         countryLeaderRoleSwitcher = builder.buildCountryLeaderSwitcher(this);
         navyLeaderRoleSwitcher = builder.buildNavyLeaderSwitcher(this);
@@ -109,31 +110,18 @@ public class CharacterItemController implements Initializable {
     private void loadRoles(GameCharacter character) {
         for (String role : character.getRoles().keys()) {
             switch (role) {
-                case "advisor" -> loadAdvisor(character, role);
-                case "country_leader" -> loadCountryLeader(character);
-                case "corps_commander", "field_marshal" -> loadUnitLeader(character);
-                case "navy_leader" -> loadNavyLeader(character, role);
+                case CharacterRoles.ADVISOR -> loadAdvisor(character);
+                case CharacterRoles.COUNTRY_LEADER -> loadCountryLeader(character);
+                case CharacterRoles.UNIT_LEADER -> loadUnitLeader(character);
+                case CharacterRoles.NAVY_LEADER -> loadNavyLeader(character);
             }
         }
     }
 
-    private void loadNavyLeader(GameCharacter character, String role) {
-        FXMLLoader loader = new FXMLLoader();
-        NavyLeader navyLeader = (NavyLeader) character.getRoles().get(role);
-        loader.setLocation(getClass().getResource("navy-leader-item.fxml"));
-        Pane pane;
-        try {
-            pane = loader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
-            throw new RuntimeException(e);
-        }
-        rolesBox.getChildren().add(pane);
-        NavyLeaderController controller = loader.getController();
-        controller.setParent(this);
-        controller.fromRole(navyLeader);
+    private void loadNavyLeader(GameCharacter character) {
+        NavyLeader navyLeader = (NavyLeader) character.getRoles().get(CharacterRoles.NAVY_LEADER);
         navyLeaderBox.setSelected(true);
-
+        navyLeaderRoleSwitcher.getController().fromRole(navyLeader);
     }
 
     private void loadUnitLeader(GameCharacter character) {
@@ -148,22 +136,10 @@ public class CharacterItemController implements Initializable {
         countryLeaderRoleSwitcher.getController().fromRole(countryLeader);
     }
 
-    private void loadAdvisor(GameCharacter character, String role) {
-        FXMLLoader loader = new FXMLLoader();
-        Advisor advisor = (Advisor) character.getRoles().get(role);
-        loader.setLocation(getClass().getResource("advisor-item.fxml"));
-        Pane pane;
-        try {
-            pane = loader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
-            throw new RuntimeException(e);
-        }
-        rolesBox.getChildren().add(pane);
-        AdvisorRoleController controller = loader.getController();
-        controller.setParent(this);
-        controller.fromRole(advisor);
+    private void loadAdvisor(GameCharacter character) {
+        Advisor advisor = (Advisor) character.getRoles().get(CharacterRoles.ADVISOR);
         advisorBox.setSelected(true);
+        advisorRoleSwitcher.getController().fromRole(advisor);
     }
 
     private void loadPortraits(GameCharacter character) {

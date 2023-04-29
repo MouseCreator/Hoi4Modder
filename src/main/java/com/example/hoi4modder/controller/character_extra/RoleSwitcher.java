@@ -17,7 +17,7 @@ public class RoleSwitcher<R extends Role> {
         this.itemController = itemController;
     }
     void setPaneController(RolePaneControllerPair<R> rolePaneControllerPair) {
-        this.rolePaneControllerPair = rolePaneControllerPair;;
+        this.rolePaneControllerPair = rolePaneControllerPair;
     }
 
     void setFileDestination(String destination) {
@@ -38,6 +38,8 @@ public class RoleSwitcher<R extends Role> {
         if (rolePaneControllerPair.isFilled()) {
             rolesBox.getChildren().remove(rolePaneControllerPair.getPane());
             rolePaneControllerPair.clear();
+            CharacterInfo characterInfo = itemController.getCharacterInfo();
+            characterInfo.removePosition(targetIndex);
         }
     }
 
@@ -49,7 +51,8 @@ public class RoleSwitcher<R extends Role> {
             RoleController<R> controller = loader.getController();
             rolePaneControllerPair.update(pane, controller);
             controller.setParent(itemController);
-            rolesBox.getChildren().add(Math.min(targetIndex,rolesBox.getChildren().size()), pane);
+            CharacterInfo characterInfo = itemController.getCharacterInfo();
+            rolesBox.getChildren().add(characterInfo.getAndInsertPosition(targetIndex), pane);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
