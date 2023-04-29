@@ -27,7 +27,7 @@ public class CountryLeaderRoleController extends RoleController<CountryLeader> i
 
     @FXML
     private TextField traitName;
-    private CountryLeader countryLeader;
+    private CountryLeader countryLeader = CountryLeader.createCountryLeader();
 
     public CountryLeaderRoleController() {
         this.ideologies = new HashMap<>();
@@ -53,7 +53,8 @@ public class CountryLeaderRoleController extends RoleController<CountryLeader> i
             if (ideologies.get(ideology).contains(type)) {
                 ideologyBox.getSelectionModel().select(ideology);
                 setTypesFromIdeology(ideology);
-                typeBox.getSelectionModel().select(stringToUpperCase(type));
+                String toSelect = stringToUpperCase(type);
+                typeBox.getSelectionModel().select(toSelect);
             }
         }
         traitList.getItems().clear();
@@ -90,6 +91,7 @@ public class CountryLeaderRoleController extends RoleController<CountryLeader> i
 
     private void setTypesFromIdeology(String ideology) {
         typeBox.getItems().clear();
+        typeBox.getSelectionModel().clearSelection();
         List<String> list = ideologies.get(ideology);
         for(String str : list)
             typeBox.getItems().add(stringToUpperCase(str));

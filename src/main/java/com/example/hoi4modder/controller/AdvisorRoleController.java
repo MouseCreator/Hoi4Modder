@@ -28,12 +28,11 @@ public class AdvisorRoleController extends RoleController<Advisor> implements In
 
     @FXML
     private ListView<String> traitList;
-    private Advisor advisor;
+    private Advisor advisor = Advisor.createAdvisor();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         initComboBox();
-        Advisor advisor = Advisor.createAdvisor();
         fromRole(advisor);
         setValueListeners();
     }

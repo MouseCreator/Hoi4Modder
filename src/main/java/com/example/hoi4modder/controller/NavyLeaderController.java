@@ -35,7 +35,7 @@ public class NavyLeaderController extends RoleController<NavyLeader> implements 
     private TextField traitField;
     @FXML
     private ListView<String> traitsList;
-    private NavyLeader navyLeader;
+    private NavyLeader navyLeader = NavyLeader.createNavyLeader();
 
     @Override
     public String filename() {
