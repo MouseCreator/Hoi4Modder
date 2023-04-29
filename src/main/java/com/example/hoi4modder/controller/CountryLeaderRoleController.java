@@ -1,5 +1,6 @@
 package com.example.hoi4modder.controller;
 
+import com.example.hoi4modder.game.roles.CharacterRoles;
 import com.example.hoi4modder.game.roles.CountryLeader;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -64,6 +65,17 @@ public class CountryLeaderRoleController extends RoleController<CountryLeader> i
         leader.setTraits(getTraits(traitList));
         return leader;
     }
+
+    @Override
+    public String getRoleType() {
+        return CharacterRoles.COUNTRY_LEADER;
+    }
+
+    @Override
+    public CountryLeader getRoleInstance() {
+        return CountryLeader.createCountryLeader();
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ideologyBox.getItems().clear();

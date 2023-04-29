@@ -62,4 +62,7 @@ public abstract class RoleController<R extends Role> {
         this.characterItemController = controller;
     }
 
+    public abstract String getRoleType();
+
+    public abstract R getRoleInstance();
 }

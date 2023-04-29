@@ -1,6 +1,7 @@
 package com.example.hoi4modder.controller;
 
 import com.example.hoi4modder.game.roles.Advisor;
+import com.example.hoi4modder.game.roles.CharacterRoles;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
@@ -65,6 +66,16 @@ public class AdvisorRoleController extends RoleController<Advisor> implements In
         advisor.setTraits(getTraits(traitList));
         advisor.toLedger();
         return advisor;
+    }
+
+    @Override
+    public String getRoleType() {
+        return CharacterRoles.ADVISOR;
+    }
+
+    @Override
+    public Advisor getRoleInstance() {
+        return Advisor.createAdvisor();
     }
 
 }

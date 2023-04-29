@@ -1,5 +1,6 @@
 package com.example.hoi4modder.controller;
 
+import com.example.hoi4modder.game.roles.CharacterRoles;
 import com.example.hoi4modder.game.roles.UnitLeader;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -66,6 +67,16 @@ public class UnitLeaderController extends RoleController<UnitLeader> implements 
         leader.setTraits(getTraits(traitsList));
         leader.setFieldMarshal(fieldMarshalBox.isSelected());
         return leader;
+    }
+
+    @Override
+    public String getRoleType() {
+        return CharacterRoles.UNIT_LEADER;
+    }
+
+    @Override
+    public UnitLeader getRoleInstance() {
+        return UnitLeader.createCorpsCommander();
     }
 
     @Override

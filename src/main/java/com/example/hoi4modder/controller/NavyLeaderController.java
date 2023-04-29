@@ -1,5 +1,6 @@
 package com.example.hoi4modder.controller;
 
+import com.example.hoi4modder.game.roles.CharacterRoles;
 import com.example.hoi4modder.game.roles.NavyLeader;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -61,6 +62,16 @@ public class NavyLeaderController extends RoleController<NavyLeader> implements 
         navyLeader.setCoordinationSkill(Integer.parseInt(cordsField.getText()));
         navyLeader.setTraits(getTraits(traitsList));
         return navyLeader;
+    }
+
+    @Override
+    public String getRoleType() {
+        return CharacterRoles.NAVY_LEADER;
+    }
+
+    @Override
+    public NavyLeader getRoleInstance() {
+        return NavyLeader.createNavyLeader();
     }
 
     @Override

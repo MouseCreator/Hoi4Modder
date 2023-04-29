@@ -2,6 +2,7 @@ package com.example.hoi4modder.controller.character_extra;
 
 import com.example.hoi4modder.controller.CharacterItemController;
 import com.example.hoi4modder.controller.RoleController;
+import com.example.hoi4modder.game.GameCharacter;
 import com.example.hoi4modder.game.roles.Role;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.CheckBox;
@@ -26,24 +27,25 @@ public class RoleSwitcher<R extends Role> {
     void setTargetIndex(int index) {
         this.targetIndex = index;
     }
-    public void bindCheckBox(Pane rolesBox, CheckBox checkBox) {
+    public void bindCheckBox(Pane rolesBox, CheckBox checkBox, GameCharacter character) {
         checkBox.selectedProperty().addListener((observableValue, oldValue, newValue) -> {
             if(checkBox.isSelected())
-                createRolePane(rolesBox);
+                createRolePane(rolesBox, character);
             else
-                destructRolePane(rolesBox);
+                destructRolePane(rolesBox, character);
         });
     }
-    private void destructRolePane(Pane rolesBox) {
+    private void destructRolePane(Pane rolesBox, GameCharacter character) {
         if (rolePaneControllerPair.isFilled()) {
             rolesBox.getChildren().remove(rolePaneControllerPair.getPane());
+            character.getRoles().remove(rolePaneControllerPair.getController().getRoleType());
             rolePaneControllerPair.clear();
             CharacterInfo characterInfo = itemController.getCharacterInfo();
             characterInfo.removePosition(targetIndex);
         }
     }
 
-    private void createRolePane(Pane rolesBox) {
+    private void createRolePane(Pane rolesBox, GameCharacter character) {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(CharacterItemController.class.getResource(fileDestination));
         try {
@@ -53,6 +55,7 @@ public class RoleSwitcher<R extends Role> {
             controller.setParent(itemController);
             CharacterInfo characterInfo = itemController.getCharacterInfo();
             rolesBox.getChildren().add(characterInfo.getAndInsertPosition(targetIndex), pane);
+            character.getRoles().put(controller.getRoleType(), controller.getRoleInstance());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

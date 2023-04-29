@@ -91,20 +91,25 @@ public class CharacterItemController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         rolesBox.setFillHeight(true);
-        countryLeaderRoleSwitcher.bindCheckBox(rolesBox, countryLeaderBox);
-        unitLeaderRoleSwitcher.bindCheckBox(rolesBox, unitLeaderBox);
-        navyLeaderRoleSwitcher.bindCheckBox(rolesBox, navyLeaderBox);
-        advisorRoleSwitcher.bindCheckBox(rolesBox, advisorBox);
+
     }
 
     public void fromCharacter(GameCharacter character) {
+        this.gameCharacter = character;
+        initRoles(gameCharacter);
         LoadedData data = listEditor.parentController.getSavedData().loadedData();
         DataPool<String> localisationPool = data.getLocalisationData();
         characterIDField.setText(character.getIdentification());
         characterNameField.setText(localisationPool.get(character.getName()));
         loadPortraits(character);
         loadRoles(character);
-        this.gameCharacter = character;
+    }
+
+    private void initRoles(GameCharacter character) {
+        countryLeaderRoleSwitcher.bindCheckBox(rolesBox, countryLeaderBox, character);
+        unitLeaderRoleSwitcher.bindCheckBox(rolesBox, unitLeaderBox, character);
+        navyLeaderRoleSwitcher.bindCheckBox(rolesBox, navyLeaderBox, character);
+        advisorRoleSwitcher.bindCheckBox(rolesBox, advisorBox, character);
     }
 
     private void loadRoles(GameCharacter character) {
