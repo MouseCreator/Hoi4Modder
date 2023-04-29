@@ -54,7 +54,6 @@ public abstract class RoleController<R extends Role> {
     }
 
     protected void setSelectedFromBox(String slot, ComboBox<String> box) {
-
         box.getSelectionModel().select(stringToUpperCase(slot));
     }
 

@@ -21,7 +21,6 @@ public class SearchingTask extends EditorListTask{
     @Override
     protected Void call() {
         findCharacters(targetString);
-        System.out.println(characters.size());
         createListOfCharacters();
         return null;
     }
@@ -35,7 +34,6 @@ public class SearchingTask extends EditorListTask{
     }
 
     private void loadByID(String name) {
-        System.out.println("Loading by ID");
         for (GameCharacter character : initialCharacters) {
             String expected = character.getIdentification();
             if (Strings.containsIgnoreCase(expected, name)) {
