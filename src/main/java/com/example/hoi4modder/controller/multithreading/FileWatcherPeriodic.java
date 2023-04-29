@@ -7,7 +7,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-public class FileWatcherPeriodic {
+public class FileWatcherPeriodic implements FileWatcher {
     final ScheduledExecutorService executor;
 
     private long lastUpdated;
