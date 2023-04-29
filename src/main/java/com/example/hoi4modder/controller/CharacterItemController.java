@@ -21,6 +21,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Window;
 
@@ -328,5 +329,22 @@ public class CharacterItemController implements Initializable {
         resetSmallImage();
         gameCharacter.getPortraits().remove("small");
         setAutoButton();
+    }
+
+    public Pane getRolesBox() {
+        return rolesBox;
+    }
+
+    public CheckBox getAdvisorCheckBox() {
+        return advisorBox;
+    }
+    public CheckBox getCountryLeaderBox() {
+        return countryLeaderBox;
+    }
+    public CheckBox getNavyLeaderBox() {
+        return navyLeaderBox;
+    }
+    public CheckBox getUnitLeaderBox() {
+        return unitLeaderBox;
     }
 }

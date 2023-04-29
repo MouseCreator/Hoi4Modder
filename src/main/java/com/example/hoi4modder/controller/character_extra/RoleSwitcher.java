@@ -6,19 +6,26 @@ import com.example.hoi4modder.game.roles.Role;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.CheckBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 
 public class RoleSwitcher<R extends Role> {
-    private final RolePaneControllerPair<R> rolePaneControllerPair;
-    private final VBox rolesBox;
-    private final int targetIndex;
-    private final CharacterItemController itemController;
-    public RoleSwitcher(CharacterItemController itemController, RolePaneControllerPair<R> rolePaneControllerPair,
-                        CheckBox checkBox, VBox roleBox, int targetIndex) {
-        this.rolePaneControllerPair = rolePaneControllerPair;
-        this.rolesBox = roleBox;
-        this.targetIndex = targetIndex;
+    private RolePaneControllerPair<R> rolePaneControllerPair;
+    private Pane rolesBox;
+    private int targetIndex;
+    private CharacterItemController itemController;
+    public RoleSwitcher(CharacterItemController itemController) {
         this.itemController = itemController;
+
+    }
+    void setPaneController(RolePaneControllerPair<R> rolePaneControllerPair) {
+        this.rolePaneControllerPair = rolePaneControllerPair;;
+    }
+    void setRolesBox(Pane box) {
+        this.rolesBox = box;
+    }
+    void setTargetIndex(int index) {
+        this.targetIndex = index;
+    }
+    void bindCheckBox(CheckBox checkBox) {
         checkBox.selectedProperty().addListener((observableValue, oldValue, newValue) -> {
             if(checkBox.isSelected())
                 createRolePane();
