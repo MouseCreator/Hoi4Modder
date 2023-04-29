@@ -8,4 +8,12 @@ import lombok.Data;
 public class RolePaneControllerPair {
     private Pane pane;
     private RoleController<Role> roleController;
+
+    public void clear() {
+        pane = null;
+        roleController = null;
+    }
+    public boolean isFilled() {
+        return pane == null;
+    }
 }
