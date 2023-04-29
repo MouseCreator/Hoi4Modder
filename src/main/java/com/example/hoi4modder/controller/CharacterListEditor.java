@@ -165,7 +165,16 @@ public class CharacterListEditor extends ActivePaneController implements Initial
     }
 
     public void onFileExternalUpdate() {
-        System.out.println("Hello, world");
+        Alert alert = new Alert(Alert.AlertType.WARNING, "Current file has been changed. Update data in editor?", ButtonType.YES, ButtonType.NO);
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.isPresent()) {
+            if (result.get() == ButtonType.YES) {
+                loadListFromFile();
+            }
+        }
+    }
+    @Override
+    public void onClose() {
     }
 }
 

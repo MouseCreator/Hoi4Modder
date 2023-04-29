@@ -12,7 +12,6 @@ public class FileWatcherPeriodic {
 
     private long lastUpdated;
     private File file;
-
     private final CharacterListEditor editor;
     Runnable checkRunnable = new Runnable() {
         @Override
