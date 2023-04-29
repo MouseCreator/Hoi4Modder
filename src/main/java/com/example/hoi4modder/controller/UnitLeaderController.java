@@ -81,6 +81,16 @@ public class UnitLeaderController extends RoleController<UnitLeader> implements 
         return CharacterRoles.UNIT_LEADER;
     }
 
+    @FXML
+    void addTrait() {
+        super.addTrait(traitsList, traitField.getText());
+    }
+
+    @FXML
+    void removeTrait() {
+        super.removeTrait(traitsList);
+    }
+
 
 
     @Override

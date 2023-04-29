@@ -54,6 +54,11 @@ public class AdvisorRoleController extends RoleController<Advisor> implements In
         super.addTrait(traitList, traitField.getText());
     }
 
+    @FXML
+    void removeTrait() {
+        super.removeTrait(traitList);
+    }
+
     @Override
     public String filename() {
         return "advisor-item.fxml";
