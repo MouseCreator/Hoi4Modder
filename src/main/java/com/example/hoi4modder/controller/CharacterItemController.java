@@ -1,5 +1,6 @@
 package com.example.hoi4modder.controller;
 
+import com.example.hoi4modder.controller.character_extra.RolePaneControllerPair;
 import com.example.hoi4modder.game.FieldValueMap;
 import com.example.hoi4modder.game.GameCharacter;
 import com.example.hoi4modder.game.roles.*;
@@ -80,12 +81,7 @@ public class CharacterItemController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         rolesBox.setFillHeight(true);
-        countryLeaderBox.selectedProperty().addListener((observableValue, oldValue, newValue) -> {
-            if(countryLeaderBox.isSelected())
-                createCountryLeaderPane();
-            else
-                destructCountryLeaderPane();
-        });
+
     }
 
     public void fromCharacter(GameCharacter character) {
@@ -160,12 +156,6 @@ public class CharacterItemController implements Initializable {
         }
     }
 
-    private void destructCountryLeaderPane() {
-        if (countryLeaderPair.isFilled()) {
-            rolesBox.getChildren().remove(countryLeaderPair.getPane());
-            countryLeaderPair.clear();
-        }
-    }
     private void loadCountryLeader(GameCharacter character) {
         CountryLeader countryLeader = (CountryLeader) character.getRoles().get(CharacterRoles.COUNTRY_LEADER);
         countryLeaderBox.setSelected(true);

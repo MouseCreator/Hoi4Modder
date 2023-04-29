@@ -1,5 +1,6 @@
-package com.example.hoi4modder.controller;
+package com.example.hoi4modder.controller.character_extra;
 
+import com.example.hoi4modder.controller.RoleController;
 import com.example.hoi4modder.game.roles.Role;
 import javafx.scene.layout.Pane;
 

@@ -24,4 +24,6 @@ module com.example.hoi4modder {
     exports com.example.hoi4modder.model.files.manager;
     exports com.example.hoi4modder.model.files.manager.strategy;
     exports com.example.hoi4modder.controller.autocomplete;
+    exports com.example.hoi4modder.controller.character_extra;
+    opens com.example.hoi4modder.controller.character_extra to javafx.fxml;
 }
