@@ -78,7 +78,16 @@ public class CountryLeaderRoleController extends RoleController<CountryLeader> i
         ideologyBox.getSelectionModel().select("Neutrality");
         setTypesFromIdeology("Neutrality");
         typeBox.getSelectionModel().select(0);
+        setValueListeners();
     }
+
+    private void setValueListeners() {
+        typeBox.valueProperty().addListener((observableValue, old, newValue) -> {
+            if (newValue != null)
+                countryLeader.setIdeology(stringToLowerCase(newValue));
+        });
+    }
+
     private void setTypesFromIdeology(String ideology) {
         typeBox.getItems().clear();
         List<String> list = ideologies.get(ideology);
@@ -86,8 +95,6 @@ public class CountryLeaderRoleController extends RoleController<CountryLeader> i
             typeBox.getItems().add(stringToUpperCase(str));
     }
     private final Map<String, List<String>> ideologies;
-
-
     @FXML
     void updateIdeologyType() {
         setTypesFromIdeology(ideologyBox.getValue());

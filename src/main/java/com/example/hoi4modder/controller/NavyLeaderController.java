@@ -33,7 +33,6 @@ public class NavyLeaderController extends RoleController<NavyLeader> implements 
 
     @FXML
     private TextField traitField;
-
     @FXML
     private ListView<String> traitsList;
     private NavyLeader navyLeader;
@@ -65,8 +64,8 @@ public class NavyLeaderController extends RoleController<NavyLeader> implements 
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        NavyLeader navyLeader = NavyLeader.createNavyLeader();
-        fromRole(navyLeader);
+        fromRole(NavyLeader.createNavyLeader());
+        setValueListeners();
     }
     public void fromCharacter(GameCharacter character) {
         if (character.getRoles().containsKey(getRoleType())) {
@@ -74,5 +73,13 @@ public class NavyLeaderController extends RoleController<NavyLeader> implements 
         } else {
             character.getRoles().put(getRoleType(), toRole());
         }
+    }
+
+    private void setValueListeners() {
+        attackField.textProperty().addListener((observableValue, old, newValue) -> navyLeader.setAttackSkill(Integer.parseInt(newValue)));
+        defenceField.textProperty().addListener((observableValue, old, newValue) -> navyLeader.setDefenceSkill(Integer.parseInt(newValue)));
+        skillField.textProperty().addListener((observableValue, old, newValue) -> navyLeader.setSkill(Integer.parseInt(newValue)));
+        manuverField.textProperty().addListener((observableValue, old, newValue) -> navyLeader.setManeuveringSkill(Integer.parseInt(newValue)));
+        cordsField.textProperty().addListener((observableValue, old, newValue) -> navyLeader.setCoordinationSkill(Integer.parseInt(newValue)));
     }
 }

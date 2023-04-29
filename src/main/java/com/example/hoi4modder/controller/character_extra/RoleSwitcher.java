@@ -56,7 +56,6 @@ public class RoleSwitcher<R extends Role> {
             CharacterInfo characterInfo = itemController.getCharacterInfo();
             rolesBox.getChildren().add(characterInfo.getAndInsertPosition(targetIndex), pane);
             controller.fromCharacter(character);
-            character.getRoles().put(controller.getRoleType(), controller.toRole());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

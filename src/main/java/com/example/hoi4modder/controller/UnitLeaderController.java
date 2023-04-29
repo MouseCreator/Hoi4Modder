@@ -85,6 +85,7 @@ public class UnitLeaderController extends RoleController<UnitLeader> implements 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        fromRole(UnitLeader.createCorpsCommander());
         setValueListeners();
     }
 
@@ -95,7 +96,6 @@ public class UnitLeaderController extends RoleController<UnitLeader> implements 
         planningField.textProperty().addListener((observableValue, old, newValue) -> unitLeader.setPlanningSkill(Integer.parseInt(newValue)));
         logisticsField.textProperty().addListener((observableValue, old, newValue) -> unitLeader.setLogisticsSkill(Integer.parseInt(newValue)));
         fieldMarshalBox.selectedProperty().addListener((observableValue, aBoolean, t1) -> unitLeader.setFieldMarshal(t1));
-
     }
     public void fromCharacter(GameCharacter character) {
         if (character.getRoles().containsKey(getRoleType())) {

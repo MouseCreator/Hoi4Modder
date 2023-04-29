@@ -35,6 +35,11 @@ public class AdvisorRoleController extends RoleController<Advisor> implements In
         initComboBox();
         Advisor advisor = Advisor.createAdvisor();
         fromRole(advisor);
+        setValueListeners();
+    }
+    private void setValueListeners() {
+        costField.textProperty().addListener((observableValue, old, newValue) -> advisor.setCost(Integer.parseInt(newValue)));
+        slotComboBox.valueProperty().addListener((observableValue, old, newValue) -> advisor.setSlot(newValue));
     }
     private void initComboBox() {
         slotComboBox.getItems().removeAll(slotComboBox.getItems());
