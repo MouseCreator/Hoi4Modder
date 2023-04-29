@@ -157,6 +157,7 @@ public class CharacterItemController implements Initializable {
     private void loadCountryLeader(GameCharacter character) {
         CountryLeader countryLeader = (CountryLeader) character.getRoles().get(CharacterRoles.COUNTRY_LEADER);
         countryLeaderBox.setSelected(true);
+        countryLeaderRoleSwitcher.getController().fromRole(countryLeader);
     }
 
     private void loadAdvisor(GameCharacter character, String role) {
@@ -325,9 +326,5 @@ public class CharacterItemController implements Initializable {
         resetSmallImage();
         gameCharacter.getPortraits().remove("small");
         setAutoButton();
-    }
-
-    public Pane getRolesBox() {
-        return rolesBox;
     }
 }

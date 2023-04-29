@@ -55,4 +55,7 @@ public class RoleSwitcher<R extends Role> {
         }
     }
 
+    public RoleController<R> getController() {
+        return rolePaneControllerPair.getController();
+    }
 }
