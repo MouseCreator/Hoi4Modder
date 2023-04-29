@@ -23,6 +23,6 @@ public class RolePaneControllerPair<R extends Role> {
         roleController = null;
     }
     public boolean isFilled() {
-        return pane == null;
+        return pane != null;
     }
 }
