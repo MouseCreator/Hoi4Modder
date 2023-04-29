@@ -1,5 +1,6 @@
 package com.example.hoi4modder.controller;
 
+import com.example.hoi4modder.game.GameCharacter;
 import com.example.hoi4modder.game.roles.CharacterRoles;
 import com.example.hoi4modder.game.roles.CountryLeader;
 import javafx.fxml.FXML;
@@ -26,6 +27,7 @@ public class CountryLeaderRoleController extends RoleController<CountryLeader> i
 
     @FXML
     private TextField traitName;
+    private CountryLeader countryLeader;
 
     public CountryLeaderRoleController() {
         this.ideologies = new HashMap<>();
@@ -60,10 +62,7 @@ public class CountryLeaderRoleController extends RoleController<CountryLeader> i
 
     @Override
     public CountryLeader toRole() {
-        CountryLeader leader = new CountryLeader();
-        leader.setIdeology(getSelectedFromBox(typeBox));
-        leader.setTraits(getTraits(traitList));
-        return leader;
+       return countryLeader;
     }
 
     @Override
@@ -93,5 +92,12 @@ public class CountryLeaderRoleController extends RoleController<CountryLeader> i
     void updateIdeologyType() {
         setTypesFromIdeology(ideologyBox.getValue());
         typeBox.getSelectionModel().select(0);
+    }
+    public void fromCharacter(GameCharacter character) {
+        if (character.getRoles().containsKey(getRoleType())) {
+            this.countryLeader = (CountryLeader) character.getRoles().get(getRoleType());
+        } else {
+            character.getRoles().put(getRoleType(), toRole());
+        }
     }
 }

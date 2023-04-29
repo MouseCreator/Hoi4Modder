@@ -1,5 +1,6 @@
 package com.example.hoi4modder.controller;
 
+import com.example.hoi4modder.game.GameCharacter;
 import com.example.hoi4modder.game.roles.Role;
 import javafx.collections.ObservableList;
 import javafx.scene.control.ComboBox;
@@ -62,4 +63,6 @@ public abstract class RoleController<R extends Role> {
     }
 
     public abstract String getRoleType();
+
+    public abstract void fromCharacter(GameCharacter character);
 }

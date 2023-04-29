@@ -1,5 +1,6 @@
 package com.example.hoi4modder.controller;
 
+import com.example.hoi4modder.game.GameCharacter;
 import com.example.hoi4modder.game.roles.Advisor;
 import com.example.hoi4modder.game.roles.CharacterRoles;
 import javafx.fxml.FXML;
@@ -27,6 +28,7 @@ public class AdvisorRoleController extends RoleController<Advisor> implements In
 
     @FXML
     private ListView<String> traitList;
+    private Advisor advisor;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -60,17 +62,20 @@ public class AdvisorRoleController extends RoleController<Advisor> implements In
         traitList.getItems().addAll(advisor.getTraits());
     }
     public Advisor toRole() {
-        Advisor advisor = new Advisor();
-        advisor.setCost(Integer.parseInt(costField.getText()));
-        advisor.setSlot(getSelectedFromBox(slotComboBox));
-        advisor.setTraits(getTraits(traitList));
-        advisor.toLedger();
         return advisor;
     }
 
     @Override
     public String getRoleType() {
         return CharacterRoles.ADVISOR;
+    }
+
+    public void fromCharacter(GameCharacter character) {
+        if (character.getRoles().containsKey(getRoleType())) {
+            this.advisor = (Advisor) character.getRoles().get(getRoleType());
+        } else {
+            character.getRoles().put(getRoleType(), toRole());
+        }
     }
 
 }

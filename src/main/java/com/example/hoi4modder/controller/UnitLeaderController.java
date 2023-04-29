@@ -1,5 +1,6 @@
 package com.example.hoi4modder.controller;
 
+import com.example.hoi4modder.game.GameCharacter;
 import com.example.hoi4modder.game.roles.CharacterRoles;
 import com.example.hoi4modder.game.roles.UnitLeader;
 import javafx.fxml.FXML;
@@ -80,6 +81,8 @@ public class UnitLeaderController extends RoleController<UnitLeader> implements 
         return CharacterRoles.UNIT_LEADER;
     }
 
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setValueListeners();
@@ -93,5 +96,12 @@ public class UnitLeaderController extends RoleController<UnitLeader> implements 
         logisticsField.textProperty().addListener((observableValue, old, newValue) -> unitLeader.setLogisticsSkill(Integer.parseInt(newValue)));
         fieldMarshalBox.selectedProperty().addListener((observableValue, aBoolean, t1) -> unitLeader.setFieldMarshal(t1));
 
+    }
+    public void fromCharacter(GameCharacter character) {
+        if (character.getRoles().containsKey(getRoleType())) {
+            this.unitLeader = (UnitLeader) character.getRoles().get(getRoleType());
+        } else {
+            character.getRoles().put(getRoleType(), toRole());
+        }
     }
 }

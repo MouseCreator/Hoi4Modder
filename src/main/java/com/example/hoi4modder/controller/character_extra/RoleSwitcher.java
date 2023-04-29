@@ -3,7 +3,6 @@ package com.example.hoi4modder.controller.character_extra;
 import com.example.hoi4modder.controller.CharacterItemController;
 import com.example.hoi4modder.controller.RoleController;
 import com.example.hoi4modder.game.GameCharacter;
-import com.example.hoi4modder.game.roles.CharacterRole;
 import com.example.hoi4modder.game.roles.Role;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.CheckBox;
@@ -56,6 +55,7 @@ public class RoleSwitcher<R extends Role> {
             controller.setParent(itemController);
             CharacterInfo characterInfo = itemController.getCharacterInfo();
             rolesBox.getChildren().add(characterInfo.getAndInsertPosition(targetIndex), pane);
+            controller.fromCharacter(character);
             character.getRoles().put(controller.getRoleType(), controller.toRole());
         } catch (Exception e) {
             throw new RuntimeException(e);

@@ -1,5 +1,6 @@
 package com.example.hoi4modder.controller;
 
+import com.example.hoi4modder.game.GameCharacter;
 import com.example.hoi4modder.game.roles.CharacterRoles;
 import com.example.hoi4modder.game.roles.NavyLeader;
 import javafx.fxml.FXML;
@@ -35,6 +36,7 @@ public class NavyLeaderController extends RoleController<NavyLeader> implements 
 
     @FXML
     private ListView<String> traitsList;
+    private NavyLeader navyLeader;
 
     @Override
     public String filename() {
@@ -54,13 +56,6 @@ public class NavyLeaderController extends RoleController<NavyLeader> implements 
 
     @Override
     public NavyLeader toRole() {
-        NavyLeader navyLeader = new NavyLeader();
-        navyLeader.setSkill(Integer.parseInt(skillField.getText()));
-        navyLeader.setAttackSkill(Integer.parseInt(attackField.getText()));
-        navyLeader.setDefenceSkill(Integer.parseInt(defenceField.getText()));
-        navyLeader.setManeuveringSkill(Integer.parseInt(manuverField.getText()));
-        navyLeader.setCoordinationSkill(Integer.parseInt(cordsField.getText()));
-        navyLeader.setTraits(getTraits(traitsList));
         return navyLeader;
     }
 
@@ -68,11 +63,16 @@ public class NavyLeaderController extends RoleController<NavyLeader> implements 
     public String getRoleType() {
         return CharacterRoles.NAVY_LEADER;
     }
-
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         NavyLeader navyLeader = NavyLeader.createNavyLeader();
         fromRole(navyLeader);
+    }
+    public void fromCharacter(GameCharacter character) {
+        if (character.getRoles().containsKey(getRoleType())) {
+            this.navyLeader = (NavyLeader) character.getRoles().get(getRoleType());
+        } else {
+            character.getRoles().put(getRoleType(), toRole());
+        }
     }
 }
