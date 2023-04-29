@@ -90,10 +90,10 @@ public class CharacterItemController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         rolesBox.setFillHeight(true);
-        countryLeaderRoleSwitcher.bindCheckBox(countryLeaderBox);
-        unitLeaderRoleSwitcher.bindCheckBox(unitLeaderBox);
-        navyLeaderRoleSwitcher.bindCheckBox(navyLeaderBox);
-        advisorRoleSwitcher.bindCheckBox(advisorBox);
+        countryLeaderRoleSwitcher.bindCheckBox(rolesBox, countryLeaderBox);
+        unitLeaderRoleSwitcher.bindCheckBox(rolesBox, unitLeaderBox);
+        navyLeaderRoleSwitcher.bindCheckBox(rolesBox, navyLeaderBox);
+        advisorRoleSwitcher.bindCheckBox(rolesBox, advisorBox);
     }
 
     public void fromCharacter(GameCharacter character) {

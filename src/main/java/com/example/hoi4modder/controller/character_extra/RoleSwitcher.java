@@ -9,8 +9,9 @@ import javafx.scene.layout.Pane;
 
 public class RoleSwitcher<R extends Role> {
     private RolePaneControllerPair<R> rolePaneControllerPair;
-    private Pane rolesBox;
     private int targetIndex;
+
+    private String fileDestination;
     private final CharacterItemController itemController;
     public RoleSwitcher(CharacterItemController itemController) {
         this.itemController = itemController;
@@ -18,36 +19,37 @@ public class RoleSwitcher<R extends Role> {
     void setPaneController(RolePaneControllerPair<R> rolePaneControllerPair) {
         this.rolePaneControllerPair = rolePaneControllerPair;;
     }
-    void setRolesBox(Pane box) {
-        this.rolesBox = box;
+
+    void setFileDestination(String destination) {
+        this.fileDestination = destination;
     }
     void setTargetIndex(int index) {
         this.targetIndex = index;
     }
-    public void bindCheckBox(CheckBox checkBox) {
+    public void bindCheckBox(Pane rolesBox, CheckBox checkBox) {
         checkBox.selectedProperty().addListener((observableValue, oldValue, newValue) -> {
             if(checkBox.isSelected())
-                createRolePane();
+                createRolePane(rolesBox);
             else
-                destructRolePane();
+                destructRolePane(rolesBox);
         });
     }
-    private void destructRolePane() {
+    private void destructRolePane(Pane rolesBox) {
         if (rolePaneControllerPair.isFilled()) {
             rolesBox.getChildren().remove(rolePaneControllerPair.getPane());
             rolePaneControllerPair.clear();
         }
     }
 
-    private void createRolePane() {
+    private void createRolePane(Pane rolesBox) {
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("country-leader-item.fxml"));
+        loader.setLocation(CharacterItemController.class.getResource(fileDestination));
         try {
             Pane pane = loader.load();
             RoleController<R> controller = loader.getController();
             rolePaneControllerPair.update(pane, controller);
             controller.setParent(itemController);
-            rolesBox.getChildren().add(targetIndex, pane);
+            rolesBox.getChildren().add(Math.min(targetIndex,rolesBox.getChildren().size()), pane);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
