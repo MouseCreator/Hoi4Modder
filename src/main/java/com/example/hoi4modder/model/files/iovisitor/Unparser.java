@@ -97,8 +97,9 @@ public class Unparser implements Visitor {
     }
 
     private void addRoles(GameCharacter character, BlockProperty mainProperty) {
-        for (String role : character.getPortraits().values()) {
+        for (CharacterRole role : character.getRoles().values()) {
             Unparser unparser = new Unparser();
+            role.acceptVisitor(unparser);
             mainProperty.add(unparser.getBlock());
         }
     }

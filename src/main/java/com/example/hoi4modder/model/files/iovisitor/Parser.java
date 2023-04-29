@@ -80,7 +80,7 @@ public class Parser implements Visitor{
             Advisor advisor = Advisor.createAdvisor();
             parser.setBlock(advisorProperty);
             parser.visitAdvisor(advisor);
-            roles.put("advisor", advisor);
+            roles.put(CharacterRoles.ADVISOR, advisor);
         }
 
         Property commanderProperty = mainProperty.getFirst("corps_commander");
@@ -88,7 +88,7 @@ public class Parser implements Visitor{
             UnitLeader unitLeader = UnitLeader.createCorpsCommander();
             parser.setBlock(commanderProperty);
             parser.visitUnitLeader(unitLeader);
-            roles.put("corps_commander", unitLeader);
+            roles.put(CharacterRoles.UNIT_LEADER, unitLeader);
         }
 
         Property fieldMarshalProperty = mainProperty.getFirst("field_marshal");
@@ -96,7 +96,7 @@ public class Parser implements Visitor{
             UnitLeader unitLeader = UnitLeader.createFieldMarshal();
             parser.setBlock(fieldMarshalProperty);
             parser.visitUnitLeader(unitLeader);
-            roles.put("field_marshal", unitLeader);
+            roles.put(CharacterRoles.UNIT_LEADER, unitLeader);
         }
 
         Property countryLeaderProperty = mainProperty.getFirst("country_leader");
@@ -104,7 +104,7 @@ public class Parser implements Visitor{
             CountryLeader countryLeader = CountryLeader.createCountryLeader();
             parser.setBlock(countryLeaderProperty);
             countryLeader.acceptVisitor(parser);
-            roles.put("country_leader", countryLeader);
+            roles.put(CharacterRoles.COUNTRY_LEADER, countryLeader);
         }
 
         Property navyLeaderProperty = mainProperty.getFirst("navy_leader");
@@ -112,7 +112,7 @@ public class Parser implements Visitor{
             NavyLeader navyLeader = NavyLeader.createNavyLeader();
             parser.setBlock(navyLeaderProperty);
             navyLeader.acceptVisitor(parser);
-            roles.put("navy_leader", navyLeader);
+            roles.put(CharacterRoles.NAVY_LEADER, navyLeader);
         }
 
         currentCharacter.setRoles(roles);

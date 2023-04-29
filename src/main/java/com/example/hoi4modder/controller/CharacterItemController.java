@@ -111,7 +111,7 @@ public class CharacterItemController implements Initializable {
             switch (role) {
                 case "advisor" -> loadAdvisor(character, role);
                 case "country_leader" -> loadCountryLeader(character);
-                case "corps_commander", "field_marshal" -> loadUnitLeader(character, role);
+                case "corps_commander", "field_marshal" -> loadUnitLeader(character);
                 case "navy_leader" -> loadNavyLeader(character, role);
             }
         }
@@ -136,22 +136,10 @@ public class CharacterItemController implements Initializable {
 
     }
 
-    private void loadUnitLeader(GameCharacter character, String role) {
-        FXMLLoader loader = new FXMLLoader();
-        UnitLeader unitLeader = (UnitLeader) character.getRoles().get(role);
-        loader.setLocation(getClass().getResource("unit-leader-item.fxml"));
-        Pane pane;
-        try {
-            pane = loader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
-            throw new RuntimeException(e);
-        }
-        rolesBox.getChildren().add(pane);
-        UnitLeaderController controller = loader.getController();
-        controller.setParent(this);
-        controller.fromRole(unitLeader);
+    private void loadUnitLeader(GameCharacter character) {
+        UnitLeader unitLeader = (UnitLeader) character.getRoles().get(CharacterRoles.UNIT_LEADER);
         unitLeaderBox.setSelected(true);
+        unitLeaderRoleSwitcher.getController().fromRole(unitLeader);
     }
 
     private void loadCountryLeader(GameCharacter character) {
