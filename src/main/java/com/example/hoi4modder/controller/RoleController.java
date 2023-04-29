@@ -23,6 +23,7 @@ public abstract class RoleController<R extends Role> {
         this.characterItemController = characterItemController;
     }
     protected void addTrait(ListView<String> listView, String trait) {
+        trait =  trait.replace('\t', ' ').trim();
         if (trait.isEmpty())
             return;
         listView.getItems().add(trait);
