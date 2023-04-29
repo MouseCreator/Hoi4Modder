@@ -69,10 +69,10 @@ public class CharacterItemController implements Initializable {
 
     private GameCharacter gameCharacter;
 
-    private final RolePaneControllerPair countryLeaderPair = new RolePaneControllerPair();
-    private final RolePaneControllerPair navyLeaderPair = new RolePaneControllerPair();
-    private final RolePaneControllerPair unitLeaderPair = new RolePaneControllerPair();
-    private final RolePaneControllerPair advisorPair = new RolePaneControllerPair();
+    private final RolePaneControllerPair<CountryLeader> countryLeaderPair = new RolePaneControllerPair<>();
+    private final RolePaneControllerPair<NavyLeader> navyLeaderPair = new RolePaneControllerPair<>();
+    private final RolePaneControllerPair<UnitLeader> unitLeaderPair = new RolePaneControllerPair<>();
+    private final RolePaneControllerPair<Advisor> advisorPair = new RolePaneControllerPair<>();
 
     public void setParent(CharacterListEditor editor) {
         this.listEditor = editor;
@@ -165,9 +165,8 @@ public class CharacterItemController implements Initializable {
         loader.setLocation(getClass().getResource("country-leader-item.fxml"));
         try {
             Pane pane = loader.load();
-            countryLeaderPair.setPane(pane);
             CountryLeaderRoleController controller = loader.getController();
-            //countryLeaderPair.setRoleController(controller);
+            countryLeaderPair.update(pane, controller);
             controller.setParent(this);
         } catch (Exception e) {
             throw new RuntimeException(e);
