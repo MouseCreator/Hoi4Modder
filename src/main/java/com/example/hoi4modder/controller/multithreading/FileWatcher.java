@@ -1,19 +1,15 @@
 package com.example.hoi4modder.controller.multithreading;
 
-import javafx.concurrent.Task;
-
 import java.io.File;
 
-public class FileWatcher extends Task<Void> {
+public class FileWatcher {
     private long lastUpdate;
-
     private File file;
+    public boolean isModified() {
+        return lastUpdate != file.lastModified();
+    }
 
-
-    @Override
-    protected Void call() throws Exception {
-        if (lastUpdate != file.lastModified())
-            return null;
-        return null;
+    public String getFileName() {
+        return file.getName();
     }
 }

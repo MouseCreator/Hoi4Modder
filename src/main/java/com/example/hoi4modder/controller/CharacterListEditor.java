@@ -163,5 +163,9 @@ public class CharacterListEditor extends ActivePaneController implements Initial
     public MainController getParent() {
         return this.parentController;
     }
+
+    public void onFileExternalUpdate() {
+        System.out.println("Hello, world");
+    }
 }
 
