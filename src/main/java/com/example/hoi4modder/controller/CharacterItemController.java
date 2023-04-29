@@ -166,6 +166,9 @@ public class CharacterItemController implements Initializable {
         try {
             Pane pane = loader.load();
             countryLeaderPair.setPane(pane);
+            CountryLeaderRoleController controller = loader.getController();
+            //countryLeaderPair.setRoleController(controller);
+            controller.setParent(this);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
