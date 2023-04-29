@@ -15,7 +15,7 @@ public class CharacterInfo {
             result++;
         }
         positions.add(target);
-        return positions.size()-1;
+        return result;
     }
 
     public void removePosition(int targetIndex) {
