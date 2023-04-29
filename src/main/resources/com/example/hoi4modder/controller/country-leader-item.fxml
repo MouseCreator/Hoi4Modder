@@ -36,9 +36,9 @@
             <ListView fx:id="traitList" prefHeight="128.0" prefWidth="190.0" />
             <HBox prefHeight="26.0" prefWidth="190.0">
                <children>
-                  <Button mnemonicParsing="false" text="X" textFill="RED" />
+                  <Button mnemonicParsing="false" onAction="#removeTrait" text="X" textFill="RED" />
                   <TextField fx:id="traitName" prefHeight="26.0" prefWidth="140.0" />
-                  <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="59.0" text="Add" />
+                  <Button mnemonicParsing="false" onAction="#addTrait" prefHeight="26.0" prefWidth="59.0" text="Add" />
                </children>
             </HBox>
          </children>

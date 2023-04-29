@@ -36,7 +36,6 @@ public class NavyLeaderController extends RoleController<NavyLeader> implements 
     @FXML
     private ListView<String> traitsList;
     private NavyLeader navyLeader = NavyLeader.createNavyLeader();
-
     @Override
     public String filename() {
         return "navy-leader-item.fxml";

@@ -36,7 +36,7 @@ public class CountryLeaderRoleController extends RoleController<CountryLeader> i
         ideologies.put("Fascism", List.of("nazism gen_nazism fascism_ideology falangism rexism".split(" ")));
         ideologies.put("Neutrality", List.of("despotism oligarchism anarchism moderatism centrism".split(" ")));
     }
-
+    @FXML
     public void addTrait() {
         super.addTrait(traitList, traitName.getText());
     }
@@ -108,5 +108,9 @@ public class CountryLeaderRoleController extends RoleController<CountryLeader> i
         } else {
             character.getRoles().put(getRoleType(), toRole());
         }
+    }
+    @FXML
+    void removeTrait() {
+        super.removeTrait(traitList);
     }
 }

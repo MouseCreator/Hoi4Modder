@@ -65,4 +65,13 @@ public abstract class RoleController<R extends Role> {
     public abstract String getRoleType();
 
     public abstract void fromCharacter(GameCharacter character);
+
+    protected void removeTrait(ListView<String> traitList) {
+        ObservableList<String> selectedItems = traitList.getSelectionModel().getSelectedItems();
+        String[] strings = new String[selectedItems.size()];
+        selectedItems.toArray(strings);
+        for (String s : strings) {
+            traitList.getItems().remove(s);
+        }
+    }
 }
