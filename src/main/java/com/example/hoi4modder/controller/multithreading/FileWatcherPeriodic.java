@@ -1,6 +1,7 @@
 package com.example.hoi4modder.controller.multithreading;
 
 import com.example.hoi4modder.controller.CharacterListEditor;
+import javafx.application.Platform;
 
 import java.io.File;
 import java.util.concurrent.Executors;
@@ -10,23 +11,20 @@ import java.util.concurrent.TimeUnit;
 public class FileWatcherPeriodic implements FileWatcher {
     ScheduledExecutorService executor;
     private long lastUpdated;
-    private File file;
+    private String filePath;
     private final CharacterListEditor editor;
     Runnable checkRunnable = new Runnable() {
         @Override
         public void run() {
+            File file = new File(filePath);
             if (file.lastModified() != lastUpdated) {
                 lastUpdated = file.lastModified();
-                editor.onFileExternalUpdate();
+                Platform.runLater(editor::onFileExternalUpdate);
             }
         }
     };
     public FileWatcherPeriodic(CharacterListEditor editor) {
         this.editor = editor;
-    }
-    public void setFile(File file) {
-        this.file = file;
-        this.lastUpdated = file.lastModified();;
     }
     public void start() {
         executor = Executors.newScheduledThreadPool(1, r -> {
@@ -34,7 +32,7 @@ public class FileWatcherPeriodic implements FileWatcher {
             t.setDaemon(true);
             return t;
         });
-        executor.scheduleAtFixedRate(checkRunnable, 0, 5, TimeUnit.SECONDS);
+        executor.scheduleAtFixedRate(checkRunnable, 0, 1, TimeUnit.SECONDS);
     }
     public void stop() {
         executor.close();
@@ -42,6 +40,8 @@ public class FileWatcherPeriodic implements FileWatcher {
 
     @Override
     public void setFile(String filename) {
-        file = new File(filename);
+        this.filePath = filename;
+
+        this.lastUpdated = new File(filePath).lastModified();
     }
 }
