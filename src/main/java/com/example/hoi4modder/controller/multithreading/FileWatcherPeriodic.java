@@ -29,7 +29,11 @@ public class FileWatcherPeriodic implements FileWatcher {
         this.lastUpdated = file.lastModified();;
     }
     public void start() {
-        executor = Executors.newScheduledThreadPool(1);
+        executor = Executors.newScheduledThreadPool(1, r -> {
+            Thread t = Executors.defaultThreadFactory().newThread(r);
+            t.setDaemon(true);
+            return t;
+        });
         executor.scheduleAtFixedRate(checkRunnable, 0, 5, TimeUnit.SECONDS);
     }
     public void stop() {

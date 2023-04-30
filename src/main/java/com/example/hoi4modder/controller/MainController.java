@@ -11,8 +11,6 @@ import javafx.scene.control.TextArea;
 import javafx.scene.layout.Pane;
 import javafx.stage.Window;
 
-import java.io.File;
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -47,15 +45,9 @@ public class MainController implements Initializable {
 
     private ActivePaneController currentActive;
 
-    private Window window;
-
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         loadPage(new CharacterListEditor().load(this));
-    }
-    public void setWindow(Window window) {
-        this.window = window;
-        window.setOnCloseRequest(event -> closeActiveController());
     }
     private void loadScene() {
         mainContent.getChildren().clear();
@@ -106,7 +98,7 @@ public class MainController implements Initializable {
 
     public MainController() {
         savedData = SavedDataFactory.factory().getSavedData();
-        setWindow(getWindow());
+
     }
     public SavedData getSavedData() {
         return savedData;
