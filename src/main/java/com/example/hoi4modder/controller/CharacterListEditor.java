@@ -1,9 +1,7 @@
 package com.example.hoi4modder.controller;
 
 import com.example.hoi4modder.controller.autocomplete.AutocompleteTextField;
-import com.example.hoi4modder.controller.multithreading.EditorListTask;
-import com.example.hoi4modder.controller.multithreading.LoadingTask;
-import com.example.hoi4modder.controller.multithreading.SearchingTask;
+import com.example.hoi4modder.controller.multithreading.*;
 import com.example.hoi4modder.game.GameCharacter;
 import com.example.hoi4modder.game.GameCharacterList;
 import com.example.hoi4modder.model.files.manager.FileSearchService;
@@ -16,6 +14,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 
+import java.io.File;
 import java.net.URL;
 import java.util.*;
 
@@ -29,6 +28,8 @@ public class CharacterListEditor extends ActivePaneController implements Initial
 
     private AutocompleteTextField searchAutocomplete;
     private final List<CharacterItemController> controllerList = new ArrayList<>();
+
+    private FileWatcher fileWatcher;
     private String countryTag;
     private final GameCharacterList characters = GameCharacterList.getArrayList();
     @FXML
@@ -81,9 +82,16 @@ public class CharacterListEditor extends ActivePaneController implements Initial
             GameCharacterList.getArrayList();
             return;
         }
+        if (fileWatcher != null) {
+            fileWatcher.stop();
+        } else {
+            fileWatcher = new FileWatcherPeriodic(this);
+        }
         String tag = tagTextField.getText().toUpperCase();
         try {
             String filename = getFileToLoad(tag);
+            fileWatcher.setFile(filename);
+            fileWatcher.start();
             loadFromThread(filename);
         } catch (NoSuchElementException e) {
             Alert alert = new Alert(Alert.AlertType.WARNING, "Cannot find country with tag " + tag, ButtonType.OK);
@@ -94,6 +102,7 @@ public class CharacterListEditor extends ActivePaneController implements Initial
     private void loadFromThread(String filename) {
         EditorListTask task = new LoadingTask(this, filename, characters);
         Thread thread = new Thread(task);
+
         task.setOnSucceeded(workerStateEvent -> {
             controllerList.clear();
             controllerList.addAll(task.getControllers());
@@ -169,12 +178,13 @@ public class CharacterListEditor extends ActivePaneController implements Initial
         Optional<ButtonType> result = alert.showAndWait();
         if (result.isPresent()) {
             if (result.get() == ButtonType.YES) {
-                loadListFromFile();
+                loadCharactersByTag();
             }
         }
     }
     @Override
     public void onClose() {
+        fileWatcher.stop();
     }
 }
 

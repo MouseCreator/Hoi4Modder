@@ -1,6 +1,5 @@
 package com.example.hoi4modder.controller;
-import com.example.hoi4modder.service.AppConfig;
-import com.example.hoi4modder.service.Destinations;
+import com.example.hoi4modder.controller.multithreading.RunGameTask;
 import com.example.hoi4modder.service.SavedData;
 import com.example.hoi4modder.service.SavedDataFactory;
 import javafx.fxml.FXML;
@@ -48,9 +47,15 @@ public class MainController implements Initializable {
 
     private ActivePaneController currentActive;
 
+    private Window window;
+
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         loadPage(new CharacterListEditor().load(this));
+    }
+    public void setWindow(Window window) {
+        this.window = window;
+        window.setOnCloseRequest(event -> closeActiveController());
     }
     private void loadScene() {
         mainContent.getChildren().clear();
@@ -64,7 +69,6 @@ public class MainController implements Initializable {
     public void loadPage(ActivePaneController toLoad) {
         if (closeActiveController())
             loadNext(toLoad);
-
     }
 
     private boolean closeActiveController() {
@@ -102,6 +106,7 @@ public class MainController implements Initializable {
 
     public MainController() {
         savedData = SavedDataFactory.factory().getSavedData();
+        setWindow(getWindow());
     }
     public SavedData getSavedData() {
         return savedData;
@@ -113,12 +118,10 @@ public class MainController implements Initializable {
 
     @FXML
     void runGame() {
-        AppConfig appConfig = new AppConfig();
-        String gameDir = appConfig.getGameDirectory();
-        String gameExe = Destinations.get().gamePath(gameDir);
+        RunGameTask runGameTask = new RunGameTask();
         try {
-            Runtime.getRuntime().exec(gameExe, null, new File(gameDir));
-        } catch (IOException e) {
+            runGameTask.call();
+        } catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Unable to start hoi4.exe; " +
                     "Make sure that location to game is set properly and hoi4.exe is in the specified directory!");
             alert.showAndWait();

@@ -4,7 +4,7 @@ import java.io.File;
 
 public class FileWatcherFocus implements FileWatcher {
     private long lastUpdate;
-    private final File file;
+    private File file;
     public FileWatcherFocus(File file) {
         this.file = file;
         lastUpdate = file.lastModified();
@@ -25,5 +25,10 @@ public class FileWatcherFocus implements FileWatcher {
     @Override
     public void stop() {
 
+    }
+
+    @Override
+    public void setFile(String filename) {
+        this.file = new File(filename);
     }
 }
