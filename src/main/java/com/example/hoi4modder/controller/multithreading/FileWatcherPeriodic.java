@@ -17,7 +17,8 @@ public class FileWatcherPeriodic implements FileWatcher {
         @Override
         public void run() {
             File file = new File(filePath);
-            if (file.lastModified() != lastUpdated) {
+            if (editor.getParent().getWindow().isFocused() && file.lastModified() != lastUpdated) {
+
                 lastUpdated = file.lastModified();
                 Platform.runLater(editor::onFileExternalUpdate);
             }

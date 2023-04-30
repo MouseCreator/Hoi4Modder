@@ -14,7 +14,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 
-import java.io.File;
 import java.net.URL;
 import java.util.*;
 
@@ -102,7 +101,6 @@ public class CharacterListEditor extends ActivePaneController implements Initial
     private void loadFromThread(String filename) {
         EditorListTask task = new LoadingTask(this, filename, characters);
         Thread thread = new Thread(task);
-
         task.setOnSucceeded(workerStateEvent -> {
             controllerList.clear();
             controllerList.addAll(task.getControllers());
@@ -110,6 +108,7 @@ public class CharacterListEditor extends ActivePaneController implements Initial
             addSearchSuggestions();
         });
         task.setOnFailed(workerStateEvent -> {
+            resetAll();
             Alert alert = new Alert(Alert.AlertType.ERROR, "An error occurred during loading characters!");
             alert.showAndWait();
         });
@@ -154,9 +153,9 @@ public class CharacterListEditor extends ActivePaneController implements Initial
     @FXML
     public void findCharacterByName() {
         EditorListTask task = new SearchingTask(this, searchTextField.getText(), characters);
+        resetAll();
         Thread searchingThread = new Thread(task);
         task.setOnSucceeded(workerStateEvent -> {
-            controllerList.clear();
             controllerList.addAll(task.getControllers());
             loadItems(task.getPanes());
         });
@@ -167,7 +166,11 @@ public class CharacterListEditor extends ActivePaneController implements Initial
         searchingThread.setName("Searching-Thread");
         searchingThread.start();
     }
-
+    private void resetAll() {
+        controllerList.clear();
+        characters.clear();
+        charactersListView.getItems().clear();
+    }
 
     public MainController getParent() {
         return this.parentController;
@@ -184,7 +187,8 @@ public class CharacterListEditor extends ActivePaneController implements Initial
     }
     @Override
     public void onClose() {
-        fileWatcher.stop();
+        if (fileWatcher != null)
+            fileWatcher.stop();
     }
 }
 
