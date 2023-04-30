@@ -2,6 +2,7 @@ package com.example.hoi4modder.controller;
 import com.example.hoi4modder.controller.multithreading.RunGameTask;
 import com.example.hoi4modder.service.SavedData;
 import com.example.hoi4modder.service.SavedDataFactory;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -61,8 +62,17 @@ public class MainController implements Initializable {
     public void loadPage(ActivePaneController toLoad) {
         if (closeActiveController())
             loadNext(toLoad);
+        Platform.runLater(this::initWindow);
     }
-
+    private Window window;
+    private void initWindow() {
+        this.window = mainPane.getScene().getWindow();
+        window.setOnCloseRequest(windowEvent -> {
+            if (currentActive != null) {
+                currentActive.onClose();
+            }
+        });
+    }
     private boolean closeActiveController() {
         if (currentActive == null) {
             return true;
@@ -105,7 +115,7 @@ public class MainController implements Initializable {
     }
 
     public Window getWindow() {
-        return mainPane.getScene().getWindow();
+        return window;
     }
 
     @FXML

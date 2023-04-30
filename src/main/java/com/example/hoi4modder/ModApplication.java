@@ -23,7 +23,6 @@ public class ModApplication extends Application {
         stage.setTitle("Hoi4 modification");
         stage.setScene(scene);
         stage.show();
-
         stage.setMinWidth(800);
         stage.setMinHeight(400);
         stage.setResizable(true);
