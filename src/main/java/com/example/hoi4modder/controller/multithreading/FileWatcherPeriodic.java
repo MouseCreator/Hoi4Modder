@@ -33,7 +33,7 @@ public class FileWatcherPeriodic implements FileWatcher {
             t.setDaemon(true);
             return t;
         });
-        executor.scheduleAtFixedRate(checkRunnable, 0, 1, TimeUnit.SECONDS);
+        executor.scheduleAtFixedRate(checkRunnable, 0, 500, TimeUnit.MILLISECONDS);
     }
     public void stop() {
         executor.close();
