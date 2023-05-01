@@ -26,7 +26,7 @@ public class NavyLeaderController extends RoleController<NavyLeader> implements 
     private TextField defenceField;
 
     @FXML
-    private TextField manuverField;
+    private TextField maneuverField;
 
     @FXML
     private TextField skillField;
@@ -46,7 +46,7 @@ public class NavyLeaderController extends RoleController<NavyLeader> implements 
         skillField.setText(String.valueOf(navyLeader.getSkill()));
         attackField.setText(String.valueOf(navyLeader.getAttackSkill()));
         defenceField.setText(String.valueOf(navyLeader.getDefenceSkill()));
-        manuverField.setText(String.valueOf(navyLeader.getManeuveringSkill()));
+        maneuverField.setText(String.valueOf(navyLeader.getManeuveringSkill()));
         cordsField.setText(String.valueOf(navyLeader.getCoordinationSkill()));
         traitsList.getItems().clear();
         traitsList.getItems().addAll(navyLeader.getTraits());
@@ -78,7 +78,7 @@ public class NavyLeaderController extends RoleController<NavyLeader> implements 
         attackField.textProperty().addListener((observableValue, old, newValue) -> navyLeader.setAttackSkill(Integer.parseInt(newValue)));
         defenceField.textProperty().addListener((observableValue, old, newValue) -> navyLeader.setDefenceSkill(Integer.parseInt(newValue)));
         skillField.textProperty().addListener((observableValue, old, newValue) -> navyLeader.setSkill(Integer.parseInt(newValue)));
-        manuverField.textProperty().addListener((observableValue, old, newValue) -> navyLeader.setManeuveringSkill(Integer.parseInt(newValue)));
+        maneuverField.textProperty().addListener((observableValue, old, newValue) -> navyLeader.setManeuveringSkill(Integer.parseInt(newValue)));
         cordsField.textProperty().addListener((observableValue, old, newValue) -> navyLeader.setCoordinationSkill(Integer.parseInt(newValue)));
     }
 
