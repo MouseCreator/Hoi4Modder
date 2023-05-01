@@ -170,7 +170,6 @@ public class CharacterListEditor extends ActivePaneController implements Initial
     }
     private void resetAll() {
         controllerList.clear();
-        characters.clear();
         charactersListView.getItems().clear();
     }
 
