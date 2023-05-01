@@ -76,6 +76,8 @@ public class CharacterListEditor extends ActivePaneController implements Initial
         searcher.setDirectory(Destinations.get().characters());
         return searcher.findCountryByTag(tag);
     }
+
+    private final Runnable onFileChanged = this::onFileExternalUpdate;
     private void loadListFromFile() {
         if (tagTextField.getText().isEmpty()) {
             GameCharacterList.getArrayList();
@@ -84,7 +86,7 @@ public class CharacterListEditor extends ActivePaneController implements Initial
         if (fileWatcher != null) {
             fileWatcher.stop();
         } else {
-            fileWatcher = new FileWatcherPeriodic(this);
+            fileWatcher = new FileWatcherPeriodic(onFileChanged);
         }
         String tag = tagTextField.getText().toUpperCase();
         try {

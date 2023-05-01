@@ -1,6 +1,5 @@
 package com.example.hoi4modder.controller.multithreading;
 
-import com.example.hoi4modder.controller.CharacterListEditor;
 import javafx.application.Platform;
 
 import java.io.File;
@@ -12,20 +11,20 @@ public class FileWatcherPeriodic implements FileWatcher {
     ScheduledExecutorService executor;
     private long lastUpdated;
     private String filePath;
-    private final CharacterListEditor editor;
+    private final Runnable onFileChange;
     Runnable checkRunnable = new Runnable() {
         @Override
         public void run() {
             File file = new File(filePath);
-            if (editor.getParent().getWindow().isFocused() && file.lastModified() != lastUpdated) {
 
+            if (file.lastModified() != lastUpdated) {
                 lastUpdated = file.lastModified();
-                Platform.runLater(editor::onFileExternalUpdate);
+                Platform.runLater(onFileChange); //callback
             }
         }
     };
-    public FileWatcherPeriodic(CharacterListEditor editor) {
-        this.editor = editor;
+    public FileWatcherPeriodic(Runnable onFileChange) {
+        this.onFileChange = onFileChange;
     }
     public void start() {
         executor = Executors.newScheduledThreadPool(1, r -> {
@@ -45,4 +44,5 @@ public class FileWatcherPeriodic implements FileWatcher {
 
         this.lastUpdated = new File(filePath).lastModified();
     }
+    //editor.getParent().getWindow().isFocused() &&
 }
