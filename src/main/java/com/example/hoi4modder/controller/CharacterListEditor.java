@@ -23,7 +23,7 @@ import java.util.*;
 /**
  * Controller for character list
  */
-public class CharacterListEditor extends ActivePaneController implements Initializable {
+public class CharacterListEditor extends ActivePaneController implements Initializable, ItemContainer<GameCharacter> {
 
     @FXML
     private ListView<Pane> charactersListView;
@@ -142,9 +142,7 @@ public class CharacterListEditor extends ActivePaneController implements Initial
     private void loadFromThread(String filename) {
         EditorListTask task = new LoadingTask(this, filename, characters);
         Thread thread = new Thread(task);
-        task.setOnSucceeded(workerStateEvent -> {
-            onLoadingSuccessAction(filename, task);
-        });
+        task.setOnSucceeded(workerStateEvent -> onLoadingSuccessAction(filename, task));
         task.setOnFailed(workerStateEvent -> {
             onLoadingFailedAction();
             Alert alert = new Alert(Alert.AlertType.ERROR, "An error occurred during loading characters!");
@@ -264,5 +262,9 @@ public class CharacterListEditor extends ActivePaneController implements Initial
     }
 
 
+    @Override
+    public void associateItem(ListItemController<GameCharacter> item) {
+        item.setParent(this);
+    }
 }
 

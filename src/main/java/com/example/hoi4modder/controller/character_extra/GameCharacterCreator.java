@@ -1,7 +1,7 @@
 package com.example.hoi4modder.controller.character_extra;
 
-import com.example.hoi4modder.controller.ActivePaneController;
 import com.example.hoi4modder.controller.CharacterItemController;
+import com.example.hoi4modder.controller.ItemContainer;
 import com.example.hoi4modder.game.GameCharacter;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
@@ -11,11 +11,11 @@ import java.io.IOException;
 import java.util.List;
 
 public class GameCharacterCreator implements ListCreator<GameCharacter> {
-    private final ActivePaneController parentController;
+    private final ItemContainer<GameCharacter> parentController;
     private final ObservableList<Pane> panes;
     private final List<CharacterItemController> controllerList;
 
-    public GameCharacterCreator(ActivePaneController controller, ObservableList<Pane> panes,
+    public GameCharacterCreator(ItemContainer<GameCharacter> controller, ObservableList<Pane> panes,
                                 List<CharacterItemController> controllerList) {
         this.parentController = controller;
         this.panes = panes;
@@ -25,11 +25,11 @@ public class GameCharacterCreator implements ListCreator<GameCharacter> {
     @Override
     public void addItem(GameCharacter character) {
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(parentController.getClass().getResource("character-item.fxml"));
+        loader.setLocation(CharacterItemController.class.getResource("character-item.fxml"));
         try {
             Pane pane = loader.load();
             CharacterItemController controller = loader.getController();
-            controller.setParent(parentController);
+            parentController.associateItem(controller);
             controller.fromModel(character);
             controllerList.add(controller);
             panes.add(pane);

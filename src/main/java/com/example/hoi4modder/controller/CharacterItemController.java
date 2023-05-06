@@ -86,7 +86,7 @@ public class CharacterItemController implements Initializable, ListItemControlle
         advisorRoleSwitcher = builder.buildAdvisorSwitcher(this);
     }
 
-    public void setParent(ActivePaneController editor) {
+    public void setParent(CharacterListEditor editor) {
         this.listEditor = editor;
         countryTag = editor.getCountry().getTag();
     }
