@@ -1,7 +1,5 @@
 package com.example.hoi4modder.controller;
 import com.example.hoi4modder.controller.multithreading.RunGameTask;
-import com.example.hoi4modder.service.SavedData;
-import com.example.hoi4modder.service.SavedDataFactory;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -104,14 +102,9 @@ public class MainController implements Initializable {
         this.consoleView.setStyle("-fx-text-fill: green");
     }
 
-    private final SavedData savedData;
 
     public MainController() {
-        savedData = SavedDataFactory.factory().getSavedData();
 
-    }
-    public SavedData getSavedData() {
-        return savedData;
     }
 
     public Window getWindow() {

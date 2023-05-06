@@ -13,6 +13,7 @@ import com.example.hoi4modder.model.files.maps.LoadedData;
 import com.example.hoi4modder.service.AppConfig;
 import com.example.hoi4modder.service.Destinations;
 import com.example.hoi4modder.service.ImageTransformer;
+import com.example.hoi4modder.service.SavedDataContainer;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -99,7 +100,7 @@ public class CharacterItemController implements Initializable, ListItemControlle
     public void fromModel(GameCharacter character) {
         this.gameCharacter = character;
         initRoles(gameCharacter);
-        LoadedData data = listEditor.getMainController().getSavedData().loadedData();
+        LoadedData data = SavedDataContainer.get().loadedData();
         characterIDField.setText(character.getIdentification());
         if (!character.getName().isEmpty()) {
             DataPool<String> localisationPool = data.getLocalisationData();
@@ -122,7 +123,7 @@ public class CharacterItemController implements Initializable, ListItemControlle
         characterIDField.textProperty().addListener((observableValue, oldValue, newValue) -> {
             gameCharacter.setIdentification(newValue);
             try {
-                listEditor.getMainController().getSavedData().loadedData().getLocalisationData().replace(oldValue, newValue);
+                SavedDataContainer.get().loadedData().getLocalisationData().replace(oldValue, newValue);
                 characterIDField.setStyle("-fx-control-inner-background: #FFFFFF");
             } catch (Exception e) {
                 characterIDField.setStyle("-fx-control-inner-background: #FFE3E3");
@@ -130,7 +131,7 @@ public class CharacterItemController implements Initializable, ListItemControlle
         });
         characterIDField.textProperty().addListener((observableValue, oldValue, newValue) -> {
             gameCharacter.setIdentification(newValue);
-            listEditor.getMainController().getSavedData().loadedData().
+            SavedDataContainer.get().loadedData().
                     getLocalisationData().put(LocalisationType.CHARACTERS, gameCharacter.getIdentification(), newValue);
         });
     }
@@ -177,7 +178,7 @@ public class CharacterItemController implements Initializable, ListItemControlle
     }
 
     private void loadPortraits(GameCharacter character) {
-        LoadedData data = listEditor.getMainController().getSavedData().loadedData();
+        LoadedData data = SavedDataContainer.get().loadedData();
         DataPool<String> graphicsPool = data.getGraphicsData();
         DirectSurfaceManager ddsPictures = new DirectSurfaceManager();
         FieldValueMap<String> portraits = character.getPortraits();
@@ -214,8 +215,8 @@ public class CharacterItemController implements Initializable, ListItemControlle
     @FXML
     void toSmallPortrait() {
         ImageTransformer transformer = new ImageTransformer();
-        FileSearchService service = listEditor.getMainController().getSavedData().fileSearchService();
-        LoadedData data =  listEditor.getMainController().getSavedData().loadedData();
+        FileSearchService service = SavedDataContainer.get().fileSearchService();
+        LoadedData data =  SavedDataContainer.get().loadedData();
         DataPool<String> graphicsData = data.getGraphicsData();
         DirectSurfaceManager ddsImage = new DirectSurfaceManager();
 
@@ -248,8 +249,8 @@ public class CharacterItemController implements Initializable, ListItemControlle
     }
     private void setLargePortrait(File file) {
         ImageTransformer transformer = new ImageTransformer();
-        FileSearchService service = listEditor.getMainController().getSavedData().fileSearchService();
-        LoadedData data = listEditor.getMainController().getSavedData().loadedData();
+        FileSearchService service = SavedDataContainer.get().fileSearchService();
+        LoadedData data =SavedDataContainer.get().loadedData();
         DirectSurfaceManager ddsImage = new DirectSurfaceManager();
         String filename = "Portrait_" + gameCharacter.getIdentification() + ".dds";
         String destination = service.getModDirectory() + Destinations.get().leaderGFX(countryTag);
@@ -274,8 +275,8 @@ public class CharacterItemController implements Initializable, ListItemControlle
     private void setSmallPortrait(File file) {
         ImageTransformer transformer = new ImageTransformer();
 
-        FileSearchService service = listEditor.getMainController().getSavedData().fileSearchService();
-        LoadedData data = listEditor.getMainController().getSavedData().loadedData();
+        FileSearchService service = SavedDataContainer.get().fileSearchService();
+        LoadedData data = SavedDataContainer.get().loadedData();
         DirectSurfaceManager ddsImage = new DirectSurfaceManager();
         String filename = "idea_" + gameCharacter.getIdentification() + ".dds";
         String destination = service.getModDirectory() + Destinations.get().ideasGFX();

@@ -1,10 +1,10 @@
 package com.example.hoi4modder.controller.multithreading;
 
-import com.example.hoi4modder.controller.CharacterListEditor;
 import com.example.hoi4modder.game.GameCharacter;
 import com.example.hoi4modder.game.GameCharacterList;
 import com.example.hoi4modder.model.files.maps.DataPool;
 import com.example.hoi4modder.model.files.maps.LoadedData;
+import com.example.hoi4modder.service.SavedDataContainer;
 import com.example.hoi4modder.utilities.Strings;
 
 public class SearchingTask extends EditorListTask{
@@ -12,8 +12,7 @@ public class SearchingTask extends EditorListTask{
     private final String targetString;
     private final GameCharacterList initialCharacters;
 
-    public SearchingTask(CharacterListEditor editor, String target, GameCharacterList initialCharacters) {
-        this.editor = editor;
+    public SearchingTask(String target, GameCharacterList initialCharacters) {
         this.targetString = target;
         this.initialCharacters = initialCharacters;
         characters = GameCharacterList.getArrayList();
@@ -44,7 +43,7 @@ public class SearchingTask extends EditorListTask{
 
     private void loadByName(String name) {
         final String targetName = name.replace("\"", "");
-        LoadedData data = editor.getParent().getSavedData().loadedData();
+        LoadedData data = SavedDataContainer.get().loadedData();
         DataPool<String> localisationPool = data.getLocalisationData();
         for (GameCharacter character : initialCharacters) {
             String expected = localisationPool.get(character.getName());

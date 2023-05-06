@@ -13,6 +13,7 @@ import com.example.hoi4modder.game.common.DynamicCountry;
 import com.example.hoi4modder.model.files.manager.FileSearchService;
 import com.example.hoi4modder.model.files.manager.strategy.PutReplaceStrategy;
 import com.example.hoi4modder.service.Destinations;
+import com.example.hoi4modder.service.SavedDataContainer;
 import com.example.hoi4modder.service.saver.CharacterSaver;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -112,7 +113,7 @@ public class CharacterListEditor extends ActivePaneController implements Initial
         loadListFromFile();
     }
     private String getFileToLoad(String tag) {
-        FileSearchService searcher = parentController.getSavedData().fileSearchService();
+        FileSearchService searcher = SavedDataContainer.get().fileSearchService();
         searcher.setStrategy(new PutReplaceStrategy());
         searcher.setDirectory(Destinations.get().characters());
         return searcher.findCountryByTag(tag);
@@ -145,7 +146,7 @@ public class CharacterListEditor extends ActivePaneController implements Initial
     }
 
     private void loadFromThread(String filename) {
-        EditorListTask task = new LoadingTask(this, filename, characters);
+        EditorListTask task = new LoadingTask(filename, characters);
         Thread thread = new Thread(task);
         task.setOnSucceeded(workerStateEvent -> onLoadingSuccessAction(filename, task));
         task.setOnFailed(workerStateEvent -> {
@@ -155,10 +156,6 @@ public class CharacterListEditor extends ActivePaneController implements Initial
         });
         thread.setName("CharacterLoadingThread");
         thread.start();
-    }
-
-    private void showAll() {
-        findCharacters("");
     }
 
     private void onLoadingSuccessAction(String filename, EditorListTask task) {
@@ -228,7 +225,7 @@ public class CharacterListEditor extends ActivePaneController implements Initial
     }
 
     public void findCharacters(String target) {
-        EditorListTask task = new SearchingTask(this, target, characters);
+        EditorListTask task = new SearchingTask(target, characters);
         resetAll();
         Thread searchingThread = new Thread(task);
         task.setOnSucceeded(workerStateEvent -> {
