@@ -5,5 +5,5 @@ public interface ListItemController<T> {
 
     T toModel();
 
-    void setParent(CharacterListEditor editor);
+    void setParent(ItemContainer<T> editor);
 }

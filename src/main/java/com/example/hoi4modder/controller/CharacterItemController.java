@@ -86,9 +86,9 @@ public class CharacterItemController implements Initializable, ListItemControlle
         advisorRoleSwitcher = builder.buildAdvisorSwitcher(this);
     }
 
-    public void setParent(CharacterListEditor editor) {
-        this.listEditor = editor;
-        countryTag = editor.getCountry().getTag();
+    public void setParent(ItemContainer<GameCharacter> editor) {
+        this.listEditor = (CharacterListEditor) editor;
+        countryTag = listEditor.getCountry().getTag();
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
