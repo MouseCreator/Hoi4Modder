@@ -1,5 +1,6 @@
 package com.example.hoi4modder.controller;
 
+import com.example.hoi4modder.game.common.Country;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.Pane;
 
@@ -43,4 +44,6 @@ public abstract class ActivePaneController {
 
     public abstract void save();
     public abstract void load();
+
+    public abstract Country getCountry();
 }

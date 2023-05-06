@@ -2,6 +2,7 @@ package com.example.hoi4modder.controller.multithreading;
 
 import com.example.hoi4modder.controller.CharacterItemController;
 import com.example.hoi4modder.controller.CharacterListEditor;
+import com.example.hoi4modder.controller.character_extra.GameCharacterCreator;
 import com.example.hoi4modder.game.GameCharacter;
 import com.example.hoi4modder.game.GameCharacterList;
 import javafx.collections.FXCollections;
@@ -19,20 +20,11 @@ public abstract class EditorListTask extends Task<Void> {
     protected CharacterListEditor editor;
     protected ObservableList<Pane> paneList = FXCollections.observableArrayList();
     protected List<CharacterItemController> controllerList = new ArrayList<>();
+
     protected void createListOfCharacters() {
+        GameCharacterCreator creator = new GameCharacterCreator(editor, paneList, controllerList);
         for (GameCharacter character : characters) {
-            FXMLLoader itemLoader = new FXMLLoader();
-            itemLoader.setLocation(editor.getClass().getResource("character-item.fxml"));
-            try {
-                Pane pane = itemLoader.load();
-                CharacterItemController controller = itemLoader.getController();
-                controller.setParent(editor);
-                controller.fromCharacter(character);
-                controllerList.add(controller);
-                paneList.add(pane);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            creator.addItem(character);
         }
     }
     public List<CharacterItemController> getControllers() {

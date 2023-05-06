@@ -1,5 +1,6 @@
 package com.example.hoi4modder.controller;
 
+import com.example.hoi4modder.game.common.Country;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -62,6 +63,11 @@ public class CountryEditorController extends ActivePaneController implements Ini
     @Override
     public void load() {
 
+    }
+
+    @Override
+    public Country getCountry() {
+        return null;
     }
 
     @FXML

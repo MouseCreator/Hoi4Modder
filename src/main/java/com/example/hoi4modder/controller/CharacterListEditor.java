@@ -4,6 +4,8 @@ import com.example.hoi4modder.controller.autocomplete.AutocompleteTextField;
 import com.example.hoi4modder.controller.multithreading.*;
 import com.example.hoi4modder.game.GameCharacter;
 import com.example.hoi4modder.game.GameCharacterList;
+import com.example.hoi4modder.game.common.Country;
+import com.example.hoi4modder.game.common.CountryImpl;
 import com.example.hoi4modder.model.files.manager.FileSearchService;
 import com.example.hoi4modder.model.files.manager.strategy.PutReplaceStrategy;
 import com.example.hoi4modder.service.Destinations;
@@ -27,7 +29,7 @@ public class CharacterListEditor extends ActivePaneController implements Initial
     private AutocompleteTextField searchAutocomplete;
     private final List<CharacterItemController> controllerList = new ArrayList<>();
     private FileWatcher fileWatcher;
-    private String countryTag;
+    private final Country country = new CountryImpl();
     private final GameCharacterList characters = GameCharacterList.getArrayList();
     @FXML
     private TextField tagTextField;
@@ -49,6 +51,11 @@ public class CharacterListEditor extends ActivePaneController implements Initial
 
     }
 
+    @Override
+    public Country getCountry() {
+        return country;
+    }
+
     @FXML
     public void duplicateSelected() {
         System.out.println("Duplicated");
@@ -65,7 +72,7 @@ public class CharacterListEditor extends ActivePaneController implements Initial
 
     @FXML
     public void loadCharactersByTag() {
-        this.countryTag = tagTextField.getText();
+        setCountryTag(tagTextField.getText());
         loadListFromFile();
     }
     private String getFileToLoad(String tag) {
@@ -142,11 +149,11 @@ public class CharacterListEditor extends ActivePaneController implements Initial
         }
     }
     public String getCountryTag() {
-        return countryTag;
+        return country.getTag();
     }
 
     public void setCountryTag(String countryTag) {
-        this.countryTag = countryTag;
+        this.country.setTag(countryTag);
     }
 
     @Override

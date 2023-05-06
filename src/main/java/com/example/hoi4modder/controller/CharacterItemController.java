@@ -32,7 +32,7 @@ import java.util.ResourceBundle;
 /**
  * Controller for single character
  */
-public class CharacterItemController implements Initializable {
+public class CharacterItemController implements Initializable, ListItemController<GameCharacter> {
     @FXML
     private CheckBox advisorBox;
 
@@ -63,10 +63,11 @@ public class CharacterItemController implements Initializable {
     @FXML
     private CheckBox unitLeaderBox;
 
-    private CharacterListEditor listEditor;
+    private ActivePaneController listEditor;
     private final CharacterInfo characterInfo;
     private boolean hasBigPortrait = false;
     private boolean hasSmallPortrait = false;
+    private String countryTag;
     private GameCharacter gameCharacter;
     private final RoleSwitcher<CountryLeader> countryLeaderRoleSwitcher;
     private final RoleSwitcher<NavyLeader> navyLeaderRoleSwitcher;
@@ -85,16 +86,17 @@ public class CharacterItemController implements Initializable {
         advisorRoleSwitcher = builder.buildAdvisorSwitcher(this);
     }
 
-    public void setParent(CharacterListEditor editor) {
+    public void setParent(ActivePaneController editor) {
         this.listEditor = editor;
+        countryTag = editor.getCountry().getTag();
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         rolesBox.setFillHeight(true);
 
     }
-
-    public void fromCharacter(GameCharacter character) {
+    @Override
+    public void fromModel(GameCharacter character) {
         this.gameCharacter = character;
         initRoles(gameCharacter);
         LoadedData data = listEditor.parentController.getSavedData().loadedData();
@@ -103,6 +105,11 @@ public class CharacterItemController implements Initializable {
         characterNameField.setText(localisationPool.get(character.getName()));
         loadPortraits(character);
         loadRoles(character);
+    }
+
+    @Override
+    public GameCharacter toModel() {
+        return gameCharacter;
     }
 
     private void initRoles(GameCharacter character) {
@@ -219,14 +226,13 @@ public class CharacterItemController implements Initializable {
     }
     private void setLargePortrait(File file) {
         ImageTransformer transformer = new ImageTransformer();
-
         FileSearchService service = listEditor.parentController.getSavedData().fileSearchService();
         LoadedData data = listEditor.parentController.getSavedData().loadedData();
         DirectSurfaceManager ddsImage = new DirectSurfaceManager();
         String filename = "Portrait_" + gameCharacter.getIdentification() + ".dds";
-        String destination = service.getModDirectory() + Destinations.get().leaderGFX(listEditor.getCountryTag());
+        String destination = service.getModDirectory() + Destinations.get().leaderGFX(countryTag);
         String fullNewPath = destination + filename;
-        String pathToPut = Destinations.get().leaderGFX(listEditor.getCountryTag()) + filename;
+        String pathToPut = Destinations.get().leaderGFX(countryTag) + filename;
         String key = "GFX_Portrait_" + gameCharacter.getIdentification();
         transformer.toBigImage(file, fullNewPath);
         gameCharacter.getPortraits().put("large", key);
