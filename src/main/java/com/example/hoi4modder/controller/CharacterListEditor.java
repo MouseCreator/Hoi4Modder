@@ -1,6 +1,7 @@
 package com.example.hoi4modder.controller;
 
 import com.example.hoi4modder.controller.autocomplete.AutocompleteTextField;
+import com.example.hoi4modder.controller.character_extra.GameCharacterCreator;
 import com.example.hoi4modder.controller.multithreading.*;
 import com.example.hoi4modder.game.GameCharacter;
 import com.example.hoi4modder.game.GameCharacterList;
@@ -63,7 +64,11 @@ public class CharacterListEditor extends ActivePaneController implements Initial
 
     @FXML
     public void addEmptyCharacter() {
-        System.out.println("Added character");
+        GameCharacter newCharacter = GameCharacter.getSampleCharacter();
+        GameCharacterCreator creator = new GameCharacterCreator(this, charactersListView.getItems(), controllerList);
+        characters.add(newCharacter);
+        creator.addItem(newCharacter);
+        charactersListView.scrollTo(characters.size()-1);
     }
     @FXML
     public void removeSelected() {
@@ -201,9 +206,6 @@ public class CharacterListEditor extends ActivePaneController implements Initial
             fileWatcher.stop();
     }
 
-    public void onAddCharacter() {
-        characters.add(new GameCharacter());
-        addEmptyCharacter();
-    }
+
 }
 

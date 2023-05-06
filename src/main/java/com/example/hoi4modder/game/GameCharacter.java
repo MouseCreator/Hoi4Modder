@@ -15,6 +15,15 @@ public class GameCharacter {
     private FieldValueMap<CharacterRole> roles;
     private FieldValueMap<String> portraits;
 
+    public static GameCharacter getSampleCharacter() {
+        GameCharacter gameCharacter = new GameCharacter();
+        gameCharacter.setIdentification("");
+        gameCharacter.setName("");
+        gameCharacter.setRoles(new FieldValueMap<>(new HashMap<>()));
+        gameCharacter.setPortraits(new FieldValueMap<>(new HashMap<>()));
+        return gameCharacter;
+    }
+
     /**
      * Clones character
      * @return duplicate character

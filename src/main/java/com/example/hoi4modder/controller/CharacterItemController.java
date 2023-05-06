@@ -100,9 +100,15 @@ public class CharacterItemController implements Initializable, ListItemControlle
         this.gameCharacter = character;
         initRoles(gameCharacter);
         LoadedData data = listEditor.parentController.getSavedData().loadedData();
-        DataPool<String> localisationPool = data.getLocalisationData();
         characterIDField.setText(character.getIdentification());
-        characterNameField.setText(localisationPool.get(character.getName()));
+        if (!character.getName().isEmpty()) {
+            DataPool<String> localisationPool = data.getLocalisationData();
+            try {
+                characterNameField.setText(localisationPool.get(character.getName()));
+            } catch (Exception e) {
+                characterNameField.setText(character.getIdentification());
+            }
+        }
         loadPortraits(character);
         loadRoles(character);
     }
