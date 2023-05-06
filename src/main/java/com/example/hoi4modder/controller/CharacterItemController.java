@@ -111,13 +111,29 @@ public class CharacterItemController implements Initializable, ListItemControlle
         }
         loadPortraits(character);
         loadRoles(character);
+        setValueListeners();
     }
 
     @Override
     public GameCharacter toModel() {
         return gameCharacter;
     }
-
+    private void setValueListeners() {
+        characterIDField.textProperty().addListener((observableValue, oldValue, newValue) -> {
+            gameCharacter.setIdentification(newValue);
+            try {
+                listEditor.getMainController().getSavedData().loadedData().getLocalisationData().replace(oldValue, newValue);
+                characterIDField.setStyle("-fx-control-inner-background: #FFFFFF");
+            } catch (Exception e) {
+                characterIDField.setStyle("-fx-control-inner-background: #FFE3E3");
+            }
+        });
+        characterIDField.textProperty().addListener((observableValue, oldValue, newValue) -> {
+            gameCharacter.setIdentification(newValue);
+            listEditor.getMainController().getSavedData().loadedData().
+                    getLocalisationData().put(LocalisationType.CHARACTERS, gameCharacter.getIdentification(), newValue);
+        });
+    }
     private void initRoles(GameCharacter character) {
         countryLeaderRoleSwitcher.bindCheckBox(rolesBox, countryLeaderBox, character);
         unitLeaderRoleSwitcher.bindCheckBox(rolesBox, unitLeaderBox, character);
