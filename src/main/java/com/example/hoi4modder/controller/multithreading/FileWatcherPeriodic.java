@@ -3,6 +3,7 @@ package com.example.hoi4modder.controller.multithreading;
 import javafx.application.Platform;
 
 import java.io.File;
+import java.util.concurrent.Callable;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -16,16 +17,26 @@ public class FileWatcherPeriodic implements FileWatcher {
         @Override
         public void run() {
             File file = new File(filePath);
-
-            if (file.lastModified() != lastUpdated) {
+            boolean runCheck;
+            try {
+                runCheck = checkCondition.call();
+            } catch (Exception e) {
+                e.printStackTrace();
+                throw new RuntimeException(e);
+            }
+            if (runCheck && file.lastModified() != lastUpdated) {
                 lastUpdated = file.lastModified();
                 Platform.runLater(onFileChange); //callback
             }
         }
     };
-    public FileWatcherPeriodic(Runnable onFileChange) {
-        this.onFileChange = onFileChange;
+    Callable<Boolean> checkCondition;
+
+    public FileWatcherPeriodic(Runnable onFileChanged, Callable<Boolean> checkCondition) {
+        this.onFileChange = onFileChanged;
+        this.checkCondition = checkCondition;
     }
+
     public void start() {
         executor = Executors.newScheduledThreadPool(1, r -> {
             Thread t = Executors.defaultThreadFactory().newThread(r);
@@ -44,5 +55,4 @@ public class FileWatcherPeriodic implements FileWatcher {
 
         this.lastUpdated = new File(filePath).lastModified();
     }
-    //editor.getParent().getWindow().isFocused() &&
 }

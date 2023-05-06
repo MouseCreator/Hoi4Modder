@@ -24,10 +24,8 @@ public class CharacterListEditor extends ActivePaneController implements Initial
 
     @FXML
     private ListView<Pane> charactersListView;
-
     private AutocompleteTextField searchAutocomplete;
     private final List<CharacterItemController> controllerList = new ArrayList<>();
-
     private FileWatcher fileWatcher;
     private String countryTag;
     private final GameCharacterList characters = GameCharacterList.getArrayList();
@@ -86,7 +84,7 @@ public class CharacterListEditor extends ActivePaneController implements Initial
         if (fileWatcher != null) {
             fileWatcher.stop();
         } else {
-            fileWatcher = new FileWatcherPeriodic(onFileChanged);
+            fileWatcher = new FileWatcherPeriodic(onFileChanged, () -> getParent().getWindow().isFocused());
         }
         String tag = tagTextField.getText().toUpperCase();
         try {
