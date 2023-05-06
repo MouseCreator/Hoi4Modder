@@ -5,7 +5,7 @@ import com.example.hoi4modder.controller.multithreading.*;
 import com.example.hoi4modder.game.GameCharacter;
 import com.example.hoi4modder.game.GameCharacterList;
 import com.example.hoi4modder.game.common.Country;
-import com.example.hoi4modder.game.common.CountryImpl;
+import com.example.hoi4modder.game.common.DynamicCountry;
 import com.example.hoi4modder.model.files.manager.FileSearchService;
 import com.example.hoi4modder.model.files.manager.strategy.PutReplaceStrategy;
 import com.example.hoi4modder.service.Destinations;
@@ -29,7 +29,7 @@ public class CharacterListEditor extends ActivePaneController implements Initial
     private AutocompleteTextField searchAutocomplete;
     private final List<CharacterItemController> controllerList = new ArrayList<>();
     private FileWatcher fileWatcher;
-    private final Country country = new CountryImpl();
+    private final DynamicCountry country = new DynamicCountry();
     private final GameCharacterList characters = GameCharacterList.getArrayList();
     @FXML
     private TextField tagTextField;

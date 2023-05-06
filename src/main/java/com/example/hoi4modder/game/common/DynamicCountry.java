@@ -1,12 +1,12 @@
 package com.example.hoi4modder.game.common;
 
-public class CountryImpl implements Country {
+public class DynamicCountry implements Country {
 
     private String tag;
-    public CountryImpl() {
+    public DynamicCountry() {
         this.tag = "";
     }
-    public CountryImpl(String tag) {
+    public DynamicCountry(String tag) {
         this.tag = tag;
     }
 
@@ -15,7 +15,6 @@ public class CountryImpl implements Country {
         return tag;
     }
 
-    @Override
     public void setTag(String countryTag) {
         this.tag = countryTag;
     }
