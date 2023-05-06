@@ -81,11 +81,7 @@ public class CharacterListEditor extends ActivePaneController implements Initial
             GameCharacterList.getArrayList();
             return;
         }
-        if (fileWatcher != null) {
-            fileWatcher.stop();
-        } else {
-            fileWatcher = new FileWatcherPeriodic(onFileChanged, () -> getParent().getWindow().isFocused());
-        }
+        initFileWatcher();
         String tag = tagTextField.getText().toUpperCase();
         try {
             String filename = getFileToLoad(tag);
@@ -95,6 +91,14 @@ public class CharacterListEditor extends ActivePaneController implements Initial
         } catch (NoSuchElementException e) {
             Alert alert = new Alert(Alert.AlertType.WARNING, "Cannot find country with tag " + tag, ButtonType.OK);
             alert.showAndWait();
+        }
+    }
+
+    private void initFileWatcher() {
+        if (fileWatcher != null) {
+            fileWatcher.stop();
+        } else {
+            fileWatcher = new FileWatcherPeriodic(onFileChanged, () -> getParent().getWindow().isFocused());
         }
     }
 
@@ -188,6 +192,11 @@ public class CharacterListEditor extends ActivePaneController implements Initial
     public void onClose() {
         if (fileWatcher != null)
             fileWatcher.stop();
+    }
+
+    public void onAddCharacter() {
+        characters.add(new GameCharacter());
+        addEmptyCharacter();
     }
 }
 
