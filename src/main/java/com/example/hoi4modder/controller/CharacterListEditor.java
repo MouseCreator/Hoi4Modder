@@ -28,7 +28,6 @@ public class CharacterListEditor extends ActivePaneController implements Initial
     @FXML
     private ListView<Pane> charactersListView;
     private AutocompleteTextField searchAutocomplete;
-
     private boolean isLoaded = false;
     private final List<CharacterItemController> controllerList = new ArrayList<>();
     private FileWatcher fileWatcher;
@@ -38,6 +37,18 @@ public class CharacterListEditor extends ActivePaneController implements Initial
     private TextField tagTextField;
     @FXML
     private TextField searchTextField;
+
+    @FXML
+    private Button duplicateBtn;
+
+    @FXML
+    private Button newCharacterBtn;
+
+    @FXML
+    private Button removeBtn;
+
+    @FXML
+    private Button saveBtn;
     @Override
     protected String getFilename() {
         return "character-list.fxml";
@@ -51,7 +62,7 @@ public class CharacterListEditor extends ActivePaneController implements Initial
 
     @Override
     public void load() {
-
+        setIsLoaded(false);
     }
 
     @Override
@@ -84,7 +95,7 @@ public class CharacterListEditor extends ActivePaneController implements Initial
 
     @FXML
     public void loadCharactersByTag() {
-        isLoaded = false;
+        setIsLoaded(false);
         setCountryTag(tagTextField.getText());
         loadListFromFile();
     }
@@ -109,6 +120,7 @@ public class CharacterListEditor extends ActivePaneController implements Initial
         } catch (NoSuchElementException e) {
             Alert alert = new Alert(Alert.AlertType.WARNING, "Cannot find country with tag " + tag, ButtonType.OK);
             alert.showAndWait();
+            onLoadingFailedAction();
         }
     }
 
@@ -128,6 +140,8 @@ public class CharacterListEditor extends ActivePaneController implements Initial
         });
         task.setOnFailed(workerStateEvent -> {
             onLoadingFailedAction();
+            Alert alert = new Alert(Alert.AlertType.ERROR, "An error occurred during loading characters!");
+            alert.showAndWait();
         });
         thread.setName("CharacterLoadingThread");
         thread.start();
@@ -138,17 +152,25 @@ public class CharacterListEditor extends ActivePaneController implements Initial
         controllerList.addAll(task.getControllers());
         loadItems(task.getPanes());
         addSearchSuggestions();
-        isLoaded = true;
+        setIsLoaded(true);
         initFileWatcher();
         fileWatcher.setFile(filename);
         fileWatcher.start();
     }
 
+    private void setIsLoaded(boolean value) {
+        this.isLoaded = value;
+        boolean disabled = !value;
+        duplicateBtn.setDisable(disabled);
+        newCharacterBtn.setDisable(disabled);
+        removeBtn.setDisable(disabled);
+        saveBtn.setDisable(disabled);
+    }
+
     private void onLoadingFailedAction() {
         resetAll();
         fileWatcher.stop();
-        Alert alert = new Alert(Alert.AlertType.ERROR, "An error occurred during loading characters!");
-        alert.showAndWait();
+
     }
 
     private SortedSet<String> characterIDs() {

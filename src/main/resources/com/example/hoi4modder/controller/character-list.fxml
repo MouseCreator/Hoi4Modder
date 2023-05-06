@@ -44,15 +44,15 @@
                         <Button layoutY="1.0" mnemonicParsing="false" onAction="#findCharacterByName" text="Search" />
                      </children>
                   </Pane>
-                  <Button mnemonicParsing="false" onAction="#addEmptyCharacter" text="New character" />
+                  <Button fx:id="newCharacterBtn" disable="true" mnemonicParsing="false" onAction="#addEmptyCharacter" text="New character" />
                </children>
             </HBox>
             <Pane prefHeight="29.0" prefWidth="20.0" />
-            <Button mnemonicParsing="false" onAction="#duplicateSelected" text="Duplicate" />
+            <Button fx:id="duplicateBtn" disable="true" mnemonicParsing="false" onAction="#duplicateSelected" text="Duplicate" />
             <Pane prefHeight="29.0" prefWidth="20.0" />
-            <Button mnemonicParsing="false" onAction="#removeSelected" text="Remove character" textFill="RED" />
+            <Button fx:id="removeBtn" disable="true" mnemonicParsing="false" onAction="#removeSelected" text="Remove character" textFill="RED" />
             <Pane prefHeight="29.0" prefWidth="20.0" />
-            <Button mnemonicParsing="false" onAction="#save" text="Save changes" />
+            <Button fx:id="saveBtn" disable="true" mnemonicParsing="false" onAction="#save" text="Save changes" />
          </children>
       </HBox>
       <ListView fx:id="charactersListView" prefHeight="652.0" prefWidth="1000.0" />
