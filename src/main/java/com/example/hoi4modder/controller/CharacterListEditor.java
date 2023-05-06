@@ -3,6 +3,9 @@ package com.example.hoi4modder.controller;
 import com.example.hoi4modder.controller.autocomplete.AutocompleteTextField;
 import com.example.hoi4modder.controller.character_extra.GameCharacterCreator;
 import com.example.hoi4modder.controller.multithreading.*;
+import com.example.hoi4modder.controller.requests.CharacterEditorRequestHandler;
+import com.example.hoi4modder.controller.requests.Request;
+import com.example.hoi4modder.controller.requests.RequestHandler;
 import com.example.hoi4modder.game.GameCharacter;
 import com.example.hoi4modder.game.GameCharacterList;
 import com.example.hoi4modder.game.common.Country;
@@ -28,6 +31,8 @@ public class CharacterListEditor extends ActivePaneController implements Initial
     @FXML
     private ListView<Pane> charactersListView;
     private AutocompleteTextField searchAutocomplete;
+
+    private final RequestHandler handler = new CharacterEditorRequestHandler(this);
     private boolean isLoaded = false;
     private final List<CharacterItemController> controllerList = new ArrayList<>();
     private FileWatcher fileWatcher;
@@ -265,6 +270,15 @@ public class CharacterListEditor extends ActivePaneController implements Initial
     @Override
     public void associateItem(ListItemController<GameCharacter> item) {
         item.setParent(this);
+    }
+
+    @Override
+    public void handle(Request request) {
+        handler.onRequest(request);
+    }
+
+    public GameCharacterList getCharacters() {
+        return characters;
     }
 }
 

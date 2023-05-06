@@ -11,6 +11,7 @@ module com.example.hoi4modder {
 
     exports com.example.hoi4modder;
     exports com.example.hoi4modder.game.common;
+    exports com.example.hoi4modder.controller.requests;
     exports com.example.hoi4modder.controller;
     exports com.example.hoi4modder.game.roles;
     exports com.example.hoi4modder.model.files.iovisitor;
