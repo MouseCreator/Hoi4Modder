@@ -63,7 +63,7 @@ public class CharacterItemController implements Initializable, ListItemControlle
     @FXML
     private CheckBox unitLeaderBox;
 
-    private ActivePaneController listEditor;
+    private ItemContainer<GameCharacter> listEditor;
     private final CharacterInfo characterInfo;
     private boolean hasBigPortrait = false;
     private boolean hasSmallPortrait = false;
@@ -87,7 +87,7 @@ public class CharacterItemController implements Initializable, ListItemControlle
     }
 
     public void setParent(ItemContainer<GameCharacter> editor) {
-        this.listEditor = (CharacterListEditor) editor;
+        this.listEditor = editor;
         countryTag = listEditor.getCountry().getTag();
     }
     @Override
@@ -99,7 +99,7 @@ public class CharacterItemController implements Initializable, ListItemControlle
     public void fromModel(GameCharacter character) {
         this.gameCharacter = character;
         initRoles(gameCharacter);
-        LoadedData data = listEditor.parentController.getSavedData().loadedData();
+        LoadedData data = listEditor.getMainController().getSavedData().loadedData();
         characterIDField.setText(character.getIdentification());
         if (!character.getName().isEmpty()) {
             DataPool<String> localisationPool = data.getLocalisationData();
@@ -161,7 +161,7 @@ public class CharacterItemController implements Initializable, ListItemControlle
     }
 
     private void loadPortraits(GameCharacter character) {
-        LoadedData data = listEditor.parentController.getSavedData().loadedData();
+        LoadedData data = listEditor.getMainController().getSavedData().loadedData();
         DataPool<String> graphicsPool = data.getGraphicsData();
         DirectSurfaceManager ddsPictures = new DirectSurfaceManager();
         FieldValueMap<String> portraits = character.getPortraits();
@@ -198,8 +198,8 @@ public class CharacterItemController implements Initializable, ListItemControlle
     @FXML
     void toSmallPortrait() {
         ImageTransformer transformer = new ImageTransformer();
-        FileSearchService service = listEditor.parentController.getSavedData().fileSearchService();
-        LoadedData data =  listEditor.parentController.getSavedData().loadedData();
+        FileSearchService service = listEditor.getMainController().getSavedData().fileSearchService();
+        LoadedData data =  listEditor.getMainController().getSavedData().loadedData();
         DataPool<String> graphicsData = data.getGraphicsData();
         DirectSurfaceManager ddsImage = new DirectSurfaceManager();
 
@@ -222,7 +222,7 @@ public class CharacterItemController implements Initializable, ListItemControlle
     @FXML
     void changeLarge() {
         FileChooser fileChooser = initFileChooser();
-        Window stage = listEditor.parentController.getWindow();
+        Window stage = listEditor.getMainController().getWindow();
         File file = fileChooser.showOpenDialog(stage);
         if (file != null) {
             setLargePortrait(file);
@@ -232,8 +232,8 @@ public class CharacterItemController implements Initializable, ListItemControlle
     }
     private void setLargePortrait(File file) {
         ImageTransformer transformer = new ImageTransformer();
-        FileSearchService service = listEditor.parentController.getSavedData().fileSearchService();
-        LoadedData data = listEditor.parentController.getSavedData().loadedData();
+        FileSearchService service = listEditor.getMainController().getSavedData().fileSearchService();
+        LoadedData data = listEditor.getMainController().getSavedData().loadedData();
         DirectSurfaceManager ddsImage = new DirectSurfaceManager();
         String filename = "Portrait_" + gameCharacter.getIdentification() + ".dds";
         String destination = service.getModDirectory() + Destinations.get().leaderGFX(countryTag);
@@ -258,8 +258,8 @@ public class CharacterItemController implements Initializable, ListItemControlle
     private void setSmallPortrait(File file) {
         ImageTransformer transformer = new ImageTransformer();
 
-        FileSearchService service = listEditor.parentController.getSavedData().fileSearchService();
-        LoadedData data = listEditor.parentController.getSavedData().loadedData();
+        FileSearchService service = listEditor.getMainController().getSavedData().fileSearchService();
+        LoadedData data = listEditor.getMainController().getSavedData().loadedData();
         DirectSurfaceManager ddsImage = new DirectSurfaceManager();
         String filename = "idea_" + gameCharacter.getIdentification() + ".dds";
         String destination = service.getModDirectory() + Destinations.get().ideasGFX();
@@ -287,7 +287,7 @@ public class CharacterItemController implements Initializable, ListItemControlle
     @FXML
     void changeSmall() {
         FileChooser fileChooser = initFileChooser();
-        Window stage = listEditor.parentController.getWindow();
+        Window stage = listEditor.getMainController().getWindow();
         File file = fileChooser.showOpenDialog(stage);
         if (file != null) {
             setSmallPortrait(file);

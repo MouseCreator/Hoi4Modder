@@ -277,6 +277,11 @@ public class CharacterListEditor extends ActivePaneController implements Initial
         handler.onRequest(request);
     }
 
+    @Override
+    public MainController getMainController() {
+        return parentController;
+    }
+
     public GameCharacterList getCharacters() {
         return characters;
     }
