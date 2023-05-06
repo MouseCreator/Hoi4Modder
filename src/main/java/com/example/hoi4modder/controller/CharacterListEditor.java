@@ -77,17 +77,24 @@ public class CharacterListEditor extends ActivePaneController implements Initial
 
     @FXML
     public void addEmptyCharacter() {
-        if (!isLoaded) {
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Country tag is not set");
-            alert.showAndWait();
-            return;
-        }
+        if (isNotLoaded()) return;
         GameCharacter newCharacter = GameCharacter.getSampleCharacter();
         GameCharacterCreator creator = new GameCharacterCreator(this, charactersListView.getItems(), controllerList);
         characters.add(newCharacter);
         creator.addItem(newCharacter);
-        charactersListView.scrollTo(characters.size()-1);
+        int last = charactersListView.getItems().size()-1;
+        charactersListView.scrollTo(last);
     }
+
+    private boolean isNotLoaded() {
+        if (!isLoaded) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Country tag is not set");
+            alert.showAndWait();
+            return true;
+        }
+        return false;
+    }
+
     @FXML
     public void removeSelected() {
         System.out.println("Removed character");
@@ -145,6 +152,10 @@ public class CharacterListEditor extends ActivePaneController implements Initial
         });
         thread.setName("CharacterLoadingThread");
         thread.start();
+    }
+
+    private void showAll() {
+        findCharacters("");
     }
 
     private void onLoadingSuccessAction(String filename, EditorListTask task) {
@@ -210,7 +221,11 @@ public class CharacterListEditor extends ActivePaneController implements Initial
 
     @FXML
     public void findCharacterByName() {
-        EditorListTask task = new SearchingTask(this, searchTextField.getText(), characters);
+        findCharacters(searchTextField.getText());
+    }
+
+    public void findCharacters(String target) {
+        EditorListTask task = new SearchingTask(this, target, characters);
         resetAll();
         Thread searchingThread = new Thread(task);
         task.setOnSucceeded(workerStateEvent -> {
