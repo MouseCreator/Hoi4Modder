@@ -28,6 +28,8 @@ public class CharacterListEditor extends ActivePaneController implements Initial
     @FXML
     private ListView<Pane> charactersListView;
     private AutocompleteTextField searchAutocomplete;
+
+    private boolean isLoaded = false;
     private final List<CharacterItemController> controllerList = new ArrayList<>();
     private FileWatcher fileWatcher;
     private final DynamicCountry country = new DynamicCountry();
@@ -64,6 +66,11 @@ public class CharacterListEditor extends ActivePaneController implements Initial
 
     @FXML
     public void addEmptyCharacter() {
+        if (!isLoaded) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Country tag is not set");
+            alert.showAndWait();
+            return;
+        }
         GameCharacter newCharacter = GameCharacter.getSampleCharacter();
         GameCharacterCreator creator = new GameCharacterCreator(this, charactersListView.getItems(), controllerList);
         characters.add(newCharacter);
@@ -77,6 +84,7 @@ public class CharacterListEditor extends ActivePaneController implements Initial
 
     @FXML
     public void loadCharactersByTag() {
+        isLoaded = false;
         setCountryTag(tagTextField.getText());
         loadListFromFile();
     }
@@ -93,12 +101,10 @@ public class CharacterListEditor extends ActivePaneController implements Initial
             GameCharacterList.getArrayList();
             return;
         }
-        initFileWatcher();
+
         String tag = tagTextField.getText().toUpperCase();
         try {
             String filename = getFileToLoad(tag);
-            fileWatcher.setFile(filename);
-            fileWatcher.start();
             loadFromThread(filename);
         } catch (NoSuchElementException e) {
             Alert alert = new Alert(Alert.AlertType.WARNING, "Cannot find country with tag " + tag, ButtonType.OK);
@@ -118,19 +124,33 @@ public class CharacterListEditor extends ActivePaneController implements Initial
         EditorListTask task = new LoadingTask(this, filename, characters);
         Thread thread = new Thread(task);
         task.setOnSucceeded(workerStateEvent -> {
-            controllerList.clear();
-            controllerList.addAll(task.getControllers());
-            loadItems(task.getPanes());
-            addSearchSuggestions();
+            onLoadingSuccessAction(filename, task);
         });
         task.setOnFailed(workerStateEvent -> {
-            resetAll();
-            Alert alert = new Alert(Alert.AlertType.ERROR, "An error occurred during loading characters!");
-            alert.showAndWait();
+            onLoadingFailedAction();
         });
         thread.setName("CharacterLoadingThread");
         thread.start();
     }
+
+    private void onLoadingSuccessAction(String filename, EditorListTask task) {
+        controllerList.clear();
+        controllerList.addAll(task.getControllers());
+        loadItems(task.getPanes());
+        addSearchSuggestions();
+        isLoaded = true;
+        initFileWatcher();
+        fileWatcher.setFile(filename);
+        fileWatcher.start();
+    }
+
+    private void onLoadingFailedAction() {
+        resetAll();
+        fileWatcher.stop();
+        Alert alert = new Alert(Alert.AlertType.ERROR, "An error occurred during loading characters!");
+        alert.showAndWait();
+    }
+
     private SortedSet<String> characterIDs() {
         SortedSet<String> set = new TreeSet<>();
         for (GameCharacter character : characters) {
