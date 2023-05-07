@@ -17,9 +17,7 @@ import com.example.hoi4modder.service.ImageTransformer;
 import com.example.hoi4modder.service.SavedDataContainer;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -60,6 +58,9 @@ public class CharacterItemController implements Initializable, ListItemControlle
     private HBox rolesBox;
 
     @FXML
+    private HBox mainPane;
+
+    @FXML
     private ImageView smallPortraitImage;
 
     @FXML
@@ -95,8 +96,8 @@ public class CharacterItemController implements Initializable, ListItemControlle
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         rolesBox.setFillHeight(true);
-
     }
+
     @Override
     public void fromModel(GameCharacter character) {
         this.gameCharacter = character;

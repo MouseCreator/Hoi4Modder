@@ -20,12 +20,11 @@ public abstract class RoleController<R extends Role> {
 
 
     protected void initializeContextMenu(ListView<String> listView) {
-        listView.setCellFactory(lv -> {
+        listView.setCellFactory(listV -> {
 
             ListCell<String> cell = new ListCell<>();
 
             ContextMenu contextMenu = new ContextMenu();
-
 
             MenuItem editItem = addEditItem(cell);
             MenuItem deleteItem = addDeleteItem(listView, cell);
