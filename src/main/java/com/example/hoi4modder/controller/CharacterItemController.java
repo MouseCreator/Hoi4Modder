@@ -122,7 +122,7 @@ public class CharacterItemController implements Initializable, ListItemControlle
     }
     private void setValueListeners() {
         characterIDField.textProperty().addListener((observableValue, oldValue, newValue) -> {
-            ItemPresentRequest request = new ItemPresentRequest(gameCharacter.getIdentification());
+            ItemPresentRequest request = new ItemPresentRequest(newValue);
             listEditor.handle(request);
             if (request.getIsPresent())
                 characterIDField.setStyle("-fx-control-inner-background: #FFE3E3");
