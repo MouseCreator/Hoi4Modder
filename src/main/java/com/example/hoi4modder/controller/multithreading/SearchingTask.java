@@ -1,5 +1,6 @@
 package com.example.hoi4modder.controller.multithreading;
 
+import com.example.hoi4modder.controller.ItemContainer;
 import com.example.hoi4modder.game.GameCharacter;
 import com.example.hoi4modder.game.GameCharacterList;
 import com.example.hoi4modder.model.files.maps.DataPool;
@@ -12,7 +13,8 @@ public class SearchingTask extends EditorListTask{
     private final String targetString;
     private final GameCharacterList initialCharacters;
 
-    public SearchingTask(String target, GameCharacterList initialCharacters) {
+    public SearchingTask(ItemContainer<GameCharacter> container, String target, GameCharacterList initialCharacters) {
+        super(container, initialCharacters);
         this.targetString = target;
         this.initialCharacters = initialCharacters;
         characters = GameCharacterList.getArrayList();

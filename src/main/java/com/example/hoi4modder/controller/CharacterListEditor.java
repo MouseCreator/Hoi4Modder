@@ -146,7 +146,7 @@ public class CharacterListEditor extends ActivePaneController implements Initial
     }
 
     private void loadFromThread(String filename) {
-        EditorListTask task = new LoadingTask(filename, characters);
+        EditorListTask task = new LoadingTask(this, filename, characters);
         Thread thread = new Thread(task);
         task.setOnSucceeded(workerStateEvent -> onLoadingSuccessAction(filename, task));
         task.setOnFailed(workerStateEvent -> {
@@ -180,7 +180,8 @@ public class CharacterListEditor extends ActivePaneController implements Initial
 
     private void onLoadingFailedAction() {
         resetAll();
-        fileWatcher.stop();
+        if (fileWatcher != null)
+            fileWatcher.stop();
 
     }
 
@@ -216,6 +217,7 @@ public class CharacterListEditor extends ActivePaneController implements Initial
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        charactersListView.setMouseTransparent(true);
         charactersListView.setFocusTraversable(false);
     }
 
@@ -225,7 +227,7 @@ public class CharacterListEditor extends ActivePaneController implements Initial
     }
 
     public void findCharacters(String target) {
-        EditorListTask task = new SearchingTask(target, characters);
+        EditorListTask task = new SearchingTask(this, target, characters);
         resetAll();
         Thread searchingThread = new Thread(task);
         task.setOnSucceeded(workerStateEvent -> {
