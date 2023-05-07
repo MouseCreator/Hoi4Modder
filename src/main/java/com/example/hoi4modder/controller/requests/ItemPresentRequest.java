@@ -12,13 +12,13 @@ public class ItemPresentRequest implements Request{
     }
     @Override
     public void handleWith(RequestHandler handler) {
-        handler.onRequest(this);
+        handler.handle(this);
     }
 
     public void setResult(boolean b) {
         this.result = b;
     }
-    public boolean getResult() {
+    public boolean getIsPresent() {
         return result;
     }
 }

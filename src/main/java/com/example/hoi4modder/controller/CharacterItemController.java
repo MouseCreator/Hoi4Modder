@@ -3,6 +3,7 @@ package com.example.hoi4modder.controller;
 import com.example.hoi4modder.controller.character_extra.CharacterInfo;
 import com.example.hoi4modder.controller.character_extra.RoleSwitcher;
 import com.example.hoi4modder.controller.character_extra.RoleSwitcherBuilder;
+import com.example.hoi4modder.controller.requests.ItemPresentRequest;
 import com.example.hoi4modder.game.FieldValueMap;
 import com.example.hoi4modder.game.GameCharacter;
 import com.example.hoi4modder.game.roles.*;
@@ -122,16 +123,13 @@ public class CharacterItemController implements Initializable, ListItemControlle
     private void setValueListeners() {
         characterIDField.textProperty().addListener((observableValue, oldValue, newValue) -> {
             gameCharacter.setIdentification(newValue);
-            try {
+            ItemPresentRequest request = new ItemPresentRequest(gameCharacter.getIdentification());
+            listEditor.handle(request);
+            if (request.getIsPresent())
                 characterIDField.setStyle("-fx-control-inner-background: #FFFFFF");
-            } catch (Exception e) {
+            else {
                 characterIDField.setStyle("-fx-control-inner-background: #FFE3E3");
             }
-        });
-        characterIDField.textProperty().addListener((observableValue, oldValue, newValue) -> {
-            gameCharacter.setIdentification(newValue);
-            SavedDataContainer.get().loadedData().
-                    getLocalisationData().put(LocalisationType.CHARACTERS, gameCharacter.getIdentification(), newValue);
         });
     }
     private void initRoles(GameCharacter character) {
