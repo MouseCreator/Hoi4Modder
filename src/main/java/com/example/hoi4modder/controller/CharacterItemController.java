@@ -122,14 +122,14 @@ public class CharacterItemController implements Initializable, ListItemControlle
     }
     private void setValueListeners() {
         characterIDField.textProperty().addListener((observableValue, oldValue, newValue) -> {
-            gameCharacter.setIdentification(newValue);
             ItemPresentRequest request = new ItemPresentRequest(gameCharacter.getIdentification());
             listEditor.handle(request);
             if (request.getIsPresent())
-                characterIDField.setStyle("-fx-control-inner-background: #FFFFFF");
-            else {
                 characterIDField.setStyle("-fx-control-inner-background: #FFE3E3");
+            else {
+                characterIDField.setStyle("-fx-control-inner-background: #FFFFFF");
             }
+            gameCharacter.setIdentification(newValue);
         });
     }
     private void initRoles(GameCharacter character) {
