@@ -2,6 +2,7 @@ package com.example.hoi4modder.controller;
 
 import com.example.hoi4modder.controller.autocomplete.AutocompleteTextField;
 import com.example.hoi4modder.controller.character_extra.GameCharacterCreator;
+import com.example.hoi4modder.controller.character_extra.NoSelectionModel;
 import com.example.hoi4modder.controller.multithreading.*;
 import com.example.hoi4modder.controller.requests.CharacterEditorRequestHandler;
 import com.example.hoi4modder.controller.requests.Request;
@@ -217,8 +218,8 @@ public class CharacterListEditor extends ActivePaneController implements Initial
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        charactersListView.setMouseTransparent(true);
         charactersListView.setFocusTraversable(false);
+        charactersListView.setSelectionModel(new NoSelectionModel<>());
     }
 
     @FXML

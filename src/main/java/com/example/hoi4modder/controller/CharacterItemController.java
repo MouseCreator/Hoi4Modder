@@ -123,7 +123,6 @@ public class CharacterItemController implements Initializable, ListItemControlle
         characterIDField.textProperty().addListener((observableValue, oldValue, newValue) -> {
             gameCharacter.setIdentification(newValue);
             try {
-                SavedDataContainer.get().loadedData().getLocalisationData().replace(oldValue, newValue);
                 characterIDField.setStyle("-fx-control-inner-background: #FFFFFF");
             } catch (Exception e) {
                 characterIDField.setStyle("-fx-control-inner-background: #FFE3E3");
