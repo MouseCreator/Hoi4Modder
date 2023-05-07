@@ -3,7 +3,9 @@ package com.example.hoi4modder.controller;
 import com.example.hoi4modder.controller.character_extra.CharacterInfo;
 import com.example.hoi4modder.controller.character_extra.RoleSwitcher;
 import com.example.hoi4modder.controller.character_extra.RoleSwitcherBuilder;
+import com.example.hoi4modder.controller.requests.DuplicateRequest;
 import com.example.hoi4modder.controller.requests.ItemPresentRequest;
+import com.example.hoi4modder.controller.requests.Request;
 import com.example.hoi4modder.game.FieldValueMap;
 import com.example.hoi4modder.game.GameCharacter;
 import com.example.hoi4modder.game.roles.*;
@@ -15,6 +17,7 @@ import com.example.hoi4modder.service.AppConfig;
 import com.example.hoi4modder.service.Destinations;
 import com.example.hoi4modder.service.ImageTransformer;
 import com.example.hoi4modder.service.SavedDataContainer;
+import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
@@ -98,7 +101,6 @@ public class CharacterItemController implements Initializable, ListItemControlle
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         rolesBox.setFillHeight(true);
-
     }
 
     private void createContextMenu() {
@@ -109,10 +111,20 @@ public class CharacterItemController implements Initializable, ListItemControlle
                 contextMenu.show(mainPane, event.getScreenX(), event.getScreenY());
             }
         });
-        MenuItem editItem = new MenuItem();
+        MenuItem duplicateItem = createDuplicateMethod();
         MenuItem deleteItem = new MenuItem();
-        contextMenu.getItems().addAll(editItem, deleteItem);
+        contextMenu.getItems().addAll(duplicateItem, deleteItem);
         bindMenuToScene(contextMenu);
+    }
+
+    private MenuItem createDuplicateMethod() {
+        MenuItem item = new MenuItem();
+        item.textProperty().bind(Bindings.format("Duplicate"));
+        item.setOnAction(event -> {
+            Request duplicateRequest = new DuplicateRequest(mainPane);
+            listEditor.handle(duplicateRequest);
+        });
+        return item;
     }
 
     private void bindMenuToScene(ContextMenu contextMenu) {
@@ -140,6 +152,10 @@ public class CharacterItemController implements Initializable, ListItemControlle
         }
         loadPortraits(character);
         loadRoles(character);
+        finishInitialization();
+    }
+
+    private void finishInitialization() {
         setValueListeners();
         createContextMenu();
     }

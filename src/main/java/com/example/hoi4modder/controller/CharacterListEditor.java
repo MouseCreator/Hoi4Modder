@@ -284,5 +284,13 @@ public class CharacterListEditor extends ActivePaneController implements Initial
     public GameCharacterList getCharacters() {
         return characters;
     }
+
+    public ListView<Pane> getItems() {
+        return charactersListView;
+    }
+
+    public List<CharacterItemController> getControllers() {
+        return controllerList;
+    }
 }
 

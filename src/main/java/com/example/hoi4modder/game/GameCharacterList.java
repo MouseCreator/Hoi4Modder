@@ -43,4 +43,15 @@ public class GameCharacterList implements Iterable<GameCharacter>, Visitable {
     public void clear() {
         characterList.clear();
     }
+
+    /**
+     * Creates a copy of a character and puts it in the list after its origin
+     * @param indexToDuplicate - index of character to duplicate
+     * @return reference to the duplicate character
+     */
+    public GameCharacter duplicate(int indexToDuplicate) {
+        GameCharacter character = characterList.get(indexToDuplicate).cloneCharacter();
+        characterList.add(indexToDuplicate, character);
+        return character;
+    }
 }

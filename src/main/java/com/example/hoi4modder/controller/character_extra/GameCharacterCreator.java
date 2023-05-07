@@ -38,4 +38,20 @@ public class GameCharacterCreator implements ListCreator<GameCharacter> {
         }
     }
 
+    @Override
+    public void addItemAt(int index, GameCharacter character) {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(CharacterItemController.class.getResource("character-item.fxml"));
+        try {
+            Pane pane = loader.load();
+            CharacterItemController controller = loader.getController();
+            parentController.associateItem(controller);
+            controller.fromModel(character);
+            controllerList.add(index, controller);
+            panes.add(index, pane);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
