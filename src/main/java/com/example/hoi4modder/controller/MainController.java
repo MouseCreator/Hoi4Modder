@@ -3,6 +3,7 @@ import com.example.hoi4modder.controller.multithreading.RunGameTask;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.ScrollPane;
@@ -121,5 +122,16 @@ public class MainController implements Initializable {
                     "Make sure that location to game is set properly and hoi4.exe is in the specified directory!");
             alert.showAndWait();
         }
+    }
+
+    public Scene getScene() {
+        if (mainPane == null) {
+            throw new IllegalStateException("Main pain is not initialized!");
+        }
+        Scene scene = mainPane.getScene();
+        if (scene == null) {
+            throw new IllegalStateException("Scene is not assigned to main pane, but is tried to be accessed");
+        }
+        return scene;
     }
 }

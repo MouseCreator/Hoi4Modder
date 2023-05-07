@@ -17,9 +17,11 @@ import com.example.hoi4modder.service.ImageTransformer;
 import com.example.hoi4modder.service.SavedDataContainer;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Window;
@@ -96,6 +98,30 @@ public class CharacterItemController implements Initializable, ListItemControlle
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         rolesBox.setFillHeight(true);
+
+    }
+
+    private void createContextMenu() {
+        ContextMenu contextMenu = new ContextMenu();
+        contextMenu.setAutoHide(true);
+        mainPane.setOnMousePressed(event -> {
+            if (event.isSecondaryButtonDown()) {
+                contextMenu.show(mainPane, event.getScreenX(), event.getScreenY());
+            }
+        });
+        MenuItem editItem = new MenuItem();
+        MenuItem deleteItem = new MenuItem();
+        contextMenu.getItems().addAll(editItem, deleteItem);
+        bindMenuToScene(contextMenu);
+    }
+
+    private void bindMenuToScene(ContextMenu contextMenu) {
+        Scene scene = listEditor.getMainController().getScene();
+        scene.addEventFilter(MouseEvent.MOUSE_PRESSED, event -> {
+            if (!contextMenu.isShowing()) return;
+            event.consume();
+            contextMenu.hide();
+        });
     }
 
     @Override
@@ -115,6 +141,7 @@ public class CharacterItemController implements Initializable, ListItemControlle
         loadPortraits(character);
         loadRoles(character);
         setValueListeners();
+        createContextMenu();
     }
 
     @Override
