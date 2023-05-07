@@ -33,6 +33,7 @@ public class AdvisorRoleController extends RoleController<Advisor> implements In
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         initComboBox();
+        initializeContextMenu(traitList);
         fromRole(advisor);
         setValueListeners();
     }

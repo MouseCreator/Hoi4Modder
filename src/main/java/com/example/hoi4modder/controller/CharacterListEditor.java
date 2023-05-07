@@ -221,7 +221,6 @@ public class CharacterListEditor extends ActivePaneController implements Initial
         charactersListView.setFocusTraversable(false);
         charactersListView.setSelectionModel(new NoSelectionModel<>());
     }
-
     @FXML
     public void findCharacterByName() {
         findCharacters(searchTextField.getText());

@@ -96,6 +96,7 @@ public class UnitLeaderController extends RoleController<UnitLeader> implements 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         fromRole(UnitLeader.createCorpsCommander());
+        initializeContextMenu(traitsList);
         setValueListeners();
     }
 

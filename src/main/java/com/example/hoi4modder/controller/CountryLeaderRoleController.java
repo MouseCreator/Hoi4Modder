@@ -78,6 +78,7 @@ public class CountryLeaderRoleController extends RoleController<CountryLeader> i
         ideologyBox.getItems().addAll("Neutrality", "Democratic", "Fascism", "Communism");
         ideologyBox.getSelectionModel().select("Neutrality");
         setTypesFromIdeology("Neutrality");
+        initializeContextMenu(traitList);
         typeBox.getSelectionModel().select(0);
         setValueListeners();
     }

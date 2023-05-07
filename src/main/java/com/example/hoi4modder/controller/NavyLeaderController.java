@@ -64,6 +64,7 @@ public class NavyLeaderController extends RoleController<NavyLeader> implements 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         fromRole(NavyLeader.createNavyLeader());
+        initializeContextMenu(traitsList);
         setValueListeners();
     }
     public void fromCharacter(GameCharacter character) {
