@@ -52,9 +52,6 @@ public class CharacterListEditor extends ActivePaneController implements Initial
     private Button newCharacterBtn;
 
     @FXML
-    private ContextMenu itemContextMenu;
-
-    @FXML
     private Button removeBtn;
 
     @FXML
