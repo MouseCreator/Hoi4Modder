@@ -9,4 +9,10 @@ import lombok.Data;
 public class SpriteType  {
     private String name;
     private String textureFile;
+    public SpriteType() {
+    }
+    public SpriteType(String name, String textureFile) {
+        this.name = name;
+        this.textureFile = textureFile;
+    }
 }
