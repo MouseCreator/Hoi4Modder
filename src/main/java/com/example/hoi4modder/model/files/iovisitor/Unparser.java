@@ -55,8 +55,8 @@ public class Unparser implements Visitor {
         baseProperty.add(new FieldValueProperty("skill", String.valueOf(unitLeader.getSkill())));
         baseProperty.add(new FieldValueProperty("attack_skill", String.valueOf(unitLeader.getAttackSkill())));
         baseProperty.add(new FieldValueProperty("defense_skill", String.valueOf(unitLeader.getDefenceSkill())));
-        baseProperty.add(new FieldValueProperty("maneuvering_skill", String.valueOf(unitLeader.getLogisticsSkill())));
-        baseProperty.add(new FieldValueProperty("coordination_skill", String.valueOf(unitLeader.getLogisticsSkill())));
+        baseProperty.add(new FieldValueProperty("planning_skill", String.valueOf(unitLeader.getLogisticsSkill())));
+        baseProperty.add(new FieldValueProperty("logistics_skill", String.valueOf(unitLeader.getLogisticsSkill())));
         baseProperty.add(new FieldValueProperty("legacy_id", String.valueOf(-1)));
     }
 
