@@ -68,6 +68,7 @@ public class CharacterListEditor extends ActivePaneController implements Initial
         if (saveThread == null || saveThread.isAlive())
             return;
         saveThread = new SaveThread(this);
+        saveThread.setName("Save-Thread");
         fileWatcher.exception();
         saveThread.start();
     }
@@ -78,7 +79,6 @@ public class CharacterListEditor extends ActivePaneController implements Initial
     @Override
     public void load() {
         setIsLoaded(false);
-        saveThread.setName("Saving-thread");
     }
 
     /**
