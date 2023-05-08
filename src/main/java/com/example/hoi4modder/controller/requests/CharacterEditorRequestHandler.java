@@ -10,14 +10,25 @@ import javafx.scene.layout.Pane;
 
 import java.util.List;
 
+/**
+ * Request handler for game character editor list
+ */
 public class CharacterEditorRequestHandler implements RequestHandler<GameCharacter>{
     private final CharacterListEditor characterListEditor;
 
+    /**
+     *
+     * @param request - receive the request to be executed
+     */
     @Override
     public void onRequest(Request<GameCharacter> request){
         request.handleWith(this);
     }
 
+    /**
+     *
+     * @param editor - editor, that uses handler
+     */
     public CharacterEditorRequestHandler(CharacterListEditor editor) {
         this.characterListEditor = editor;
     }
@@ -34,6 +45,10 @@ public class CharacterEditorRequestHandler implements RequestHandler<GameCharact
         request.setResult(false);
     }
 
+    /**
+     *
+     * @param request - duplicates game character and puts it above origin
+     */
     @Override
     public void handle(DuplicateRequest<GameCharacter> request) {
         GameCharacterList characters = characterListEditor.getCharacters();
@@ -43,6 +58,11 @@ public class CharacterEditorRequestHandler implements RequestHandler<GameCharact
                 characterListEditor.getControllers());
         creator.addItemAt(listView.getItems().indexOf(request.pane()), gameCharacter);
     }
+
+    /**
+     *
+     * @param request - removes selected item
+     */
     @Override
     public void handle(RemoveRequest<GameCharacter> request) {
         GameCharacterList characters = characterListEditor.getCharacters();
@@ -53,6 +73,10 @@ public class CharacterEditorRequestHandler implements RequestHandler<GameCharact
         listView.getItems().remove(request.pane());
     }
 
+    /**
+     *
+     * @param request - adds item above current, making it easy to access
+     */
     @Override
     public void handle(AddRequest<GameCharacter> request) {
         GameCharacterList characters = characterListEditor.getCharacters();

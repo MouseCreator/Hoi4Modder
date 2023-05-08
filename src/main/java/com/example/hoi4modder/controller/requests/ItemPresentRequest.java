@@ -1,5 +1,9 @@
 package com.example.hoi4modder.controller.requests;
 
+/**
+ * Request to check, if item present in the list
+ * @param <T> - generic type for controller and item
+ */
 public class ItemPresentRequest<T> implements Request<T>{
     private final String id;
 

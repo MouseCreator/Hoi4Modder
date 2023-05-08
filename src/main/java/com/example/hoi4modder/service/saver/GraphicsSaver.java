@@ -13,10 +13,18 @@ import com.example.hoi4modder.model.files.maps.DataPool;
  */
 public class GraphicsSaver implements SimpleSaver {
     private final DataPool<String> graphicsData;
+
+    /**
+     *
+     * @param graphicsData - map of graphical objects, that may be converted to sprite list
+     */
     public GraphicsSaver(DataPool<String> graphicsData) {
         this.graphicsData = graphicsData;
     }
 
+    /**
+     * Saves to sprite file
+     */
     public void save() {
         for (String key : graphicsData.keys()) {
             DataMap<String> dataMap = graphicsData.getMap(key);

@@ -15,6 +15,9 @@ public class CharacterSaver implements SimpleSaver {
         this.editor = characterListEditor;
     }
 
+    /**
+     * Saves character list, localisation and textures to files
+     */
     public void save() {
         saveLoadedData();
         saveCountryCharacters();
