@@ -45,15 +45,9 @@ public class CharacterListEditor extends ActivePaneController implements Initial
     @FXML
     private TextField searchTextField;
 
-    @FXML
-    private Button duplicateBtn;
 
     @FXML
     private Button newCharacterBtn;
-
-    @FXML
-    private Button removeBtn;
-
     @FXML
     private Button saveBtn;
     @Override
@@ -77,10 +71,6 @@ public class CharacterListEditor extends ActivePaneController implements Initial
         return country;
     }
 
-    @FXML
-    public void duplicateSelected() {
-        System.out.println("Duplicated");
-    }
 
     @FXML
     public void addEmptyCharacter() {
@@ -100,11 +90,6 @@ public class CharacterListEditor extends ActivePaneController implements Initial
             return true;
         }
         return false;
-    }
-
-    @FXML
-    public void removeSelected() {
-        System.out.println("Removed character");
     }
 
     @FXML
@@ -173,9 +158,7 @@ public class CharacterListEditor extends ActivePaneController implements Initial
     private void setIsLoaded(boolean value) {
         this.isLoaded = value;
         boolean disabled = !value;
-        duplicateBtn.setDisable(disabled);
         newCharacterBtn.setDisable(disabled);
-        removeBtn.setDisable(disabled);
         saveBtn.setDisable(disabled);
     }
 
