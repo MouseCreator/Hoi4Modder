@@ -30,7 +30,6 @@ public class CharacterListEditor extends ActivePaneController implements Initial
     @FXML
     private ListView<Pane> charactersListView;
     private AutocompleteTextField searchAutocomplete;
-
     private final RequestHandler<GameCharacter> handler = new CharacterEditorRequestHandler(this);
     private boolean isLoaded = false;
 
@@ -68,6 +67,7 @@ public class CharacterListEditor extends ActivePaneController implements Initial
     @Override
     public void load() {
         setIsLoaded(false);
+        saveThread.setName("Saving-thread");
     }
 
     @Override

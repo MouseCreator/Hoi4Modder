@@ -20,6 +20,7 @@ public class Parser implements Visitor{
         for(Property property : charactersCollection) {
             GameCharacter character = propertyToCharacter(property);
             characterList.add(character);
+            System.out.println(character.getIdentification());
         }
     }
 

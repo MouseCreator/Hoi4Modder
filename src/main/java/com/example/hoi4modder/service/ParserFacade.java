@@ -16,14 +16,11 @@ import java.io.IOException;
  */
 public class ParserFacade {
     /**
-     *
      * @param filename - filename for character list. Should fit the in-game style and contain one "characters" block
-     * @return list of characters in the file.
      * @throws IOException if file was not found or error occurred during reading a file
      */
-    public GameCharacterList characterListFromFile(GameCharacterList list, String filename) throws IOException {
+    public void characterListFromFile(GameCharacterList list, String filename) throws IOException {
         parseVisitable(filename, list);
-        return list;
     }
 
     private void parseVisitable(String filename, Visitable visitable) throws IOException {

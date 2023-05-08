@@ -18,7 +18,7 @@ public class CharacterFileSaver {
 
 
     public void save() {
-        FileSearch fileSearchService = FileSearch.createPutCreateService();
+        FileSearch fileSearchService = FileSearch.createPutReplaceService();
         String countryFile = fileSearchService.findCountryByTag(countryTag);
         writeOutput(countryFile);
     }
