@@ -10,6 +10,8 @@ import java.util.Set;
 public class LocalisationMap implements Visitable{
     private final Map<String, String> map = new HashMap<>();
 
+    private String filename;
+
     public boolean containsKey(String key) {
         return map.containsKey(key);
     }
@@ -31,5 +33,13 @@ public class LocalisationMap implements Visitable{
     @Override
     public void acceptVisitor(Visitor visitor) {
         visitor.visitLocalisationMap(this);
+    }
+
+    public void setFileName(String filename) {
+        this.filename = filename;
+    }
+
+    public String getFileName() {
+        return filename;
     }
 }

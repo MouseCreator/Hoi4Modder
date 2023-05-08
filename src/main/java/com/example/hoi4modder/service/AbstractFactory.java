@@ -27,13 +27,11 @@ public class AbstractFactory {
     }
 
     /**
-     *
      * @param fromFile - full path to file to get characters from
-     * @return list of characters, saved in file
      * @throws IOException if file was not found or an error occurred during reading a file
      */
-    public GameCharacterList getCharacterList(GameCharacterList list, String fromFile) throws IOException {
-        return parserFacade.characterListFromFile(list, fromFile);
+    public void getCharacterList(GameCharacterList list, String fromFile) throws IOException {
+        parserFacade.characterListFromFile(list, fromFile);
     }
     /**
      *
@@ -43,7 +41,9 @@ public class AbstractFactory {
      */
     public DataMap<String> graphicsMap(String filename) throws IOException {
         SpriteList list = parserFacade.spriteListFromFile(filename);
-        return spriteListToMap(list);
+        DataMap<String> dataMap = spriteListToMap(list);
+        dataMap.setFilename(filename);
+        return dataMap;
     }
 
     private DataMap<String> spriteListToMap(SpriteList list) {
@@ -61,6 +61,7 @@ public class AbstractFactory {
      */
     public DataMap<String> localeMap(String filename) throws IOException {
         LocalisationMap localisationMap = parserFacade.localisationMapFromFile(filename);
+        localisationMap.setFileName(filename);
         return localisationMap.toDataMap();
     }
 }

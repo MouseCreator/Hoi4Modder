@@ -7,7 +7,7 @@ import com.example.hoi4modder.service.Destinations;
 /**
  * Service to find files with specified strategy
  */
-class FileSearchService {
+public class FileSearchService {
     private String gameDirectory;
     private String modDirectory;
     private String directory;

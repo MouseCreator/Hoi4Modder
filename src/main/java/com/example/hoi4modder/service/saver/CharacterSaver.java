@@ -17,9 +17,8 @@ public class CharacterSaver {
         saveCountryCharacters();
     }
     private void saveLoadedData() {
-        LoadedData data = SavedDataContainer.get().loadedData();
-        DataPool<String> graphicsData = data.getGraphicsData();
-        DataPool<String> localisationData = data.getLocalisationData();
+        saveGraphicsData();
+        saveLocalisationData();
     }
 
     private void saveCountryCharacters() {
@@ -27,6 +26,22 @@ public class CharacterSaver {
         GameCharacterList characterList = editor.getCharacters();
 
         CharacterFileSaver fileSaver = new CharacterFileSaver(tag, characterList);
+        fileSaver.save();
+    }
+
+    private void saveGraphicsData() {
+        LoadedData data = SavedDataContainer.get().loadedData();
+        DataPool<String> graphicsData = data.getGraphicsData();
+
+        GraphicsSaver fileSaver = new GraphicsSaver(graphicsData);
+        fileSaver.save();
+    }
+
+    private void saveLocalisationData() {
+        LoadedData data = SavedDataContainer.get().loadedData();
+        DataPool<String> localisationData = data.getLocalisationData();
+
+        LocalisationSaver fileSaver = new LocalisationSaver(localisationData);
         fileSaver.save();
     }
 }

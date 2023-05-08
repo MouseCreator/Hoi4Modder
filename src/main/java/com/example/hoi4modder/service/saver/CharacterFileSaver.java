@@ -1,5 +1,6 @@
 package com.example.hoi4modder.service.saver;
 
+import com.example.hoi4modder.game.GameCharacter;
 import com.example.hoi4modder.game.GameCharacterList;
 import com.example.hoi4modder.model.files.iovisitor.Unparser;
 import com.example.hoi4modder.model.files.manager.FileSearch;
@@ -14,6 +15,7 @@ public class CharacterFileSaver {
         this.gameCharacters = gameCharacters;
         this.countryTag = tag;
     }
+
 
     public void save() {
         FileSearch fileSearchService = FileSearch.createPutCreateService();
@@ -33,5 +35,15 @@ public class CharacterFileSaver {
         Unparser unparser = new Unparser();
         unparser.visitCharacterList(gameCharacters);
         return unparser.getBlock().toFile();
+    }
+
+    private String generateRecruitCharacterMessage() {
+        StringBuilder builder = new StringBuilder();
+
+        for (GameCharacter character : gameCharacters) {
+            builder.append("recruit_character = ") .append(character.getIdentification()).append("\n");
+        }
+
+        return builder.toString();
     }
 }
