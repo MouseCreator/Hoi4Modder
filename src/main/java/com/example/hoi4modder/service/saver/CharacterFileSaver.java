@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * Class to save character lists by tag
  */
-public class CharacterFileSaver {
+public class CharacterFileSaver implements SimpleSaver {
     private final String countryTag;
     private final GameCharacterList gameCharacters;
     public CharacterFileSaver(String tag, GameCharacterList gameCharacters) {
@@ -22,7 +22,9 @@ public class CharacterFileSaver {
         this.countryTag = tag;
     }
 
-
+    /**
+     * Saves characters to characters file of the country
+     */
     public void save() {
         FileSearch fileSearchService = FileSearch.createPutReplaceService();
         String countryFile = fileSearchService.findCountryByTag(countryTag);

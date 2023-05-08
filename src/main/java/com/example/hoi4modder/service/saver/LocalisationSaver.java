@@ -9,7 +9,7 @@ import com.example.hoi4modder.model.files.maps.DataPool;
 /**
  * Saver for localisation data
  */
-public class LocalisationSaver {
+public class LocalisationSaver implements SimpleSaver {
     private final DataPool<String> localisationData;
 
     /**

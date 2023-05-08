@@ -11,7 +11,7 @@ import com.example.hoi4modder.model.files.maps.DataPool;
 /**
  * Class to save graphics data
  */
-public class GraphicsSaver {
+public class GraphicsSaver implements SimpleSaver {
     private final DataPool<String> graphicsData;
     public GraphicsSaver(DataPool<String> graphicsData) {
         this.graphicsData = graphicsData;

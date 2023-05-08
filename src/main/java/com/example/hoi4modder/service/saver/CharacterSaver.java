@@ -9,7 +9,7 @@ import com.example.hoi4modder.service.SavedDataContainer;
 /**
  * Saver for characters and related data
  */
-public class CharacterSaver {
+public class CharacterSaver implements SimpleSaver {
     private final CharacterListEditor editor;
     public CharacterSaver(CharacterListEditor characterListEditor) {
         this.editor = characterListEditor;
