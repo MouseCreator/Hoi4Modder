@@ -27,4 +27,9 @@ public class FileSearch {
         service.setDirectory(Destinations.get().characters());
         return service.findCountryByTag(tag);
     }
+
+    public String findCountryFile(String countryTag) {
+        service.setDirectory(Destinations.get().countries());
+        return service.findInstance(countryTag);
+    }
 }

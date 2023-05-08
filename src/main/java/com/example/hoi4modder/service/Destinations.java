@@ -33,6 +33,8 @@ public class Destinations {
     private final String russian = "russian" + s;
     private final String yml = ".yml";
     private final String interfaceDir = "interface" + s;
+
+    private final String countriesDir = "countries" + s;
     private final String states = "states" + s;
 
     private final String iconsDir = "icons" + s;
@@ -111,5 +113,9 @@ public class Destinations {
 
     public String icon() {
         return fileNotation + basedir + data + image + iconsDir + "IconModder.png";
+    }
+
+    public String countries() {
+        return history + countriesDir;
     }
 }
