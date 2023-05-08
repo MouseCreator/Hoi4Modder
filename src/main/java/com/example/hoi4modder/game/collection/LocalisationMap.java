@@ -8,8 +8,14 @@ import java.util.Map;
 import java.util.Set;
 
 public class LocalisationMap implements Visitable{
-    private final Map<String, String> map = new HashMap<>();
+    private final Map<String, String> map;
 
+    public LocalisationMap(DataMap<String> dataMap) {
+        this.map = dataMap.getMap();
+    }
+    public LocalisationMap() {
+       map = new HashMap<>();
+    }
     private String filename;
 
     public boolean containsKey(String key) {

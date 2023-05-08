@@ -3,6 +3,7 @@ package com.example.hoi4modder.model.files.maps;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.NoSuchElementException;
+import java.util.Set;
 
 /**
  * Map of the maps. Contains data maps of shared type, loaded from different classes
@@ -34,6 +35,10 @@ public class DataPool<T> {
                 return result;
         }
         throw new NoSuchElementException("Cannot find value " + key + " in the data pool");
+    }
+
+    public DataMap<T> getMap(String key) {
+        return maps.get(key);
     }
 
     /**
@@ -124,4 +129,7 @@ public class DataPool<T> {
         return maps.get(type).replaceKey(oldKey, newKey);
     }
 
+    public Set<String> keys() {
+        return maps.keySet();
+    }
 }

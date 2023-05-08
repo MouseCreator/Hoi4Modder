@@ -136,4 +136,8 @@ public class DataMap<T> {
     public Set<String> getKeys() {
         return map.keySet();
     }
+
+    public Map<String, T> getMap() {
+        return map;
+    }
 }
