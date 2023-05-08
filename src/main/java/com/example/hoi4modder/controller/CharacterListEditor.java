@@ -12,7 +12,7 @@ import com.example.hoi4modder.game.GameCharacterList;
 import com.example.hoi4modder.game.common.Country;
 import com.example.hoi4modder.game.common.DynamicCountry;
 import com.example.hoi4modder.model.files.manager.FileSearch;
-import com.example.hoi4modder.service.saver.CharacterSaver;
+import com.example.hoi4modder.service.saver.SaveThread;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -33,6 +33,8 @@ public class CharacterListEditor extends ActivePaneController implements Initial
 
     private final RequestHandler<GameCharacter> handler = new CharacterEditorRequestHandler(this);
     private boolean isLoaded = false;
+
+    private final SaveThread saveThread = new SaveThread(this);
     private final List<CharacterItemController> controllerList = new ArrayList<>();
     private FileWatcher fileWatcher;
     private final DynamicCountry country = new DynamicCountry();
@@ -54,8 +56,13 @@ public class CharacterListEditor extends ActivePaneController implements Initial
 
     @Override
     public void save() {
-        CharacterSaver saver = new CharacterSaver(this);
-        saver.save();
+        if (isNotLoaded())
+            return;
+
+        if (saveThread.isAlive())
+            return;
+
+        saveThread.start();
     }
 
     @Override
