@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
@@ -11,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="262.0" prefWidth="189.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hoi4modder.controller.NavyLeaderController">
+<VBox maxHeight="-Infinity" prefHeight="262.0" prefWidth="189.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hoi4modder.controller.NavyLeaderController">
    <children>
       <Label text="Navy Leader">
          <font>
@@ -58,7 +59,7 @@
          </children>
       </HBox>
       <ListView fx:id="traitsList" prefHeight="97.0" prefWidth="190.0" />
-      <HBox prefHeight="35.0" prefWidth="208.0">
+      <HBox prefHeight="26.0" prefWidth="185.0">
          <children>
             <Button mnemonicParsing="false" onAction="#removeTrait" text="X" textFill="RED" />
             <TextField fx:id="traitField" prefHeight="26.0" prefWidth="126.0" />
@@ -66,4 +67,7 @@
          </children>
       </HBox>
    </children>
+   <padding>
+      <Insets bottom="10.0" left="2.0" right="2.0" />
+   </padding>
 </VBox>

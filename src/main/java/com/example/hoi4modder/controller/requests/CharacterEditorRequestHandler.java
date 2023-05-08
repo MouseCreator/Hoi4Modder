@@ -51,7 +51,6 @@ public class CharacterEditorRequestHandler implements RequestHandler<GameCharact
         characters.remove(request.controller().toModel());
         controllerList.remove((CharacterItemController) request.controller());
         listView.getItems().remove(request.pane());
-
     }
 
 }
