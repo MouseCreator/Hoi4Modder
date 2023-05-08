@@ -53,4 +53,15 @@ public class CharacterEditorRequestHandler implements RequestHandler<GameCharact
         listView.getItems().remove(request.pane());
     }
 
+    @Override
+    public void handle(AddRequest<GameCharacter> request) {
+        GameCharacterList characters = characterListEditor.getCharacters();
+        ListView<Pane> listView = characterListEditor.getItems();
+        GameCharacter gameCharacter = GameCharacter.getSampleCharacter();
+        characters.addAfter(gameCharacter, request.after());
+        GameCharacterCreator creator = new GameCharacterCreator(characterListEditor, listView.getItems(),
+                characterListEditor.getControllers());
+        creator.addItemAt(listView.getItems().indexOf(request.pane()), gameCharacter);
+    }
+
 }

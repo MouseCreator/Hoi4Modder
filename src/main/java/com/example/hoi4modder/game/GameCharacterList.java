@@ -62,4 +62,8 @@ public class GameCharacterList implements Iterable<GameCharacter>, Visitable {
     public int indexOf(GameCharacter model) {
         return characterList.indexOf(model);
     }
+
+    public void addAfter(GameCharacter gameCharacter, GameCharacter after) {
+        characterList.add(characterList.indexOf(after), gameCharacter);
+    }
 }

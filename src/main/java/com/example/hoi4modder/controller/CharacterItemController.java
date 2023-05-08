@@ -3,10 +3,7 @@ package com.example.hoi4modder.controller;
 import com.example.hoi4modder.controller.character_extra.CharacterInfo;
 import com.example.hoi4modder.controller.character_extra.RoleSwitcher;
 import com.example.hoi4modder.controller.character_extra.RoleSwitcherBuilder;
-import com.example.hoi4modder.controller.requests.DuplicateRequest;
-import com.example.hoi4modder.controller.requests.ItemPresentRequest;
-import com.example.hoi4modder.controller.requests.RemoveRequest;
-import com.example.hoi4modder.controller.requests.Request;
+import com.example.hoi4modder.controller.requests.*;
 import com.example.hoi4modder.game.FieldValueMap;
 import com.example.hoi4modder.game.GameCharacter;
 import com.example.hoi4modder.game.roles.*;
@@ -112,9 +109,10 @@ public class CharacterItemController implements Initializable, ListItemControlle
                 contextMenu.show(mainPane, event.getScreenX(), event.getScreenY());
             }
         });
+        MenuItem addItem = createAddMethod();
         MenuItem duplicateItem = createDuplicateMethod();
         MenuItem deleteItem = createRemoveMethod();
-        contextMenu.getItems().addAll(duplicateItem, deleteItem);
+        contextMenu.getItems().addAll(addItem, duplicateItem, deleteItem);
         bindMenuToScene(contextMenu);
     }
 
@@ -133,6 +131,16 @@ public class CharacterItemController implements Initializable, ListItemControlle
         item.setOnAction(event -> {
             Request<GameCharacter> removeRequest = new RemoveRequest<>(this, mainPane);
             listEditor.handle(removeRequest);
+        });
+        return item;
+    }
+
+    private MenuItem createAddMethod() {
+        MenuItem item = new MenuItem();
+        item.textProperty().bind(Bindings.format("Add"));
+        item.setOnAction(event -> {
+            Request<GameCharacter> addRequest = new AddRequest<>(gameCharacter, mainPane);
+            listEditor.handle(addRequest);
         });
         return item;
     }

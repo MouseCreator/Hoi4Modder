@@ -29,6 +29,7 @@ public class ModApplication extends Application {
 
         javafx.scene.image.Image icon = new javafx.scene.image.Image(Destinations.get().icon());
         stage.getIcons().add(icon);
+
         stage.show();
     }
     public static void main(String[] args) {

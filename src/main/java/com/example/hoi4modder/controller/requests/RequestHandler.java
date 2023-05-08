@@ -6,4 +6,6 @@ public interface RequestHandler<T> {
     void onRequest(Request<T> request);
 
     void handle(RemoveRequest<T> removeRequest);
+
+    void handle(AddRequest<T> tAddRequest);
 }
