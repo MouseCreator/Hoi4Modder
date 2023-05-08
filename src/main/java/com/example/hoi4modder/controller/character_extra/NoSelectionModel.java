@@ -4,6 +4,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.MultipleSelectionModel;
 
+/**
+ * Selection model, that does not allow item to be selected
+ * @param <T> - generic type of items of the list
+ */
 public class NoSelectionModel<T> extends MultipleSelectionModel<T> {
 
     @Override
