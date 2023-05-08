@@ -31,8 +31,6 @@ public class CharacterListEditor extends ActivePaneController implements Initial
     //private AutocompleteTextField searchAutocomplete;
     private final RequestHandler<GameCharacter> handler = new CharacterEditorRequestHandler(this);
     private boolean isLoaded = false;
-
-    private final SaveThread saveThread = new SaveThread(this);
     private final List<CharacterItemController> controllerList = new ArrayList<>();
     private FileWatcher fileWatcher;
     private final DynamicCountry country = new DynamicCountry();
@@ -60,13 +58,16 @@ public class CharacterListEditor extends ActivePaneController implements Initial
     /**
      * Saves characters to game file
      */
-    @Override
+
+    private SaveThread saveThread;
+    @FXML
     public void save() {
         if (isNotLoaded())
             return;
 
-        if (saveThread.isAlive())
+        if (saveThread == null || saveThread.isAlive())
             return;
+        saveThread = new SaveThread(this);
         fileWatcher.exception();
         saveThread.start();
     }

@@ -55,7 +55,6 @@ public class CountryEditorController extends ActivePaneController implements Ini
         return "country-editor.fxml";
     }
 
-    @Override
     public void save() {
         
     }

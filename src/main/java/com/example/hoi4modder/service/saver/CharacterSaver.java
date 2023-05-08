@@ -5,6 +5,7 @@ import com.example.hoi4modder.game.GameCharacterList;
 import com.example.hoi4modder.model.files.maps.DataPool;
 import com.example.hoi4modder.model.files.maps.LoadedData;
 import com.example.hoi4modder.service.SavedDataContainer;
+import javafx.fxml.FXML;
 
 /**
  * Saver for characters and related data
@@ -18,6 +19,8 @@ public class CharacterSaver implements SimpleSaver {
     /**
      * Saves character list, localisation and textures to files
      */
+    @FXML
+    @Override
     public void save() {
         saveLoadedData();
         saveCountryCharacters();
