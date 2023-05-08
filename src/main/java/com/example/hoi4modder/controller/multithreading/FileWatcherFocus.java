@@ -4,6 +4,8 @@ import java.io.File;
 
 public class FileWatcherFocus implements FileWatcher {
     private long lastUpdate;
+
+    private int exceptionCounter;
     private File file;
     public FileWatcherFocus(File file) {
         this.file = file;
@@ -30,5 +32,10 @@ public class FileWatcherFocus implements FileWatcher {
     @Override
     public void setFile(String filename) {
         this.file = new File(filename);
+    }
+
+    @Override
+    public void exception() {
+        exceptionCounter++;
     }
 }

@@ -11,6 +11,8 @@ import java.util.concurrent.TimeUnit;
 public class FileWatcherPeriodic implements FileWatcher {
     ScheduledExecutorService executor;
     private long lastUpdated;
+
+    private int exceptionCounter;
     private String filePath;
     private final Runnable onFileChange;
     Runnable checkRunnable = new Runnable() {
@@ -26,7 +28,10 @@ public class FileWatcherPeriodic implements FileWatcher {
             }
             if (runCheck && file.lastModified() != lastUpdated) {
                 lastUpdated = file.lastModified();
-                Platform.runLater(onFileChange); //callback
+                if (exceptionCounter == 0)
+                    Platform.runLater(onFileChange); //callback
+                else
+                    exceptionCounter--;
             }
         }
     };
@@ -52,7 +57,11 @@ public class FileWatcherPeriodic implements FileWatcher {
     @Override
     public void setFile(String filename) {
         this.filePath = filename;
-
         this.lastUpdated = new File(filePath).lastModified();
+    }
+
+    @Override
+    public void exception() {
+        exceptionCounter++;
     }
 }

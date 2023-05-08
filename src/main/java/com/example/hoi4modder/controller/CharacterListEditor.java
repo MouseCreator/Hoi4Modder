@@ -60,7 +60,7 @@ public class CharacterListEditor extends ActivePaneController implements Initial
 
         if (saveThread.isAlive())
             return;
-
+        fileWatcher.exception();
         saveThread.start();
     }
 
