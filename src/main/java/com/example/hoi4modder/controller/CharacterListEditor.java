@@ -11,10 +11,7 @@ import com.example.hoi4modder.game.GameCharacter;
 import com.example.hoi4modder.game.GameCharacterList;
 import com.example.hoi4modder.game.common.Country;
 import com.example.hoi4modder.game.common.DynamicCountry;
-import com.example.hoi4modder.model.files.manager.FileSearchService;
-import com.example.hoi4modder.model.files.manager.strategy.PutReplaceStrategy;
-import com.example.hoi4modder.service.Destinations;
-import com.example.hoi4modder.service.SavedDataContainer;
+import com.example.hoi4modder.model.files.manager.FileSearch;
 import com.example.hoi4modder.service.saver.CharacterSaver;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -99,9 +96,7 @@ public class CharacterListEditor extends ActivePaneController implements Initial
         loadListFromFile();
     }
     private String getFileToLoad(String tag) {
-        FileSearchService searcher = SavedDataContainer.get().fileSearchService();
-        searcher.setStrategy(new PutReplaceStrategy());
-        searcher.setDirectory(Destinations.get().characters());
+        FileSearch searcher = FileSearch.createPutReplaceService();
         return searcher.findCountryByTag(tag);
     }
 

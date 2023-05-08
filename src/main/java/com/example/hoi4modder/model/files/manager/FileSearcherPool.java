@@ -6,7 +6,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 /**
  * OBJECT POOL for File Searchers
  */
-public class FileSearcherPool {
+class FileSearcherPool {
     private final BlockingQueue<FileSearchService> fileSearchers;
     private final int capacity;
     private int remaining;
