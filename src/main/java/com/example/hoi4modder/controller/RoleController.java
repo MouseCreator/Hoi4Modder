@@ -18,7 +18,10 @@ import java.util.Set;
 public abstract class RoleController<R extends Role> {
     protected CharacterItemController characterItemController;
 
-
+    /**
+     * Adds context menu on right click on traits list item
+     * @param listView - traits list
+     */
     protected void initializeContextMenu(ListView<String> listView) {
         listView.setCellFactory(listV -> {
 
@@ -63,13 +66,11 @@ public abstract class RoleController<R extends Role> {
         clipboard.setContent(content);
     }
 
-    public CharacterItemController getCharacterItem() {
-        return characterItemController;
-    }
-
-    public void setCharacterItem(CharacterItemController characterItemController) {
-        this.characterItemController = characterItemController;
-    }
+    /**
+     * Adds trait to trait list
+     * @param listView - trait list
+     * @param trait - trait name
+     */
     protected void addTrait(ListView<String> listView, String trait) {
         trait =  trait.replace('\t', ' ').trim();
         if (cannotBeAdded(listView, trait))
@@ -81,45 +82,88 @@ public abstract class RoleController<R extends Role> {
         return trait.isEmpty() || listView.getItems().contains(trait);
     }
 
-
+    /**
+     *
+     * @param listView - trait list
+     * @return traits for the character's role
+     */
     protected Set<String> getTraits(ListView<String> listView) {
         ObservableList<String> items = listView.getItems();
         return new HashSet<>(items);
     }
 
+    /**
+     *
+     * @return source file for role GUI element
+     */
     public abstract String filename();
 
+    /**
+     *
+     * @param role - role to generate element
+     */
     public abstract void fromRole(R role);
 
+    /**
+     *
+     * @return convert current item to role
+     */
     public abstract R toRole();
 
-    protected String getSelectedFromBox(ComboBox<String> box) {
-        String result = box.getValue();
-        return stringToLowerCase(result);
-    }
-
+    /**
+     *
+     * @param origin - string in GUI case, containing scapes and capital letters
+     * @return string in snake case
+     */
     protected String stringToLowerCase(String origin) {
         origin = origin.replace(" ", "_");
         return origin.toLowerCase();
     }
+
+    /**
+     *
+     * @param origin - string in snake case
+     * @return string in GUI case
+     */
     protected String stringToUpperCase(String origin) {
         origin = origin.replace("_", " ");
         origin = origin.substring(0, 1).toUpperCase() + origin.substring(1);
         return origin;
     }
 
+    /**
+     *
+     * @param slot - slot to be selected in combobox
+     * @param box - box to be modified
+     */
     protected void setSelectedFromBox(String slot, ComboBox<String> box) {
         box.getSelectionModel().select(stringToUpperCase(slot));
     }
 
+    /**
+     *
+     * @param controller - controller of the character item
+     */
     public void setParent(CharacterItemController controller) {
         this.characterItemController = controller;
     }
 
+    /**
+     *
+     * @return role name for character
+     */
     public abstract String getRoleType();
 
+    /**
+     * Creates role from character
+     * @param character - game character to get role from
+     */
     public abstract void fromCharacter(GameCharacter character);
 
+    /**
+     * Remove selected trait from the list
+     * @param traitList - trait list
+     */
     protected void removeTrait(ListView<String> traitList) {
         ObservableList<String> selectedItems = traitList.getSelectionModel().getSelectedItems();
         String[] strings = new String[selectedItems.size()];

@@ -65,6 +65,11 @@ public class AdvisorRoleController extends RoleController<Advisor> implements In
         return "advisor-item.fxml";
     }
 
+    /**
+     *
+     * @param advisor - advisor to fill item fields
+     */
+    @Override
     public void fromRole(Advisor advisor) {
         costField.setText(String.valueOf(advisor.getCost()));
         setSelectedFromBox(advisor.getSlot(), slotComboBox);
