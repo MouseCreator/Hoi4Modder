@@ -6,6 +6,9 @@ import com.example.hoi4modder.model.files.maps.DataPool;
 import com.example.hoi4modder.model.files.maps.LoadedData;
 import com.example.hoi4modder.service.SavedDataContainer;
 
+/**
+ * Saver for characters and related data
+ */
 public class CharacterSaver {
     private final CharacterListEditor editor;
     public CharacterSaver(CharacterListEditor characterListEditor) {

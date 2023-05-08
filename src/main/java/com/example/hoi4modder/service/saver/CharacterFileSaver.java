@@ -8,6 +8,9 @@ import com.example.hoi4modder.model.files.manager.GameFilesWriter;
 
 import java.io.IOException;
 
+/**
+ * Class to save character lists by tag
+ */
 public class CharacterFileSaver {
     private final String countryTag;
     private final GameCharacterList gameCharacters;

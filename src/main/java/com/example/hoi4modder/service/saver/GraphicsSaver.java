@@ -8,6 +8,9 @@ import com.example.hoi4modder.model.files.manager.GameFilesWriter;
 import com.example.hoi4modder.model.files.maps.DataMap;
 import com.example.hoi4modder.model.files.maps.DataPool;
 
+/**
+ * Class to save graphics data
+ */
 public class GraphicsSaver {
     private final DataPool<String> graphicsData;
     public GraphicsSaver(DataPool<String> graphicsData) {
@@ -33,6 +36,7 @@ public class GraphicsSaver {
             e.printStackTrace();
         }
     }
+
     private SpriteList buildSpriteList(DataMap<String> dataMap) {
         SpriteList spriteList = new SpriteList();
         for (String str : dataMap.getKeys()) {

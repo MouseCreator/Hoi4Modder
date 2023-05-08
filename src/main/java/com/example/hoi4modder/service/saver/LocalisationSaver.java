@@ -6,13 +6,23 @@ import com.example.hoi4modder.model.files.manager.GameFilesWriter;
 import com.example.hoi4modder.model.files.maps.DataMap;
 import com.example.hoi4modder.model.files.maps.DataPool;
 
-
+/**
+ * Saver for localisation data
+ */
 public class LocalisationSaver {
     private final DataPool<String> localisationData;
+
+    /**
+     *
+     * @param localisationData - data to be saved
+     */
     public LocalisationSaver(DataPool<String> localisationData) {
         this.localisationData = localisationData;
     }
 
+    /**
+     * Saves localisation to file it was loaded from
+     */
     public void save() {
         for (String key : localisationData.keys()) {
             DataMap<String> dataMap = localisationData.getMap(key);
