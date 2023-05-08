@@ -33,7 +33,9 @@ public class LocalisationBuilder implements DataPoolBuilder<String>{
     private DataMap<String> createLocaleMap(FileSearchService searcher, String keyword) {
         try {
             String filename = searcher.findInstance(keyword);
-            return AbstractFactory.get().localeMap(filename);
+            DataMap<String> dataMap = AbstractFactory.get().localeMap(filename);
+            dataMap.setFilename(filename);
+            return dataMap;
         } catch (Exception e) {
             return null;
         }

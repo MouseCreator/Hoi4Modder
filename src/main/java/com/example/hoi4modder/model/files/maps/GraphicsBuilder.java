@@ -26,7 +26,9 @@ public class GraphicsBuilder implements DataPoolBuilder<String> {
     private DataMap<String> createGraphicsMap(FileSearchService searcher, String keyword) {
         try {
             String filename = searcher.findInstance(keyword);
-            return AbstractFactory.get().graphicsMap(filename);
+            DataMap<String> dataMap = AbstractFactory.get().graphicsMap(filename);
+            dataMap.setFilename(filename);
+            return dataMap;
         } catch (Exception e) {
             return null;
         }

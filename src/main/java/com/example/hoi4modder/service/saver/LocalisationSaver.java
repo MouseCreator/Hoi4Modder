@@ -4,7 +4,7 @@ import com.example.hoi4modder.game.collection.LocalisationMap;
 import com.example.hoi4modder.model.files.iovisitor.Unparser;
 import com.example.hoi4modder.model.files.manager.FileSearchService;
 import com.example.hoi4modder.model.files.manager.GameFilesWriter;
-import com.example.hoi4modder.model.files.manager.strategy.PutCreateStrategy;
+import com.example.hoi4modder.model.files.manager.strategy.PutReplaceStrategy;
 import com.example.hoi4modder.model.files.maps.DataMap;
 import com.example.hoi4modder.model.files.maps.DataPool;
 import com.example.hoi4modder.service.Destinations;
@@ -27,7 +27,7 @@ public class LocalisationSaver {
     private void saveDataMap(DataMap<String> dataMap) {
         String filename = dataMap.getFilename();
         FileSearchService fileSearchService = SavedDataContainer.get().fileSearchService();
-        fileSearchService.setStrategy(new PutCreateStrategy());
+        fileSearchService.setStrategy(new PutReplaceStrategy());
         fileSearchService.setDirectory(Destinations.get().localisation());
         String file = fileSearchService.findInstance(filename);
 

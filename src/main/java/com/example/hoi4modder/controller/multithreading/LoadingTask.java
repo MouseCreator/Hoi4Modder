@@ -19,7 +19,6 @@ public class LoadingTask extends EditorListTask {
     protected Void call() throws Exception {
         characters.clear();
         AbstractFactory.get().getCharacterList(characters, filename);
-        System.out.println("Characters loaded!");
         createListOfCharacters();
         return null;
     }
