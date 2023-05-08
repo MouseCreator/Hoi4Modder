@@ -110,7 +110,12 @@ public class Unparser implements Visitor {
         BlockProperty civilianBlock = new BlockProperty();
         civilianBlock.setKey("civilian");
         for (String key : portraits.keys()) {
-            civilianBlock.add(new FieldValueProperty(key, portraits.get(key)));
+            if (key.equals("small")) {
+                civilianBlock.add(new FieldValueProperty(key, inQuotes(portraits.get(key))));
+            } else {
+                civilianBlock.add(new FieldValueProperty(key, portraits.get(key)));
+            }
+
         }
         mainBlock.add(civilianBlock);
         return mainBlock;
