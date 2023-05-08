@@ -166,7 +166,6 @@ public class CharacterListEditor extends ActivePaneController implements Initial
         resetAll();
         if (fileWatcher != null)
             fileWatcher.stop();
-
     }
 
     private SortedSet<String> characterIDs() {

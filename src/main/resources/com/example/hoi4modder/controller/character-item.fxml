@@ -89,7 +89,6 @@
                   <Button mnemonicParsing="false" onAction="#removeSmall" text="X" textFill="RED" />
                </children>
             </HBox>
-            <Pane prefHeight="200.0" prefWidth="200.0" />
          </children>
       </VBox>
    </children>
