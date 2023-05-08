@@ -80,9 +80,17 @@ public class CharacterItemController implements Initializable, ListItemControlle
     private final RoleSwitcher<UnitLeader> unitLeaderRoleSwitcher;
     private final RoleSwitcher<Advisor> advisorRoleSwitcher;
 
+    /**
+     *
+     * @return additional info about character's roles
+     */
     public CharacterInfo getCharacterInfo() {
         return characterInfo;
     }
+
+    /**
+     * Creates empty character item
+     */
     public CharacterItemController() {
         characterInfo = new CharacterInfo();
         RoleSwitcherBuilder builder = new RoleSwitcherBuilder();
@@ -92,6 +100,10 @@ public class CharacterItemController implements Initializable, ListItemControlle
         advisorRoleSwitcher = builder.buildAdvisorSwitcher(this);
     }
 
+    /**
+     * Sets parent to editor
+     * @param editor - list to be associated with
+     */
     public void setParent(ItemContainer<GameCharacter> editor) {
         this.listEditor = editor;
         countryTag = listEditor.getCountry().getTag();
@@ -100,7 +112,6 @@ public class CharacterItemController implements Initializable, ListItemControlle
     public void initialize(URL url, ResourceBundle resourceBundle) {
         rolesBox.setFillHeight(true);
     }
-
     private void createContextMenu() {
         ContextMenu contextMenu = new ContextMenu();
         contextMenu.setAutoHide(true);
@@ -154,6 +165,10 @@ public class CharacterItemController implements Initializable, ListItemControlle
         });
     }
 
+    /**
+     *
+     * @param character - game character to create item from
+     */
     @Override
     public void fromModel(GameCharacter character) {
         this.gameCharacter = character;
@@ -178,6 +193,10 @@ public class CharacterItemController implements Initializable, ListItemControlle
         createContextMenu();
     }
 
+    /**
+     *
+     * @return character, generated from pane's content
+     */
     @Override
     public GameCharacter toModel() {
         return gameCharacter;
@@ -271,6 +290,9 @@ public class CharacterItemController implements Initializable, ListItemControlle
         return new AppConfig().getModDirectory();
     }
 
+    /**
+     * Generates small portrait from large
+     */
     @FXML
     void toSmallPortrait() {
         ImageTransformer transformer = new ImageTransformer();
@@ -360,6 +382,10 @@ public class CharacterItemController implements Initializable, ListItemControlle
         smallPortraitImage.setImage(new Image(new File(Destinations.get().noSmallPortrait()).toURI().toString()));
         this.hasSmallPortrait = false;
     }
+
+    /**
+     * Changes small portrait of the character
+     */
     @FXML
     void changeSmall() {
         FileChooser fileChooser = initFileChooser();
@@ -371,6 +397,10 @@ public class CharacterItemController implements Initializable, ListItemControlle
             setAutoButton();
         }
     }
+
+    /**
+     * Clears large portrait for character
+     */
     @FXML
     void removeLarge() {
         resetLargeImage();
@@ -378,6 +408,9 @@ public class CharacterItemController implements Initializable, ListItemControlle
         setAutoButton();
     }
 
+    /**
+     * Clears small portrait for character
+     */
     @FXML
     void removeSmall() {
         resetSmallImage();

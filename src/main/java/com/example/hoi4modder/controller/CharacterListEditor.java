@@ -47,11 +47,19 @@ public class CharacterListEditor extends ActivePaneController implements Initial
     private Button newCharacterBtn;
     @FXML
     private Button saveBtn;
+
+    /**
+     *
+     * @return source of editor GUI
+     */
     @Override
     protected String getFilename() {
         return "character-list.fxml";
     }
 
+    /**
+     * Saves characters to game file
+     */
     @Override
     public void save() {
         if (isNotLoaded())
@@ -63,18 +71,27 @@ public class CharacterListEditor extends ActivePaneController implements Initial
         saveThread.start();
     }
 
+    /**
+     * Loads controller, initializes elements that are not related to GUI
+     */
     @Override
     public void load() {
         setIsLoaded(false);
         saveThread.setName("Saving-thread");
     }
 
+    /**
+     *
+     * @return country being edited
+     */
     @Override
     public Country getCountry() {
         return country;
     }
 
-
+    /**
+     * Adds empty character in the end of the list
+     */
     @FXML
     public void addEmptyCharacter() {
         if (isNotLoaded()) return;
@@ -95,6 +112,10 @@ public class CharacterListEditor extends ActivePaneController implements Initial
         return false;
     }
 
+    /**
+     * Creates list of characters of specific country.
+     * Country tag is given from tag text field
+     */
     @FXML
     public void loadCharactersByTag() {
         setIsLoaded(false);
@@ -128,7 +149,7 @@ public class CharacterListEditor extends ActivePaneController implements Initial
         if (fileWatcher != null) {
             fileWatcher.stop();
         } else {
-            fileWatcher = new FileWatcherPeriodic(onFileChanged, () -> getParent().getWindow().isFocused());
+            fileWatcher = new FileWatcherPeriodic(onFileChanged, () -> getMainController().getWindow().isFocused());
         }
     }
 
@@ -169,14 +190,14 @@ public class CharacterListEditor extends ActivePaneController implements Initial
             fileWatcher.stop();
     }
 
-    private SortedSet<String> characterIDs() {
+    /*private SortedSet<String> characterIDs() {
         SortedSet<String> set = new TreeSet<>();
         for (GameCharacter character : characters) {
             set.add(character.getIdentification());
         }
         return set;
     }
-    /*private void addSearchSuggestions() {
+    private void addSearchSuggestions() {
         if (searchAutocomplete == null) {
             searchAutocomplete = new AutocompleteTextField(searchTextField, characterIDs());
         } else {
@@ -191,11 +212,16 @@ public class CharacterListEditor extends ActivePaneController implements Initial
             charactersListView.scrollTo(0);
         }
     }
+
+    /**
+     *
+     * @return tag of country being edited
+     */
     public String getCountryTag() {
         return country.getTag();
     }
 
-    public void setCountryTag(String countryTag) {
+    private void setCountryTag(String countryTag) {
         this.country.setTag(countryTag);
     }
 
@@ -205,11 +231,18 @@ public class CharacterListEditor extends ActivePaneController implements Initial
         charactersListView.setSelectionModel(new NoSelectionModel<>());
     }
 
+    /**
+     * Finds characters, using their name property
+     */
     @FXML
     public void findCharacterByName() {
         findCharacters(searchTextField.getText());
     }
 
+    /**
+     * Finds characters that fit conditions of target string
+     * @param target - string to filter characters
+     */
     public void findCharacters(String target) {
         EditorListTask task = new SearchingTask(this, target, characters);
         resetAll();
@@ -230,10 +263,9 @@ public class CharacterListEditor extends ActivePaneController implements Initial
         charactersListView.getItems().clear();
     }
 
-    public MainController getParent() {
-        return this.parentController;
-    }
-
+    /**
+     * Action to execute, if file was externally changed
+     */
     public void onFileExternalUpdate() {
         Alert alert = new Alert(Alert.AlertType.WARNING, "Current file has been changed. Update data in editor?", ButtonType.YES, ButtonType.NO);
         Optional<ButtonType> result = alert.showAndWait();
@@ -243,36 +275,62 @@ public class CharacterListEditor extends ActivePaneController implements Initial
             }
         }
     }
+
+    /**
+     * Action to execute, when pane is closing
+     */
     @Override
     public void onClose() {
         if (fileWatcher != null)
             fileWatcher.stop();
     }
 
-
+    /**
+     *
+     * @param item - sets item's parent to editor
+     */
     @Override
     public void associateItem(ListItemController<GameCharacter> item) {
         item.setParent(this);
     }
 
+    /**
+     * Handles requests
+     * @param request - action to be executed on editor
+     */
     @Override
     public void handle(Request<GameCharacter> request) {
         handler.onRequest(request);
     }
-
+    /**
+     *
+     * @return main controller of the application
+     */
     @Override
     public MainController getMainController() {
         return parentController;
     }
 
+    /**
+     *
+     * @return list of all loaded characters
+     */
     public GameCharacterList getCharacters() {
         return characters;
     }
 
+    /**
+     *
+     * @return all displayed characters
+     */
     public ListView<Pane> getItems() {
         return charactersListView;
     }
 
+    /**
+     *
+     * @return controllers of all displayed characters
+     */
     public List<CharacterItemController> getControllers() {
         return controllerList;
     }

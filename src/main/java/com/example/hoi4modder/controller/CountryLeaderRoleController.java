@@ -28,7 +28,11 @@ public class CountryLeaderRoleController extends RoleController<CountryLeader> i
     @FXML
     private TextField traitName;
     private CountryLeader countryLeader = CountryLeader.createCountryLeader();
+    private final Map<String, List<String>> ideologies;
 
+    /**
+     * Creates role controller and initializes ideologies and types
+     */
     public CountryLeaderRoleController() {
         this.ideologies = new HashMap<>();
         ideologies.put("Democratic", List.of("conservatism liberalism socialism".split(" ")));
@@ -36,16 +40,28 @@ public class CountryLeaderRoleController extends RoleController<CountryLeader> i
         ideologies.put("Fascism", List.of("nazism gen_nazism fascism_ideology falangism rexism".split(" ")));
         ideologies.put("Neutrality", List.of("despotism oligarchism anarchism moderatism centrism".split(" ")));
     }
+
+    /**
+     * Adds trait to country leader
+     */
     @FXML
     public void addTrait() {
         super.addTrait(traitList, traitName.getText());
     }
 
+    /**
+     *
+     * @return filename to load gui pane for country leader
+     */
     @Override
     public String filename() {
         return "country-leader-item.fxml";
     }
 
+    /**
+     *
+     * @param leader - country leader to create role from
+     */
     @Override
     public void fromRole(CountryLeader leader) {
         String type = leader.getIdeology();
@@ -61,17 +77,23 @@ public class CountryLeaderRoleController extends RoleController<CountryLeader> i
         traitList.getItems().addAll(leader.getTraits());
     }
 
+    /**
+     *
+     * @return role, generated from interface inputs
+     */
     @Override
     public CountryLeader toRole() {
        return countryLeader;
     }
 
+    /**
+     *
+     * @return country leader role type
+     */
     @Override
     public String getRoleType() {
         return CharacterRoles.COUNTRY_LEADER;
     }
-
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ideologyBox.getItems().clear();
@@ -97,12 +119,21 @@ public class CountryLeaderRoleController extends RoleController<CountryLeader> i
         for(String str : list)
             typeBox.getItems().add(stringToUpperCase(str));
     }
-    private final Map<String, List<String>> ideologies;
+
+
+    /**
+     * Sets ideology type relevant for current ideology
+     */
     @FXML
     void updateIdeologyType() {
         setTypesFromIdeology(ideologyBox.getValue());
         typeBox.getSelectionModel().select(0);
     }
+
+    /**
+     * Generates country leader role from character
+     * @param character - input character
+     */
     public void fromCharacter(GameCharacter character) {
         if (character.getRoles().containsKey(getRoleType())) {
             this.countryLeader = (CountryLeader) character.getRoles().get(getRoleType());
@@ -110,6 +141,10 @@ public class CountryLeaderRoleController extends RoleController<CountryLeader> i
             character.getRoles().put(getRoleType(), toRole());
         }
     }
+
+    /**
+     * Add trait to country leader
+     */
     @FXML
     void removeTrait() {
         super.removeTrait(traitList);
