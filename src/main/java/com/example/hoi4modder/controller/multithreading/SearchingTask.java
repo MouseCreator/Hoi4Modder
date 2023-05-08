@@ -8,6 +8,9 @@ import com.example.hoi4modder.model.files.maps.LoadedData;
 import com.example.hoi4modder.service.SavedDataContainer;
 import com.example.hoi4modder.utilities.Strings;
 
+/**
+ *
+ */
 public class SearchingTask extends EditorListTask{
 
     private final String targetString;

@@ -6,6 +6,9 @@ import javafx.concurrent.Task;
 
 import java.io.File;
 
+/**
+ * Invokes process to launch Hearts of Iron IV from specified directory
+ */
 public class RunGameTask extends Task<Void> {
     @Override
     public Void call() throws Exception {
