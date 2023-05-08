@@ -1,6 +1,5 @@
 package com.example.hoi4modder.controller;
 
-import com.example.hoi4modder.controller.autocomplete.AutocompleteTextField;
 import com.example.hoi4modder.controller.character_extra.GameCharacterCreator;
 import com.example.hoi4modder.controller.character_extra.NoSelectionModel;
 import com.example.hoi4modder.controller.multithreading.*;
@@ -29,7 +28,7 @@ public class CharacterListEditor extends ActivePaneController implements Initial
 
     @FXML
     private ListView<Pane> charactersListView;
-    private AutocompleteTextField searchAutocomplete;
+    //private AutocompleteTextField searchAutocomplete;
     private final RequestHandler<GameCharacter> handler = new CharacterEditorRequestHandler(this);
     private boolean isLoaded = false;
 
@@ -150,7 +149,7 @@ public class CharacterListEditor extends ActivePaneController implements Initial
         controllerList.clear();
         controllerList.addAll(task.getControllers());
         loadItems(task.getPanes());
-        addSearchSuggestions();
+        //addSearchSuggestions();
         setIsLoaded(true);
         initFileWatcher();
         fileWatcher.setFile(filename);
@@ -177,14 +176,14 @@ public class CharacterListEditor extends ActivePaneController implements Initial
         }
         return set;
     }
-    private void addSearchSuggestions() {
+    /*private void addSearchSuggestions() {
         if (searchAutocomplete == null) {
             searchAutocomplete = new AutocompleteTextField(searchTextField, characterIDs());
         } else {
             searchAutocomplete.clearSuggestions();
             searchAutocomplete.addAllSuggestions(characterIDs());
         }
-    }
+    }*/
 
     private void loadItems(ObservableList<Pane> panes)  {
         charactersListView.setItems(panes);

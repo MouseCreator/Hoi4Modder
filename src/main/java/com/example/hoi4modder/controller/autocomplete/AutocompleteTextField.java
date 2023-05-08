@@ -5,6 +5,9 @@ import javafx.scene.control.*;
 
 import java.util.*;
 
+/**
+ * Class for autocomplete in text field
+ */
 public class AutocompleteTextField {
     private final TextField textField;
 
