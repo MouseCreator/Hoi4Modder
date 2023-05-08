@@ -34,7 +34,7 @@ public class CharacterListEditor extends ActivePaneController implements Initial
     private ListView<Pane> charactersListView;
     private AutocompleteTextField searchAutocomplete;
 
-    private final RequestHandler handler = new CharacterEditorRequestHandler(this);
+    private final RequestHandler<GameCharacter> handler = new CharacterEditorRequestHandler(this);
     private boolean isLoaded = false;
     private final List<CharacterItemController> controllerList = new ArrayList<>();
     private FileWatcher fileWatcher;
@@ -273,7 +273,7 @@ public class CharacterListEditor extends ActivePaneController implements Initial
     }
 
     @Override
-    public void handle(Request request) {
+    public void handle(Request<GameCharacter> request) {
         handler.onRequest(request);
     }
 

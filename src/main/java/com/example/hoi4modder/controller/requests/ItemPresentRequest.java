@@ -1,6 +1,6 @@
 package com.example.hoi4modder.controller.requests;
 
-public class ItemPresentRequest implements Request{
+public class ItemPresentRequest<T> implements Request<T>{
     private final String id;
 
     public boolean result = false;
@@ -11,7 +11,7 @@ public class ItemPresentRequest implements Request{
         return id;
     }
     @Override
-    public void handleWith(RequestHandler handler) {
+    public void handleWith(RequestHandler<T> handler) {
         handler.handle(this);
     }
 

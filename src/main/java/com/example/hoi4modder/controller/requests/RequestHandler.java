@@ -1,7 +1,9 @@
 package com.example.hoi4modder.controller.requests;
 
-public interface RequestHandler {
-    void handle(ItemPresentRequest request);
-    void handle(DuplicateRequest request);
-    void onRequest(Request request);
+public interface RequestHandler<T> {
+    void handle(ItemPresentRequest<T> request);
+    void handle(DuplicateRequest<T> request);
+    void onRequest(Request<T> request);
+
+    void handle(RemoveRequest<T> removeRequest);
 }

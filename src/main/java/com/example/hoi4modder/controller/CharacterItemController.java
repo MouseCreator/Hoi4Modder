@@ -5,6 +5,7 @@ import com.example.hoi4modder.controller.character_extra.RoleSwitcher;
 import com.example.hoi4modder.controller.character_extra.RoleSwitcherBuilder;
 import com.example.hoi4modder.controller.requests.DuplicateRequest;
 import com.example.hoi4modder.controller.requests.ItemPresentRequest;
+import com.example.hoi4modder.controller.requests.RemoveRequest;
 import com.example.hoi4modder.controller.requests.Request;
 import com.example.hoi4modder.game.FieldValueMap;
 import com.example.hoi4modder.game.GameCharacter;
@@ -112,7 +113,7 @@ public class CharacterItemController implements Initializable, ListItemControlle
             }
         });
         MenuItem duplicateItem = createDuplicateMethod();
-        MenuItem deleteItem = new MenuItem();
+        MenuItem deleteItem = createRemoveMethod();
         contextMenu.getItems().addAll(duplicateItem, deleteItem);
         bindMenuToScene(contextMenu);
     }
@@ -121,8 +122,17 @@ public class CharacterItemController implements Initializable, ListItemControlle
         MenuItem item = new MenuItem();
         item.textProperty().bind(Bindings.format("Duplicate"));
         item.setOnAction(event -> {
-            Request duplicateRequest = new DuplicateRequest(mainPane);
+            Request<GameCharacter> duplicateRequest = new DuplicateRequest<>(gameCharacter, mainPane);
             listEditor.handle(duplicateRequest);
+        });
+        return item;
+    }
+    private MenuItem createRemoveMethod() {
+        MenuItem item = new MenuItem();
+        item.textProperty().bind(Bindings.format("Remove"));
+        item.setOnAction(event -> {
+            Request<GameCharacter> removeRequest = new RemoveRequest<>(this, mainPane);
+            listEditor.handle(removeRequest);
         });
         return item;
     }
@@ -166,7 +176,7 @@ public class CharacterItemController implements Initializable, ListItemControlle
     }
     private void setValueListeners() {
         characterIDField.textProperty().addListener((observableValue, oldValue, newValue) -> {
-            ItemPresentRequest request = new ItemPresentRequest(newValue);
+            ItemPresentRequest<GameCharacter> request = new ItemPresentRequest<>(newValue);
             listEditor.handle(request);
             if (request.getIsPresent())
                 characterIDField.setStyle("-fx-control-inner-background: #FFE3E3");

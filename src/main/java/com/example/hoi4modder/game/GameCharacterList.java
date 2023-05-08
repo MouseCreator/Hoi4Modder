@@ -54,4 +54,12 @@ public class GameCharacterList implements Iterable<GameCharacter>, Visitable {
         characterList.add(indexToDuplicate, character);
         return character;
     }
+
+    public void remove(GameCharacter gameCharacter) {
+        characterList.remove(gameCharacter);
+    }
+
+    public int indexOf(GameCharacter model) {
+        return characterList.indexOf(model);
+    }
 }
