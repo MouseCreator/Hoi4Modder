@@ -13,7 +13,7 @@ public class CharacterSaver {
     }
 
     public void save() {
-       // saveLoadedData();
+        saveLoadedData();
         saveCountryCharacters();
     }
     private void saveLoadedData() {
