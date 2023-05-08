@@ -1,7 +1,5 @@
 package com.example.hoi4modder.service;
 
-import javafx.scene.image.Image;
-
 import java.io.File;
 
 /**
@@ -9,6 +7,7 @@ import java.io.File;
  */
 public class Destinations {
     private static final Destinations destinations = new Destinations();
+    private final String fileNotation = "file:";
 
     public static Destinations get() {
         return destinations;
@@ -35,6 +34,8 @@ public class Destinations {
     private final String yml = ".yml";
     private final String interfaceDir = "interface" + s;
     private final String states = "states" + s;
+
+    private final String iconsDir = "icons" + s;
 
     /**
      *
@@ -106,5 +107,9 @@ public class Destinations {
 
     public String gamePath(String gameDirectory) {
         return gameDirectory + "hoi4.exe";
+    }
+
+    public String icon() {
+        return fileNotation + basedir + data + image + iconsDir + "IconModder.png";
     }
 }

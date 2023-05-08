@@ -1,5 +1,6 @@
 package com.example.hoi4modder;
 
+import com.example.hoi4modder.service.Destinations;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -22,10 +23,13 @@ public class ModApplication extends Application {
         Scene scene = new Scene(fxmlLoader.load(), 1280, 720);
         stage.setTitle("Hoi4 modification");
         stage.setScene(scene);
-        stage.show();
         stage.setMinWidth(800);
         stage.setMinHeight(400);
         stage.setResizable(true);
+
+        javafx.scene.image.Image icon = new javafx.scene.image.Image(Destinations.get().icon());
+        stage.getIcons().add(icon);
+        stage.show();
     }
     public static void main(String[] args) {
         launch();
