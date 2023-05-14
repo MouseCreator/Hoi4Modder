@@ -1,13 +1,25 @@
 package com.example.hoi4modder.controller.command;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.Stack;
 
-public class CommandHistory {
-    private final Stack<Command> undoStack = new Stack<>();
-    private final Stack<Command> redoStack = new Stack<>();
+public class FixedSizeCommandHistory implements History{
+    private final Deque<Command> undoStack;
+    private final Stack<Command> redoStack;
 
+    private final int size;
+
+    public FixedSizeCommandHistory(int size) {
+        this.undoStack = new ArrayDeque<>(size);
+        redoStack = new Stack<>();
+        this.size =size;
+    }
     public void add(Command command) {
-        undoStack.push(command);
+        if (undoStack.size() == size) {
+            undoStack.pollLast();
+        }
+        undoStack.addFirst(command);
         redoStack.clear();
     }
     public void undo() {

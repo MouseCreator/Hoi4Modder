@@ -11,6 +11,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.layout.Pane;
 import javafx.stage.Window;
 
+import javax.swing.undo.UndoManager;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -18,7 +19,7 @@ import java.util.ResourceBundle;
  * Controller of the main window and scene
  */
 public class MainController implements Initializable {
-
+    UndoManager undoManager = new UndoManager();
     @FXML
     private Pane leftContent;
 
