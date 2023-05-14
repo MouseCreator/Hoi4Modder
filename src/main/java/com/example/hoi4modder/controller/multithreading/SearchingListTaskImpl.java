@@ -11,12 +11,12 @@ import com.example.hoi4modder.utilities.Strings;
 /**
  *
  */
-public class SearchingTask extends EditorListTask{
+public class SearchingListTaskImpl extends EditorListTaskImpl {
 
     private final String targetString;
     private final GameCharacterList initialCharacters;
 
-    public SearchingTask(ItemContainer<GameCharacter> container, String target, GameCharacterList initialCharacters) {
+    public SearchingListTaskImpl(ItemContainer<GameCharacter> container, String target, GameCharacterList initialCharacters) {
         super(container, initialCharacters);
         this.targetString = target;
         this.initialCharacters = initialCharacters;

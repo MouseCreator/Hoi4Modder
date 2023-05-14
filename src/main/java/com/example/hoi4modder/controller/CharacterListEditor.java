@@ -155,7 +155,7 @@ public class CharacterListEditor extends ActivePaneController implements Initial
     }
 
     private void loadFromThread(String filename) {
-        EditorListTask task = new LoadingTask(this, filename, characters);
+        EditorListTaskImpl task = new LoadingListTaskImpl(this, filename, characters);
         Thread thread = new Thread(task);
         task.setOnSucceeded(workerStateEvent -> onLoadingSuccessAction(filename, task));
         task.setOnFailed(workerStateEvent -> {
@@ -167,7 +167,7 @@ public class CharacterListEditor extends ActivePaneController implements Initial
         thread.start();
     }
 
-    private void onLoadingSuccessAction(String filename, EditorListTask task) {
+    private void onLoadingSuccessAction(String filename, EditorListTaskImpl task) {
         controllerList.clear();
         controllerList.addAll(task.getControllers());
         loadItems(task.getPanes());
@@ -245,7 +245,7 @@ public class CharacterListEditor extends ActivePaneController implements Initial
      * @param target - string to filter characters
      */
     public void findCharacters(String target) {
-        EditorListTask task = new SearchingTask(this, target, characters);
+        EditorListTaskImpl task = new SearchingListTaskImpl(this, target, characters);
         resetAll();
         Thread searchingThread = new Thread(task);
         task.setOnSucceeded(workerStateEvent -> {

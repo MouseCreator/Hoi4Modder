@@ -8,7 +8,7 @@ import com.example.hoi4modder.service.AbstractFactory;
 /**
  * Loads characters for specific country
  */
-public class LoadingTask extends EditorListTask {
+public class LoadingListTaskImpl extends EditorListTaskImpl {
 
     private final String filename;
 
@@ -18,7 +18,7 @@ public class LoadingTask extends EditorListTask {
      * @param filename - file to be loaded
      * @param characters - list of characters to be filled
      */
-    public LoadingTask(ItemContainer<GameCharacter> container, String filename, GameCharacterList characters) {
+    public LoadingListTaskImpl(ItemContainer<GameCharacter> container, String filename, GameCharacterList characters) {
         super(container, characters);
         this.filename = filename;
     }
