@@ -10,6 +10,9 @@ public class SaveThread extends Thread{
 
     private final CharacterSaver saver;
 
+
+    private boolean isSaving;
+
     public SaveThread (CharacterListEditor editor) {
         saver = new CharacterSaver(editor);
     }
@@ -19,6 +22,13 @@ public class SaveThread extends Thread{
      */
     @Override
     public void run() {
+        isSaving = true;
         saver.save();
+        isSaving = false;
+
+    }
+
+    public boolean isSaving() {
+        return isSaving;
     }
 }

@@ -59,12 +59,13 @@ public class CharacterListEditor extends ActivePaneController implements Initial
      */
 
     private SaveThread saveThread;
+
     @FXML
     public void save() {
         if (isNotLoaded())
             return;
 
-        if (saveThread == null || saveThread.isAlive())
+        if (saveThread == null || saveThread.isSaving())
             return;
         saveThread = new SaveThread(this);
         saveThread.setName("Save-Thread");
