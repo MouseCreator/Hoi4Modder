@@ -2,6 +2,7 @@ package com.example.hoi4modder.controller.requests;
 
 import com.example.hoi4modder.controller.CharacterItemController;
 import com.example.hoi4modder.controller.CharacterListEditor;
+import com.example.hoi4modder.controller.ListItemController;
 import com.example.hoi4modder.controller.character_extra.GameCharacterCreator;
 import com.example.hoi4modder.game.GameCharacter;
 import com.example.hoi4modder.game.GameCharacterList;
@@ -15,16 +16,6 @@ import java.util.List;
  */
 public class CharacterEditorRequestHandler implements RequestHandler<GameCharacter>{
     private final CharacterListEditor characterListEditor;
-
-    /**
-     *
-     * @param request - receive the request to be executed
-     */
-    @Override
-    public void onRequest(Request<GameCharacter> request){
-        request.handleWith(this);
-    }
-
     /**
      *
      * @param editor - editor, that uses handler
@@ -33,59 +24,60 @@ public class CharacterEditorRequestHandler implements RequestHandler<GameCharact
         this.characterListEditor = editor;
     }
     @Override
-    public void handle(ItemPresentRequest<GameCharacter> request) {
-        String id = request.getId();
+    public boolean handleContains(String elementId) {
         GameCharacterList gameCharacters = characterListEditor.getCharacters();
         for (GameCharacter gameCharacter : gameCharacters) {
-            if (gameCharacter.getIdentification().equals(id)) {
-                request.setResult(true);
-                return;
+            if (gameCharacter.getIdentification().equals(elementId)) {
+                return true;
             }
         }
-        request.setResult(false);
+        return false;
     }
 
     /**
      *
-     * @param request - duplicates game character and puts it above origin
+     * @param model - character to duplicate
+     * @param pane - character GUI representation
      */
     @Override
-    public void handle(DuplicateRequest<GameCharacter> request) {
+    public void handleDuplicate(GameCharacter model, Pane pane) {
         GameCharacterList characters = characterListEditor.getCharacters();
         ListView<Pane> listView = characterListEditor.getItems();
-        GameCharacter gameCharacter = characters.duplicate(characters.indexOf(request.model()));
+        GameCharacter gameCharacter = characters.duplicate(characters.indexOf(model));
         GameCharacterCreator creator = new GameCharacterCreator(characterListEditor, listView.getItems(),
                 characterListEditor.getControllers());
-        creator.addItemAt(listView.getItems().indexOf(request.pane()), gameCharacter);
+        creator.addItemAt(listView.getItems().indexOf(pane), gameCharacter);
     }
 
     /**
      *
-     * @param request - removes selected item
+     * @param controller - controller for GUI representation of character
+     * @param pane - character GUI representation
      */
     @Override
-    public void handle(RemoveRequest<GameCharacter> request) {
+    public void handleRemove(ListItemController<GameCharacter> controller, Pane pane) {
         GameCharacterList characters = characterListEditor.getCharacters();
         ListView<Pane> listView = characterListEditor.getItems();
         List<CharacterItemController> controllerList = characterListEditor.getControllers();
-        characters.remove(request.controller().toModel());
-        controllerList.remove((CharacterItemController) request.controller());
-        listView.getItems().remove(request.pane());
+        characters.remove(controller.toModel());
+        controllerList.remove((CharacterItemController) controller);
+        listView.getItems().remove(pane);
     }
 
     /**
      *
-     * @param request - adds item above current, making it easy to access
+     * @param after - character, after which new character has to be added
+     * @param pane - GUI representation of the character
      */
     @Override
-    public void handle(AddRequest<GameCharacter> request) {
+    public void handleAdd(GameCharacter after, Pane pane) {
         GameCharacterList characters = characterListEditor.getCharacters();
         ListView<Pane> listView = characterListEditor.getItems();
         GameCharacter gameCharacter = GameCharacter.getSampleCharacter();
-        characters.addAfter(gameCharacter, request.after());
+        characters.addAfter(gameCharacter, after);
         GameCharacterCreator creator = new GameCharacterCreator(characterListEditor, listView.getItems(),
                 characterListEditor.getControllers());
-        creator.addItemAt(listView.getItems().indexOf(request.pane()), gameCharacter);
+        creator.addItemAt(listView.getItems().indexOf(pane), gameCharacter);
     }
 
 }

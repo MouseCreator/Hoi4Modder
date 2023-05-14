@@ -70,6 +70,8 @@ public class CharacterItemController implements Initializable, ListItemControlle
     private CheckBox unitLeaderBox;
 
     private ItemContainer<GameCharacter> listEditor;
+
+    private RequestHandler<GameCharacter> requestHandler;
     private final CharacterInfo characterInfo;
     private boolean hasBigPortrait = false;
     private boolean hasSmallPortrait = false;
@@ -106,6 +108,7 @@ public class CharacterItemController implements Initializable, ListItemControlle
      */
     public void setParent(ItemContainer<GameCharacter> editor) {
         this.listEditor = editor;
+        this.requestHandler = editor.getHandler();
         countryTag = listEditor.getCountry().getTag();
     }
     @Override
@@ -130,19 +133,13 @@ public class CharacterItemController implements Initializable, ListItemControlle
     private MenuItem createDuplicateMethod() {
         MenuItem item = new MenuItem();
         item.textProperty().bind(Bindings.format("Duplicate"));
-        item.setOnAction(event -> {
-            Request<GameCharacter> duplicateRequest = new DuplicateRequest<>(gameCharacter, mainPane);
-            listEditor.handle(duplicateRequest);
-        });
+        item.setOnAction(event -> requestHandler.handleDuplicate(gameCharacter, mainPane));
         return item;
     }
     private MenuItem createRemoveMethod() {
         MenuItem item = new MenuItem();
         item.textProperty().bind(Bindings.format("Remove"));
-        item.setOnAction(event -> {
-            Request<GameCharacter> removeRequest = new RemoveRequest<>(this, mainPane);
-            listEditor.handle(removeRequest);
-        });
+        item.setOnAction(event -> requestHandler.handleRemove(this, mainPane));
         return item;
     }
 
@@ -150,8 +147,7 @@ public class CharacterItemController implements Initializable, ListItemControlle
         MenuItem item = new MenuItem();
         item.textProperty().bind(Bindings.format("Add"));
         item.setOnAction(event -> {
-            Request<GameCharacter> addRequest = new AddRequest<>(gameCharacter, mainPane);
-            listEditor.handle(addRequest);
+            requestHandler.handleAdd(gameCharacter, mainPane);
         });
         return item;
     }
@@ -203,9 +199,8 @@ public class CharacterItemController implements Initializable, ListItemControlle
     }
     private void setValueListeners() {
         characterIDField.textProperty().addListener((observableValue, oldValue, newValue) -> {
-            ItemPresentRequest<GameCharacter> request = new ItemPresentRequest<>(newValue);
-            listEditor.handle(request);
-            if (request.getIsPresent())
+            boolean isPresent = requestHandler.handleContains(newValue);
+            if (isPresent)
                 characterIDField.setStyle("-fx-control-inner-background: #FFE3E3");
             else {
                 characterIDField.setStyle("-fx-control-inner-background: #FFFFFF");

@@ -4,7 +4,6 @@ import com.example.hoi4modder.controller.character_extra.GameCharacterCreator;
 import com.example.hoi4modder.controller.character_extra.NoSelectionModel;
 import com.example.hoi4modder.controller.multithreading.*;
 import com.example.hoi4modder.controller.requests.CharacterEditorRequestHandler;
-import com.example.hoi4modder.controller.requests.Request;
 import com.example.hoi4modder.controller.requests.RequestHandler;
 import com.example.hoi4modder.game.GameCharacter;
 import com.example.hoi4modder.game.GameCharacterList;
@@ -89,6 +88,7 @@ public class CharacterListEditor extends ActivePaneController implements Initial
     public Country getCountry() {
         return country;
     }
+
 
     /**
      * Adds empty character in the end of the list
@@ -294,15 +294,6 @@ public class CharacterListEditor extends ActivePaneController implements Initial
     public void associateItem(ListItemController<GameCharacter> item) {
         item.setParent(this);
     }
-
-    /**
-     * Handles requests
-     * @param request - action to be executed on editor
-     */
-    @Override
-    public void handle(Request<GameCharacter> request) {
-        handler.onRequest(request);
-    }
     /**
      *
      * @return main controller of the application
@@ -335,5 +326,11 @@ public class CharacterListEditor extends ActivePaneController implements Initial
     public List<CharacterItemController> getControllers() {
         return controllerList;
     }
+
+    @Override
+    public RequestHandler<GameCharacter> getHandler() {
+        return handler;
+    }
+
 }
 

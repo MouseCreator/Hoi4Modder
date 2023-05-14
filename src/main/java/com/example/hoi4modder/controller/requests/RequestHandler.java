@@ -1,5 +1,8 @@
 package com.example.hoi4modder.controller.requests;
 
+import com.example.hoi4modder.controller.ListItemController;
+import javafx.scene.layout.Pane;
+
 /**
  * Receives request and responds, using controller methods
  * @param <T> - generic value, inherited from controller
@@ -7,31 +10,20 @@ package com.example.hoi4modder.controller.requests;
 public interface RequestHandler<T> {
     /**
      * Checks if item is present
-     * @param request - request, containing which item to check
      */
-    void handle(ItemPresentRequest<T> request);
+    boolean handleContains(String elementId);
 
     /**
      * Creates a duplicate of some element
-     * @param request - request, containing which item to duplicate
      */
-    void handle(DuplicateRequest<T> request);
-
-    /**
-     * Receive request
-     * @param request - request to be executed
-     */
-    void onRequest(Request<T> request);
-
+    void handleDuplicate(T model, Pane pane);
     /**
      * Removes element from the list
-     * @param removeRequest - request, containing which item to remove
      */
-    void handle(RemoveRequest<T> removeRequest);
+    void handleRemove(ListItemController<T> controller, Pane pane);
 
     /**
      * Adds element to the list
-     * @param tAddRequest - request, containing position to add element
      */
-    void handle(AddRequest<T> tAddRequest);
+    void handleAdd(T after, Pane pane);
 }

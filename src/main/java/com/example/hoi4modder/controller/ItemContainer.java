@@ -1,6 +1,6 @@
 package com.example.hoi4modder.controller;
 
-import com.example.hoi4modder.controller.requests.Request;
+import com.example.hoi4modder.controller.requests.RequestHandler;
 import com.example.hoi4modder.game.common.Country;
 
 /**
@@ -15,12 +15,6 @@ public interface ItemContainer<T> {
     void associateItem(ListItemController<T> item);
 
     /**
-     * Receive and handle request
-     * @param request - action to be executed on list
-     */
-    void handle(Request<T> request);
-
-    /**
      *
      * @return main controller
      */
@@ -31,4 +25,10 @@ public interface ItemContainer<T> {
      * @return current edited country
      */
     Country getCountry();
+
+    /**
+     *
+     * @return request handler that items can use
+     */
+    RequestHandler<T> getHandler();
 }
