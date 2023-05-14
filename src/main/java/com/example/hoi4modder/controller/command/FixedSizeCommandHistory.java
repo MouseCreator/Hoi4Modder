@@ -7,13 +7,11 @@ import java.util.Stack;
 public class FixedSizeCommandHistory implements History{
     private final Deque<Command> undoStack;
     private final Stack<Command> redoStack;
-
     private final int size;
-
     public FixedSizeCommandHistory(int size) {
         this.undoStack = new ArrayDeque<>(size);
         redoStack = new Stack<>();
-        this.size =size;
+        this.size = size;
     }
     public void add(Command command) {
         if (undoStack.size() == size) {

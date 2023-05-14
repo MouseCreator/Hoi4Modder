@@ -30,18 +30,19 @@ public abstract class ActivePaneController {
             ActivePaneController controller = fxmlLoader.getController();
             controller.content = pane;
             controller.parentController = parentController;
+            controller.loadContent();
             return controller;
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
+    protected abstract void loadContent();
 
     protected abstract String getFilename();
 
     public Pane getContent() {
         return content;
     }
-    public abstract void load();
 
     public abstract Country getCountry();
 }

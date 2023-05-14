@@ -48,7 +48,7 @@ public class MainController implements Initializable {
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
-        loadPage(new CharacterListEditor().load(this));
+
     }
     private void loadScene() {
         mainContent.getChildren().clear();
@@ -134,5 +134,9 @@ public class MainController implements Initializable {
             throw new IllegalStateException("Scene is not assigned to main pane, but is tried to be accessed");
         }
         return scene;
+    }
+
+    public void start() {
+        loadPage(new CharacterListEditor().load(this));
     }
 }

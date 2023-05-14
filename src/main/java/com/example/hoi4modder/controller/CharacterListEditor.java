@@ -2,6 +2,9 @@ package com.example.hoi4modder.controller;
 
 import com.example.hoi4modder.controller.character_extra.GameCharacterCreator;
 import com.example.hoi4modder.controller.character_extra.NoSelectionModel;
+import com.example.hoi4modder.controller.command.CreateCharacterCommand;
+import com.example.hoi4modder.controller.command.FixedSizeCommandHistory;
+import com.example.hoi4modder.controller.command.History;
 import com.example.hoi4modder.controller.multithreading.*;
 import com.example.hoi4modder.controller.requests.CharacterEditorRequestHandler;
 import com.example.hoi4modder.controller.requests.RequestHandler;
@@ -15,6 +18,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
 
 import java.net.URL;
@@ -32,19 +36,17 @@ public class CharacterListEditor extends ActivePaneController implements Initial
     private boolean isLoaded = false;
     private final List<CharacterItemController> controllerList = new ArrayList<>();
     private FileWatcher fileWatcher;
+    private final History history = new FixedSizeCommandHistory(100);
     private final DynamicCountry country = new DynamicCountry();
     private final GameCharacterList characters = GameCharacterList.getArrayList();
     @FXML
     private TextField tagTextField;
     @FXML
     private TextField searchTextField;
-
-
     @FXML
     private Button newCharacterBtn;
     @FXML
     private Button saveBtn;
-
     /**
      *
      * @return source of editor GUI
@@ -74,14 +76,6 @@ public class CharacterListEditor extends ActivePaneController implements Initial
     }
 
     /**
-     * Loads controller, initializes elements that are not related to GUI
-     */
-    @Override
-    public void load() {
-        setIsLoaded(false);
-    }
-
-    /**
      *
      * @return country being edited
      */
@@ -103,7 +97,9 @@ public class CharacterListEditor extends ActivePaneController implements Initial
         creator.addItem(newCharacter);
         int last = charactersListView.getItems().size()-1;
         charactersListView.scrollTo(last);
+        history.add(new CreateCharacterCommand(this));
     }
+
 
     private boolean isNotLoaded() {
         if (!isLoaded) {
@@ -285,6 +281,20 @@ public class CharacterListEditor extends ActivePaneController implements Initial
     public void onClose() {
         if (fileWatcher != null)
             fileWatcher.stop();
+    }
+
+    @Override
+    protected void loadContent() {
+        parentController.getScene().setOnKeyPressed(event ->
+        {
+            if (event.isControlDown() && event.getCode() == KeyCode.Z) {
+                if (event.isAltDown()) {
+                    history.redo();
+                } else {
+                    history.undo();
+                }
+            }
+        });
     }
 
     /**

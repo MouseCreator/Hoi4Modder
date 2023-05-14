@@ -5,7 +5,6 @@ import java.util.Stack;
 public class CommandHistory {
     private final Stack<Command> undoStack = new Stack<>();
     private final Stack<Command> redoStack = new Stack<>();
-
     public void add(Command command) {
         undoStack.push(command);
         redoStack.clear();

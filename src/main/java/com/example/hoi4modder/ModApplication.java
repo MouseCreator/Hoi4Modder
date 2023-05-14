@@ -1,5 +1,6 @@
 package com.example.hoi4modder;
 
+import com.example.hoi4modder.controller.MainController;
 import com.example.hoi4modder.service.Destinations;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -31,6 +32,8 @@ public class ModApplication extends Application {
         stage.getIcons().add(icon);
 
         stage.show();
+        MainController controller = fxmlLoader.getController();
+        controller.start();
     }
     public static void main(String[] args) {
         launch();

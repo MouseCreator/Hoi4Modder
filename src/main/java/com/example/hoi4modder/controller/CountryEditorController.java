@@ -50,6 +50,12 @@ public class CountryEditorController extends ActivePaneController implements Ini
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
     }
+
+    @Override
+    protected void loadContent() {
+
+    }
+
     @Override
     protected String getFilename() {
         return "country-editor.fxml";
@@ -57,11 +63,6 @@ public class CountryEditorController extends ActivePaneController implements Ini
 
     public void save() {
         
-    }
-
-    @Override
-    public void load() {
-
     }
 
     @Override
