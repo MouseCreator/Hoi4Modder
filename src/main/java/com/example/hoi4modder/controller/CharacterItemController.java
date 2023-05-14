@@ -146,9 +146,7 @@ public class CharacterItemController implements Initializable, ListItemControlle
     private MenuItem createAddMethod() {
         MenuItem item = new MenuItem();
         item.textProperty().bind(Bindings.format("Add"));
-        item.setOnAction(event -> {
-            requestHandler.handleAdd(gameCharacter, mainPane);
-        });
+        item.setOnAction(event -> requestHandler.handleAdd(gameCharacter, mainPane));
         return item;
     }
 
