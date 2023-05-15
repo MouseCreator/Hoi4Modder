@@ -66,8 +66,7 @@ public class CharacterListEditor extends ActivePaneController implements Initial
     public void save() {
         if (isNotLoaded())
             return;
-
-        if (saveThread == null || saveThread.isSaving())
+        if (saveThread != null && saveThread.isSaving())
             return;
         saveThread = new SaveThread(this);
         saveThread.setName("Save-Thread");
