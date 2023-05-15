@@ -66,6 +66,7 @@ public class NavyLeaderController extends RoleController<NavyLeader> implements 
         fromRole(NavyLeader.createNavyLeader());
         initializeContextMenu(traitsList);
         setValueListeners();
+        initializeTextField(traitsList, traitField);
     }
     public void fromCharacter(GameCharacter character) {
         if (character.getRoles().containsKey(getRoleType())) {
@@ -85,7 +86,7 @@ public class NavyLeaderController extends RoleController<NavyLeader> implements 
 
     @FXML
     void addTrait() {
-        super.addTrait(traitsList, traitField.getText());
+        super.addTrait(traitsList, traitField);
     }
 
     @FXML

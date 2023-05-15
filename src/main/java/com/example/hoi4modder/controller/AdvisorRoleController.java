@@ -36,6 +36,7 @@ public class AdvisorRoleController extends RoleController<Advisor> implements In
         initializeContextMenu(traitList);
         fromRole(advisor);
         setValueListeners();
+        initializeTextField(traitList, traitField);
     }
     private void setValueListeners() {
         costField.textProperty().addListener((observableValue, old, newValue) -> advisor.setCost(Integer.parseInt(newValue)));
@@ -52,7 +53,7 @@ public class AdvisorRoleController extends RoleController<Advisor> implements In
 
     @FXML
     void addTrait() {
-        super.addTrait(traitList, traitField.getText());
+        super.addTrait(traitList, traitField);
     }
 
     @FXML

@@ -83,7 +83,7 @@ public class UnitLeaderController extends RoleController<UnitLeader> implements 
 
     @FXML
     void addTrait() {
-        super.addTrait(traitsList, traitField.getText());
+        super.addTrait(traitsList, traitField);
     }
 
     @FXML
@@ -98,6 +98,7 @@ public class UnitLeaderController extends RoleController<UnitLeader> implements 
         fromRole(UnitLeader.createCorpsCommander());
         initializeContextMenu(traitsList);
         setValueListeners();
+        initializeTextField(traitsList, traitField);
     }
 
     private void setValueListeners() {

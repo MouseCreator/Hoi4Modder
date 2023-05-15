@@ -46,7 +46,7 @@ public class CountryLeaderRoleController extends RoleController<CountryLeader> i
      */
     @FXML
     public void addTrait() {
-        super.addTrait(traitList, traitName.getText());
+        super.addTrait(traitList, traitName);
     }
 
     /**
@@ -103,6 +103,7 @@ public class CountryLeaderRoleController extends RoleController<CountryLeader> i
         initializeContextMenu(traitList);
         typeBox.getSelectionModel().select(0);
         setValueListeners();
+        initializeTextField(traitList, traitName);
     }
 
     private void setValueListeners() {

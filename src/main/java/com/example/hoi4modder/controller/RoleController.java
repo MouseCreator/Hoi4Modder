@@ -48,7 +48,6 @@ public abstract class RoleController<R extends Role> {
             }
         });
     }
-
     private static MenuItem addDeleteItem(ListView<String> listView, ListCell<String> cell) {
         MenuItem deleteItem = new MenuItem();
         deleteItem.textProperty().bind(Bindings.format("Delete"));
@@ -74,13 +73,25 @@ public abstract class RoleController<R extends Role> {
     /**
      * Adds trait to trait list
      * @param listView - trait list
-     * @param trait - trait name
+     * @param field - text field to get trait name
      */
-    protected void addTrait(ListView<String> listView, String trait) {
+    protected void addTrait(ListView<String> listView, TextField field) {
+        String trait = field.getText();
+        if (trait == null)
+            return;
         trait =  trait.replace('\t', ' ').trim();
         if (cannotBeAdded(listView, trait))
             return;
         listView.getItems().add(trait);
+        field.setText("");
+    }
+
+    protected void initializeTextField(ListView<String> listView, TextField traitField) {
+        traitField.setOnKeyPressed(keyEvent -> {
+            if (keyEvent.getCode() == KeyCode.ENTER) {
+                addTrait(listView, traitField);
+            }
+        });
     }
 
     private boolean cannotBeAdded(ListView<String> listView, String trait) {
