@@ -66,4 +66,12 @@ public class GameCharacterList implements Iterable<GameCharacter>, Visitable {
     public void addAfter(GameCharacter gameCharacter, GameCharacter after) {
         characterList.add(characterList.indexOf(after), gameCharacter);
     }
+
+    public GameCharacter get(int index) {
+        return characterList.get(index);
+    }
+
+    public void add(int index, GameCharacter newCharacter) {
+        characterList.add(index, newCharacter);
+    }
 }

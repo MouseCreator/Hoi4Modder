@@ -5,7 +5,6 @@ import com.example.hoi4modder.controller.character_extra.NoSelectionModel;
 import com.example.hoi4modder.controller.command.*;
 import com.example.hoi4modder.controller.multithreading.*;
 import com.example.hoi4modder.controller.requests.CharacterEditorRequestHandler;
-import com.example.hoi4modder.controller.requests.RequestHandler;
 import com.example.hoi4modder.game.GameCharacter;
 import com.example.hoi4modder.game.GameCharacterList;
 import com.example.hoi4modder.game.common.Country;
@@ -29,7 +28,7 @@ public class CharacterListEditor extends ActivePaneController implements Initial
 
     @FXML
     private ListView<Pane> charactersListView;
-    private final RequestHandler<GameCharacter> handler = new CharacterEditorRequestHandler(this);
+    private final CharacterEditorRequestHandler handler = new CharacterEditorRequestHandler(this);
     private boolean isLoaded = false;
     private final List<CharacterItemController> controllerList = new ArrayList<>();
     private FileWatcher fileWatcher;
@@ -358,9 +357,20 @@ public class CharacterListEditor extends ActivePaneController implements Initial
     }
 
     @Override
-    public RequestHandler<GameCharacter> getHandler() {
+    public CharacterEditorRequestHandler getHandler() {
         return handler;
     }
 
+    public void addCharacterAt(int index, int visual, GameCharacter character) {
+        if (isNotLoaded()) return;
+        GameCharacterCreator creator =
+                new GameCharacterCreator(this, charactersListView.getItems(), controllerList);
+        characters.add(index, character);
+        creator.addItemAt(visual, character);
+    }
+
+    public History getHistory() {
+        return history;
+    }
 }
 

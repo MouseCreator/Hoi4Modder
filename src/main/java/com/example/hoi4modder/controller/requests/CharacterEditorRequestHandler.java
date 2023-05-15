@@ -4,12 +4,14 @@ import com.example.hoi4modder.controller.CharacterItemController;
 import com.example.hoi4modder.controller.CharacterListEditor;
 import com.example.hoi4modder.controller.ListItemController;
 import com.example.hoi4modder.controller.character_extra.GameCharacterCreator;
+import com.example.hoi4modder.controller.command.DeleteCharacterCommand;
 import com.example.hoi4modder.game.GameCharacter;
 import com.example.hoi4modder.game.GameCharacterList;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Pane;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 /**
  * Request handler for game character editor list
@@ -48,22 +50,28 @@ public class CharacterEditorRequestHandler implements RequestHandler<GameCharact
                 characterListEditor.getControllers());
         creator.addItemAt(listView.getItems().indexOf(pane), gameCharacter);
     }
-
-    /**
-     *
-     * @param controller - controller for GUI representation of character
-     * @param pane - character GUI representation
-     */
     @Override
-    public void handleRemove(ListItemController<GameCharacter> controller, Pane pane) {
+    public void handleRemove(GameCharacter gameCharacter) {
+        DeleteCharacterCommand deleteCharacterCommand = new DeleteCharacterCommand(gameCharacter, characterListEditor);
+        characterListEditor.getHistory().add(deleteCharacterCommand);
+        deleteCharacterCommand.execute();
+    }
+
+    public int onRemoveCommand(GameCharacter gameCharacter) {
         GameCharacterList characters = characterListEditor.getCharacters();
         ListView<Pane> listView = characterListEditor.getItems();
         List<CharacterItemController> controllerList = characterListEditor.getControllers();
-        characters.remove(controller.toModel());
-        controllerList.remove((CharacterItemController) controller);
-        listView.getItems().remove(pane);
+        characters.remove(gameCharacter);
+        for (int i = 0; i < controllerList.size(); i++) {
+            ListItemController<GameCharacter> controller = controllerList.get(i);
+            if (controller.toModel().equals(gameCharacter)) {
+                controllerList.remove(i);
+                listView.getItems().remove(i);
+                return i;
+            }
+        }
+        throw new NoSuchElementException("Cannot find Game Character to remove");
     }
-
     /**
      *
      * @param after - character, after which new character has to be added

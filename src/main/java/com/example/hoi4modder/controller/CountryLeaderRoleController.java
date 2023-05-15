@@ -104,7 +104,6 @@ public class CountryLeaderRoleController extends RoleController<CountryLeader> i
         typeBox.getSelectionModel().select(0);
         setValueListeners();
         initializeTextField(traitList, traitName);
-        ideologyBox.show();
         ideologyBox.setOnKeyPressed(keyEvent -> {
             switch (keyEvent.getCode()) {
                 case N, DIGIT1, NUMPAD1 -> { ideologyBox.getSelectionModel().select(0);

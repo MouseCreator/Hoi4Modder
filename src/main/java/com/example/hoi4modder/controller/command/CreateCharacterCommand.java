@@ -1,31 +1,28 @@
 package com.example.hoi4modder.controller.command;
 
-import com.example.hoi4modder.controller.CharacterItemController;
+
 import com.example.hoi4modder.controller.CharacterListEditor;
-import javafx.scene.layout.Pane;
+import com.example.hoi4modder.game.GameCharacter;
 
 public class CreateCharacterCommand implements Command{
 
     private final CharacterListEditor editor;
-    private Pane pane;
-    private CharacterItemController itemController;
+    private GameCharacter addedItem;
     public CreateCharacterCommand(CharacterListEditor editor) {
         this.editor = editor;
         int lastIndex = editor.getControllers().size()-1;
-        this.pane = editor.getItems().getItems().get(lastIndex);
-        this.itemController = editor.getControllers().get(lastIndex);
+        addedItem = editor.getCharacters().get(lastIndex);
     }
     @Override
     public void execute() {
         editor.pushCharacter();
         int lastIndex = editor.getControllers().size()-1;
-        this.pane = editor.getItems().getItems().get(lastIndex);
-        this.itemController = editor.getControllers().get(lastIndex);
+        this.addedItem = editor.getCharacters().get(lastIndex);
     }
 
     @Override
     public void undo() {
-        editor.getHandler().handleRemove(itemController, pane);
+        editor.getHandler().handleRemove(addedItem);
     }
 
     @Override

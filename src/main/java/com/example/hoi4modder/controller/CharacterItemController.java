@@ -139,7 +139,8 @@ public class CharacterItemController implements Initializable, ListItemControlle
     private MenuItem createRemoveMethod() {
         MenuItem item = new MenuItem();
         item.textProperty().bind(Bindings.format("Remove"));
-        item.setOnAction(event -> requestHandler.handleRemove(this, mainPane));
+        item.setOnAction(event -> requestHandler.handleRemove(toModel()));
+
         return item;
     }
 

@@ -1,6 +1,5 @@
 package com.example.hoi4modder.controller.requests;
 
-import com.example.hoi4modder.controller.ListItemController;
 import javafx.scene.layout.Pane;
 
 /**
@@ -20,7 +19,7 @@ public interface RequestHandler<T> {
     /**
      * Removes element from the list
      */
-    void handleRemove(ListItemController<T> controller, Pane pane);
+    void handleRemove(T model);
 
     /**
      * Adds element to the list
