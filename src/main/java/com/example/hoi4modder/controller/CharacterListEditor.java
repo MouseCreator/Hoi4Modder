@@ -230,6 +230,17 @@ public class CharacterListEditor extends ActivePaneController implements Initial
     public void initialize(URL url, ResourceBundle resourceBundle) {
         charactersListView.setFocusTraversable(false);
         charactersListView.setSelectionModel(new NoSelectionModel<>());
+
+        tagTextField.setOnKeyPressed(keyEvent -> {
+            if (keyEvent.getCode() == KeyCode.ENTER) {
+                loadCharactersByTag();
+            }
+        });
+        searchTextField.setOnKeyPressed(keyEvent -> {
+            if (keyEvent.getCode() == KeyCode.ENTER) {
+                findCharacterByName();
+            }
+        });
     }
 
     /**
