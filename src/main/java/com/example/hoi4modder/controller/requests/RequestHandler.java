@@ -1,7 +1,5 @@
 package com.example.hoi4modder.controller.requests;
 
-import javafx.scene.layout.Pane;
-
 /**
  * Receives request and responds, using controller methods
  * @param <T> - generic value, inherited from controller
@@ -24,5 +22,5 @@ public interface RequestHandler<T> {
     /**
      * Adds element to the list
      */
-    void handleAdd(T after, Pane pane);
+    void handleAdd(T after);
 }

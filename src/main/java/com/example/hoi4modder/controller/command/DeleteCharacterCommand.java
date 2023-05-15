@@ -17,7 +17,7 @@ public class DeleteCharacterCommand implements Command{
     @Override
     public void execute() {
         index = editor.getCharacters().indexOf(gameCharacter);
-        visualIndex = editor.getHandler().onRemoveCommand(gameCharacter);
+        visualIndex = editor.getHandler().removeCommand(gameCharacter);
     }
 
     @Override

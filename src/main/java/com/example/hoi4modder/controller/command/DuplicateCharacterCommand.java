@@ -20,7 +20,7 @@ public class DuplicateCharacterCommand implements Command{
 
     @Override
     public void undo() {
-        editor.getHandler().onRemoveCommand(character);
+        editor.getHandler().removeCommand(character);
     }
 
     @Override

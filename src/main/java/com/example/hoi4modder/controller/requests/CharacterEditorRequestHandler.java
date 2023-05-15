@@ -4,6 +4,7 @@ import com.example.hoi4modder.controller.CharacterItemController;
 import com.example.hoi4modder.controller.CharacterListEditor;
 import com.example.hoi4modder.controller.ListItemController;
 import com.example.hoi4modder.controller.character_extra.GameCharacterCreator;
+import com.example.hoi4modder.controller.command.AddAfterCommand;
 import com.example.hoi4modder.controller.command.DeleteCharacterCommand;
 import com.example.hoi4modder.controller.command.DuplicateCharacterCommand;
 import com.example.hoi4modder.game.GameCharacter;
@@ -16,7 +17,7 @@ import java.util.List;
 /**
  * Request handler for game character editor list
  */
-public class CharacterEditorRequestHandler implements RequestHandler<GameCharacter>{
+public class CharacterEditorRequestHandler implements CommandRequestHandler<GameCharacter>{
     private final CharacterListEditor characterListEditor;
     /**
      *
@@ -79,7 +80,10 @@ public class CharacterEditorRequestHandler implements RequestHandler<GameCharact
         }
         return -1;
     }
-    public int onRemoveCommand(GameCharacter gameCharacter) {
+
+
+
+    public int removeCommand(GameCharacter gameCharacter) {
         GameCharacterList characters = characterListEditor.getCharacters();
         ListView<Pane> listView = characterListEditor.getItems();
         List<CharacterItemController> controllerList = characterListEditor.getControllers();
@@ -97,17 +101,26 @@ public class CharacterEditorRequestHandler implements RequestHandler<GameCharact
     /**
      *
      * @param after - character, after which new character has to be added
-     * @param pane - GUI representation of the character
      */
     @Override
-    public void handleAdd(GameCharacter after, Pane pane) {
+    public void handleAdd(GameCharacter after) {
+        AddAfterCommand addAfterCommand = new AddAfterCommand(characterListEditor, after);
+        characterListEditor.getHistory().add(addAfterCommand);
+        addAfterCommand.execute();
+    }
+
+    @Override
+    public GameCharacter addCommand(GameCharacter after) {
         GameCharacterList characters = characterListEditor.getCharacters();
         ListView<Pane> listView = characterListEditor.getItems();
         GameCharacter gameCharacter = GameCharacter.getSampleCharacter();
         characters.addAfter(gameCharacter, after);
-        GameCharacterCreator creator = new GameCharacterCreator(characterListEditor, listView.getItems(),
-                characterListEditor.getControllers());
-        creator.addItemAt(listView.getItems().indexOf(pane), gameCharacter);
+        if (findVisualIndexOf(after) != -1) {
+            GameCharacterCreator creator = new GameCharacterCreator(characterListEditor, listView.getItems(),
+                    characterListEditor.getControllers());
+            creator.addItemAt(findVisualIndexOf(after), gameCharacter);
+        }
+        return gameCharacter;
     }
 
     @Override
