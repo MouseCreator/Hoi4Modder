@@ -107,13 +107,13 @@ public class CountryLeaderRoleController extends RoleController<CountryLeader> i
         ideologyBox.show();
         ideologyBox.setOnKeyPressed(keyEvent -> {
             switch (keyEvent.getCode()) {
-                case N, DIGIT1 -> { ideologyBox.getSelectionModel().select(0);
+                case N, DIGIT1, NUMPAD1 -> { ideologyBox.getSelectionModel().select(0);
                     ideologyBox.hide(); }
-                case D, DIGIT2 -> { ideologyBox.getSelectionModel().select(1);
+                case D, DIGIT2, NUMPAD2 -> { ideologyBox.getSelectionModel().select(1);
                     ideologyBox.hide(); }
-                case F, DIGIT3 -> { ideologyBox.getSelectionModel().select(2);
+                case F, DIGIT3, NUMPAD3 -> { ideologyBox.getSelectionModel().select(2);
                     ideologyBox.hide(); }
-                case C, DIGIT4 -> { ideologyBox.getSelectionModel().select(3);
+                case C, DIGIT4, NUMPAD4 -> { ideologyBox.getSelectionModel().select(3);
                     ideologyBox.hide(); }
                 default -> {
                 }
