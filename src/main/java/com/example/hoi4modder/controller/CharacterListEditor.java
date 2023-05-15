@@ -298,6 +298,9 @@ public class CharacterListEditor extends ActivePaneController implements Initial
                     history.undo();
                 }
             }
+            if (event.isControlDown() && event.getCode() == KeyCode.N) {
+                addEmptyCharacter();
+            }
         });
     }
 
