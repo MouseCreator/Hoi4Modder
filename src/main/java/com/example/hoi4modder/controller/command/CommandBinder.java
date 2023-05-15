@@ -1,5 +1,6 @@
 package com.example.hoi4modder.controller.command;
 
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 
 /**
@@ -18,12 +19,26 @@ public class CommandBinder {
         BindMemory<String> binding = new BindMemory<>();
         textField.focusedProperty().addListener((observable, oldValue, isNowSelected) -> {
             if (isNowSelected) {
-                binding.setLastString(textField.getText());
+                binding.setMemory(textField.getText());
             } else {
                 String newText = textField.getText();
-                if (binding.getLastString().equals(newText))
+                if (binding.getMemory().equals(newText))
                     return;
-                history.add(new TextFieldEditCommand(textField, binding.getLastString(), newText));
+                history.add(new TextFieldEditCommand(textField, binding.getMemory(), newText));
+            }
+        });
+    }
+
+    public void bindComboBox(History history, ComboBox<String> comboBox) {
+        BindMemory<Integer> binding = new BindMemory<>();
+        comboBox.focusedProperty().addListener((observable, oldValue, isNowSelected) -> {
+            if (isNowSelected) {
+                binding.setMemory(comboBox.getSelectionModel().getSelectedIndex());
+            } else {
+                Integer newSelection = comboBox.getSelectionModel().getSelectedIndex();
+                if (binding.getMemory().equals(newSelection))
+                    return;
+                history.add(new ComboboxEditCommand(comboBox, binding.getMemory(), newSelection));
             }
         });
     }

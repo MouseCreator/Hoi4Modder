@@ -14,11 +14,11 @@ class BindMemory<T> {
         this.memoryValue = initial;
     }
 
-    public void setLastString(T newValue) {
+    public void setMemory(T newValue) {
         this.memoryValue = newValue;
     }
 
-    public T getLastString() {
+    public T getMemory() {
         return memoryValue;
     }
 }
