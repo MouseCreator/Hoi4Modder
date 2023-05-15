@@ -17,7 +17,7 @@ public class CreateCharacterCommand implements Command{
     }
     @Override
     public void execute() {
-        editor.addEmptyCharacter();
+        editor.pushCharacter();
         int lastIndex = editor.getControllers().size()-1;
         this.pane = editor.getItems().getItems().get(lastIndex);
         this.itemController = editor.getControllers().get(lastIndex);
@@ -26,5 +26,10 @@ public class CreateCharacterCommand implements Command{
     @Override
     public void undo() {
         editor.getHandler().handleRemove(itemController, pane);
+    }
+
+    @Override
+    public String toString() {
+        return "Create character command";
     }
 }

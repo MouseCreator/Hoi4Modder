@@ -14,7 +14,7 @@ public class CommandHistory {
             return;
         }
         Command lastCommand = undoStack.pop();
-        lastCommand.execute();
+        lastCommand.undo();
         redoStack.push(lastCommand);
     }
     public void redo() {

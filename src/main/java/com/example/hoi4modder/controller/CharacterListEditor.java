@@ -90,6 +90,11 @@ public class CharacterListEditor extends ActivePaneController implements Initial
      */
     @FXML
     public void addEmptyCharacter() {
+        pushCharacter();
+        history.add(new CreateCharacterCommand(this));
+    }
+
+    public void pushCharacter() {
         if (isNotLoaded()) return;
         GameCharacter newCharacter = GameCharacter.getSampleCharacter();
         GameCharacterCreator creator = new GameCharacterCreator(this, charactersListView.getItems(), controllerList);
@@ -97,7 +102,6 @@ public class CharacterListEditor extends ActivePaneController implements Initial
         creator.addItem(newCharacter);
         int last = charactersListView.getItems().size()-1;
         charactersListView.scrollTo(last);
-        history.add(new CreateCharacterCommand(this));
     }
 
 
