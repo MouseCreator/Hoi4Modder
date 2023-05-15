@@ -29,4 +29,12 @@ public class CommandHistory {
         lastCommand.execute();
         undoStack.push(lastCommand);
     }
+
+    @Override
+    public String toString() {
+        return "FixedSizeCommandHistory{" +
+                "undoStack=" + undoStack +
+                ", redoStack=" + redoStack +
+                '}';
+    }
 }

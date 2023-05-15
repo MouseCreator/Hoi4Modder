@@ -28,13 +28,6 @@ public class FixedSizeCommandHistory implements History{
         lastCommand.undo();
         redoStack.push(lastCommand);
     }
-
-    private void print() {
-        System.out.println("UNDO");
-        System.out.println(undoStack);
-        System.out.println("REDO");
-        System.out.println(redoStack);
-    }
     public void redo() {
         if (redoStack.isEmpty()) {
             return;
@@ -42,5 +35,14 @@ public class FixedSizeCommandHistory implements History{
         Command lastCommand = redoStack.pop();
         lastCommand.execute();
         undoStack.push(lastCommand);
+    }
+
+    @Override
+    public String toString() {
+        return "FixedSizeCommandHistory{" +
+                "undoStack=" + undoStack +
+                ", redoStack=" + redoStack +
+                ", size=" + size +
+                '}';
     }
 }

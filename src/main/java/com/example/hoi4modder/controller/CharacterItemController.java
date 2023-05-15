@@ -133,7 +133,7 @@ public class CharacterItemController implements Initializable, ListItemControlle
     private MenuItem createDuplicateMethod() {
         MenuItem item = new MenuItem();
         item.textProperty().bind(Bindings.format("Duplicate"));
-        item.setOnAction(event -> requestHandler.handleDuplicate(gameCharacter, mainPane));
+        item.setOnAction(event -> requestHandler.handleDuplicate(gameCharacter));
         return item;
     }
     private MenuItem createRemoveMethod() {

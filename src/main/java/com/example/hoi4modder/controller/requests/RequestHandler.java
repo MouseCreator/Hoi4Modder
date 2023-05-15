@@ -15,7 +15,7 @@ public interface RequestHandler<T> {
     /**
      * Creates a duplicate of some element
      */
-    void handleDuplicate(T model, Pane pane);
+    void handleDuplicate(T model);
     /**
      * Removes element from the list
      */

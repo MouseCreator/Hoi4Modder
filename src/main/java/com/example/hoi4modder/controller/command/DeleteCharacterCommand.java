@@ -24,4 +24,9 @@ public class DeleteCharacterCommand implements Command{
     public void undo() {
         editor.addCharacterAt(index, visualIndex, gameCharacter);
     }
+
+    @Override
+    public String toString() {
+        return "Delete command";
+    }
 }

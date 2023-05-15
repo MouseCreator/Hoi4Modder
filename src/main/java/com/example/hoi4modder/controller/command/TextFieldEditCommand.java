@@ -19,4 +19,10 @@ public class TextFieldEditCommand implements Command {
     public void undo() {
         trackedTextField.setText(oldText);
     }
+
+    @Override
+    public String toString() {
+        return "Text field command: changed " + (oldText.isEmpty() ? "empty text field" : oldText) + " to " +
+                (newText.isEmpty() ? "empty text field" : newText);
+    }
 }
