@@ -22,7 +22,7 @@ public class DeleteCharacterCommand implements Command{
 
     @Override
     public void undo() {
-        editor.addCharacterAt(index, visualIndex, gameCharacter);
+        editor.addCharacterAt(index, Math.max(visualIndex, 0), gameCharacter);
     }
 
     @Override

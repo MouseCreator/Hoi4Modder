@@ -26,6 +26,12 @@ public class CharacterEditorRequestHandler implements CommandRequestHandler<Game
     public CharacterEditorRequestHandler(CharacterListEditor editor) {
         this.characterListEditor = editor;
     }
+
+    /**
+     *
+     * @param elementId - element identification
+     * @return true, if element with such identification exists
+     */
     @Override
     public boolean handleContains(String elementId) {
         GameCharacterList gameCharacters = characterListEditor.getCharacters();
@@ -49,6 +55,12 @@ public class CharacterEditorRequestHandler implements CommandRequestHandler<Game
         characterListEditor.getHistory().add(duplicateCharacterCommand);
         duplicateCharacterCommand.execute();
     }
+
+    /**
+     * Duplicates character
+     * @param model - character to duplicate
+     * @return copy of character
+     */
     public GameCharacter duplicateCommand(GameCharacter model) {
         GameCharacterList characters = characterListEditor.getCharacters();
         ListView<Pane> listView = characterListEditor.getItems();
@@ -61,15 +73,32 @@ public class CharacterEditorRequestHandler implements CommandRequestHandler<Game
         }
         return gameCharacter;
     }
+
+    /**
+     * Removes character from the list and adds it to command history
+     * @param gameCharacter - character to remove
+     */
     @Override
     public void handleRemove(GameCharacter gameCharacter) {
         DeleteCharacterCommand deleteCharacterCommand = new DeleteCharacterCommand(gameCharacter, characterListEditor);
         characterListEditor.getHistory().add(deleteCharacterCommand);
         deleteCharacterCommand.execute();
     }
+
+    /**
+     *
+     * @param character - target character
+     * @return index of element in model list
+     */
     private int findModelIndexOf(GameCharacter character) {
         return characterListEditor.getCharacters().indexOf(character);
     }
+
+    /**
+     *
+     * @param character - target element
+     * @return index of element in the listview
+     */
     private int findVisualIndexOf(GameCharacter character) {
         List<CharacterItemController> controllerList = characterListEditor.getControllers();
         for (int i = 0; i < controllerList.size(); i++) {
@@ -81,8 +110,12 @@ public class CharacterEditorRequestHandler implements CommandRequestHandler<Game
         return -1;
     }
 
-
-
+    /**
+     * Removes character from model list;
+     * Removes controller and pane, if they are displayed.
+     * @param gameCharacter - character to remove
+     * @return visual index of the removed character or -1 if element is not displayed
+     */
     public int removeCommand(GameCharacter gameCharacter) {
         GameCharacterList characters = characterListEditor.getCharacters();
         ListView<Pane> listView = characterListEditor.getItems();
@@ -109,6 +142,11 @@ public class CharacterEditorRequestHandler implements CommandRequestHandler<Game
         addAfterCommand.execute();
     }
 
+    /**
+     * Adds new empty character after selected
+     * @param after - support element, after which new item will be added
+     * @return created item
+     */
     @Override
     public GameCharacter addCommand(GameCharacter after) {
         GameCharacterList characters = characterListEditor.getCharacters();
@@ -123,6 +161,10 @@ public class CharacterEditorRequestHandler implements CommandRequestHandler<Game
         return gameCharacter;
     }
 
+    /**
+     *
+     * @return simple string representation of the duplicate command
+     */
     @Override
     public String toString() {
         return "Duplicate command";
