@@ -2,6 +2,10 @@ package com.example.hoi4modder.controller.command;
 
 import java.util.Stack;
 
+/**
+ * History implementation that uses stacks for undo/redo commands;
+ * Does not have a limit for number of commands
+ */
 public class CommandHistory {
     private final Stack<Command> undoStack = new Stack<>();
     private final Stack<Command> redoStack = new Stack<>();

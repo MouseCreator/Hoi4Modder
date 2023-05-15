@@ -15,7 +15,7 @@ public class CommandBinder {
         return commandBinder;
     }
     public void bindTextField(History history, TextField textField) {
-        TextFieldBind binding = new TextFieldBind();
+        BindMemory<String> binding = new BindMemory<>();
         textField.focusedProperty().addListener((observable, oldValue, isNowSelected) -> {
             if (isNowSelected) {
                 binding.setLastString(textField.getText());
