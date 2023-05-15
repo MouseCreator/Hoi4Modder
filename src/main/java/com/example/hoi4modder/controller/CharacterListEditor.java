@@ -2,10 +2,7 @@ package com.example.hoi4modder.controller;
 
 import com.example.hoi4modder.controller.character_extra.GameCharacterCreator;
 import com.example.hoi4modder.controller.character_extra.NoSelectionModel;
-import com.example.hoi4modder.controller.command.Command;
-import com.example.hoi4modder.controller.command.CreateCharacterCommand;
-import com.example.hoi4modder.controller.command.FixedSizeCommandHistory;
-import com.example.hoi4modder.controller.command.History;
+import com.example.hoi4modder.controller.command.*;
 import com.example.hoi4modder.controller.multithreading.*;
 import com.example.hoi4modder.controller.requests.CharacterEditorRequestHandler;
 import com.example.hoi4modder.controller.requests.RequestHandler;
@@ -49,7 +46,7 @@ public class CharacterListEditor extends ActivePaneController implements Initial
     private Button saveBtn;
     /**
      *
-     * @return source of editor GUI
+     * @return source of editor GUI fxml file
      */
     @Override
     protected String getFilename() {
@@ -242,6 +239,8 @@ public class CharacterListEditor extends ActivePaneController implements Initial
                 findCharacterByName();
             }
         });
+        CommandBinder.get().bindTextField(history, tagTextField);
+        CommandBinder.get().bindTextField(history, searchTextField);
     }
     /**
      * Finds characters, using their name property
