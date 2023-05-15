@@ -65,6 +65,8 @@
             <artifactId>javafx-swing</artifactId>
             <version>20</version>
         </dependency>
+
+
     </dependencies>
 
     <build>

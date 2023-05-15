@@ -2,6 +2,7 @@ package com.example.hoi4modder.controller;
 
 import com.example.hoi4modder.controller.character_extra.GameCharacterCreator;
 import com.example.hoi4modder.controller.character_extra.NoSelectionModel;
+import com.example.hoi4modder.controller.command.Command;
 import com.example.hoi4modder.controller.command.CreateCharacterCommand;
 import com.example.hoi4modder.controller.command.FixedSizeCommandHistory;
 import com.example.hoi4modder.controller.command.History;
@@ -31,7 +32,6 @@ public class CharacterListEditor extends ActivePaneController implements Initial
 
     @FXML
     private ListView<Pane> charactersListView;
-    //private AutocompleteTextField searchAutocomplete;
     private final RequestHandler<GameCharacter> handler = new CharacterEditorRequestHandler(this);
     private boolean isLoaded = false;
     private final List<CharacterItemController> controllerList = new ArrayList<>();
@@ -56,12 +56,10 @@ public class CharacterListEditor extends ActivePaneController implements Initial
         return "character-list.fxml";
     }
 
+    private SaveThread saveThread;
     /**
      * Saves characters to game file
      */
-
-    private SaveThread saveThread;
-
     @FXML
     public void save() {
         if (isNotLoaded())
@@ -85,14 +83,17 @@ public class CharacterListEditor extends ActivePaneController implements Initial
 
 
     /**
-     * Adds empty character in the end of the list
+     * Executes command for adding empty character
      */
     @FXML
     public void addEmptyCharacter() {
-        pushCharacter();
-        history.add(new CreateCharacterCommand(this));
+        Command command = new CreateCharacterCommand(this);
+        command.execute();
+        history.add(command);
     }
-
+    /**
+     * Adds empty character in the end of the list
+     */
     public void pushCharacter() {
         if (isNotLoaded()) return;
         GameCharacter newCharacter = GameCharacter.getSampleCharacter();
@@ -242,7 +243,6 @@ public class CharacterListEditor extends ActivePaneController implements Initial
             }
         });
     }
-
     /**
      * Finds characters, using their name property
      */
