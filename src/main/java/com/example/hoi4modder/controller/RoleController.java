@@ -7,7 +7,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.*;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
-
+import javafx.scene.input.KeyCode;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -41,6 +41,11 @@ public abstract class RoleController<R extends Role> {
                 }
             });
             return cell;
+        });
+        listView.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.DELETE) {
+                removeTrait(listView);
+            }
         });
     }
 
