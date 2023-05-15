@@ -11,6 +11,9 @@ public class CreateCharacterCommand implements Command{
     private CharacterItemController itemController;
     public CreateCharacterCommand(CharacterListEditor editor) {
         this.editor = editor;
+        int lastIndex = editor.getControllers().size()-1;
+        this.pane = editor.getItems().getItems().get(lastIndex);
+        this.itemController = editor.getControllers().get(lastIndex);
     }
     @Override
     public void execute() {
