@@ -311,6 +311,9 @@ public class CharacterListEditor extends ActivePaneController implements Initial
             if (event.isControlDown() && event.getCode() == KeyCode.N) {
                 addEmptyCharacter();
             }
+            if (event.isControlDown() && event.getCode() == KeyCode.S) {
+                save();
+            }
         });
     }
 
