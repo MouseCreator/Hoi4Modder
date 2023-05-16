@@ -117,6 +117,7 @@ public class CharacterItemController implements Initializable, ControlConnectabl
     public void initialize(URL url, ResourceBundle resourceBundle) {
         rolesBox.setFillHeight(true);
         controlConnector = ControlIndexConnector.getArrayConnector();
+        mainPane.setOnMouseClicked(event -> listEditor.getMainController().getScene().getRoot().requestFocus());
 
     }
     private void createContextMenu() {
@@ -187,11 +188,18 @@ public class CharacterItemController implements Initializable, ControlConnectabl
         finishInitialization();
     }
     private ControlConnector controlConnector;
+
+    @Override
+    public ControlCallable callSelf() {
+        return selfCall;
+    }
+    private ControlCallable selfCall;
     private void finishInitialization() {
         setValueListeners();
         createContextMenu();
         controlConnector.initialize(this);
-        listEditor.getHandler().handleConnect(characterIDField, gameCharacter);
+        selfCall = listEditor.getHandler().handleConnect(gameCharacter);
+        listEditor.getHandler().handleConnect(characterIDField, selfCall);
     }
 
     /**
@@ -422,4 +430,5 @@ public class CharacterItemController implements Initializable, ControlConnectabl
     public ControlConnector getConnector() {
         return controlConnector;
     }
+
 }

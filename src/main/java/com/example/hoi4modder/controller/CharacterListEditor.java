@@ -33,7 +33,7 @@ public class CharacterListEditor extends ActivePaneController implements Initial
     private boolean isLoaded = false;
     private final List<CharacterItemController> controllerList = new ArrayList<>();
     private FileWatcher fileWatcher;
-    private final History history = new LoggableHistory(new FixedSizeCommandHistory(100));
+    private final History history = new FixedSizeCommandHistory(100);
     private final DynamicCountry country = new DynamicCountry();
     private final GameCharacterList characters = GameCharacterList.getArrayList();
     @FXML
@@ -307,12 +307,13 @@ public class CharacterListEditor extends ActivePaneController implements Initial
                     history.undo();
                 }
             }
-            if (event.isControlDown() && event.getCode() == KeyCode.N) {
+            else if (event.isControlDown() && event.getCode() == KeyCode.N) {
                 addEmptyCharacter();
             }
-            if (event.isControlDown() && event.getCode() == KeyCode.S) {
+            else if (event.isControlDown() && event.getCode() == KeyCode.S) {
                 save();
             }
+            event.consume();
         });
     }
 

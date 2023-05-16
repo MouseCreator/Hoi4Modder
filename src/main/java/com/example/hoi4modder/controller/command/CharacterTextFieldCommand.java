@@ -19,7 +19,7 @@ public class CharacterTextFieldCommand extends CharacterItemCommand{
     @Override
     public void execute() {
         ControlConnectable connectable = getItemController();
-        TextField field = (TextField) connectable.getConnector().getFieldByIndex(textFieldId);
+        TextField field = (TextField) connectable.callSelf().call();
         field.setText(newValue);
     }
 
