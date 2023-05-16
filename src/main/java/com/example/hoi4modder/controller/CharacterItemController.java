@@ -3,6 +3,8 @@ package com.example.hoi4modder.controller;
 import com.example.hoi4modder.controller.character_extra.CharacterInfo;
 import com.example.hoi4modder.controller.character_extra.RoleSwitcher;
 import com.example.hoi4modder.controller.character_extra.RoleSwitcherBuilder;
+import com.example.hoi4modder.controller.command.ControlConnector;
+import com.example.hoi4modder.controller.command.ControlIndexConnector;
 import com.example.hoi4modder.controller.requests.*;
 import com.example.hoi4modder.game.FieldValueMap;
 import com.example.hoi4modder.game.GameCharacter;
@@ -182,10 +184,12 @@ public class CharacterItemController implements Initializable, ListItemControlle
         loadRoles(character);
         finishInitialization();
     }
-
+    private ControlConnector controlConnector;
     private void finishInitialization() {
         setValueListeners();
         createContextMenu();
+        controlConnector = ControlIndexConnector.getArrayConnector();
+        controlConnector.initialize(this);
     }
 
     /**

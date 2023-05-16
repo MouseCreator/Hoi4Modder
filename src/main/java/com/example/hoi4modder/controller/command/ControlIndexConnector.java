@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Class that sets indexes for all @FXML fields in controller
  */
-public class ControlIndexConnector {
+public class ControlIndexConnector implements ControlConnector {
     private final List<Object> controls;
     private boolean isInitialized;
 
