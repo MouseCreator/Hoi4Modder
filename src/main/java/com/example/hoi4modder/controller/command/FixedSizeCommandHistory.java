@@ -13,6 +13,12 @@ public class FixedSizeCommandHistory implements History{
         redoStack = new Stack<>();
         this.size = size;
     }
+
+    /**
+     * Adds new action to undo list;
+     * If the list is full, first added action will be removed
+     * @param command - command to add
+     */
     public void add(Command command) {
         if (undoStack.size() == size) {
             undoStack.pollLast();
@@ -20,6 +26,10 @@ public class FixedSizeCommandHistory implements History{
         undoStack.addFirst(command);
         redoStack.clear();
     }
+
+    /**
+     * Cancels last action
+     */
     public void undo() {
         if (undoStack.isEmpty()) {
             return;
@@ -28,6 +38,10 @@ public class FixedSizeCommandHistory implements History{
         lastCommand.undo();
         redoStack.push(lastCommand);
     }
+
+    /**
+     * Cancels last undo
+     */
     public void redo() {
         if (redoStack.isEmpty()) {
             return;

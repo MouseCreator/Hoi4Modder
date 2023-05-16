@@ -14,10 +14,18 @@ class BindMemory<T> {
         this.memoryValue = initial;
     }
 
+    /**
+     * Sets new value to memory
+     * @param newValue - value to be stored in memory
+     */
     public void setMemory(T newValue) {
         this.memoryValue = newValue;
     }
 
+    /**
+     *
+     * @return value, stored in memory
+     */
     public T getMemory() {
         return memoryValue;
     }

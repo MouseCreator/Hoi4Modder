@@ -1,5 +1,10 @@
 package com.example.hoi4modder.controller.command;
 
+/**
+ * History with console logs;
+ * Prints itself in console on the BEGINNING of any action
+ * Works as a Decorator
+ */
 public class LoggableHistory implements History{
     private final History history;
     public LoggableHistory(History decoratedHistory) {

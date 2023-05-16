@@ -5,7 +5,6 @@ import com.example.hoi4modder.controller.CharacterListEditor;
 import com.example.hoi4modder.game.GameCharacter;
 
 public class CreateCharacterCommand implements Command{
-
     private final CharacterListEditor editor;
     private GameCharacter addedItem;
     public CreateCharacterCommand(CharacterListEditor editor) {
@@ -13,6 +12,10 @@ public class CreateCharacterCommand implements Command{
         int lastIndex = editor.getControllers().size()-1;
         addedItem = editor.getCharacters().get(lastIndex);
     }
+
+    /**
+     * Adds new empty character in the end of the list
+     */
     @Override
     public void execute() {
         editor.pushCharacter();
@@ -20,9 +23,12 @@ public class CreateCharacterCommand implements Command{
         this.addedItem = editor.getCharacters().get(lastIndex);
     }
 
+    /**
+     * Removes character that was added
+     */
     @Override
     public void undo() {
-        editor.getHandler().handleRemove(addedItem);
+        editor.getHandler().removeCommand(addedItem);
     }
 
     @Override

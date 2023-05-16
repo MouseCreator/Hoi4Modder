@@ -2,6 +2,9 @@ package com.example.hoi4modder.controller.command;
 
 import javafx.scene.control.ComboBox;
 
+/**
+ * Command to change value in the combobox
+ */
 public class ComboboxEditCommand implements Command {
     private final ComboBox<String> comboBox;
     private final Integer oldSelected;
@@ -12,11 +15,17 @@ public class ComboboxEditCommand implements Command {
         this.newSelected = newSelection;
     }
 
+    /**
+     * Changes to new value
+     */
     @Override
     public void execute() {
         comboBox.getSelectionModel().select(newSelected);
     }
 
+    /**
+     * Changes to old value
+     */
     @Override
     public void undo() {
         comboBox.getSelectionModel().select(oldSelected);
