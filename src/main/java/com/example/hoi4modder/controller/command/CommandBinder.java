@@ -1,5 +1,6 @@
 package com.example.hoi4modder.controller.command;
 
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 
@@ -35,25 +36,6 @@ public class CommandBinder {
         });
     }
 
-    /**
-     * Connects combobox and history
-     * @param history - history of commands
-     * @param comboBox - combobox to keep track of
-     */
-    public void bindComboBox(History history, ComboBox<String> comboBox) {
-        BindMemory<Integer> binding = new BindMemory<>();
-        comboBox.focusedProperty().addListener((observable, oldValue, isNowSelected) -> {
-            if (isNowSelected) {
-                binding.setMemory(comboBox.getSelectionModel().getSelectedIndex());
-            } else {
-                Integer newSelection = comboBox.getSelectionModel().getSelectedIndex();
-                if (binding.getMemory().equals(newSelection))
-                    return;
-                history.add(new ComboboxEditCommand(comboBox, binding.getMemory(), newSelection));
-            }
-        });
-    }
-
     public void connectableCommand(History history, ControlConnectableCallable controlConnectableCallable,
                                    TextField textField) {
         BindMemory<String> binding = new BindMemory<>();
@@ -67,6 +49,32 @@ public class CommandBinder {
                 int index = controlConnectableCallable.call().getConnector().getIndexOf(textField);
                 history.add(new CharacterTextFieldCommand(controlConnectableCallable, index ,binding.getMemory(), newText));
             }
+        });
+    }
+
+    public void connectableCommand(History history, ControlConnectableCallable controlConnectableCallable,
+                                   CheckBox checkBox) {
+        checkBox.selectedProperty().addListener((observable, oldValue, isNowSelected) -> {
+            if (oldValue != isNowSelected) {
+                if (history.isRedo() || history.isUndo()) {
+                    return;
+                }
+                int index = controlConnectableCallable.call().getConnector().getIndexOf(checkBox);
+                history.add(new CharacterCheckBoxCommand(controlConnectableCallable, index, oldValue, isNowSelected));
+            }
+        });
+    }
+    public void connectableCommand(History history, ControlConnectableCallable controlConnectableCallable,
+                                   ComboBox<String> comboBox) {
+        comboBox.valueProperty().addListener((observable, oldValue, newValue) -> {
+            if (oldValue.equals(newValue))
+                return;
+            if (history.isRedo() || history.isUndo()) {
+                return;
+            }
+            int index = controlConnectableCallable.call().getConnector().getIndexOf(comboBox);
+
+            history.add(new CharacterComboBoxCommand(controlConnectableCallable, index ,oldValue, newValue));
         });
     }
 }

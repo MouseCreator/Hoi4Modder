@@ -30,4 +30,14 @@ public class LoggableHistory implements History{
         print();
         history.add(command);
     }
+
+    @Override
+    public boolean isRedo() {
+        return history.isRedo();
+    }
+
+    @Override
+    public boolean isUndo() {
+        return history.isUndo();
+    }
 }

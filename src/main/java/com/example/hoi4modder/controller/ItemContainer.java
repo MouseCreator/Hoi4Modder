@@ -1,5 +1,6 @@
 package com.example.hoi4modder.controller;
 
+import com.example.hoi4modder.controller.command.History;
 import com.example.hoi4modder.controller.requests.RequestHandler;
 import com.example.hoi4modder.game.common.Country;
 
@@ -31,4 +32,10 @@ public interface ItemContainer<T> {
      * @return request handler that items can use
      */
     RequestHandler<T> getHandler();
+
+    /**
+     *
+     * @return request handler that items can use
+     */
+    History getHistory();
 }

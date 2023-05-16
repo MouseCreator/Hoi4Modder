@@ -4,6 +4,7 @@ import com.example.hoi4modder.controller.character_extra.CharacterInfo;
 import com.example.hoi4modder.controller.character_extra.RoleSwitcher;
 import com.example.hoi4modder.controller.character_extra.RoleSwitcherBuilder;
 import com.example.hoi4modder.controller.command.*;
+import com.example.hoi4modder.controller.command.roles.AutomaticInitializer;
 import com.example.hoi4modder.controller.requests.*;
 import com.example.hoi4modder.game.FieldValueMap;
 import com.example.hoi4modder.game.GameCharacter;
@@ -199,8 +200,8 @@ public class CharacterItemController implements Initializable, ControlConnectabl
         createContextMenu();
         controlConnector.initialize(this);
         selfCall = listEditor.getHandler().handleConnect(gameCharacter);
-        listEditor.getHandler().handleConnect(characterIDField, selfCall);
-        listEditor.getHandler().handleConnect(characterNameField, selfCall);
+        AutomaticInitializer<GameCharacter> automaticInitializer = new AutomaticInitializer<>();
+        automaticInitializer.initialize(listEditor.getHandler(), this);
     }
 
     /**

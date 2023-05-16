@@ -27,6 +27,19 @@ public class FixedSizeCommandHistory implements History{
         redoStack.clear();
     }
 
+    @Override
+    public boolean isRedo() {
+        return redoInProcess;
+    }
+
+    @Override
+    public boolean isUndo() {
+        return undoInProcess;
+    }
+
+    private boolean undoInProcess = false;
+    private boolean redoInProcess = false;
+
     /**
      * Cancels last action
      */
@@ -35,7 +48,9 @@ public class FixedSizeCommandHistory implements History{
             return;
         }
         Command lastCommand = undoStack.pop();
+        undoInProcess = true;
         lastCommand.undo();
+        undoInProcess = false;
         redoStack.push(lastCommand);
     }
 
@@ -47,7 +62,9 @@ public class FixedSizeCommandHistory implements History{
             return;
         }
         Command lastCommand = redoStack.pop();
+        redoInProcess = true;
         lastCommand.execute();
+        redoInProcess = false;
         undoStack.push(lastCommand);
     }
 

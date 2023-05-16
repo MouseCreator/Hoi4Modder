@@ -16,4 +16,7 @@ public interface History {
      * @param command - command to add
      */
     void add(Command command);
+
+    boolean isRedo();
+    boolean isUndo();
 }

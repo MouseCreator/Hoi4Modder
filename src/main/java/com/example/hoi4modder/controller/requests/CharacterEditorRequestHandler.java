@@ -7,6 +7,8 @@ import com.example.hoi4modder.controller.character_extra.GameCharacterCreator;
 import com.example.hoi4modder.controller.command.*;
 import com.example.hoi4modder.game.GameCharacter;
 import com.example.hoi4modder.game.GameCharacterList;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
@@ -147,6 +149,16 @@ public class CharacterEditorRequestHandler implements CommandRequestHandler<Game
     }
 
     @Override
+    public void handleConnect(CheckBox checkBox, ControlConnectableCallable controlConnectableCallable) {
+        CommandBinder.get().connectableCommand(characterListEditor.getHistory(), controlConnectableCallable, checkBox);
+    }
+
+    @Override
+    public void handleConnect(ComboBox<String> comboBox, ControlConnectableCallable controlConnectableCallable) {
+        CommandBinder.get().connectableCommand(characterListEditor.getHistory(), controlConnectableCallable, comboBox);
+    }
+
+    @Override
     public int handleVisualIndex(GameCharacter model) {
         return findVisualIndexOf(model);
     }
@@ -161,6 +173,7 @@ public class CharacterEditorRequestHandler implements CommandRequestHandler<Game
             }
         };
     }
+
 
     /**
      * Adds new empty character after selected

@@ -1,7 +1,5 @@
 package com.example.hoi4modder.controller;
 
-import com.example.hoi4modder.game.common.Country;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.image.ImageView;
@@ -14,7 +12,7 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 @Deprecated
-public class CountryEditorController extends ActivePaneController implements Initializable {
+public class CountryEditorController implements Initializable {
 
     @FXML
     private ImageView flagImage;
@@ -51,27 +49,4 @@ public class CountryEditorController extends ActivePaneController implements Ini
 
     }
 
-    @Override
-    protected void loadContent() {
-
-    }
-
-    @Override
-    protected String getFilename() {
-        return "country-editor.fxml";
-    }
-
-    public void save() {
-        
-    }
-
-    @Override
-    public Country getCountry() {
-        return null;
-    }
-
-    @FXML
-    void loadImage(ActionEvent event) {
-
-    }
 }

@@ -6,7 +6,7 @@ import java.util.Stack;
  * History implementation that uses stacks for undo/redo commands;
  * Does not have a limit for number of commands
  */
-public class CommandHistory {
+public class CommandHistory implements History{
     private final Stack<Command> undoStack = new Stack<>();
     private final Stack<Command> redoStack = new Stack<>();
 
@@ -19,6 +19,17 @@ public class CommandHistory {
         undoStack.push(command);
         redoStack.clear();
     }
+    private boolean redoInProcess = false;
+    private boolean undoInProcess = false;
+    @Override
+    public boolean isRedo() {
+        return redoInProcess;
+    }
+
+    @Override
+    public boolean isUndo() {
+        return undoInProcess;
+    }
 
     /**
      * Pops last command from undo stack
@@ -28,7 +39,9 @@ public class CommandHistory {
             return;
         }
         Command lastCommand = undoStack.pop();
+        undoInProcess = true;
         lastCommand.undo();
+        undoInProcess = false;
         redoStack.push(lastCommand);
     }
 
@@ -40,7 +53,9 @@ public class CommandHistory {
             return;
         }
         Command lastCommand = redoStack.pop();
+        redoInProcess = true;
         lastCommand.execute();
+        redoInProcess = false;
         undoStack.push(lastCommand);
     }
 
