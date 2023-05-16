@@ -18,13 +18,13 @@ public class CharacterTextFieldCommand extends CharacterItemCommand{
 
     @Override
     public void execute() {
-        TextField field = (TextField) controlCallable.call().callSelf().call().getConnector().getFieldByIndex(textFieldId);
+        TextField field = (TextField) controlCallable.call().getConnector().getFieldByIndex(textFieldId);
         field.setText(newValue);
     }
 
     @Override
     public void undo() {
-        TextField field = (TextField) controlCallable.call().callSelf().call().getConnector().getFieldByIndex(textFieldId);
+        TextField field = (TextField) controlCallable.call().getConnector().getFieldByIndex(textFieldId);
         field.setText(oldValue);
     }
 
