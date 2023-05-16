@@ -1,5 +1,6 @@
 package com.example.hoi4modder.controller.requests;
 
+import com.example.hoi4modder.controller.command.ControlConnectable;
 import com.example.hoi4modder.controller.command.ControlConnectableCallable;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
@@ -29,10 +30,11 @@ public interface RequestHandler<T> {
      */
     void handleAdd(T after);
 
-    void handleConnect(TextField field, ControlConnectableCallable controlConnectableCallable);
-
     int handleVisualIndex(T model);
+
     ControlConnectableCallable handleConnect(T gameCharacter);
+    void handleConnect(TextField field, ControlConnectableCallable controlConnectableCallable);
     void handleConnect(CheckBox checkBox, ControlConnectableCallable controlConnectableCallable);
     void handleConnect(ComboBox<String> checkBox, ControlConnectableCallable controlConnectableCallable);
+    void handleInitialization(ControlConnectable controller);
 }

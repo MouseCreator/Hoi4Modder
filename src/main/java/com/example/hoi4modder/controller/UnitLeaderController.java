@@ -59,19 +59,6 @@ public class UnitLeaderController extends RoleController<UnitLeader> implements 
         traitsList.getItems().addAll(unitLeader.getTraits());
     }
 
-    @Deprecated
-    public UnitLeader toRoleOld() {
-        UnitLeader leader = new UnitLeader();
-        leader.setSkill(Integer.parseInt(skillField.getText()));
-        leader.setAttackSkill(Integer.parseInt(attackField.getText()));
-        leader.setDefenceSkill(Integer.parseInt(defenseField.getText()));
-        leader.setLogisticsSkill(Integer.parseInt(logisticsField.getText()));
-        leader.setPlanningSkill(Integer.parseInt(planningField.getText()));
-        leader.setTraits(getTraits(traitsList));
-        leader.setFieldMarshal(fieldMarshalBox.isSelected());
-        return leader;
-    }
-
     public UnitLeader toRole() {
        return unitLeader;
     }

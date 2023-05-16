@@ -5,6 +5,7 @@ import com.example.hoi4modder.controller.CharacterListEditor;
 import com.example.hoi4modder.controller.ListItemController;
 import com.example.hoi4modder.controller.character_extra.GameCharacterCreator;
 import com.example.hoi4modder.controller.command.*;
+import com.example.hoi4modder.controller.command.roles.AutomaticInitializer;
 import com.example.hoi4modder.game.GameCharacter;
 import com.example.hoi4modder.game.GameCharacterList;
 import javafx.scene.control.CheckBox;
@@ -20,6 +21,8 @@ import java.util.List;
  */
 public class CharacterEditorRequestHandler implements CommandRequestHandler<GameCharacter>{
     private final CharacterListEditor characterListEditor;
+
+    private final AutomaticInitializer<GameCharacter> initializer = new AutomaticInitializer<>();
     /**
      *
      * @param editor - editor, that uses handler
@@ -201,5 +204,9 @@ public class CharacterEditorRequestHandler implements CommandRequestHandler<Game
     @Override
     public String toString() {
         return "Duplicate command";
+    }
+    @Override
+    public void handleInitialization(ControlConnectable controller) {
+        initializer.initialize(this, controller);
     }
 }
