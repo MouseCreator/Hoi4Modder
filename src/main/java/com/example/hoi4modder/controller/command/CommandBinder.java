@@ -53,4 +53,20 @@ public class CommandBinder {
             }
         });
     }
+
+    public void connectableCommand(History history, ControlCallable controlConnectableCallable,
+                                   TextField textField) {
+        BindMemory<String> binding = new BindMemory<>();
+        textField.focusedProperty().addListener((observable, oldValue, isNowSelected) -> {
+            if (isNowSelected) {
+                binding.setMemory(textField.getText());
+            } else {
+                String newText = textField.getText();
+                if (binding.getMemory().equals(newText))
+                    return;
+                int index = controlConnectableCallable.call().getConnector().getIndexOf(textField);
+                history.add(new CharacterTextFieldCommand(controlConnectableCallable, index ,binding.getMemory(), newText));
+            }
+        });
+    }
 }

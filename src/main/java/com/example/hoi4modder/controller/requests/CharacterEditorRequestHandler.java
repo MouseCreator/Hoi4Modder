@@ -4,12 +4,11 @@ import com.example.hoi4modder.controller.CharacterItemController;
 import com.example.hoi4modder.controller.CharacterListEditor;
 import com.example.hoi4modder.controller.ListItemController;
 import com.example.hoi4modder.controller.character_extra.GameCharacterCreator;
-import com.example.hoi4modder.controller.command.AddAfterCommand;
-import com.example.hoi4modder.controller.command.DeleteCharacterCommand;
-import com.example.hoi4modder.controller.command.DuplicateCharacterCommand;
+import com.example.hoi4modder.controller.command.*;
 import com.example.hoi4modder.game.GameCharacter;
 import com.example.hoi4modder.game.GameCharacterList;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 
 import java.util.List;
@@ -140,6 +139,18 @@ public class CharacterEditorRequestHandler implements CommandRequestHandler<Game
         AddAfterCommand addAfterCommand = new AddAfterCommand(characterListEditor, after);
         characterListEditor.getHistory().add(addAfterCommand);
         addAfterCommand.execute();
+    }
+
+    @Override
+    public void handleConnect(TextField field, GameCharacter gameCharacter) {
+        ControlCallable controlCallable = new ControlCallable() {
+            @Override
+            public ControlConnectable call() {
+                final int visualIndex = findVisualIndexOf(gameCharacter);
+                return characterListEditor.getControllers().get(visualIndex);
+            }
+        };
+        CommandBinder.get().connectableCommand(characterListEditor.getHistory(), controlCallable ,field);
     }
 
     /**

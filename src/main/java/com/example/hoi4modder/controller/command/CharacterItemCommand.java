@@ -1,16 +1,21 @@
 package com.example.hoi4modder.controller.command;
 
-import com.example.hoi4modder.controller.CharacterItemController;
-import com.example.hoi4modder.controller.CharacterListEditor;
+
+import java.util.concurrent.Callable;
 
 public abstract class CharacterItemCommand implements Command{
-    private final int visualIndex;
-    protected final CharacterListEditor editor;
-    public CharacterItemCommand(CharacterListEditor editor, int visualIndex) {
-        this.editor =  editor;
-        this.visualIndex = visualIndex;
+
+    private final Callable<ControlConnectable> pathToConnectedItem;
+
+    public CharacterItemCommand(Callable<ControlConnectable> pathToConnectedItem) {
+        this.pathToConnectedItem = pathToConnectedItem;
     }
-    protected CharacterItemController getItemController() {
-        return editor.getControllers().get(visualIndex);
+    protected ControlConnectable getItemController() {
+        try {
+            return pathToConnectedItem.call();
+        } catch (Exception e) {
+             e.printStackTrace();
+             throw new RuntimeException("Cannot access control connectable with callable method");
+        }
     }
 }

@@ -3,8 +3,7 @@ package com.example.hoi4modder.controller;
 import com.example.hoi4modder.controller.character_extra.CharacterInfo;
 import com.example.hoi4modder.controller.character_extra.RoleSwitcher;
 import com.example.hoi4modder.controller.character_extra.RoleSwitcherBuilder;
-import com.example.hoi4modder.controller.command.ControlConnector;
-import com.example.hoi4modder.controller.command.ControlIndexConnector;
+import com.example.hoi4modder.controller.command.*;
 import com.example.hoi4modder.controller.requests.*;
 import com.example.hoi4modder.game.FieldValueMap;
 import com.example.hoi4modder.game.GameCharacter;
@@ -37,7 +36,7 @@ import java.util.ResourceBundle;
 /**
  * Controller for single character
  */
-public class CharacterItemController implements Initializable, ListItemController<GameCharacter> {
+public class CharacterItemController implements Initializable, ControlConnectable, ListItemController<GameCharacter> {
     @FXML
     private CheckBox advisorBox;
 
@@ -113,9 +112,12 @@ public class CharacterItemController implements Initializable, ListItemControlle
         this.requestHandler = editor.getHandler();
         countryTag = listEditor.getCountry().getTag();
     }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         rolesBox.setFillHeight(true);
+        controlConnector = ControlIndexConnector.getArrayConnector();
+
     }
     private void createContextMenu() {
         ContextMenu contextMenu = new ContextMenu();
@@ -188,8 +190,8 @@ public class CharacterItemController implements Initializable, ListItemControlle
     private void finishInitialization() {
         setValueListeners();
         createContextMenu();
-        controlConnector = ControlIndexConnector.getArrayConnector();
         controlConnector.initialize(this);
+        listEditor.getHandler().handleConnect(characterIDField, gameCharacter);
     }
 
     /**
@@ -414,5 +416,10 @@ public class CharacterItemController implements Initializable, ListItemControlle
         resetSmallImage();
         gameCharacter.getPortraits().remove("small");
         setAutoButton();
+    }
+
+    @Override
+    public ControlConnector getConnector() {
+        return controlConnector;
     }
 }

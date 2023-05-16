@@ -1,5 +1,7 @@
 package com.example.hoi4modder.controller.requests;
 
+import javafx.scene.control.TextField;
+
 /**
  * Receives request and responds, using controller methods
  * @param <T> - generic value, inherited from controller
@@ -23,4 +25,6 @@ public interface RequestHandler<T> {
      * Adds element to the list
      */
     void handleAdd(T after);
+
+    void handleConnect(TextField field, T model);
 }
