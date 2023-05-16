@@ -190,16 +190,17 @@ public class CharacterItemController implements Initializable, ControlConnectabl
     private ControlConnector controlConnector;
 
     @Override
-    public ControlCallable callSelf() {
+    public ControlConnectableCallable callSelf() {
         return selfCall;
     }
-    private ControlCallable selfCall;
+    private ControlConnectableCallable selfCall;
     private void finishInitialization() {
         setValueListeners();
         createContextMenu();
         controlConnector.initialize(this);
         selfCall = listEditor.getHandler().handleConnect(gameCharacter);
         listEditor.getHandler().handleConnect(characterIDField, selfCall);
+        listEditor.getHandler().handleConnect(characterNameField, selfCall);
     }
 
     /**

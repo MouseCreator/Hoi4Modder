@@ -1,6 +1,6 @@
 package com.example.hoi4modder.controller.requests;
 
-import com.example.hoi4modder.controller.command.ControlCallable;
+import com.example.hoi4modder.controller.command.ControlConnectableCallable;
 import javafx.scene.control.TextField;
 
 /**
@@ -27,9 +27,9 @@ public interface RequestHandler<T> {
      */
     void handleAdd(T after);
 
-    void handleConnect(TextField field, ControlCallable controlCallable);
+    void handleConnect(TextField field, ControlConnectableCallable controlConnectableCallable);
 
     int handleVisualIndex(T model);
 
-    ControlCallable handleConnect(T gameCharacter);
+    ControlConnectableCallable handleConnect(T gameCharacter);
 }

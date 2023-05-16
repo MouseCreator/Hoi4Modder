@@ -8,7 +8,7 @@ public class CharacterTextFieldCommand extends CharacterItemCommand{
     private final String oldValue;
     private final String newValue;
     private final int textFieldId;
-    public CharacterTextFieldCommand(ControlCallable controlConnectableCallable, int control,
+    public CharacterTextFieldCommand(ControlConnectableCallable controlConnectableCallable, int control,
                                      String oldValue, String newValue) {
         super(controlConnectableCallable);
         this.oldValue = oldValue;
@@ -18,13 +18,13 @@ public class CharacterTextFieldCommand extends CharacterItemCommand{
 
     @Override
     public void execute() {
-        TextField field = (TextField) controlCallable.call().getConnector().getFieldByIndex(textFieldId);
+        TextField field = (TextField) controlConnectableCallable.call().getConnector().getFieldByIndex(textFieldId);
         field.setText(newValue);
     }
 
     @Override
     public void undo() {
-        TextField field = (TextField) controlCallable.call().getConnector().getFieldByIndex(textFieldId);
+        TextField field = (TextField) controlConnectableCallable.call().getConnector().getFieldByIndex(textFieldId);
         field.setText(oldValue);
     }
 

@@ -142,8 +142,8 @@ public class CharacterEditorRequestHandler implements CommandRequestHandler<Game
     }
 
     @Override
-    public void handleConnect(TextField field, ControlCallable controlCallable) {
-        CommandBinder.get().connectableCommand(characterListEditor.getHistory(), controlCallable ,field);
+    public void handleConnect(TextField field, ControlConnectableCallable controlConnectableCallable) {
+        CommandBinder.get().connectableCommand(characterListEditor.getHistory(), controlConnectableCallable,field);
     }
 
     @Override
@@ -152,8 +152,8 @@ public class CharacterEditorRequestHandler implements CommandRequestHandler<Game
     }
 
     @Override
-    public ControlCallable handleConnect(GameCharacter gameCharacter) {
-        return new ControlCallable() {
+    public ControlConnectableCallable handleConnect(GameCharacter gameCharacter) {
+        return new ControlConnectableCallable() {
             @Override
             public ControlConnectable call() {
                 int index = handleVisualIndex(gameCharacter);

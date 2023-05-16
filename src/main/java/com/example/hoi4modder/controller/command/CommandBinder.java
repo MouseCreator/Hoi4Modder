@@ -54,7 +54,7 @@ public class CommandBinder {
         });
     }
 
-    public void connectableCommand(History history, ControlCallable controlConnectableCallable,
+    public void connectableCommand(History history, ControlConnectableCallable controlConnectableCallable,
                                    TextField textField) {
         BindMemory<String> binding = new BindMemory<>();
         textField.focusedProperty().addListener((observable, oldValue, isNowSelected) -> {
