@@ -6,15 +6,17 @@ import com.example.hoi4modder.game.GameCharacter;
 public class AddAfterCommand implements Command{
 
     public AddAfterCommand(CharacterListEditor editor, GameCharacter after) {
-        this.addedCharacter = after;
+        this.after = after;
         this.editor = editor;
     }
 
     private final CharacterListEditor editor;
     private GameCharacter addedCharacter;
+
+    private final GameCharacter after;
     @Override
     public void execute() {
-        addedCharacter = editor.getHandler().addCommand(addedCharacter);
+        addedCharacter = editor.getHandler().addCommand(after);
     }
 
     @Override

@@ -10,7 +10,6 @@ public class DuplicateCharacterCommand implements Command{
         this.originID = character.getIdentification();
     }
     private GameCharacter character;
-
     private final String originID;
     private final CharacterListEditor editor;
     @Override
