@@ -20,6 +20,8 @@ public class AdvisorRoleController extends RoleController<Advisor> implements In
     @FXML
     private TextField costField;
 
+    public AdvisorRoleController() {}
+
     @FXML
     private ComboBox<String> slotComboBox;
 
@@ -48,8 +50,6 @@ public class AdvisorRoleController extends RoleController<Advisor> implements In
                 "Army chief", "Navy chief", "Air chief");
         slotComboBox.getSelectionModel().select("Political advisor");
     }
-
-
 
     @FXML
     void addTrait() {
