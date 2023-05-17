@@ -4,6 +4,7 @@ import com.example.hoi4modder.controller.command.roles.ActionRunner;
 import com.example.hoi4modder.game.GameCharacter;
 import com.example.hoi4modder.game.roles.Advisor;
 import com.example.hoi4modder.game.roles.CharacterRoles;
+import com.example.hoi4modder.utilities.IntegerValues;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
@@ -47,7 +48,7 @@ public class AdvisorRoleController extends RoleController<Advisor> implements In
         undoRedoManager = characterItemController.getListEditor().getHandler().handleInitialization(this);
     }
     private void setValueListeners() {
-        costField.textProperty().addListener((observableValue, old, newValue) -> advisor.setCost(Integer.parseInt(newValue)));
+        costField.textProperty().addListener((observableValue, old, newValue) -> advisor.setCost(IntegerValues.parseInt(newValue)));
         slotComboBox.valueProperty().addListener((observableValue, old, newValue) -> advisor.setSlot(stringToLowerCase(newValue)));
     }
     private void initComboBox() {

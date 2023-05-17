@@ -4,6 +4,7 @@ import com.example.hoi4modder.controller.command.roles.ActionRunner;
 import com.example.hoi4modder.game.GameCharacter;
 import com.example.hoi4modder.game.roles.CharacterRoles;
 import com.example.hoi4modder.game.roles.NavyLeader;
+import com.example.hoi4modder.utilities.IntegerValues;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
@@ -84,11 +85,11 @@ public class NavyLeaderController extends RoleController<NavyLeader> implements 
     }
 
     private void setValueListeners() {
-        attackField.textProperty().addListener((observableValue, old, newValue) -> navyLeader.setAttackSkill(Integer.parseInt(newValue)));
-        defenceField.textProperty().addListener((observableValue, old, newValue) -> navyLeader.setDefenceSkill(Integer.parseInt(newValue)));
-        skillField.textProperty().addListener((observableValue, old, newValue) -> navyLeader.setSkill(Integer.parseInt(newValue)));
-        maneuverField.textProperty().addListener((observableValue, old, newValue) -> navyLeader.setManeuveringSkill(Integer.parseInt(newValue)));
-        cordsField.textProperty().addListener((observableValue, old, newValue) -> navyLeader.setCoordinationSkill(Integer.parseInt(newValue)));
+        attackField.textProperty().addListener((observableValue, old, newValue) -> navyLeader.setAttackSkill(IntegerValues.parseInt(newValue)));
+        defenceField.textProperty().addListener((observableValue, old, newValue) -> navyLeader.setDefenceSkill(IntegerValues.parseInt(newValue)));
+        skillField.textProperty().addListener((observableValue, old, newValue) -> navyLeader.setSkill(IntegerValues.parseInt(newValue)));
+        maneuverField.textProperty().addListener((observableValue, old, newValue) -> navyLeader.setManeuveringSkill(IntegerValues.parseInt(newValue)));
+        cordsField.textProperty().addListener((observableValue, old, newValue) -> navyLeader.setCoordinationSkill(IntegerValues.parseInt(newValue)));
     }
 
     @FXML

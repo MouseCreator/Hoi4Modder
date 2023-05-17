@@ -4,6 +4,7 @@ import com.example.hoi4modder.controller.command.roles.ActionRunner;
 import com.example.hoi4modder.game.GameCharacter;
 import com.example.hoi4modder.game.roles.CharacterRoles;
 import com.example.hoi4modder.game.roles.UnitLeader;
+import com.example.hoi4modder.utilities.IntegerValues;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.CheckBox;
@@ -93,11 +94,11 @@ public class UnitLeaderController extends RoleController<UnitLeader> implements 
     }
 
     private void setValueListeners() {
-        attackField.textProperty().addListener((observableValue, old, newValue) -> unitLeader.setAttackSkill(Integer.parseInt(newValue)));
-        defenseField.textProperty().addListener((observableValue, old, newValue) -> unitLeader.setDefenceSkill(Integer.parseInt(newValue)));
-        skillField.textProperty().addListener((observableValue, old, newValue) -> unitLeader.setSkill(Integer.parseInt(newValue)));
-        planningField.textProperty().addListener((observableValue, old, newValue) -> unitLeader.setPlanningSkill(Integer.parseInt(newValue)));
-        logisticsField.textProperty().addListener((observableValue, old, newValue) -> unitLeader.setLogisticsSkill(Integer.parseInt(newValue)));
+        attackField.textProperty().addListener((observableValue, old, newValue) -> unitLeader.setAttackSkill(IntegerValues.parseInt(newValue)));
+        defenseField.textProperty().addListener((observableValue, old, newValue) -> unitLeader.setDefenceSkill(IntegerValues.parseInt(newValue)));
+        skillField.textProperty().addListener((observableValue, old, newValue) -> unitLeader.setSkill(IntegerValues.parseInt(newValue)));
+        planningField.textProperty().addListener((observableValue, old, newValue) -> unitLeader.setPlanningSkill(IntegerValues.parseInt(newValue)));
+        logisticsField.textProperty().addListener((observableValue, old, newValue) -> unitLeader.setLogisticsSkill(IntegerValues.parseInt(newValue)));
         fieldMarshalBox.selectedProperty().addListener((observableValue, aBoolean, t1) -> unitLeader.setFieldMarshal(t1));
     }
     public void fromCharacter(GameCharacter character) {
