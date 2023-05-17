@@ -106,6 +106,7 @@ public class CountryLeaderRoleController extends RoleController<CountryLeader> i
         setTypesFromIdeology("Neutrality");
         initializeContextMenu(traitList);
         typeBox.getSelectionModel().select(0);
+        fromRole(countryLeader);
         setValueListeners();
         initializeTextField(traitList, traitName);
         ideologyBox.setOnKeyPressed(keyEvent -> {
@@ -125,9 +126,8 @@ public class CountryLeaderRoleController extends RoleController<CountryLeader> i
     }
     @Override
     public void initConnector() {
-        String[] initSelf = new String[]{"typeBox", "ideologyBox"};
         initializeControlConnector(this);
-        undoRedoManager = characterItemController.getListEditor().getHandler().handleInitialization(this,initSelf);
+        undoRedoManager = characterItemController.getListEditor().getHandler().handleInitialization(this);
     }
 
     private void setValueListeners() {
@@ -151,8 +151,10 @@ public class CountryLeaderRoleController extends RoleController<CountryLeader> i
      */
     @FXML
     void updateIdeologyType() {
+        undoRedoManager.setEnabled(typeBox, false);
         setTypesFromIdeology(ideologyBox.getValue());
         typeBox.getSelectionModel().select(0);
+        undoRedoManager.setEnabled(typeBox, true);
     }
 
     /**

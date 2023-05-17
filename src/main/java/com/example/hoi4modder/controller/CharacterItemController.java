@@ -252,24 +252,28 @@ public class CharacterItemController implements Initializable, ControlConnectabl
         NavyLeader navyLeader = (NavyLeader) character.getRoles().get(CharacterRoles.NAVY_LEADER);
         navyLeaderBox.setSelected(true);
         navyLeaderRoleSwitcher.getController().fromRole(navyLeader);
+        navyLeaderRoleSwitcher.getController().setParent(this);
     }
 
     private void loadUnitLeader(GameCharacter character) {
         UnitLeader unitLeader = (UnitLeader) character.getRoles().get(CharacterRoles.UNIT_LEADER);
         unitLeaderBox.setSelected(true);
         unitLeaderRoleSwitcher.getController().fromRole(unitLeader);
+        unitLeaderRoleSwitcher.getController().setParent(this);
     }
 
     private void loadCountryLeader(GameCharacter character) {
         CountryLeader countryLeader = (CountryLeader) character.getRoles().get(CharacterRoles.COUNTRY_LEADER);
         countryLeaderBox.setSelected(true);
         countryLeaderRoleSwitcher.getController().fromRole(countryLeader);
+        countryLeaderRoleSwitcher.getController().setParent(this);
     }
 
     private void loadAdvisor(GameCharacter character) {
         Advisor advisor = (Advisor) character.getRoles().get(CharacterRoles.ADVISOR);
         advisorBox.setSelected(true);
         advisorRoleSwitcher.getController().fromRole(advisor);
+        advisorRoleSwitcher.getController().setParent(this);
     }
 
     private void loadPortraits(GameCharacter character) {
