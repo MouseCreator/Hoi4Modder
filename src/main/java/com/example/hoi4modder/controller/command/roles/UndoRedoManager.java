@@ -6,4 +6,6 @@ public interface UndoRedoManager {
     void setEnabled(Object object, boolean value);
     void addObjectStatus(Object object);
     void addObjectStatus(Object object, ControlStatus status);
+    void enableAll();
+    void disableAll();
 }

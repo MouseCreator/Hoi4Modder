@@ -164,7 +164,7 @@ public class CharacterListEditor extends ActivePaneController implements Initial
             alert.showAndWait();
         });
         thread.setName("CharacterLoadingThread");
-        history.startAuto();
+
         thread.start();
     }
 
@@ -173,7 +173,7 @@ public class CharacterListEditor extends ActivePaneController implements Initial
         controllerList.addAll(task.getControllers());
         loadItems(task.getPanes());
         //addSearchSuggestions();
-        history.endAuto();
+
         setIsLoaded(true);
         initFileWatcher();
         fileWatcher.setFile(filename);
@@ -189,7 +189,6 @@ public class CharacterListEditor extends ActivePaneController implements Initial
 
     private void onLoadingFailedAction() {
         resetAll();
-        history.endAuto();
         if (fileWatcher != null)
             fileWatcher.stop();
     }

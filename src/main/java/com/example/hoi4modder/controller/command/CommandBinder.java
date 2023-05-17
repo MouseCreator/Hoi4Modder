@@ -42,6 +42,8 @@ public class CommandBinder {
                                    TextField textField, UndoRedoManager undoRedoManager) {
         BindMemory<String> binding = new BindMemory<>();
         textField.focusedProperty().addListener((observable, oldValue, isNowSelected) -> {
+            if (!undoRedoManager.isEnabled(textField))
+                return;
             if (isNowSelected) {
                 binding.setMemory(textField.getText());
             } else {
@@ -57,6 +59,8 @@ public class CommandBinder {
     public void connectableCommand(History history, ControlConnectableCallable controlConnectableCallable,
                                    CheckBox checkBox, UndoRedoManager undoRedoManager) {
         checkBox.selectedProperty().addListener((observable, oldValue, isNowSelected) -> {
+            if (!undoRedoManager.isEnabled(checkBox))
+                return;
             if (oldValue != isNowSelected) {
                 if (history.isRedo() || history.isUndo()) {
                     return;
@@ -69,6 +73,8 @@ public class CommandBinder {
     public void connectableCommand(History history, ControlConnectableCallable controlConnectableCallable,
                                    ComboBox<String> comboBox, UndoRedoManager undoRedoManager) {
         comboBox.valueProperty().addListener((observable, oldValue, newValue) -> {
+            if (!undoRedoManager.isEnabled(comboBox))
+                return;
             if (newValue.equals(oldValue))
                 return;
             if (history.isRedo() || history.isUndo()) {
