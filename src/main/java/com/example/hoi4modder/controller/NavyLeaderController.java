@@ -70,7 +70,7 @@ public class NavyLeaderController extends RoleController<NavyLeader> implements 
     @Override
     public void initConnector() {
         initializeControlConnector(this);
-        characterItemController.getListEditor().getHandler().handleInitialization(this);
+        undoRedoManager = characterItemController.getListEditor().getHandler().handleInitialization(this);
     }
     public void fromCharacter(GameCharacter character) {
         if (character.getRoles().containsKey(getRoleType())) {

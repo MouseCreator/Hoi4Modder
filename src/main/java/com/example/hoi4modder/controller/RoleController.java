@@ -1,9 +1,7 @@
 package com.example.hoi4modder.controller;
 
-import com.example.hoi4modder.controller.command.ControlConnectable;
-import com.example.hoi4modder.controller.command.ControlConnectableCallable;
-import com.example.hoi4modder.controller.command.ControlConnector;
-import com.example.hoi4modder.controller.command.ControlIndexConnector;
+import com.example.hoi4modder.controller.command.*;
+import com.example.hoi4modder.controller.command.roles.UndoRedoManager;
 import com.example.hoi4modder.game.GameCharacter;
 import com.example.hoi4modder.game.roles.Role;
 import javafx.beans.binding.Bindings;
@@ -41,9 +39,11 @@ public abstract class RoleController<R extends Role> implements ControlConnectab
 
     protected abstract String roleString();
 
+    protected UndoRedoManager undoRedoManager;
     protected void initializeControlConnector(Initializable controller) {
         controlConnector = ControlIndexConnector.getArrayConnector();
         controlConnector.initialize(controller);
+
     }
 
     /**
@@ -76,6 +76,8 @@ public abstract class RoleController<R extends Role> implements ControlConnectab
             }
         });
     }
+
+
     private static MenuItem addDeleteItem(ListView<String> listView, ListCell<String> cell) {
         MenuItem deleteItem = new MenuItem();
         deleteItem.textProperty().bind(Bindings.format("Delete"));

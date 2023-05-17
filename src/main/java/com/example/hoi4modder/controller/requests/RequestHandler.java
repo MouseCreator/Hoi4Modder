@@ -37,6 +37,6 @@ public interface RequestHandler<T> {
     void handleConnect(TextField field, ControlConnectableCallable controlConnectableCallable, UndoRedoManager undoRedoManager);
     void handleConnect(CheckBox checkBox, ControlConnectableCallable controlConnectableCallable,UndoRedoManager undoRedoManage );
     void handleConnect(ComboBox<String> checkBox, ControlConnectableCallable controlConnectableCallable, UndoRedoManager undoRedoManage);
-    void handleInitialization(ControlConnectable controller);
-    void handleInitialization(ControlConnectable controller, String[] exceptions);
+    UndoRedoManager handleInitialization(ControlConnectable controller);
+    UndoRedoManager handleInitialization(ControlConnectable controller, String[] exceptions);
 }

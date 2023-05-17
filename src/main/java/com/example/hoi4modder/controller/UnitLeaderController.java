@@ -108,7 +108,7 @@ public class UnitLeaderController extends RoleController<UnitLeader> implements 
     @Override
     public void initConnector() {
         initializeControlConnector(this);
-        characterItemController.getListEditor().getHandler().handleInitialization(this);
+        undoRedoManager = characterItemController.getListEditor().getHandler().handleInitialization(this);
     }
     @Override
     protected String roleString() {

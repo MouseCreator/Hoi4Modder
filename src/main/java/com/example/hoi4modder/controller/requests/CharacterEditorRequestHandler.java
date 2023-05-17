@@ -207,12 +207,12 @@ public class CharacterEditorRequestHandler implements CommandRequestHandler<Game
         return "Duplicate command";
     }
     @Override
-    public void handleInitialization(ControlConnectable controller) {
-        initializer.initialize(this, controller);
+    public UndoRedoManager handleInitialization(ControlConnectable controller) {
+        return initializer.initialize(this, controller);
     }
 
     @Override
-    public void handleInitialization(ControlConnectable controller, String[] exceptions) {
-        initializer.initialize(this, controller, exceptions);
+    public UndoRedoManager handleInitialization(ControlConnectable controller, String[] exceptions) {
+        return initializer.initialize(this, controller, exceptions);
     }
 }

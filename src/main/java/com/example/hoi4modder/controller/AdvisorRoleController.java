@@ -43,7 +43,7 @@ public class AdvisorRoleController extends RoleController<Advisor> implements In
     @Override
     public void initConnector() {
         initializeControlConnector(this);
-        characterItemController.getListEditor().getHandler().handleInitialization(this);
+        undoRedoManager = characterItemController.getListEditor().getHandler().handleInitialization(this);
     }
     private void setValueListeners() {
         costField.textProperty().addListener((observableValue, old, newValue) -> advisor.setCost(Integer.parseInt(newValue)));
