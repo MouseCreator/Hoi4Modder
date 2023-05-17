@@ -3,7 +3,7 @@ package com.example.hoi4modder.controller.command;
 /**
  * Auxiliary class that stores last state of class, used in memory
  */
-class BindMemory<T> {
+public class BindMemory<T> {
     private T memoryValue;
 
     public BindMemory() {

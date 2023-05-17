@@ -83,7 +83,7 @@ public class CountryLeaderRoleController extends RoleController<CountryLeader> i
      */
     @Override
     public CountryLeader toRole() {
-       return countryLeader;
+        return countryLeader;
     }
 
     /**
