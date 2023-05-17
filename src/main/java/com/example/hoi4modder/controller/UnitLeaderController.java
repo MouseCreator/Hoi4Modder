@@ -1,5 +1,6 @@
 package com.example.hoi4modder.controller;
 
+import com.example.hoi4modder.controller.command.roles.ActionRunner;
 import com.example.hoi4modder.game.GameCharacter;
 import com.example.hoi4modder.game.roles.CharacterRoles;
 import com.example.hoi4modder.game.roles.UnitLeader;
@@ -48,15 +49,17 @@ public class UnitLeaderController extends RoleController<UnitLeader> implements 
     private UnitLeader unitLeader = UnitLeader.createCorpsCommander();
     @Override
     public void fromRole(UnitLeader unitLeader) {
-        this.unitLeader = unitLeader;
-        skillField.setText(String.valueOf(unitLeader.getSkill()));
-        attackField.setText(String.valueOf(unitLeader.getAttackSkill()));
-        defenseField.setText(String.valueOf(unitLeader.getDefenceSkill()));
-        logisticsField.setText(String.valueOf(unitLeader.getLogisticsSkill()));
-        planningField.setText(String.valueOf(unitLeader.getPlanningSkill()));
-        traitsList.getItems().clear();
-        fieldMarshalBox.setSelected(unitLeader.getFieldMarshal());
-        traitsList.getItems().addAll(unitLeader.getTraits());
+        ActionRunner.get().runAction(undoRedoManager,() -> {
+            this.unitLeader = unitLeader;
+            skillField.setText(String.valueOf(unitLeader.getSkill()));
+            attackField.setText(String.valueOf(unitLeader.getAttackSkill()));
+            defenseField.setText(String.valueOf(unitLeader.getDefenceSkill()));
+            logisticsField.setText(String.valueOf(unitLeader.getLogisticsSkill()));
+            planningField.setText(String.valueOf(unitLeader.getPlanningSkill()));
+            traitsList.getItems().clear();
+            fieldMarshalBox.setSelected(unitLeader.getFieldMarshal());
+            traitsList.getItems().addAll(unitLeader.getTraits());
+        });
     }
 
     public UnitLeader toRole() {

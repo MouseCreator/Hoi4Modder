@@ -1,5 +1,6 @@
 package com.example.hoi4modder.controller;
 
+import com.example.hoi4modder.controller.command.roles.ActionRunner;
 import com.example.hoi4modder.game.GameCharacter;
 import com.example.hoi4modder.game.roles.CharacterRoles;
 import com.example.hoi4modder.game.roles.NavyLeader;
@@ -43,13 +44,15 @@ public class NavyLeaderController extends RoleController<NavyLeader> implements 
 
     @Override
     public void fromRole(NavyLeader navyLeader) {
-        skillField.setText(String.valueOf(navyLeader.getSkill()));
-        attackField.setText(String.valueOf(navyLeader.getAttackSkill()));
-        defenceField.setText(String.valueOf(navyLeader.getDefenceSkill()));
-        maneuverField.setText(String.valueOf(navyLeader.getManeuveringSkill()));
-        cordsField.setText(String.valueOf(navyLeader.getCoordinationSkill()));
-        traitsList.getItems().clear();
-        traitsList.getItems().addAll(navyLeader.getTraits());
+        ActionRunner.get().runAction(undoRedoManager,() -> {
+            skillField.setText(String.valueOf(navyLeader.getSkill()));
+            attackField.setText(String.valueOf(navyLeader.getAttackSkill()));
+            defenceField.setText(String.valueOf(navyLeader.getDefenceSkill()));
+            maneuverField.setText(String.valueOf(navyLeader.getManeuveringSkill()));
+            cordsField.setText(String.valueOf(navyLeader.getCoordinationSkill()));
+            traitsList.getItems().clear();
+            traitsList.getItems().addAll(navyLeader.getTraits());
+        });
     }
 
     @Override

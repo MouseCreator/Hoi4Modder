@@ -1,5 +1,6 @@
 package com.example.hoi4modder.controller;
 
+import com.example.hoi4modder.controller.command.roles.ActionRunner;
 import com.example.hoi4modder.game.GameCharacter;
 import com.example.hoi4modder.game.roles.Advisor;
 import com.example.hoi4modder.game.roles.CharacterRoles;
@@ -77,11 +78,12 @@ public class AdvisorRoleController extends RoleController<Advisor> implements In
      */
     @Override
     public void fromRole(Advisor advisor) {
-
-        costField.setText(String.valueOf(advisor.getCost()));
-        setSelectedFromBox(advisor.getSlot(), slotComboBox);
-        traitList.getItems().clear();
-        traitList.getItems().addAll(advisor.getTraits());
+        ActionRunner.get().runAction(undoRedoManager,() -> {
+            costField.setText(String.valueOf(advisor.getCost()));
+            setSelectedFromBox(advisor.getSlot(), slotComboBox);
+            traitList.getItems().clear();
+            traitList.getItems().addAll(advisor.getTraits());
+        });
 
     }
     public Advisor toRole() {

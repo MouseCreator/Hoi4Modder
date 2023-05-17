@@ -1,5 +1,6 @@
 package com.example.hoi4modder.controller;
 
+import com.example.hoi4modder.controller.command.roles.ActionRunner;
 import com.example.hoi4modder.game.GameCharacter;
 import com.example.hoi4modder.game.roles.CharacterRoles;
 import com.example.hoi4modder.game.roles.CountryLeader;
@@ -64,17 +65,19 @@ public class CountryLeaderRoleController extends RoleController<CountryLeader> i
      */
     @Override
     public void fromRole(CountryLeader leader) {
-        String type = leader.getIdeology();
-        for (String ideology : ideologies.keySet()) {
-            if (ideologies.get(ideology).contains(type)) {
-                ideologyBox.getSelectionModel().select(ideology);
-                setTypesFromIdeology(ideology);
-                String toSelect = stringToUpperCase(type);
-                typeBox.getSelectionModel().select(toSelect);
+        ActionRunner.get().runAction(undoRedoManager,() -> {
+            String type = leader.getIdeology();
+            for (String ideology : ideologies.keySet()) {
+                if (ideologies.get(ideology).contains(type)) {
+                    ideologyBox.getSelectionModel().select(ideology);
+                    setTypesFromIdeology(ideology);
+                    String toSelect = stringToUpperCase(type);
+                    typeBox.getSelectionModel().select(toSelect);
+                }
             }
-        }
-        traitList.getItems().clear();
-        traitList.getItems().addAll(leader.getTraits());
+            traitList.getItems().clear();
+            traitList.getItems().addAll(leader.getTraits());
+        });
     }
 
     /**
