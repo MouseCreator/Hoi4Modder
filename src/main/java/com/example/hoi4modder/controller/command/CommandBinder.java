@@ -67,7 +67,7 @@ public class CommandBinder {
     public void connectableCommand(History history, ControlConnectableCallable controlConnectableCallable,
                                    ComboBox<String> comboBox) {
         comboBox.valueProperty().addListener((observable, oldValue, newValue) -> {
-            if (oldValue.equals(newValue))
+            if (newValue.equals(oldValue))
                 return;
             if (history.isRedo() || history.isUndo()) {
                 return;

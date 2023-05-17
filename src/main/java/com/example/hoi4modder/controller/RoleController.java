@@ -1,9 +1,14 @@
 package com.example.hoi4modder.controller;
 
+import com.example.hoi4modder.controller.command.ControlConnectable;
+import com.example.hoi4modder.controller.command.ControlConnectableCallable;
+import com.example.hoi4modder.controller.command.ControlConnector;
+import com.example.hoi4modder.controller.command.ControlIndexConnector;
 import com.example.hoi4modder.game.GameCharacter;
 import com.example.hoi4modder.game.roles.Role;
 import javafx.beans.binding.Bindings;
 import javafx.collections.ObservableList;
+import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
@@ -15,8 +20,31 @@ import java.util.Set;
  * Controller for roles panes
  * @param <R> - role of the controller
  */
-public abstract class RoleController<R extends Role> {
+public abstract class RoleController<R extends Role> implements ControlConnectable {
     protected CharacterItemController characterItemController;
+    protected ControlConnector controlConnector;
+    @Override
+    public ControlConnector getConnector() {
+        return controlConnector;
+    }
+
+    @Override
+    public ControlConnectableCallable callSelf() {
+        return new ControlConnectableCallable() {
+            @Override
+            public ControlConnectable call() {
+                CharacterItemController parent = (CharacterItemController) characterItemController.callSelf().call();
+                return parent.getRoleController(roleString());
+            }
+        };
+    }
+
+    protected abstract String roleString();
+
+    protected void initializeControlConnector(Initializable controller) {
+        controlConnector = ControlIndexConnector.getArrayConnector();
+        controlConnector.initialize(controller);
+    }
 
     /**
      * Adds context menu on right click on traits list item
@@ -162,6 +190,10 @@ public abstract class RoleController<R extends Role> {
      */
     public void setParent(CharacterItemController controller) {
         this.characterItemController = controller;
+        onSetParent();
+    }
+    protected void onSetParent(){
+        initConnector();
     }
 
     /**
@@ -188,4 +220,6 @@ public abstract class RoleController<R extends Role> {
             traitList.getItems().remove(s);
         }
     }
+
+    public abstract void initConnector();
 }

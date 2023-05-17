@@ -40,6 +40,11 @@ public class AdvisorRoleController extends RoleController<Advisor> implements In
         setValueListeners();
         initializeTextField(traitList, traitField);
     }
+    @Override
+    public void initConnector() {
+        initializeControlConnector(this);
+        characterItemController.getListEditor().getHandler().handleInitialization(this);
+    }
     private void setValueListeners() {
         costField.textProperty().addListener((observableValue, old, newValue) -> advisor.setCost(Integer.parseInt(newValue)));
         slotComboBox.valueProperty().addListener((observableValue, old, newValue) -> advisor.setSlot(stringToLowerCase(newValue)));
@@ -93,5 +98,8 @@ public class AdvisorRoleController extends RoleController<Advisor> implements In
             character.getRoles().put(getRoleType(), toRole());
         }
     }
-
+    @Override
+    protected String roleString() {
+        return CharacterRoles.ADVISOR;
+    }
 }

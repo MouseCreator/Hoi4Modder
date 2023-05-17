@@ -66,7 +66,11 @@ public class NavyLeaderController extends RoleController<NavyLeader> implements 
         fromRole(NavyLeader.createNavyLeader());
         initializeContextMenu(traitsList);
         setValueListeners();
-        initializeTextField(traitsList, traitField);
+    }
+    @Override
+    public void initConnector() {
+        initializeControlConnector(this);
+        characterItemController.getListEditor().getHandler().handleInitialization(this);
     }
     public void fromCharacter(GameCharacter character) {
         if (character.getRoles().containsKey(getRoleType())) {
@@ -92,5 +96,10 @@ public class NavyLeaderController extends RoleController<NavyLeader> implements 
     @FXML
     void removeTrait() {
         super.removeTrait(traitsList);
+    }
+
+    @Override
+    protected String roleString() {
+        return CharacterRoles.NAVY_LEADER;
     }
 }

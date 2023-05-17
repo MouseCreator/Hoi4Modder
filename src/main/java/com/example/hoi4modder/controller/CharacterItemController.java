@@ -336,6 +336,10 @@ public class CharacterItemController implements Initializable, ControlConnectabl
             setAutoButton();
         }
     }
+
+    public ItemContainer<GameCharacter> getListEditor() {
+        return listEditor;
+    }
     private void setLargePortrait(File file) {
         ImageTransformer transformer = new ImageTransformer();
         FileSearchService service = SavedDataContainer.get().fileSearchService();
@@ -431,4 +435,14 @@ public class CharacterItemController implements Initializable, ControlConnectabl
         return controlConnector;
     }
 
+    ControlConnectable getRoleController(String role) {
+        return switch (role) {
+            case CharacterRoles.UNIT_LEADER -> (unitLeaderRoleSwitcher == null) ? null: unitLeaderRoleSwitcher.getController();
+            case CharacterRoles.ADVISOR -> (advisorRoleSwitcher == null) ? null: advisorRoleSwitcher.getController();
+            case CharacterRoles.NAVY_LEADER -> (navyLeaderRoleSwitcher == null) ? null: navyLeaderRoleSwitcher.getController();
+            case CharacterRoles.COUNTRY_LEADER -> (countryLeaderRoleSwitcher == null) ? null: countryLeaderRoleSwitcher.getController();
+            default -> throw new IllegalStateException("Not a character role");
+        };
+
+    }
 }

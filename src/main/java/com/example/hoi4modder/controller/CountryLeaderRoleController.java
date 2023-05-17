@@ -94,6 +94,7 @@ public class CountryLeaderRoleController extends RoleController<CountryLeader> i
     public String getRoleType() {
         return CharacterRoles.COUNTRY_LEADER;
     }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ideologyBox.getItems().clear();
@@ -118,6 +119,11 @@ public class CountryLeaderRoleController extends RoleController<CountryLeader> i
                 }
             }
         });
+    }
+    @Override
+    public void initConnector() {
+        initializeControlConnector(this);
+        characterItemController.getListEditor().getHandler().handleInitialization(this);
     }
 
     private void setValueListeners() {
@@ -163,5 +169,9 @@ public class CountryLeaderRoleController extends RoleController<CountryLeader> i
     @FXML
     void removeTrait() {
         super.removeTrait(traitList);
+    }
+    @Override
+    protected String roleString() {
+        return CharacterRoles.COUNTRY_LEADER;
     }
 }

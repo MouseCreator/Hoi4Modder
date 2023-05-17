@@ -86,6 +86,7 @@ public class UnitLeaderController extends RoleController<UnitLeader> implements 
         initializeContextMenu(traitsList);
         setValueListeners();
         initializeTextField(traitsList, traitField);
+
     }
 
     private void setValueListeners() {
@@ -102,5 +103,15 @@ public class UnitLeaderController extends RoleController<UnitLeader> implements 
         } else {
             character.getRoles().put(getRoleType(), toRole());
         }
+    }
+
+    @Override
+    public void initConnector() {
+        initializeControlConnector(this);
+        characterItemController.getListEditor().getHandler().handleInitialization(this);
+    }
+    @Override
+    protected String roleString() {
+        return CharacterRoles.UNIT_LEADER;
     }
 }
