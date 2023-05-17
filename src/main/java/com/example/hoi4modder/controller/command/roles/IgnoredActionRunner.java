@@ -24,4 +24,5 @@ public class IgnoredActionRunner {
         undoRedoManager.lastState();
         return result;
     }
+
 }
