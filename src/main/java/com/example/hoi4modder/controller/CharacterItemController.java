@@ -183,9 +183,17 @@ public class CharacterItemController implements Initializable, ControlConnectabl
                 characterNameField.setText(character.getIdentification());
             }
         }
+
+        initConnector();
         loadPortraits(character);
         loadRoles(character);
         finishInitialization();
+    }
+
+    private void initConnector() {
+        controlConnector.initialize(this);
+        selfCall = listEditor.getHandler().handleConnect(gameCharacter);
+        requestHandler.handleInitialization(this);
     }
     private ControlConnector controlConnector;
 
@@ -197,9 +205,7 @@ public class CharacterItemController implements Initializable, ControlConnectabl
     private void finishInitialization() {
         setValueListeners();
         createContextMenu();
-        controlConnector.initialize(this);
-        selfCall = listEditor.getHandler().handleConnect(gameCharacter);
-        requestHandler.handleInitialization(this);
+
     }
 
     /**
