@@ -14,7 +14,7 @@ public class AutomaticInitializer<T> {
     public UndoRedoManager initialize(RequestHandler<T> handler, ControlConnectable controller) {
         Class<?> controllerClass = controller.getClass();
         Field[] fields = controllerClass.getDeclaredFields();
-        UndoRedoManager undoRedoManager = UndoRedoManagerFactory.get().treeMap();
+        UndoRedoManager undoRedoManager = UndoRedoManagerFactory.get().hashMap();
         for (Field field : fields) {
             if (field.isAnnotationPresent(FXML.class)) {
                 handleFXMLAnnotation(handler, controller, field, undoRedoManager);
@@ -25,7 +25,7 @@ public class AutomaticInitializer<T> {
     public UndoRedoManager initialize(RequestHandler<T> handler, ControlConnectable controller, String[] exceptions) {
         Class<?> controllerClass = controller.getClass();
         Field[] fields = controllerClass.getDeclaredFields();
-        UndoRedoManager undoRedoManager = UndoRedoManagerFactory.get().treeMap();
+        UndoRedoManager undoRedoManager = UndoRedoManagerFactory.get().hashMap();
         for (Field field : fields) {
             if (List.of(exceptions).contains(field.getName()))
                 continue;

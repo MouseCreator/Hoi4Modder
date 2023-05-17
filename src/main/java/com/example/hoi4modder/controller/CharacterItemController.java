@@ -4,6 +4,7 @@ import com.example.hoi4modder.controller.character_extra.CharacterInfo;
 import com.example.hoi4modder.controller.character_extra.RoleSwitcher;
 import com.example.hoi4modder.controller.character_extra.RoleSwitcherBuilder;
 import com.example.hoi4modder.controller.command.*;
+import com.example.hoi4modder.controller.command.roles.UndoRedoManager;
 import com.example.hoi4modder.controller.requests.*;
 import com.example.hoi4modder.game.FieldValueMap;
 import com.example.hoi4modder.game.GameCharacter;
@@ -186,14 +187,16 @@ public class CharacterItemController implements Initializable, ControlConnectabl
 
         initConnector();
         loadPortraits(character);
+        undoRedoManager.disableAll();
         loadRoles(character);
+        undoRedoManager.enableAll();
         finishInitialization();
     }
-
+    private UndoRedoManager undoRedoManager;
     private void initConnector() {
         controlConnector.initialize(this);
         selfCall = listEditor.getHandler().handleConnect(gameCharacter);
-        requestHandler.handleInitialization(this);
+        undoRedoManager = requestHandler.handleInitialization(this);
     }
     private ControlConnector controlConnector;
 

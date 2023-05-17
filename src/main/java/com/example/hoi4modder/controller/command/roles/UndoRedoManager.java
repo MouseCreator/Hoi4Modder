@@ -8,4 +8,6 @@ public interface UndoRedoManager {
     void addObjectStatus(Object object, ControlStatus status);
     void enableAll();
     void disableAll();
+    void saveState();
+    void lastState();
 }

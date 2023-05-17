@@ -77,10 +77,12 @@ public class AdvisorRoleController extends RoleController<Advisor> implements In
      */
     @Override
     public void fromRole(Advisor advisor) {
+
         costField.setText(String.valueOf(advisor.getCost()));
         setSelectedFromBox(advisor.getSlot(), slotComboBox);
         traitList.getItems().clear();
         traitList.getItems().addAll(advisor.getTraits());
+
     }
     public Advisor toRole() {
         return advisor;
