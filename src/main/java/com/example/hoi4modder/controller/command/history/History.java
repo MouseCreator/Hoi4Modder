@@ -22,7 +22,4 @@ public interface History {
     boolean isRedo();
     boolean isUndo();
 
-    boolean isAuto();
-    void startAuto();
-    void endAuto();
 }

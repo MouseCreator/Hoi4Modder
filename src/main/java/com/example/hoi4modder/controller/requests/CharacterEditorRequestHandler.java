@@ -6,6 +6,7 @@ import com.example.hoi4modder.controller.ListItemController;
 import com.example.hoi4modder.controller.character_extra.GameCharacterCreator;
 import com.example.hoi4modder.controller.command.*;
 import com.example.hoi4modder.controller.command.roles.AutomaticInitializer;
+import com.example.hoi4modder.controller.command.roles.UndoRedoManager;
 import com.example.hoi4modder.game.GameCharacter;
 import com.example.hoi4modder.game.GameCharacterList;
 import javafx.scene.control.CheckBox;
@@ -147,18 +148,18 @@ public class CharacterEditorRequestHandler implements CommandRequestHandler<Game
     }
 
     @Override
-    public void handleConnect(TextField field, ControlConnectableCallable controlConnectableCallable) {
-        CommandBinder.get().connectableCommand(characterListEditor.getHistory(), controlConnectableCallable,field);
+    public void handleConnect(TextField field, ControlConnectableCallable controlConnectableCallable, UndoRedoManager undoRedoManager) {
+        CommandBinder.get().connectableCommand(characterListEditor.getHistory(), controlConnectableCallable,field, undoRedoManager);
     }
 
     @Override
-    public void handleConnect(CheckBox checkBox, ControlConnectableCallable controlConnectableCallable) {
-        CommandBinder.get().connectableCommand(characterListEditor.getHistory(), controlConnectableCallable, checkBox);
+    public void handleConnect(CheckBox checkBox, ControlConnectableCallable controlConnectableCallable, UndoRedoManager undoRedoManager) {
+        CommandBinder.get().connectableCommand(characterListEditor.getHistory(), controlConnectableCallable, checkBox, undoRedoManager);
     }
 
     @Override
-    public void handleConnect(ComboBox<String> comboBox, ControlConnectableCallable controlConnectableCallable) {
-        CommandBinder.get().connectableCommand(characterListEditor.getHistory(), controlConnectableCallable, comboBox);
+    public void handleConnect(ComboBox<String> comboBox, ControlConnectableCallable controlConnectableCallable, UndoRedoManager undoRedoManager) {
+        CommandBinder.get().connectableCommand(characterListEditor.getHistory(), controlConnectableCallable, comboBox, undoRedoManager);
     }
 
     @Override

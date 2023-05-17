@@ -28,6 +28,7 @@ module com.example.hoi4modder {
     exports com.example.hoi4modder.controller.autocomplete;
     exports com.example.hoi4modder.controller.character_extra;
     exports com.example.hoi4modder.controller.command;
+    exports com.example.hoi4modder.controller.command.roles;
     opens com.example.hoi4modder.controller.character_extra to javafx.fxml;
     exports com.example.hoi4modder.controller.command.history;
 }

@@ -72,15 +72,4 @@ public class CommandHistory implements History{
                 ", redoStack=" + redoStack +
                 '}';
     }
-    private boolean isAuto;
-    public boolean isAuto() {
-        return isAuto;
-    }
-
-    public void startAuto() {
-        this.isAuto = true;
-    }
-    public void endAuto() {
-        this.isAuto = false;
-    }
 }

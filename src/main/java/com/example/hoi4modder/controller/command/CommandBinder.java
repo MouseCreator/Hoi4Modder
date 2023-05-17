@@ -1,6 +1,7 @@
 package com.example.hoi4modder.controller.command;
 
 import com.example.hoi4modder.controller.command.history.History;
+import com.example.hoi4modder.controller.command.roles.UndoRedoManager;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
@@ -26,8 +27,6 @@ public class CommandBinder {
     public void bindTextField(History history, TextField textField) {
         BindMemory<String> binding = new BindMemory<>();
         textField.focusedProperty().addListener((observable, oldValue, isNowSelected) -> {
-            if (history.isAuto())
-                return;
             if (isNowSelected) {
                 binding.setMemory(textField.getText());
             } else {
@@ -40,11 +39,9 @@ public class CommandBinder {
     }
 
     public void connectableCommand(History history, ControlConnectableCallable controlConnectableCallable,
-                                   TextField textField) {
+                                   TextField textField, UndoRedoManager undoRedoManager) {
         BindMemory<String> binding = new BindMemory<>();
         textField.focusedProperty().addListener((observable, oldValue, isNowSelected) -> {
-            if (history.isAuto())
-                return;
             if (isNowSelected) {
                 binding.setMemory(textField.getText());
             } else {
@@ -58,10 +55,10 @@ public class CommandBinder {
     }
 
     public void connectableCommand(History history, ControlConnectableCallable controlConnectableCallable,
-                                   CheckBox checkBox) {
+                                   CheckBox checkBox, UndoRedoManager undoRedoManager) {
         checkBox.selectedProperty().addListener((observable, oldValue, isNowSelected) -> {
             if (oldValue != isNowSelected) {
-                if (history.isRedo() || history.isUndo() || history.isAuto()) {
+                if (history.isRedo() || history.isUndo()) {
                     return;
                 }
                 int index = controlConnectableCallable.call().getConnector().getIndexOf(checkBox);
@@ -70,11 +67,11 @@ public class CommandBinder {
         });
     }
     public void connectableCommand(History history, ControlConnectableCallable controlConnectableCallable,
-                                   ComboBox<String> comboBox) {
+                                   ComboBox<String> comboBox, UndoRedoManager undoRedoManager) {
         comboBox.valueProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue.equals(oldValue))
                 return;
-            if (history.isRedo() || history.isUndo() || history.isAuto()) {
+            if (history.isRedo() || history.isUndo()) {
                 return;
             }
             int index = controlConnectableCallable.call().getConnector().getIndexOf(comboBox);

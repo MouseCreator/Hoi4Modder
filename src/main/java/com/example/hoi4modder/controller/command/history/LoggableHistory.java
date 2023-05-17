@@ -37,18 +37,6 @@ public class LoggableHistory implements History{
     public boolean isRedo() {
         return history.isRedo();
     }
-    public boolean isAuto() {
-        return history.isAuto();
-    }
-
-    public void startAuto() {
-        System.out.println("Started auto process");
-        history.startAuto();
-    }
-    public void endAuto() {
-        System.out.println("Ended auto process");
-        history.endAuto();
-    }
     @Override
     public boolean isUndo() {
         return history.isUndo();

@@ -2,6 +2,7 @@ package com.example.hoi4modder.controller.requests;
 
 import com.example.hoi4modder.controller.command.ControlConnectable;
 import com.example.hoi4modder.controller.command.ControlConnectableCallable;
+import com.example.hoi4modder.controller.command.roles.UndoRedoManager;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
@@ -33,9 +34,9 @@ public interface RequestHandler<T> {
     int handleVisualIndex(T model);
 
     ControlConnectableCallable handleConnect(T gameCharacter);
-    void handleConnect(TextField field, ControlConnectableCallable controlConnectableCallable);
-    void handleConnect(CheckBox checkBox, ControlConnectableCallable controlConnectableCallable);
-    void handleConnect(ComboBox<String> checkBox, ControlConnectableCallable controlConnectableCallable);
+    void handleConnect(TextField field, ControlConnectableCallable controlConnectableCallable, UndoRedoManager undoRedoManager);
+    void handleConnect(CheckBox checkBox, ControlConnectableCallable controlConnectableCallable,UndoRedoManager undoRedoManage );
+    void handleConnect(ComboBox<String> checkBox, ControlConnectableCallable controlConnectableCallable, UndoRedoManager undoRedoManage);
     void handleInitialization(ControlConnectable controller);
     void handleInitialization(ControlConnectable controller, String[] exceptions);
 }

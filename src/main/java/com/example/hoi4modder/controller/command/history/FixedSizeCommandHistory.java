@@ -55,17 +55,6 @@ public class FixedSizeCommandHistory implements History {
         undoInProcess = false;
         redoStack.push(lastCommand);
     }
-    private boolean isAuto;
-    public boolean isAuto() {
-        return isAuto;
-    }
-
-    public void startAuto() {
-        this.isAuto = true;
-    }
-    public void endAuto() {
-        this.isAuto = false;
-    }
     /**
      * Cancels last undo
      */
