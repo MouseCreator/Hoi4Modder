@@ -3,6 +3,8 @@ package com.example.hoi4modder.controller;
 import com.example.hoi4modder.controller.character_extra.GameCharacterCreator;
 import com.example.hoi4modder.controller.character_extra.NoSelectionModel;
 import com.example.hoi4modder.controller.command.*;
+import com.example.hoi4modder.controller.command.history.FixedSizeCommandHistory;
+import com.example.hoi4modder.controller.command.history.History;
 import com.example.hoi4modder.controller.multithreading.*;
 import com.example.hoi4modder.controller.requests.CharacterEditorRequestHandler;
 import com.example.hoi4modder.controller.requests.CommandRequestHandler;
@@ -162,6 +164,7 @@ public class CharacterListEditor extends ActivePaneController implements Initial
             alert.showAndWait();
         });
         thread.setName("CharacterLoadingThread");
+        history.startAuto();
         thread.start();
     }
 
@@ -170,6 +173,7 @@ public class CharacterListEditor extends ActivePaneController implements Initial
         controllerList.addAll(task.getControllers());
         loadItems(task.getPanes());
         //addSearchSuggestions();
+        history.endAuto();
         setIsLoaded(true);
         initFileWatcher();
         fileWatcher.setFile(filename);
@@ -185,6 +189,7 @@ public class CharacterListEditor extends ActivePaneController implements Initial
 
     private void onLoadingFailedAction() {
         resetAll();
+        history.endAuto();
         if (fileWatcher != null)
             fileWatcher.stop();
     }

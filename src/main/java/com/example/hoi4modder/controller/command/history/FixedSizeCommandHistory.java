@@ -1,10 +1,12 @@
-package com.example.hoi4modder.controller.command;
+package com.example.hoi4modder.controller.command.history;
+
+import com.example.hoi4modder.controller.command.Command;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.Stack;
 
-public class FixedSizeCommandHistory implements History{
+public class FixedSizeCommandHistory implements History {
     private final Deque<Command> undoStack;
     private final Stack<Command> redoStack;
     private final int size;
@@ -53,7 +55,17 @@ public class FixedSizeCommandHistory implements History{
         undoInProcess = false;
         redoStack.push(lastCommand);
     }
+    private boolean isAuto;
+    public boolean isAuto() {
+        return isAuto;
+    }
 
+    public void startAuto() {
+        this.isAuto = true;
+    }
+    public void endAuto() {
+        this.isAuto = false;
+    }
     /**
      * Cancels last undo
      */

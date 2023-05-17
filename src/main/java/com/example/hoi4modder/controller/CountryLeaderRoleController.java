@@ -122,8 +122,9 @@ public class CountryLeaderRoleController extends RoleController<CountryLeader> i
     }
     @Override
     public void initConnector() {
+        String[] initSelf = new String[]{"typeBox", "ideologyBox"};
         initializeControlConnector(this);
-        characterItemController.getListEditor().getHandler().handleInitialization(this);
+        characterItemController.getListEditor().getHandler().handleInitialization(this,initSelf);
     }
 
     private void setValueListeners() {

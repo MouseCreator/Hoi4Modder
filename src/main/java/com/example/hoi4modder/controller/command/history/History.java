@@ -1,4 +1,6 @@
-package com.example.hoi4modder.controller.command;
+package com.example.hoi4modder.controller.command.history;
+
+import com.example.hoi4modder.controller.command.Command;
 
 public interface History {
     /**
@@ -19,4 +21,8 @@ public interface History {
 
     boolean isRedo();
     boolean isUndo();
+
+    boolean isAuto();
+    void startAuto();
+    void endAuto();
 }

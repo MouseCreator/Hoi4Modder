@@ -29,4 +29,5 @@ module com.example.hoi4modder {
     exports com.example.hoi4modder.controller.character_extra;
     exports com.example.hoi4modder.controller.command;
     opens com.example.hoi4modder.controller.character_extra to javafx.fxml;
+    exports com.example.hoi4modder.controller.command.history;
 }

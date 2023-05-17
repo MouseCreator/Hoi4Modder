@@ -1,4 +1,6 @@
-package com.example.hoi4modder.controller.command;
+package com.example.hoi4modder.controller.command.history;
+
+import com.example.hoi4modder.controller.command.Command;
 
 import java.util.Stack;
 
@@ -69,5 +71,16 @@ public class CommandHistory implements History{
                 "undoStack=" + undoStack +
                 ", redoStack=" + redoStack +
                 '}';
+    }
+    private boolean isAuto;
+    public boolean isAuto() {
+        return isAuto;
+    }
+
+    public void startAuto() {
+        this.isAuto = true;
+    }
+    public void endAuto() {
+        this.isAuto = false;
     }
 }

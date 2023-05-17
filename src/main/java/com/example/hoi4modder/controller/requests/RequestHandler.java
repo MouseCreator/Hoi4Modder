@@ -37,4 +37,5 @@ public interface RequestHandler<T> {
     void handleConnect(CheckBox checkBox, ControlConnectableCallable controlConnectableCallable);
     void handleConnect(ComboBox<String> checkBox, ControlConnectableCallable controlConnectableCallable);
     void handleInitialization(ControlConnectable controller);
+    void handleInitialization(ControlConnectable controller, String[] exceptions);
 }

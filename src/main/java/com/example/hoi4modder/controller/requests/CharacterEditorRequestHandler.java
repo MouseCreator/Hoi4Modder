@@ -209,4 +209,9 @@ public class CharacterEditorRequestHandler implements CommandRequestHandler<Game
     public void handleInitialization(ControlConnectable controller) {
         initializer.initialize(this, controller);
     }
+
+    @Override
+    public void handleInitialization(ControlConnectable controller, String[] exceptions) {
+        initializer.initialize(this, controller, exceptions);
+    }
 }
